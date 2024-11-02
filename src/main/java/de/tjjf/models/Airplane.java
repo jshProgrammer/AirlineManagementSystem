@@ -1,9 +1,12 @@
 package de.tjjf.models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 import java.util.Date;
-
+@Entity
 public class Airplane {
-
+    @Id
     private int serialNum;
 
     private char manufacturer;
