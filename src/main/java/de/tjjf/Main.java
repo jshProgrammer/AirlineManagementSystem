@@ -34,7 +34,7 @@ public class Main
 {
     public static void main(String[] args)
     {
-
+        System.out.println("Test");
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("my-persistence-unit");
         EntityManager em = emf.createEntityManager();
 
