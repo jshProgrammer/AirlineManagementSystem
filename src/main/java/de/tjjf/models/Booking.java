@@ -6,6 +6,18 @@ import java.util.Date;
 
 @Entity
 public class Booking {
+    enum SeatingClass {
+        Economy,
+        Business,
+        First
+    }
+
+    enum BookingStatus {
+        Paid,
+        Unpaid,
+        Canceled
+    }
+
     @Id
     private int personId;
 

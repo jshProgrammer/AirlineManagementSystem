@@ -1,22 +1,35 @@
 package de.tjjf.models;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.Id;
 
 import java.util.Date;
 @Entity
 public class Flight {
+
+    enum FlyStatus {
+        scheduled,
+        in_the_air,
+        landed,
+        delayed,
+        canceled
+    }
+
     @Id
     private long flightNum;
 
+    //TODO: Beziehung hinzufügen
     private long airplane;
 
     private Date departureDateTime;
 
+    //TODO: Beziehung hinzufügen
     private char departureAirport;
 
     private Date arrivalDateTime;
 
+    //TODO: Beziehung hinzufügen
     private char arrivalAirport;
 
     private Date boardingTime;
@@ -25,20 +38,30 @@ public class Flight {
 
     private int duration;
 
-    private personId pilot;
+    //TODO: Beziehung hinzufügen
+    private int pilot;
 
-    private personId copilot;
+    //TODO: Beziehung hinzufügen
+    private int copilot;
 
 
     public Flight(){
 
     }
-    public Flight( String firstName, String lastName )
-    {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
 
+    public Flight(long flightNum, long airplane, Date departureDateTime, char departureAirport, Date arrivalDateTime, char arrivalAirport, Date boardingTime, FlyStatus status, int duration, int pilot, int copilot) {
+        this.flightNum = flightNum;
+        this.airplane = airplane;
+        this.departureDateTime = departureDateTime;
+        this.departureAirport = departureAirport;
+        this.arrivalDateTime = arrivalDateTime;
+        this.arrivalAirport = arrivalAirport;
+        this.boardingTime = boardingTime;
+        this.status = status;
+        this.duration = duration;
+        this.pilot = pilot;
+        this.copilot = copilot;
+    }
 
     public void setAirplane(long airplane) {
         this.airplane = airplane;
@@ -56,7 +79,7 @@ public class Flight {
         this.boardingTime = boardingTime;
     }
 
-    public void setCopilot(personId copilot) {
+    public void setCopilot(int copilot) {
         this.copilot = copilot;
     }
 
@@ -76,7 +99,7 @@ public class Flight {
         this.flightNum = flightNum;
     }
 
-    public void setPilot(personId pilot) {
+    public void setPilot(int pilot) {
         this.pilot = pilot;
     }
 
@@ -100,7 +123,7 @@ public class Flight {
         return boardingTime;
     }
 
-    public personId getCopilot() {
+    public int getCopilot() {
         return copilot;
     }
 
@@ -120,7 +143,7 @@ public class Flight {
         return flightNum;
     }
 
-    public personId getPilot() {
+    public int getPilot() {
         return pilot;
     }
 

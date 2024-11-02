@@ -3,15 +3,25 @@ package de.tjjf.models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
+import java.util.Date;
+
 @Entity
 public class Person
 {
     @Id
-    private long id;
+    private long personId;
 
     private String firstName;
+    private String middleNames;
 
     private String lastName;
+    private Date dateOfBirth;
+    private String phonenumber;
+    //TODO: evtl. Adress-Objekt anlegen
+    private String address;
+    private String email;
+    //TODO: nicht direkt in Klasse
+    private String password;
 
     public Person( )
     {
@@ -28,14 +38,14 @@ public class Person
         return firstName;
     }
 
-    public long getId( )
+    public long getPersonId( )
     {
-        return id;
+        return personId;
     }
 
-    public void setId( long id )
+    public void setPersonId( long id )
     {
-        this.id = id;
+        this.personId = id;
     }
 
     public void setFirstName( String firstName )
@@ -48,9 +58,57 @@ public class Person
         return lastName;
     }
 
-    public void setLastName( String lastName )
+    public String getMiddleNames() {
+        return middleNames;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public String getPhonenumber() {
+        return phonenumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setLastName(String lastName )
     {
         this.lastName = lastName;
+    }
+
+    public void setMiddleNames(String middleNames) {
+        this.middleNames = middleNames;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
 
