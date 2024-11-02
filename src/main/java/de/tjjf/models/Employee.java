@@ -1,27 +1,38 @@
 package de.tjjf.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
 @Entity
 public class Employee {
+    @Column(nullable=false)
     @Id
     private int employeeId;
+
+    @Column(nullable=false)
     private int personId;
+
+    @Column(nullable=false)
     private int salary;
+
+    @Column(nullable=false)
     private String position;
-    private String flugGesellschaft;
+
+    @ManyToOne()
+    @JoinColumn(name = "airline_name", referencedColumnName = "name")
+    private Airline airline;
+
+    @Column(nullable=false)
     private Date hireDate;
 
     public Employee() {}
 
-    public Employee(int personId, int salary, String position, String flugGesellschaft, Date hireDate) {
+    public Employee(int personId, int salary, String position, Airline airline, Date hireDate) {
         this.personId = personId;
         this.salary = salary;
         this.position = position;
-        this.flugGesellschaft = flugGesellschaft;
+        this.airline = airline;
         this.hireDate = hireDate;
     }
 
@@ -37,8 +48,8 @@ public class Employee {
         return position;
     }
 
-    public String getFlugGesellschaft() {
-        return flugGesellschaft;
+    public Airline getAirline() {
+        return airline;
     }
 
     public Date getHireDate() {
@@ -57,8 +68,8 @@ public class Employee {
         this.position = position;
     }
 
-    public void setFlugGesellschaft(String flugGesellschaft) {
-        this.flugGesellschaft = flugGesellschaft;
+    public void setAirline(Airline airline) {
+        this.airline = airline;
     }
 
     public void setHireDate(Date hireDate) {

@@ -1,14 +1,12 @@
 package de.tjjf.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ForeignKey;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Date;
 @Entity
 public class Flight {
 
-    enum FlyStatus {
+    public enum FlyStatus {
         scheduled,
         in_the_air,
         landed,
@@ -16,40 +14,45 @@ public class Flight {
         canceled
     }
 
+    //TODO: evtl @JoinColumn damit Anzeigen aller Buchungen
+    @Column(nullable = false)
     @Id
     private long flightNum;
 
-    //TODO: Beziehung hinzufügen
-    private long airplane;
+
+    @ManyToOne()
+    private Airplane airplane;
 
     private Date departureDateTime;
 
-    //TODO: Beziehung hinzufügen
-    private char departureAirport;
+    @OneToOne
+    private Airport departureAirport;
 
     private Date arrivalDateTime;
 
-    //TODO: Beziehung hinzufügen
-    private char arrivalAirport;
+    @OneToOne
+    private Airport arrivalAirport;
 
+    @Column(nullable = false)
     private Date boardingTime;
 
+    @Column(nullable = false)
     private FlyStatus status;
 
+    @Column(nullable = false)
     private int duration;
 
-    //TODO: Beziehung hinzufügen
-    private int pilot;
+    //TODO: evtl ManyToOne-Beziehung?
+    @OneToOne()
+    private Employee pilot;
 
-    //TODO: Beziehung hinzufügen
-    private int copilot;
+    @OneToOne()
+    private Employee copilot;
 
 
-    public Flight(){
+    public Flight(){}
 
-    }
-
-    public Flight(long flightNum, long airplane, Date departureDateTime, char departureAirport, Date arrivalDateTime, char arrivalAirport, Date boardingTime, FlyStatus status, int duration, int pilot, int copilot) {
+    public Flight(long flightNum, Airplane airplane, Date departureDateTime, Airport departureAirport, Date arrivalDateTime, Airport arrivalAirport, Date boardingTime, FlyStatus status, int duration, Employee pilot, Employee copilot) {
         this.flightNum = flightNum;
         this.airplane = airplane;
         this.departureDateTime = departureDateTime;
@@ -63,11 +66,11 @@ public class Flight {
         this.copilot = copilot;
     }
 
-    public void setAirplane(long airplane) {
+    public void setAirplane(Airplane airplane) {
         this.airplane = airplane;
     }
 
-    public void setArrivalAirport(char arrivalAirport) {
+    public void setArrivalAirport(Airport arrivalAirport) {
         this.arrivalAirport = arrivalAirport;
     }
 
@@ -79,11 +82,11 @@ public class Flight {
         this.boardingTime = boardingTime;
     }
 
-    public void setCopilot(int copilot) {
+    public void setCopilot(Employee copilot) {
         this.copilot = copilot;
     }
 
-    public void setDepartureAirport(char departureAirport) {
+    public void setDepartureAirport(Airport departureAirport) {
         this.departureAirport = departureAirport;
     }
 
@@ -99,7 +102,7 @@ public class Flight {
         this.flightNum = flightNum;
     }
 
-    public void setPilot(int pilot) {
+    public void setPilot(Employee pilot) {
         this.pilot = pilot;
     }
 
@@ -107,11 +110,11 @@ public class Flight {
         this.status = status;
     }
 
-    public long getAirplane() {
+    public Airplane getAirplane() {
         return airplane;
     }
 
-    public char getArrivalAirport() {
+    public Airport getArrivalAirport() {
         return arrivalAirport;
     }
 
@@ -123,11 +126,11 @@ public class Flight {
         return boardingTime;
     }
 
-    public int getCopilot() {
+    public Employee getCopilot() {
         return copilot;
     }
 
-    public char getDepartureAirport() {
+    public Airport getDepartureAirport() {
         return departureAirport;
     }
 
@@ -143,7 +146,7 @@ public class Flight {
         return flightNum;
     }
 
-    public int getPilot() {
+    public Employee getPilot() {
         return pilot;
     }
 

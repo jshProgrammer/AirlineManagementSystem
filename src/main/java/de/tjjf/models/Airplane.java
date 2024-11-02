@@ -1,7 +1,6 @@
 package de.tjjf.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Date;
 @Entity
@@ -9,37 +8,85 @@ public class Airplane {
     @Id
     private int serialNum;
 
-    private char manufacturer;
+    @Column(nullable=false)
+    private String manufacturer;
 
-    private char model;
+    @Column(nullable=false)
+    private String model;
 
-    private int amountOfSeats;
+    @Column(nullable=false)
+    private int amoutOfEconomySeats;
 
-    private Date dateOfLastMaintenace;
+    @Column(nullable=false)
+    private int amoutOfBusinessSeats;
 
-    private int flightHours;
+    @Column(nullable=false)
+    private int amoutOfFirstClassSeats;
 
-    public Airplane() {
+    @ManyToOne()
+    private Airline belongingAirline;
 
+    @Column(nullable=false)
+    private boolean isOperatable;
+
+    public Airplane() {}
+
+    public Airplane(int serialNum, String manufacturer, String model, int amoutOfEconomySeats, int amoutOfBusinessSeats, int amoutOfFirstClassSeats, Airline belongingAirline, boolean isOperatable) {
+        this.serialNum = serialNum;
+        this.manufacturer = manufacturer;
+        this.model = model;
+        this.amoutOfEconomySeats = amoutOfEconomySeats;
+        this.amoutOfBusinessSeats = amoutOfBusinessSeats;
+        this.amoutOfFirstClassSeats = amoutOfFirstClassSeats;
+        this.belongingAirline = belongingAirline;
+        this.isOperatable = isOperatable;
     }
 
-    public void setAmountOfSeats(int amountOfSeats) {
-        this.amountOfSeats = amountOfSeats;
+    public int getAmoutOfEconomySeats() {
+        return amoutOfEconomySeats;
     }
 
-    public void setDateOfLastMaintenace(Date dateOfLastMaintenace) {
-        this.dateOfLastMaintenace = dateOfLastMaintenace;
+    public int getAmoutOfBusinessSeats() {
+        return amoutOfBusinessSeats;
     }
 
-    public void setFlightHours(int flightHours) {
-        this.flightHours = flightHours;
+    public int getAmoutOfFirstClassSeats() {
+        return amoutOfFirstClassSeats;
     }
 
-    public void setManufacturer(char manufacturer) {
+    public Airline getBelongingAirline() {
+        return belongingAirline;
+    }
+
+    public boolean isOperatable() {
+        return isOperatable;
+    }
+
+    public void setAmoutOfEconomySeats(int amoutOfEconomySeats) {
+        this.amoutOfEconomySeats = amoutOfEconomySeats;
+    }
+
+    public void setAmoutOfBusinessSeats(int amoutOfBusinessSeats) {
+        this.amoutOfBusinessSeats = amoutOfBusinessSeats;
+    }
+
+    public void setAmoutOfFirstClassSeats(int amoutOfFirstClassSeats) {
+        this.amoutOfFirstClassSeats = amoutOfFirstClassSeats;
+    }
+
+    public void setBelongingAirline(Airline belongingAirline) {
+        this.belongingAirline = belongingAirline;
+    }
+
+    public void setOperatable(boolean operatable) {
+        isOperatable = operatable;
+    }
+
+    public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
     }
 
-    public void setModel(char model) {
+    public void setModel(String model) {
         this.model = model;
     }
 
@@ -47,23 +94,11 @@ public class Airplane {
         this.serialNum = serialNum;
     }
 
-    public int getAmountOfSeats() {
-        return amountOfSeats;
-    }
-
-    public Date getDateOfLastMaintenace() {
-        return dateOfLastMaintenace;
-    }
-
-    public int getFlightHours() {
-        return flightHours;
-    }
-
-    public char getManufacturer() {
+    public String getManufacturer() {
         return manufacturer;
     }
 
-    public char getModel() {
+    public String getModel() {
         return model;
     }
 
