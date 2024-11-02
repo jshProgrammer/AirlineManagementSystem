@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="906a608a-9164-4375-a1dc-984c49b1cfbf" name="Changes" comment="Test push 2">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="906a608a-9164-4375-a1dc-984c49b1cfbf" name="Changes" comment="Entity Airport, Airplane initialized">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/models/Airplane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/models/Airplane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/models/Airport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/models/Airport.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/models/Flight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/models/Flight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/de/tjjf/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/de/tjjf/Main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +123,7 @@
       <updated>1730544424484</updated>
       <workItem from="1730544425481" duration="1119000" />
       <workItem from="1730546117746" duration="1351000" />
-      <workItem from="1730547476537" duration="478000" />
+      <workItem from="1730547476537" duration="936000" />
     </task>
     <task id="LOCAL-00001" summary="Initializing project with maven, hibernate and h2">
       <option name="closed" value="true" />
@@ -157,7 +157,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730546723940</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Entity Airport, Airplane initialized">
+      <option name="closed" value="true" />
+      <created>1730547983391</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1730547983391</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -178,7 +186,8 @@
     <MESSAGE value="Initializing project with maven, hibernate and h2" />
     <MESSAGE value="Test push" />
     <MESSAGE value="Test push 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Test push 2" />
+    <MESSAGE value="Entity Airport, Airplane initialized" />
+    <option name="LAST_COMMIT_MESSAGE" value="Entity Airport, Airplane initialized" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -1,7 +1,11 @@
 package de.tjjf.models;
 
-public class Airport {
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
+@Entity
+public class Airport {
+    @Id
     private char code;
 
     private char name;
