@@ -35,6 +35,7 @@ public class Main
     public static void main(String[] args)
     {
         System.out.println("Jasmin Test");
+        System.out.println("odijfgo");
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("my-persistence-unit");
         EntityManager em = emf.createEntityManager();
