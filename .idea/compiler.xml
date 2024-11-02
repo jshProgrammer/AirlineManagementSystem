@@ -9,5 +9,8 @@
         <module name="AirlineManagement" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="AirlineManagement" target="20" />
+    </bytecodeTargetLevel>
   </component>
 </project>
