@@ -11,7 +11,8 @@ public class Employee {
     private int employeeId;
 
     @Column(nullable=false)
-    private int personId;
+    @OneToOne
+    private Person personId;
 
     @Column(nullable=false)
     private int salary;
@@ -28,7 +29,7 @@ public class Employee {
 
     public Employee() {}
 
-    public Employee(int personId, int salary, String position, Airline airline, Date hireDate) {
+    public Employee(Person personId, int salary, String position, Airline airline, Date hireDate) {
         this.personId = personId;
         this.salary = salary;
         this.position = position;

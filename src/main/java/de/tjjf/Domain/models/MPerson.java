@@ -24,10 +24,6 @@ public class MPerson
     //TODO: nicht direkt in Klasse
     private String password;
 
-    public MPerson( )
-    {
-    }
-
     public MPerson(long personId, String firstName, String middleNames, String lastName, Date dateOfBirth, String phonenumber, String address, String email, String password) {
         this.personId = personId;
         this.firstName = firstName;

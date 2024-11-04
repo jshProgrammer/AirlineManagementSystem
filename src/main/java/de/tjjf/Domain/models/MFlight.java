@@ -33,9 +33,6 @@ public class MFlight {
 
     private MEmployee copilot;
 
-
-    public MFlight(){}
-
     public MFlight(long flightNum, MAirplane airplane, Date departureDateTime, MAirport departureAirport, Date arrivalDateTime, MAirport arrivalAirport, Date boardingTime, FlyStatus status, int duration, MEmployee pilot, MEmployee copilot) {
         this.flightNum = flightNum;
         this.airplane = airplane;

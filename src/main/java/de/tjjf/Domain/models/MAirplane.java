@@ -17,8 +17,6 @@ public class MAirplane {
 
     private boolean isOperatable;
 
-    public MAirplane() {}
-
     public MAirplane(int serialNum, String manufacturer, String model, int amoutOfEconomySeats, int amoutOfBusinessSeats, int amoutOfFirstClassSeats, MAirline belongingAirline, boolean isOperatable) {
         this.serialNum = serialNum;
         this.manufacturer = manufacturer;

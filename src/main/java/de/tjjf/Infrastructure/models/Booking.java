@@ -2,7 +2,6 @@ package de.tjjf.Infrastructure.models;
 
 import jakarta.persistence.*;
 
-import javax.persistence.Entity;
 import java.util.Date;
 
 @Entity
@@ -25,13 +24,13 @@ public class Booking {
     private int bookingId;
 
     @Column(nullable=false)
-    @OneToMany()
-    private int personId;
+    @ManyToOne()
+    private Person personId;
 
     //TODO: evtl eher Flight statt int als Datentyp?
     @Column(nullable=false)
-    @OneToMany()
-    private int flightNum;
+    @ManyToOne()
+    private Flight flightNum;
 
     @Column(nullable=false)
     private Date dateTimeOfBooking;
@@ -52,4 +51,16 @@ public class Booking {
     private int maxWeightOfLuggage;
 
     public Booking(){}
+
+    public Booking(int bookingId, Person personId, Flight flightNum, Date dateTimeOfBooking, int totalPrice, int seatNum, SeatingClass seatingClass, BookingStatus bookingStatus, int maxWeightOfLuggage) {
+        this.bookingId = bookingId;
+        this.personId = personId;
+        this.flightNum = flightNum;
+        this.dateTimeOfBooking = dateTimeOfBooking;
+        this.totalPrice = totalPrice;
+        this.seatNum = seatNum;
+        this.seatingClass = seatingClass;
+        this.bookingStatus = bookingStatus;
+        this.maxWeightOfLuggage = maxWeightOfLuggage;
+    }
 }

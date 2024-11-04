@@ -35,7 +35,17 @@ public class MBooking {
 
     private int maxWeightOfLuggage;
 
-    public MBooking(){}
+    public MBooking(int bookingId, int personId, Flight flight, Date dateTimeOfBooking, int totalPrice, int seatNum, SeatingClass seatingClass, BookingStatus bookingStatus, int maxWeightOfLuggage) {
+        this.bookingId = bookingId;
+        this.personId = personId;
+        this.flight = flight;
+        this.dateTimeOfBooking = dateTimeOfBooking;
+        this.totalPrice = totalPrice;
+        this.seatNum = seatNum;
+        this.seatingClass = seatingClass;
+        this.bookingStatus = bookingStatus;
+        this.maxWeightOfLuggage = maxWeightOfLuggage;
+    }
 
     public void setBookingStatus(BookingStatus bookingStatus) {
         this.bookingStatus = bookingStatus;

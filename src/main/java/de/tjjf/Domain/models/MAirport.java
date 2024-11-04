@@ -12,8 +12,6 @@ public class MAirport {
 
     private String timezone;
 
-    public MAirport(){}
-
     public MAirport(String code, String name, String country, String city, String timezone) {
         this.code = code;
         this.name = name;

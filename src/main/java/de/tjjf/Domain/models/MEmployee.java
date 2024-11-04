@@ -15,8 +15,6 @@ public class MEmployee {
 
     private Date hireDate;
 
-    public MEmployee() {}
-
     public MEmployee(int personId, int salary, String position, MAirline airline, Date hireDate) {
         this.personId = personId;
         this.salary = salary;

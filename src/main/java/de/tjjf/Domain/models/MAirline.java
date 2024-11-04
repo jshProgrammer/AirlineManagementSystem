@@ -8,8 +8,6 @@ public class MAirline {
 
     private String headQuarters;
 
-    public MAirline() {}
-
     public MAirline(String name, Date foundationYear, String headQuarters) {
         this.name = name;
         this.foundationYear = foundationYear;

@@ -5,8 +5,6 @@ public class MClient {
 
     private boolean isBusinessClient;
 
-    public MClient() {}
-
     public MClient(int personID, boolean isBusinessClient) {
         this.personID = personID;
         this.isBusinessClient = isBusinessClient;
