@@ -1,4 +1,4 @@
-package de.tjjf.models;
+package de.tjjf.Infrastructure.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -20,30 +20,6 @@ public class Airline {
     public Airline(String name, Date foundationYear, String headQuarters) {
         this.name = name;
         this.foundationYear = foundationYear;
-        this.headQuarters = headQuarters;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Date getFoundationYear() {
-        return foundationYear;
-    }
-
-    public String getHeadQuarters() {
-        return headQuarters;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setFoundationYear(Date foundationYear) {
-        this.foundationYear = foundationYear;
-    }
-
-    public void setHeadQuarters(String headQuarters) {
         this.headQuarters = headQuarters;
     }
 }

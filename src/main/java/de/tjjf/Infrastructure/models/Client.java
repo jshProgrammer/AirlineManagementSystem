@@ -1,4 +1,4 @@
-package de.tjjf.models;
+package de.tjjf.Infrastructure.models;
 
 import jakarta.persistence.*;
 
@@ -18,21 +18,5 @@ public class Client {
     public Client(int personID, boolean isBusinessClient) {
         this.personID = personID;
         this.isBusinessClient = isBusinessClient;
-    }
-
-    public int getPersonID() {
-        return personID;
-    }
-
-    public boolean isBusinessClient() {
-        return isBusinessClient;
-    }
-
-    public void setPersonID(int personID) {
-        this.personID = personID;
-    }
-
-    public void setBusinessClient(boolean businessClient) {
-        isBusinessClient = businessClient;
     }
 }

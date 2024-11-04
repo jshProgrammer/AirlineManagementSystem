@@ -1,4 +1,4 @@
-package de.tjjf.models;
+package de.tjjf.Infrastructure.models;
 
 import jakarta.persistence.*;
 
@@ -33,46 +33,6 @@ public class Employee {
         this.salary = salary;
         this.position = position;
         this.airline = airline;
-        this.hireDate = hireDate;
-    }
-
-    public int getPersonId() {
-        return personId;
-    }
-
-    public int getSalary() {
-        return salary;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public Airline getAirline() {
-        return airline;
-    }
-
-    public Date getHireDate() {
-        return hireDate;
-    }
-
-    public void setPersonId(int personId) {
-        this.personId = personId;
-    }
-
-    public void setSalary(int salary) {
-        this.salary = salary;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
-    public void setAirline(Airline airline) {
-        this.airline = airline;
-    }
-
-    public void setHireDate(Date hireDate) {
         this.hireDate = hireDate;
     }
 }
