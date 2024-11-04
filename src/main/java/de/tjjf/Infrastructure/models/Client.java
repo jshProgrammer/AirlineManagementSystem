@@ -19,4 +19,20 @@ public class Client {
         this.personID = personID;
         this.isBusinessClient = isBusinessClient;
     }
+
+    public Person getPersonID() {
+        return personID;
+    }
+
+    public void setPersonID(Person personID) {
+        this.personID = personID;
+    }
+
+    public boolean isBusinessClient() {
+        return isBusinessClient;
+    }
+
+    public void setBusinessClient(boolean businessClient) {
+        isBusinessClient = businessClient;
+    }
 }

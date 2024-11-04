@@ -22,6 +22,14 @@ public class MEmployee {
         this.airline = airline;
         this.hireDate = hireDate;
     }
+    public MEmployee(int employeeId, int personId, int salary, String position, MAirline airline, Date hireDate) {
+        this.employeeId = employeeId;
+        this.personId = personId;
+        this.salary = salary;
+        this.position = position;
+        this.airline = airline;
+        this.hireDate = hireDate;
+    }
 
     public int getPersonId() {
         return personId;
@@ -61,5 +69,13 @@ public class MEmployee {
 
     public void setHireDate(Date hireDate) {
         this.hireDate = hireDate;
+    }
+
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 }

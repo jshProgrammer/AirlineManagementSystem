@@ -40,4 +40,68 @@ public class Airplane {
         this.belongingAirline = belongingAirline;
         this.isOperatable = isOperatable;
     }
+
+    public int getSerialNum() {
+        return serialNum;
+    }
+
+    public void setSerialNum(int serialNum) {
+        this.serialNum = serialNum;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public int getAmoutOfEconomySeats() {
+        return amoutOfEconomySeats;
+    }
+
+    public void setAmoutOfEconomySeats(int amoutOfEconomySeats) {
+        this.amoutOfEconomySeats = amoutOfEconomySeats;
+    }
+
+    public int getAmoutOfBusinessSeats() {
+        return amoutOfBusinessSeats;
+    }
+
+    public void setAmoutOfBusinessSeats(int amoutOfBusinessSeats) {
+        this.amoutOfBusinessSeats = amoutOfBusinessSeats;
+    }
+
+    public int getAmoutOfFirstClassSeats() {
+        return amoutOfFirstClassSeats;
+    }
+
+    public void setAmoutOfFirstClassSeats(int amoutOfFirstClassSeats) {
+        this.amoutOfFirstClassSeats = amoutOfFirstClassSeats;
+    }
+
+    public Airline getBelongingAirline() {
+        return belongingAirline;
+    }
+
+    public void setBelongingAirline(Airline belongingAirline) {
+        this.belongingAirline = belongingAirline;
+    }
+
+    public boolean isOperatable() {
+        return isOperatable;
+    }
+
+    public void setOperatable(boolean operatable) {
+        isOperatable = operatable;
+    }
 }

@@ -110,4 +110,8 @@ public class MBooking {
     public BookingStatus getBookingStatus() {
         return bookingStatus;
     }
+
+    public int getBookingId() {
+        return bookingId;
+    }
 }

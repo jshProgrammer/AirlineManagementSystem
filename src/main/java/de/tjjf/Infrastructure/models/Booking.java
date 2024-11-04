@@ -27,6 +27,7 @@ public class Booking {
     private Person personId;
 
     //TODO: evtl eher Flight statt int als Datentyp?
+    //Umbenennung der Variable
     @ManyToOne()
     private Flight flightNum;
 
@@ -59,6 +60,78 @@ public class Booking {
         this.seatNum = seatNum;
         this.seatingClass = seatingClass;
         this.bookingStatus = bookingStatus;
+        this.maxWeightOfLuggage = maxWeightOfLuggage;
+    }
+
+    public int getBookingId() {
+        return bookingId;
+    }
+
+    public void setBookingId(int bookingId) {
+        this.bookingId = bookingId;
+    }
+
+    public Person getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(Person personId) {
+        this.personId = personId;
+    }
+
+    public Flight getFlightNum() {
+        return flightNum;
+    }
+
+    public void setFlightNum(Flight flightNum) {
+        this.flightNum = flightNum;
+    }
+
+    public Date getDateTimeOfBooking() {
+        return dateTimeOfBooking;
+    }
+
+    public void setDateTimeOfBooking(Date dateTimeOfBooking) {
+        this.dateTimeOfBooking = dateTimeOfBooking;
+    }
+
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public int getSeatNum() {
+        return seatNum;
+    }
+
+    public void setSeatNum(int seatNum) {
+        this.seatNum = seatNum;
+    }
+
+    public SeatingClass getSeatingClass() {
+        return seatingClass;
+    }
+
+    public void setSeatingClass(SeatingClass seatingClass) {
+        this.seatingClass = seatingClass;
+    }
+
+    public BookingStatus getBookingStatus() {
+        return bookingStatus;
+    }
+
+    public void setBookingStatus(BookingStatus bookingStatus) {
+        this.bookingStatus = bookingStatus;
+    }
+
+    public int getMaxWeightOfLuggage() {
+        return maxWeightOfLuggage;
+    }
+
+    public void setMaxWeightOfLuggage(int maxWeightOfLuggage) {
         this.maxWeightOfLuggage = maxWeightOfLuggage;
     }
 }
