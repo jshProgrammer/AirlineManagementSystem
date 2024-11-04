@@ -23,12 +23,10 @@ public class Booking {
     @Id
     private int bookingId;
 
-    @Column(nullable=false)
     @ManyToOne()
     private Person personId;
 
     //TODO: evtl eher Flight statt int als Datentyp?
-    @Column(nullable=false)
     @ManyToOne()
     private Flight flightNum;
 

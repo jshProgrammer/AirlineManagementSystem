@@ -1,6 +1,7 @@
 package de.tjjf.Domain.models;
 
 import java.util.Date;
+
 public class MAirline {
     private String name;
 

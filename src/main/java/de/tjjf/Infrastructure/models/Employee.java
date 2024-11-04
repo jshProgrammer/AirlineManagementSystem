@@ -10,7 +10,6 @@ public class Employee {
     @Id
     private int employeeId;
 
-    @Column(nullable=false)
     @OneToOne
     private Person personId;
 
@@ -21,7 +20,7 @@ public class Employee {
     private String position;
 
     @ManyToOne()
-    @JoinColumn(name = "airline_name", referencedColumnName = "name")
+    //@JoinColumn(name = "airline_name", referencedColumnName = "name")
     private Airline airline;
 
     @Column(nullable=false)

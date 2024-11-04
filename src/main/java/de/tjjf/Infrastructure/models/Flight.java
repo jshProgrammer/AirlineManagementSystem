@@ -15,7 +15,6 @@ public class Flight {
     }
 
     //TODO: evtl @JoinColumn damit Anzeigen aller Buchungen
-    @Column(nullable = false)
     @Id
     private long flightNum;
 

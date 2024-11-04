@@ -5,10 +5,9 @@ import jakarta.persistence.*;
 @Entity
 public class Client {
     //TODO: hier evtl. mapped-Attribut nötig
-    @Column(nullable=false)
     @Id
     @OneToOne
-    @JoinColumn(name = "personId", referencedColumnName = "personID s")
+    //@JoinColumn(name = "personId", referencedColumnName = "personID s")
     private Person personID;
 
     @Column(nullable=false)
