@@ -13,7 +13,7 @@ public class AirplaneMapper {
                 mAirplane.getAmoutOfEconomySeats(),
                 mAirplane.getAmoutOfBusinessSeats(),
                 mAirplane.getAmoutOfFirstClassSeats(),
-                mAirplane.getBelongingAirline(),
+                AirlineMapper.toEntity(mAirplane.getBelongingAirline()),
                 mAirplane.isOperatable()
         );
     }
@@ -26,7 +26,7 @@ public class AirplaneMapper {
                 airplane.getAmoutOfEconomySeats(),
                 airplane.getAmoutOfBusinessSeats(),
                 airplane.getAmoutOfFirstClassSeats(),
-                airplane.getBelongingAirline(),
+                AirlineMapper.toDomain(airplane.getBelongingAirline()),
                 airplane.isOperatable()
         );
     }
