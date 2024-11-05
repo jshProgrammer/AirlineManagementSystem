@@ -1,6 +1,6 @@
 package de.tjjf.Domain.models;
 
-public class MClient {
+public class MClient implements MModel {
     private int personID;
 
     private boolean isBusinessClient;

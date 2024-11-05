@@ -5,7 +5,7 @@ import de.tjjf.Infrastructure.models.Person;
 
 public class PersonMapper {
 
-    public static Person toEntity(MPerson mPerson){
+    public Person toEntity(MPerson mPerson){
         return new Person(
                 mPerson.getPersonId(),
                 mPerson.getFirstName(),
@@ -19,7 +19,7 @@ public class PersonMapper {
         );
     }
 
-    public static MPerson toDomain(Person person){
+    public MPerson toDomain(Person person){
         return new MPerson(
                 person.getPersonId(),
                 person.getFirstName(),

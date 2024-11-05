@@ -1,7 +1,7 @@
 package de.tjjf.Domain.models;
 
 import java.util.Date;
-public class MFlight {
+public class MFlight implements MModel {
 
     public enum FlyStatus {
         scheduled,

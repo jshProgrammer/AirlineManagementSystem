@@ -1,11 +1,13 @@
 package de.tjjf.Infrastructure.mapper;
 
 import de.tjjf.Domain.models.MAirline;
+import de.tjjf.Domain.models.MModel;
 import de.tjjf.Infrastructure.models.Airline;
+import de.tjjf.Infrastructure.models.Model;
 
-public class AirlineMapper {
+public class AirlineMapper extends Mapper<MAirline, Airline> {
 
-    public static Airline toEntity(MAirline mAirline) {
+    public Airline toEntity(MAirline mAirline) {
         return new Airline(
                 mAirline.getName(),
                 mAirline.getFoundationYear(),
@@ -13,12 +15,13 @@ public class AirlineMapper {
         );
     }
 
-    public static MAirline toDomain(Airline airline) {
+    public MAirline toDomain(Airline airline) {
         return new MAirline(
                 airline.getName(),
                 airline.getFoundationYear(),
                 airline.getHeadQuarters()
         );
     }
+
 }
 

@@ -3,7 +3,7 @@ package de.tjjf.Infrastructure.models;
 import jakarta.persistence.*;
 
 @Entity
-public class Airplane {
+public class Airplane implements Model {
     @Id
     private int serialNum;
 

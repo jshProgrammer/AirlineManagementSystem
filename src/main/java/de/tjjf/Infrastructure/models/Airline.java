@@ -5,7 +5,7 @@ import jakarta.persistence.Id;
 
 import java.util.Date;
 @Entity
-public class Airline {
+public class Airline implements Model {
     @Id
     private String name;
 

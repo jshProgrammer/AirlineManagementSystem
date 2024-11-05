@@ -3,7 +3,7 @@ package de.tjjf.Domain.models;
 import de.tjjf.Infrastructure.models.Flight;
 import java.util.Date;
 
-public class MBooking {
+public class MBooking implements MModel {
     //TODO: enums in der Klasse lassen?
     public enum SeatingClass {
         Economy,

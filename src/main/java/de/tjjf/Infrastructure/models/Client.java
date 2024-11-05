@@ -3,7 +3,7 @@ package de.tjjf.Infrastructure.models;
 import jakarta.persistence.*;
 
 @Entity
-public class Client {
+public class Client implements Model {
     //TODO: hier evtl. mapped-Attribut nötig
     @Id
     @OneToOne

@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.Date;
 @Entity
-public class Flight {
+public class Flight implements Model {
 
     public enum FlyStatus {
         scheduled,
@@ -62,6 +62,94 @@ public class Flight {
         this.status = status;
         this.duration = duration;
         this.pilot = pilot;
+        this.copilot = copilot;
+    }
+
+    public long getFlightNum() {
+        return flightNum;
+    }
+
+    public Airplane getAirplane() {
+        return airplane;
+    }
+
+    public Date getDepartureDateTime() {
+        return departureDateTime;
+    }
+
+    public Airport getDepartureAirport() {
+        return departureAirport;
+    }
+
+    public Date getArrivalDateTime() {
+        return arrivalDateTime;
+    }
+
+    public Airport getArrivalAirport() {
+        return arrivalAirport;
+    }
+
+    public Date getBoardingTime() {
+        return boardingTime;
+    }
+
+    public FlyStatus getStatus() {
+        return status;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public Employee getPilot() {
+        return pilot;
+    }
+
+    public Employee getCopilot() {
+        return copilot;
+    }
+
+    public void setFlightNum(long flightNum) {
+        this.flightNum = flightNum;
+    }
+
+    public void setAirplane(Airplane airplane) {
+        this.airplane = airplane;
+    }
+
+    public void setDepartureDateTime(Date departureDateTime) {
+        this.departureDateTime = departureDateTime;
+    }
+
+    public void setDepartureAirport(Airport departureAirport) {
+        this.departureAirport = departureAirport;
+    }
+
+    public void setArrivalDateTime(Date arrivalDateTime) {
+        this.arrivalDateTime = arrivalDateTime;
+    }
+
+    public void setArrivalAirport(Airport arrivalAirport) {
+        this.arrivalAirport = arrivalAirport;
+    }
+
+    public void setBoardingTime(Date boardingTime) {
+        this.boardingTime = boardingTime;
+    }
+
+    public void setStatus(FlyStatus status) {
+        this.status = status;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public void setPilot(Employee pilot) {
+        this.pilot = pilot;
+    }
+
+    public void setCopilot(Employee copilot) {
         this.copilot = copilot;
     }
 }

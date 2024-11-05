@@ -1,6 +1,6 @@
 package de.tjjf.Domain.models;
 
-public class MAirplane {
+public class MAirplane implements MModel {
     private int serialNum;
 
     private String manufacturer;

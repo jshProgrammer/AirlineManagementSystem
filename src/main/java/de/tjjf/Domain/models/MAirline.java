@@ -2,7 +2,7 @@ package de.tjjf.Domain.models;
 
 import java.util.Date;
 
-public class MAirline {
+public class MAirline implements MModel {
     private String name;
 
     private Date foundationYear;

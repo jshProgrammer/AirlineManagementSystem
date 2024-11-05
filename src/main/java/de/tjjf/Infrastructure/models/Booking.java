@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-public class Booking {
+public class Booking implements Model {
     //TODO: enums in der Klasse lassen?
     public enum SeatingClass {
         Economy,

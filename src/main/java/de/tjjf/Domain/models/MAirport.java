@@ -1,6 +1,6 @@
 package de.tjjf.Domain.models;
 
-public class MAirport {
+public class MAirport implements MModel {
 
     private String code;
 

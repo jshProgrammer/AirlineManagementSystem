@@ -3,8 +3,9 @@ package de.tjjf.Infrastructure.mapper;
 import de.tjjf.Domain.models.MClient;
 import de.tjjf.Infrastructure.models.Client;
 
-public class ClientMapper {
-    public static Client toEntity(MClient mClient){
+/*
+public class ClientMapper extends Mapper<MClient, Client>{
+    public Client toEntity(MClient mClient){
         return new Client(
                 mClient.getPersonID(),
                 mClient.isBusinessClient()
@@ -17,4 +18,4 @@ public class ClientMapper {
                 client.isBusinessClient()
         );
     }
-}
+}*/

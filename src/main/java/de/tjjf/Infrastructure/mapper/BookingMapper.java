@@ -8,7 +8,7 @@ public class BookingMapper {
     public static Booking toEntity(MBooking mBooking){
         return new Booking(
                 mBooking.getBookingId(),
-                mBooking.getPersonId(),
+                new PersonMapper().toEntity(mBooking.getPersonId()),
                 mBooking.getFlight(),
                 mBooking.getDateTimeOfBooking(),
                 mBooking.getTotalPrice(),
@@ -33,4 +33,4 @@ public class BookingMapper {
                 booking.getMaxWeightOfLuggage()
         );
     }
-}
+}*/

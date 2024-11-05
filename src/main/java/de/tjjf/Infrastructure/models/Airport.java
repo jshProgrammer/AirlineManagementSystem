@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
-public class Airport {
+public class Airport implements Model {
 
     @Column(nullable = false)
     @Id

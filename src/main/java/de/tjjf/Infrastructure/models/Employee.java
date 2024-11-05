@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-public class Employee {
+public class Employee implements Model {
     @Column(nullable=false)
     @Id
     private int employeeId;

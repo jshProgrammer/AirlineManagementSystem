@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 import java.util.Date;
 
 @Entity
-public class Person
+public class Person implements Model
 {
     @Column(nullable = false)
     @Id

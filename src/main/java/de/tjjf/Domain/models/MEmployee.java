@@ -2,7 +2,7 @@ package de.tjjf.Domain.models;
 
 import java.util.Date;
 
-public class MEmployee {
+public class MEmployee implements MModel {
     private int employeeId;
 
     private int personId;

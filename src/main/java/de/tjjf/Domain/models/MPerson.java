@@ -2,7 +2,7 @@ package de.tjjf.Domain.models;
 
 import java.util.Date;
 
-public class MPerson
+public class MPerson implements MModel
 {
     private long personId;
 

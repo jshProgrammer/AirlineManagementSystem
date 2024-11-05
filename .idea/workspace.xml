@@ -4,30 +4,216 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0eb50235-628a-4483-ab64-59f3939482c3" name="Changes" comment="Creating entites with relations">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+    <list default="true" id="0eb50235-628a-4483-ab64-59f3939482c3" name="Changes" comment=" (pair programming with Tom) Finish DatabaseAdapter, Refactoring with abstraction of Model, MModel, Mapper &#10; &#10; changed Java/Module JDK to 21 for switch-case-expression&#10; commented some Mapper classes until question is answered">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Domain/models/MAirline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Domain/models/MAirline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Domain/models/MAirplane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Domain/models/MAirplane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Domain/models/MAirport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Domain/models/MAirport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Domain/models/MBooking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Domain/models/MBooking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Domain/models/MClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Domain/models/MClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Domain/models/MEmployee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Domain/models/MEmployee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Domain/models/MFlight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Domain/models/MFlight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Domain/models/MPerson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Domain/models/MPerson.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Domain/ports/DataAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Domain/ports/DataAccess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/DatabaseAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/DatabaseAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/mapper/AirlineMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/mapper/AirlineMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/mapper/AirplaneMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/mapper/AirplaneMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/mapper/BookingMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/mapper/BookingMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/mapper/ClientMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/mapper/ClientMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/mapper/EmployeeMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/mapper/EmployeeMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/mapper/FlightMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/mapper/FlightMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/mapper/PersonMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/mapper/PersonMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/models/Airline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/models/Airline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/models/Airplane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/models/Airplane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/models/Airport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/models/Airport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/models/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/models/Booking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/models/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/models/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/models/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/models/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/models/Flight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/models/Flight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/models/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/models/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/AirlineManagement-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/AirlineManagement-1.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/persistence.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/tjjf/Domain/models/MAirline.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/tjjf/Domain/models/MAirplane.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/tjjf/Domain/models/MAirport.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/tjjf/Domain/models/MBooking.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/tjjf/Domain/models/MClient.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/tjjf/Domain/models/MEmployee.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/tjjf/Domain/models/MFlight.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/tjjf/Domain/models/MPerson.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/tjjf/Infrastructure/models/Airline.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/tjjf/Infrastructure/models/Airplane.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/tjjf/Infrastructure/models/Airport.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/tjjf/Infrastructure/models/Booking.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/tjjf/Infrastructure/models/Client.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/tjjf/Infrastructure/models/Employee.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/tjjf/Infrastructure/models/Flight.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/tjjf/Infrastructure/models/Person.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/tjjf/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/tjjf/models/Airplane.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/tjjf/models/Airport.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/tjjf/models/Booking.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/tjjf/models/Client.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/tjjf/models/Employee.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/tjjf/models/Flight.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/tjjf/models/Person.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/consumer14507744637113520725pom" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/project-local-repo/de.tjjf/AirlineManagement/1.0/AirlineManagement-1.0-consumer.pom" beforeDir="false" afterPath="$PROJECT_DIR$/target/project-local-repo/de.tjjf/AirlineManagement/1.0/AirlineManagement-1.0-consumer.pom" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/project-local-repo/de.tjjf/AirlineManagement/1.0/AirlineManagement-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/project-local-repo/de.tjjf/AirlineManagement/1.0/AirlineManagement-1.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/project-local-repo/de.tjjf/AirlineManagement/1.0/AirlineManagement-1.0.pom" beforeDir="false" afterPath="$PROJECT_DIR$/target/project-local-repo/de.tjjf/AirlineManagement/1.0/AirlineManagement-1.0.pom" afterDir="false" />
+    </list>
+    <list id="07d317b1-8995-4a1f-ae3c-703621936804" name="Changes by tomknoblach" comment="Changes by tomknoblach">
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Domain/ports/DataAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Domain/ports/DataAccess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/DatabaseAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/DatabaseAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/mapper/AirplaneMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/mapper/AirplaneMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/mapper/AirportMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/mapper/AirportMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/mapper/BookingMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/mapper/BookingMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/mapper/ClientMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/mapper/ClientMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/mapper/FlightMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/mapper/FlightMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/mapper/PersonMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/mapper/PersonMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/models/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/models/Person.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/mapper/PersonMapper.java">
+      <ranges>
+        <range start1="5" end1="6" start2="5" end2="6" changelist="07d317b1-8995-4a1f-ae3c-703621936804" />
+        <range start1="7" end1="8" start2="7" end2="8" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+        <range start1="21" end1="22" start2="21" end2="22" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/models/Person.java">
+      <ranges>
+        <range start1="9" end1="10" start2="9" end2="10" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+        <range start1="18" end1="20" start2="18" end2="19" changelist="07d317b1-8995-4a1f-ae3c-703621936804" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/DatabaseAdapter.java">
+      <ranges>
+        <range start1="2" end1="3" start2="2" end2="3" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+        <range start1="4" end1="6" start2="4" end2="6" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+        <range start1="19" end1="20" start2="19" end2="27" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+        <range start1="23" end1="24" start2="30" end2="31" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+        <range start1="27" end1="27" start2="34" end2="38" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+        <range start1="33" end1="35" start2="44" end2="46" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+        <range start1="38" end1="43" start2="49" end2="52" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+        <range start1="46" end1="48" start2="55" end2="72" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+        <range start1="50" end1="62" start2="74" end2="82" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+        <range start1="63" end1="70" start2="83" end2="87" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+        <range start1="74" end1="76" start2="91" end2="119" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+        <range start1="81" end1="83" start2="124" end2="126" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+        <range start1="86" end1="87" start2="129" end2="130" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+        <range start1="88" end1="88" start2="131" end2="147" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+        <range start1="90" end1="92" start2="149" end2="150" changelist="07d317b1-8995-4a1f-ae3c-703621936804" />
+        <range start1="98" end1="99" start2="156" end2="157" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+        <range start1="118" end1="120" start2="176" end2="209" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+        <range start1="126" end1="127" start2="215" end2="216" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+        <range start1="135" end1="136" start2="224" end2="225" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/mapper/BookingMapper.java">
+      <ranges>
+        <range start1="4" end1="4" start2="4" end2="6" changelist="07d317b1-8995-4a1f-ae3c-703621936804" />
+        <range start1="5" end1="8" start2="7" end2="8" changelist="07d317b1-8995-4a1f-ae3c-703621936804" />
+        <range start1="10" end1="11" start2="10" end2="11" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+        <range start1="22" end1="23" start2="22" end2="23" changelist="07d317b1-8995-4a1f-ae3c-703621936804" />
+        <range start1="35" end1="36" start2="35" end2="36" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/mapper/AirplaneMapper.java">
+      <ranges>
+        <range start1="5" end1="6" start2="5" end2="6" changelist="07d317b1-8995-4a1f-ae3c-703621936804" />
+        <range start1="7" end1="8" start2="7" end2="8" changelist="07d317b1-8995-4a1f-ae3c-703621936804" />
+        <range start1="15" end1="16" start2="15" end2="16" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+        <range start1="20" end1="21" start2="20" end2="21" changelist="07d317b1-8995-4a1f-ae3c-703621936804" />
+        <range start1="28" end1="29" start2="28" end2="29" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/mapper/ClientMapper.java">
+      <ranges>
+        <range start1="5" end1="7" start2="5" end2="8" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+        <range start1="13" end1="14" start2="14" end2="15" changelist="07d317b1-8995-4a1f-ae3c-703621936804" />
+        <range start1="19" end1="20" start2="20" end2="21" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/mapper/FlightMapper.java">
+      <ranges>
+        <range start1="5" end1="6" start2="5" end2="7" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+        <range start1="7" end1="8" start2="8" end2="10" changelist="07d317b1-8995-4a1f-ae3c-703621936804" />
+        <range start1="9" end1="10" start2="11" end2="22" changelist="07d317b1-8995-4a1f-ae3c-703621936804" />
+        <range start1="12" end1="13" start2="24" end2="40" changelist="07d317b1-8995-4a1f-ae3c-703621936804" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/src/main/java/de/tjjf/Domain/ports/DataAccess.java">
+      <ranges>
+        <range start1="3" end1="4" start2="3" end2="4" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+        <range start1="8" end1="9" start2="8" end2="9" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+        <range start1="10" end1="11" start2="10" end2="20" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+        <range start1="12" end1="13" start2="21" end2="22" changelist="07d317b1-8995-4a1f-ae3c-703621936804" />
+        <range start1="14" end1="15" start2="23" end2="32" changelist="0eb50235-628a-4483-ab64-59f3939482c3" />
+      </ranges>
+    </file>
+  </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "codeWithMe.voiceChat.enabledByDefault": "false",
     "git-widget-placeholder": "main",
-    "node.js.selected.package.tslint": "(autodetect)"
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="DatabaseAdapter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="de.tjjf.Infrastructure.DatabaseAdapter" />
+      <module name="AirlineManagement" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="de.tjjf.Infrastructure.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.DatabaseAdapter" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="TaskManager">
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Creating entites with relations" />
-    <option name="LAST_COMMIT_MESSAGE" value="Creating entites with relations" />
+    <MESSAGE value=" Finish DatabaseAdapter, Refactoring with abstraction of Model, MModel, Mapper (pair programming with Tom)&#10; &#10; changed Java/Module JDK to 21 for switch-case-expression&#10; commented some Mapper classes until question is answered" />
+    <MESSAGE value="Changes by tomknoblach" />
+    <MESSAGE value=" (pair programming with Tom) Finish DatabaseAdapter, Refactoring with abstraction of Model, MModel, Mapper &#10; &#10; changed Java/Module JDK to 21 for switch-case-expression&#10; commented some Mapper classes until question is answered" />
+    <option name="LAST_COMMIT_MESSAGE" value=" (pair programming with Tom) Finish DatabaseAdapter, Refactoring with abstraction of Model, MModel, Mapper &#10; &#10; changed Java/Module JDK to 21 for switch-case-expression&#10; commented some Mapper classes until question is answered" />
   </component>
 </project>
