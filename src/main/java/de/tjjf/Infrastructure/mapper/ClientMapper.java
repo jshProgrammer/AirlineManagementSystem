@@ -12,7 +12,7 @@ public class ClientMapper extends Mapper<MClient, Client>{
         );
     }
 
-    public static MClient toDomain(Client client){
+    public MClient toDomain(Client client){
         return new MClient(
                 client.getPersonID(),
                 client.isBusinessClient()

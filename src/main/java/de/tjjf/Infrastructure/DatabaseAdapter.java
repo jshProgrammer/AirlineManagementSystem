@@ -147,8 +147,7 @@ public class DatabaseAdapter implements DataAccess {
         update(mModel, mapper);
     }
 
-    @Override
-    public void update(MAirline airline) {
+    public void update(MModel mModel, Mapper mapper) {
         EntityManager em = null;
 
         try

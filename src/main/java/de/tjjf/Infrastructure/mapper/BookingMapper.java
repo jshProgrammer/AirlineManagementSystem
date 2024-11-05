@@ -2,10 +2,10 @@ package de.tjjf.Infrastructure.mapper;
 
 import de.tjjf.Domain.models.MBooking;
 import de.tjjf.Infrastructure.models.Booking;
+/*
+public class BookingMapper extends Mapper<MBooking, Booking> {
 
-public class BookingMapper {
-
-    public static Booking toEntity(MBooking mBooking){
+    public Booking toEntity(MBooking mBooking){
         return new Booking(
                 mBooking.getBookingId(),
                 new PersonMapper().toEntity(mBooking.getPersonId()),
@@ -20,7 +20,7 @@ public class BookingMapper {
         );
     }
 
-    public static MBooking toDomain(Booking booking){
+    public MBooking toDomain(Booking booking){
         return new MBooking(
                 booking.getBookingId(),
                 booking.getPersonId(),

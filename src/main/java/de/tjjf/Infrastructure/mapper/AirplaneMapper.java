@@ -3,9 +3,9 @@ package de.tjjf.Infrastructure.mapper;
 import de.tjjf.Domain.models.MAirplane;
 import de.tjjf.Infrastructure.models.Airplane;
 
-public class AirplaneMapper {
+public class AirplaneMapper extends Mapper<MAirplane, Airplane> {
 
-    public static Airplane toEntity(MAirplane mAirplane){
+    public  Airplane toEntity(MAirplane mAirplane){
         return new Airplane(
                 mAirplane.getSerialNum(),
                 mAirplane.getManufacturer(),
@@ -18,7 +18,7 @@ public class AirplaneMapper {
         );
     }
 
-    public static MAirplane toDomain(Airplane airplane){
+    public MAirplane toDomain(Airplane airplane){
         return new MAirplane(
                 airplane.getSerialNum(),
                 airplane.getManufacturer(),

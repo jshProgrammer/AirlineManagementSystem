@@ -16,8 +16,7 @@ public class Person implements Model
     @Column(nullable = false)
     private String firstName;
 
-    //evtl nullable true, nicht jeder hat middle name
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String middleNames;
 
     @Column(nullable = false)

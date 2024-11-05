@@ -3,7 +3,7 @@ package de.tjjf.Infrastructure.mapper;
 import de.tjjf.Domain.models.MPerson;
 import de.tjjf.Infrastructure.models.Person;
 
-public class PersonMapper {
+public class PersonMapper extends Mapper<MPerson, Person>{
 
     public Person toEntity(MPerson mPerson){
         return new Person(

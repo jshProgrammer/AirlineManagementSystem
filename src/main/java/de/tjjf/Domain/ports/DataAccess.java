@@ -19,7 +19,7 @@ public interface DataAccess {
     public MPerson readPerson(int id);
 
 
-    void update( MAirline airline );
+    void update( MModel mModel );
 
     //TODO: schönere Lösung falls möglich
     public void deleteAirplane(int serialnumber);
