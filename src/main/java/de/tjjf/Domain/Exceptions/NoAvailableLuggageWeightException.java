@@ -1,4 +1,4 @@
-package de.tjjf.Domain;
+package de.tjjf.Domain.Exceptions;
 
 public class NoAvailableLuggageWeightException extends RuntimeException {
     public NoAvailableLuggageWeightException( )

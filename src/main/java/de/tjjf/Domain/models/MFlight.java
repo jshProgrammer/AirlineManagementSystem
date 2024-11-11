@@ -29,7 +29,7 @@ public class MFlight implements MModel {
 
     private int duration;
 
-    MBooking[] bookings;
+    MTicket[] bookings;
 
     private MEmployee pilot;
 
@@ -51,7 +51,7 @@ public class MFlight implements MModel {
         this.duration = duration;
         this.pilot = pilot;
         this.copilot = copilot;
-        this.bookings = new MBooking[airplane.getAmountOfBusinessSeats() + airplane.getAmountOfEconomySeats() + airplane.getAmountOfFirstClassSeats()];
+        this.bookings = new MTicket[airplane.getAmountOfBusinessSeats() + airplane.getAmountOfEconomySeats() + airplane.getAmountOfFirstClassSeats()];
 
     }
 
@@ -143,7 +143,7 @@ public class MFlight implements MModel {
         return status;
     }
 
-    public MBooking[] getBookings() {
+    public MTicket[] getBookings() {
         return bookings;
     }
 
@@ -170,12 +170,16 @@ public class MFlight implements MModel {
     }
 
 
-    public void addBooking(MBooking newBooking) {
+    public void addBooking(MTicket newBooking) {
        for(int i=0; i<bookings.length; i++) {
            if(bookings[i] == null) {
                bookings[i] = newBooking;
                break;
            }
        }
+    }
+
+    public void cancelFlight(){
+        this.status = FlyStatus.canceled;
     }
 }

@@ -3,8 +3,6 @@ package de.tjjf.Domain.ports;
 
 import de.tjjf.Domain.models.*;
 
-import java.util.List;
-
 public interface DataAccess {
     public void create(MModel mModel);
 
@@ -12,7 +10,7 @@ public interface DataAccess {
     public MModel readAirline(String name);
     public MModel readAirplane(int serialnumber);
     public MAirport readAirport(String code);
-    public MBooking readBooking(int bookingnum);
+    public MTicket readBooking(int bookingnum);
     /*public MClient readClient(int personId);
     public MEmployee readEmployee(int employeeid);
     public MFlight readFlight(long flightnum);/

@@ -60,7 +60,7 @@ public class DatabaseAdapter implements DataAccess {
             case MAirplane mAirplane -> new AirplaneMapper();
             case MAirport mAirport -> new AirportMapper();
             case MPerson mPerson -> new PersonMapper();
-            //case MBooking mBooking -> new BookingMapper();
+            //case MTicket mBooking -> new BookingMapper();
             //case MClient mClient -> new ClientMapper();
             //case MEmployee mEmployee -> new EmployeeMapper();
             //case MFlight mFlight -> new FlightMapper();
@@ -100,8 +100,8 @@ public class DatabaseAdapter implements DataAccess {
     public MAirport readAirport(String code) {
         return  (MAirport) read(Airport.class, code, new AirportMapper());
     }
-    /*public MBooking readBooking(int bookingnum) {
-        return  (MBooking) read(Booking.class, bookingnum, new BookingMapper());
+    /*public MTicket readBooking(int bookingnum) {
+        return  (MTicket) read(Ticket.class, bookingnum, new BookingMapper());
     }*/
      /*public MClient readClient(int personId) {
         return (MClient) read(Client.class, personId, new ClientMapper());
@@ -135,21 +135,21 @@ public class DatabaseAdapter implements DataAccess {
     }
 
     //TODO: diese Logik in Domäne ziehen => nur wenn sehr komplex
-    public boolean isSeatingUpdateAvailable( Booking booking, MBooking.SeatingClass newDesiredSeatingClass ) {
-        MBooking mBooking = read(Booking.class, booking.getBookingId(), new BookingMapper());
+    public boolean isSeatingUpdateAvailable( Ticket booking, MTicket.SeatingClass newDesiredSeatingClass ) {
+        MTicket mBooking = read(Ticket.class, booking.getBookingId(), new BookingMapper());
 
-        //TODO: hier Booking oder MBooking
+        //TODO: hier Ticket oder MTicket
 
         MFlight belongingFlight = mBooking.getFlight();
-        MBooking[] bookingsOfThisFlight = belongingFlight.getBookings();
+        MTicket[] bookingsOfThisFlight = belongingFlight.getBookings();
 
         int totalNumberOfSeatsInDesiredClass = switch(newDesiredSeatingClass) {
-            case Booking.SeatingClass .Economy -> belongingFlight.getAirplane().getAmountOfEconomySeats();
-            case Booking.SeatingClass .Business -> belongingFlight.getAirplane().getAmountOfBusinessSeats();
-            case Booking.SeatingClass .First -> belongingFlight.getAirplane().getAmountOfFirstClassSeats();
+            case Ticket.SeatingClass .Economy -> belongingFlight.getAirplane().getAmountOfEconomySeats();
+            case Ticket.SeatingClass .Business -> belongingFlight.getAirplane().getAmountOfBusinessSeats();
+            case Ticket.SeatingClass .First -> belongingFlight.getAirplane().getAmountOfFirstClassSeats();
         };
 
-        for(MBooking mBookingIter : bookingsOfThisFlight) {
+        for(MTicket mBookingIter : bookingsOfThisFlight) {
             if(mBookingIter.getSeatingClass() == newDesiredSeatingClass) {
 
             }
@@ -165,7 +165,7 @@ public class DatabaseAdapter implements DataAccess {
             case MAirplane mAirplane -> new AirplaneMapper();
             case MAirport mAirport -> new AirportMapper();
             case MPerson mPerson -> new PersonMapper();
-            //case MBooking mBooking -> new BookingMapper();
+            //case MTicket mBooking -> new BookingMapper();
             //case MClient mClient -> new ClientMapper();
             //case MEmployee mEmployee -> new EmployeeMapper();
             //case MFlight mFlight -> new FlightMapper();
@@ -213,7 +213,7 @@ public class DatabaseAdapter implements DataAccess {
         delete(Airport.class, code, new AirportMapper());
     }
     public void deleteBooking(int bookingnum) {
-        delete(Booking.class, bookingnum, new AirlineMapper());
+        delete(Ticket.class, bookingnum, new AirlineMapper());
     }
 
 

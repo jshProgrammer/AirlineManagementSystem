@@ -1,12 +1,12 @@
 package de.tjjf.Infrastructure.persistence.mapper;
 
 /*
-public class BookingMapper extends Mapper<MBooking, Booking> {
+public class BookingMapper extends Mapper<MTicket, Ticket> {
 
 //TODO: bookings hinzufügen
 
-    public Booking toEntity(MBooking mBooking){
-        return new Booking(
+    public Ticket toEntity(MTicket mBooking){
+        return new Ticket(
                 mBooking.getBookingId(),
                 new PersonMapper().toEntity(mBooking.getPersonId()),
                 mBooking.getFlight(),
@@ -20,8 +20,8 @@ public class BookingMapper extends Mapper<MBooking, Booking> {
         );
     }
 
-    public MBooking toDomain(Booking booking){
-        return new MBooking(
+    public MTicket toDomain(Ticket booking){
+        return new MTicket(
                 booking.getBookingId(),
                 booking.getPersonId(),
                 booking.getFlightNum(),

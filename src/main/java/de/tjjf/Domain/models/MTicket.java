@@ -1,7 +1,7 @@
 package de.tjjf.Domain.models;
 
-import de.tjjf.Domain.NoAvailableLuggageWeightException;
-import de.tjjf.Domain.NoSeatsLeftException;
+import de.tjjf.Domain.Exceptions.NoAvailableLuggageWeightException;
+import de.tjjf.Domain.Exceptions.NoSeatsLeftException;
 
 import java.util.Date;
 
@@ -19,7 +19,7 @@ public class MTicket implements MModel {
         Canceled
     }
 
-    private int bookingId;
+    private int ticketId;
 
     private int personId;
 
@@ -33,28 +33,28 @@ public class MTicket implements MModel {
 
     private SeatingClass seatingClass;
 
-    private BookingStatus bookingStatus;
+    private BookingStatus ticketStatus;
 
     private int weightOfLuggage;
 
-    public MTicket(int bookingId, int personId, MFlight flight, Date dateTimeOfBooking, int totalPrice, int seatNum, SeatingClass seatingClass, BookingStatus bookingStatus, int weightOfLuggage) {
+    public MTicket(int ticketId, int personId, MFlight flight, Date dateTimeOfBooking, int totalPrice, int seatNum, SeatingClass seatingClass, BookingStatus ticketStatus, int weightOfLuggage) {
 
         // check whether there is still a place for customer
         if(! (isSeatingUpdateAvailable(seatingClass))) throw new NoSeatsLeftException("Flight cannot be booked any more due to restricted amount");
 
-        this.bookingId = bookingId;
+        this.ticketId = ticketId;
         this.personId = personId;
         this.flight = flight;
         this.dateTimeOfBooking = dateTimeOfBooking;
         this.totalPrice = totalPrice;
         this.seatNum = seatNum;
         this.seatingClass = seatingClass;
-        this.bookingStatus = bookingStatus;
+        this.ticketStatus = ticketStatus;
         setLuggageWeight(weightOfLuggage);
     }
 
-    public void setBookingStatus(BookingStatus bookingStatus) {
-        this.bookingStatus = bookingStatus;
+    public void setTicketStatus(BookingStatus ticketStatus) {
+        this.ticketStatus = ticketStatus;
     }
 
     public void setDateTimeOfBooking(Date dateTimeOfBooking) {
@@ -142,12 +142,12 @@ public class MTicket implements MModel {
         return dateTimeOfBooking;
     }
 
-    public BookingStatus getBookingStatus() {
-        return bookingStatus;
+    public BookingStatus getTicketStatus() {
+        return ticketStatus;
     }
 
-    public int getBookingId() {
-        return bookingId;
+    public int getTicketId() {
+        return ticketId;
     }
 
     private boolean isSeatingUpdateAvailable( MTicket.SeatingClass newDesiredSeatingClass ) {
@@ -170,6 +170,10 @@ public class MTicket implements MModel {
         }
 
         return reservedNumberOfSeats < totalNumberOfSeats;
+    }
+
+    public void cancelTicket(){
+        this.ticketStatus = BookingStatus.Canceled;
     }
 
 }

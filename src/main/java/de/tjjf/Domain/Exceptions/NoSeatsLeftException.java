@@ -1,4 +1,4 @@
-package de.tjjf.Domain;
+package de.tjjf.Domain.Exceptions;
 
 public class NoSeatsLeftException extends RuntimeException {
     public NoSeatsLeftException( )
