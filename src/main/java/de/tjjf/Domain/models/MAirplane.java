@@ -7,37 +7,43 @@ public class MAirplane implements MModel {
 
     private String model;
 
-    private int amoutOfEconomySeats;
+    private int amountOfEconomySeats;
 
-    private int amoutOfBusinessSeats;
+    private int amountOfBusinessSeats;
 
-    private int amoutOfFirstClassSeats;
+    private int amountOfFirstClassSeats;
 
     private MAirline belongingAirline;
 
     private boolean isOperatable;
 
-    public MAirplane(int serialNum, String manufacturer, String model, int amoutOfEconomySeats, int amoutOfBusinessSeats, int amoutOfFirstClassSeats, MAirline belongingAirline, boolean isOperatable) {
+    final private int maxWeightOfLuggage;
+
+    public MAirplane(int serialNum, String manufacturer, String model, int amountOfEconomySeats, int amoutOfBusinessSeats, int amoutOfFirstClassSeats, MAirline belongingAirline, boolean isOperatable, int maxWeightOfLuggage) {
         this.serialNum = serialNum;
         this.manufacturer = manufacturer;
         this.model = model;
-        this.amoutOfEconomySeats = amoutOfEconomySeats;
-        this.amoutOfBusinessSeats = amoutOfBusinessSeats;
-        this.amoutOfFirstClassSeats = amoutOfFirstClassSeats;
+        this.amountOfEconomySeats = amountOfEconomySeats;
+        this.amountOfBusinessSeats = amoutOfBusinessSeats;
+        this.amountOfFirstClassSeats = amoutOfFirstClassSeats;
         this.belongingAirline = belongingAirline;
         this.isOperatable = isOperatable;
+        this.maxWeightOfLuggage = maxWeightOfLuggage;
     }
 
-    public int getAmoutOfEconomySeats() {
-        return amoutOfEconomySeats;
+    public int getTotalNumberOfSeats(){
+        return this.amountOfBusinessSeats + this.amountOfEconomySeats + this.amountOfFirstClassSeats;
+    }
+    public int getAmountOfEconomySeats() {
+        return amountOfEconomySeats;
     }
 
-    public int getAmoutOfBusinessSeats() {
-        return amoutOfBusinessSeats;
+    public int getAmountOfBusinessSeats() {
+        return amountOfBusinessSeats;
     }
 
-    public int getAmoutOfFirstClassSeats() {
-        return amoutOfFirstClassSeats;
+    public int getAmountOfFirstClassSeats() {
+        return amountOfFirstClassSeats;
     }
 
     public MAirline getBelongingAirline() {
@@ -48,16 +54,16 @@ public class MAirplane implements MModel {
         return isOperatable;
     }
 
-    public void setAmoutOfEconomySeats(int amoutOfEconomySeats) {
-        this.amoutOfEconomySeats = amoutOfEconomySeats;
+    public void setAmountOfEconomySeats(int amountOfEconomySeats) {
+        this.amountOfEconomySeats = amountOfEconomySeats;
     }
 
-    public void setAmoutOfBusinessSeats(int amoutOfBusinessSeats) {
-        this.amoutOfBusinessSeats = amoutOfBusinessSeats;
+    public void setAmountOfBusinessSeats(int amountOfBusinessSeats) {
+        this.amountOfBusinessSeats = amountOfBusinessSeats;
     }
 
-    public void setAmoutOfFirstClassSeats(int amoutOfFirstClassSeats) {
-        this.amoutOfFirstClassSeats = amoutOfFirstClassSeats;
+    public void setAmountOfFirstClassSeats(int amountOfFirstClassSeats) {
+        this.amountOfFirstClassSeats = amountOfFirstClassSeats;
     }
 
     public void setBelongingAirline(MAirline belongingAirline) {
@@ -90,5 +96,9 @@ public class MAirplane implements MModel {
 
     public int getSerialNum() {
         return serialNum;
+    }
+
+    public int getMaxWeightOfLuggage() {
+        return maxWeightOfLuggage;
     }
 }

@@ -144,9 +144,9 @@ public class DatabaseAdapter implements DataAccess {
         MBooking[] bookingsOfThisFlight = belongingFlight.getBookings();
 
         int totalNumberOfSeatsInDesiredClass = switch(newDesiredSeatingClass) {
-            case Booking.SeatingClass .Economy -> belongingFlight.getAirplane().getAmoutOfEconomySeats();
-            case Booking.SeatingClass .Business -> belongingFlight.getAirplane().getAmoutOfBusinessSeats();
-            case Booking.SeatingClass .First -> belongingFlight.getAirplane().getAmoutOfFirstClassSeats();
+            case Booking.SeatingClass .Economy -> belongingFlight.getAirplane().getAmountOfEconomySeats();
+            case Booking.SeatingClass .Business -> belongingFlight.getAirplane().getAmountOfBusinessSeats();
+            case Booking.SeatingClass .First -> belongingFlight.getAirplane().getAmountOfFirstClassSeats();
         };
 
         for(MBooking mBookingIter : bookingsOfThisFlight) {

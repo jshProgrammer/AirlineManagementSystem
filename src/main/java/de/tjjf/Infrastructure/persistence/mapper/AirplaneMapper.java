@@ -10,9 +10,9 @@ public class AirplaneMapper extends Mapper<MAirplane, Airplane> {
                 mAirplane.getSerialNum(),
                 mAirplane.getManufacturer(),
                 mAirplane.getModel(),
-                mAirplane.getAmoutOfEconomySeats(),
-                mAirplane.getAmoutOfBusinessSeats(),
-                mAirplane.getAmoutOfFirstClassSeats(),
+                mAirplane.getAmountOfEconomySeats(),
+                mAirplane.getAmountOfBusinessSeats(),
+                mAirplane.getAmountOfFirstClassSeats(),
                 new AirlineMapper().toEntity(mAirplane.getBelongingAirline()),
                 mAirplane.isOperatable()
         );
