@@ -5,7 +5,7 @@ import de.tjjf.Domain.NoSeatsLeftException;
 
 import java.util.Date;
 
-public class MBooking implements MModel {
+public class MTicket implements MModel {
     //TODO: enums in der Klasse lassen?
     public enum SeatingClass {
         Economy,
@@ -37,7 +37,7 @@ public class MBooking implements MModel {
 
     private int weightOfLuggage;
 
-    public MBooking(int bookingId, int personId, MFlight flight, Date dateTimeOfBooking, int totalPrice, int seatNum, SeatingClass seatingClass, BookingStatus bookingStatus, int weightOfLuggage) {
+    public MTicket(int bookingId, int personId, MFlight flight, Date dateTimeOfBooking, int totalPrice, int seatNum, SeatingClass seatingClass, BookingStatus bookingStatus, int weightOfLuggage) {
 
         // check whether there is still a place for customer
         if(! (isSeatingUpdateAvailable(seatingClass))) throw new NoSeatsLeftException("Flight cannot be booked any more due to restricted amount");
@@ -150,22 +150,21 @@ public class MBooking implements MModel {
         return bookingId;
     }
 
-
-    private boolean isSeatingUpdateAvailable( MBooking.SeatingClass newDesiredSeatingClass ) {
+    private boolean isSeatingUpdateAvailable( MTicket.SeatingClass newDesiredSeatingClass ) {
 
         MFlight belongingFlight = this.getFlight();
-        MBooking[] bookingsOfThisFlight = belongingFlight.getBookings();
+        MTicket[] bookingsOfThisFlight = belongingFlight.getBookings();
 
         int totalNumberOfSeats = switch(newDesiredSeatingClass) {
-            case MBooking.SeatingClass .Economy -> belongingFlight.getAirplane().getAmountOfEconomySeats();
-            case MBooking.SeatingClass .Business -> belongingFlight.getAirplane().getAmountOfBusinessSeats();
-            case MBooking.SeatingClass .First -> belongingFlight.getAirplane().getAmountOfFirstClassSeats();
+            case MTicket.SeatingClass .Economy -> belongingFlight.getAirplane().getAmountOfEconomySeats();
+            case MTicket.SeatingClass .Business -> belongingFlight.getAirplane().getAmountOfBusinessSeats();
+            case MTicket.SeatingClass .First -> belongingFlight.getAirplane().getAmountOfFirstClassSeats();
         };
 
         int reservedNumberOfSeats = 0;
 
-        for(MBooking mBookingIter : bookingsOfThisFlight) {
-            if(mBookingIter.getSeatingClass() == newDesiredSeatingClass) {
+        for(MTicket mTicketIter : bookingsOfThisFlight) {
+            if(mTicketIter.getSeatingClass() == newDesiredSeatingClass) {
                 reservedNumberOfSeats++;
             }
         }
