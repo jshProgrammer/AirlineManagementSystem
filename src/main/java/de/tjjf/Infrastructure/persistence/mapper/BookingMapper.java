@@ -1,9 +1,9 @@
-package de.tjjf.Infrastructure.mapper;
+package de.tjjf.Infrastructure.persistence.mapper;
 
-import de.tjjf.Domain.models.MBooking;
-import de.tjjf.Infrastructure.models.Booking;
 /*
 public class BookingMapper extends Mapper<MBooking, Booking> {
+
+//TODO: bookings hinzufügen
 
     public Booking toEntity(MBooking mBooking){
         return new Booking(

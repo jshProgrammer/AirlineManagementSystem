@@ -1,6 +1,6 @@
 package de.tjjf.Domain.models;
 
-import de.tjjf.Infrastructure.models.Flight;
+import de.tjjf.Infrastructure.persistence.entities.Flight;
 import java.util.Date;
 
 public class MBooking implements MModel {

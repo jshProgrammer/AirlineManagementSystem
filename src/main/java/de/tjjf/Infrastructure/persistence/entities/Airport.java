@@ -1,4 +1,4 @@
-package de.tjjf.Infrastructure.models;
+package de.tjjf.Infrastructure.persistence.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

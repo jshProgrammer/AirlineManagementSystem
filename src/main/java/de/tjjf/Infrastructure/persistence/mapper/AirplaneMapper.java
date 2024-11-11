@@ -1,7 +1,7 @@
-package de.tjjf.Infrastructure.mapper;
+package de.tjjf.Infrastructure.persistence.mapper;
 
 import de.tjjf.Domain.models.MAirplane;
-import de.tjjf.Infrastructure.models.Airplane;
+import de.tjjf.Infrastructure.persistence.entities.Airplane;
 
 public class AirplaneMapper extends Mapper<MAirplane, Airplane> {
 
