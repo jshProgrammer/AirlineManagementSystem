@@ -29,6 +29,8 @@ public class MFlight implements MModel {
 
     private int duration;
 
+    MBooking[] bookings;
+
     private MEmployee pilot;
 
     private MEmployee copilot;
@@ -133,5 +135,13 @@ public class MFlight implements MModel {
 
     public FlyStatus getStatus() {
         return status;
+    }
+
+    public MBooking[] getBookings() {
+        return booking;
+    }
+
+    public void setBookings(MBooking[] booking) {
+        this.booking = booking;
     }
 }
