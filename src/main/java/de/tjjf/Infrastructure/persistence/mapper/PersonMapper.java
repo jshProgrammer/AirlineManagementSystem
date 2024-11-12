@@ -1,7 +1,7 @@
-package de.tjjf.Infrastructure.mapper;
+package de.tjjf.Infrastructure.persistence.mapper;
 
 import de.tjjf.Domain.models.MPerson;
-import de.tjjf.Infrastructure.models.Person;
+import de.tjjf.Infrastructure.persistence.entities.Person;
 
 public class PersonMapper extends Mapper<MPerson, Person>{
 

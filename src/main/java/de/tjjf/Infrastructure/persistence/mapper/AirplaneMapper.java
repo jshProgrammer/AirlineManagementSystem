@@ -1,24 +1,24 @@
-package de.tjjf.Infrastructure.mapper;
+package de.tjjf.Infrastructure.persistence.mapper;
 
 import de.tjjf.Domain.models.MAirplane;
-import de.tjjf.Infrastructure.models.Airplane;
+import de.tjjf.Infrastructure.persistence.entities.Airplane;
 
-public class AirplaneMapper extends Mapper<MAirplane, Airplane> {
+/*public class AirplaneMapper extends Mapper<MAirplane, Airplane> {
 
     public  Airplane toEntity(MAirplane mAirplane){
         return new Airplane(
                 mAirplane.getSerialNum(),
                 mAirplane.getManufacturer(),
                 mAirplane.getModel(),
-                mAirplane.getAmoutOfEconomySeats(),
-                mAirplane.getAmoutOfBusinessSeats(),
-                mAirplane.getAmoutOfFirstClassSeats(),
+                mAirplane.getAmountOfEconomySeats(),
+                mAirplane.getAmountOfBusinessSeats(),
+                mAirplane.getAmountOfFirstClassSeats(),
                 new AirlineMapper().toEntity(mAirplane.getBelongingAirline()),
                 mAirplane.isOperatable()
         );
     }
 
-    public MAirplane toDomain(Airplane airplane){
+   public MAirplane toDomain(Airplane airplane){
         return new MAirplane(
                 airplane.getSerialNum(),
                 airplane.getManufacturer(),
@@ -30,4 +30,4 @@ public class AirplaneMapper extends Mapper<MAirplane, Airplane> {
                 airplane.isOperatable()
         );
     }
-}
+}*/

@@ -1,7 +1,4 @@
-package de.tjjf.Infrastructure.mapper;
-
-import de.tjjf.Domain.models.MClient;
-import de.tjjf.Infrastructure.models.Client;
+package de.tjjf.Infrastructure.persistence.mapper;
 
 /*
 public class ClientMapper extends Mapper<MClient, Client>{

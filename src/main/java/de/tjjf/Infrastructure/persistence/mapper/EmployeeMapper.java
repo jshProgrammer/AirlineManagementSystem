@@ -1,7 +1,4 @@
-package de.tjjf.Infrastructure.mapper;
-
-import de.tjjf.Domain.models.MEmployee;
-import de.tjjf.Infrastructure.models.Employee;
+package de.tjjf.Infrastructure.persistence.mapper;
 
 /*
 public class EmployeeMapper extends Mapper<MEmployee, Employee>{

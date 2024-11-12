@@ -1,15 +1,15 @@
-package de.tjjf.Infrastructure;
+package de.tjjf.Infrastructure.persistence;
 
 import de.tjjf.Domain.models.*;
 import de.tjjf.Domain.ports.DataAccess;
-import de.tjjf.Infrastructure.mapper.*;
-import de.tjjf.Infrastructure.models.*;
+import de.tjjf.Infrastructure.persistence.mapper.*;
+import de.tjjf.Infrastructure.persistence.entities.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 import java.util.Date;
-
+/*
 public class DatabaseAdapter implements DataAccess {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory( "my-persistence-unit" );
 
@@ -53,13 +53,14 @@ public class DatabaseAdapter implements DataAccess {
 
     }
 
+    // switch case weg => schlechte Objektorientierung
     public void create(MModel mModel) {
         Mapper mapper = switch(mModel) {
             case MAirline mAirline -> new AirlineMapper();
             case MAirplane mAirplane -> new AirplaneMapper();
             case MAirport mAirport -> new AirportMapper();
             case MPerson mPerson -> new PersonMapper();
-            //case MBooking mBooking -> new BookingMapper();
+            //case MTicket mBooking -> new BookingMapper();
             //case MClient mClient -> new ClientMapper();
             //case MEmployee mEmployee -> new EmployeeMapper();
             //case MFlight mFlight -> new FlightMapper();
@@ -69,6 +70,7 @@ public class DatabaseAdapter implements DataAccess {
         create(mModel, mapper);
     }
 
+    // Typsicherheit hier nicht aufgeben  => MModel bleibt zwar, aber create-Nethoden spezifisch
     private void create(MModel mModel, Mapper mapper) {
         EntityManager em = null;
 
@@ -98,9 +100,9 @@ public class DatabaseAdapter implements DataAccess {
     public MAirport readAirport(String code) {
         return  (MAirport) read(Airport.class, code, new AirportMapper());
     }
-    public MBooking readBooking(int bookingnum) {
-        return  (MBooking) read(Booking.class, bookingnum, new AirlineMapper());
-    }
+    /*public MTicket readBooking(int bookingnum) {
+        return  (MTicket) read(Ticket.class, bookingnum, new BookingMapper());
+    }*/
      /*public MClient readClient(int personId) {
         return (MClient) read(Client.class, personId, new ClientMapper());
     }*/
@@ -111,6 +113,7 @@ public class DatabaseAdapter implements DataAccess {
         return  (MFlight) read(Flight.class, flightnum, new FlightMapper());
     }*/
 
+/*
     public MPerson readPerson(int personId) {
         return  (MPerson) read(Person.class, personId, new PersonMapper());
     }
@@ -131,13 +134,38 @@ public class DatabaseAdapter implements DataAccess {
         }
     }
 
+    //TODO: diese Logik in Domäne ziehen => nur wenn sehr komplex
+    public boolean isSeatingUpdateAvailable( Ticket booking, MTicket.SeatingClass newDesiredSeatingClass ) {
+        MTicket mBooking = read(Ticket.class, booking.getBookingId(), new BookingMapper());
+
+        //TODO: hier Ticket oder MTicket
+
+        MFlight belongingFlight = mBooking.getFlight();
+        MTicket[] bookingsOfThisFlight = belongingFlight.getBookings();
+
+        int totalNumberOfSeatsInDesiredClass = switch(newDesiredSeatingClass) {
+            case Ticket.SeatingClass .Economy -> belongingFlight.getAirplane().getAmountOfEconomySeats();
+            case Ticket.SeatingClass .Business -> belongingFlight.getAirplane().getAmountOfBusinessSeats();
+            case Ticket.SeatingClass .First -> belongingFlight.getAirplane().getAmountOfFirstClassSeats();
+        };
+
+        for(MTicket mBookingIter : bookingsOfThisFlight) {
+            if(mBookingIter.getSeatingClass() == newDesiredSeatingClass) {
+
+            }
+        }
+
+        return true;
+    }
+
     public void update(MModel mModel) {
+        //TODO: switch-case auslagern => DRY
         Mapper mapper = switch(mModel) {
             case MAirline mAirline -> new AirlineMapper();
             case MAirplane mAirplane -> new AirplaneMapper();
             case MAirport mAirport -> new AirportMapper();
             case MPerson mPerson -> new PersonMapper();
-            //case MBooking mBooking -> new BookingMapper();
+            //case MTicket mBooking -> new BookingMapper();
             //case MClient mClient -> new ClientMapper();
             //case MEmployee mEmployee -> new EmployeeMapper();
             //case MFlight mFlight -> new FlightMapper();
@@ -185,7 +213,7 @@ public class DatabaseAdapter implements DataAccess {
         delete(Airport.class, code, new AirportMapper());
     }
     public void deleteBooking(int bookingnum) {
-        delete(Booking.class, bookingnum, new AirlineMapper());
+        delete(Ticket.class, bookingnum, new AirlineMapper());
     }
 
 
@@ -201,6 +229,7 @@ public class DatabaseAdapter implements DataAccess {
         delete(Flight.class, flightnum, new FlightMapper());
     }*/
 
+/*
     public void deletePerson(int personId) {
         delete(Person.class, personId, new PersonMapper());
     }
@@ -226,3 +255,4 @@ public class DatabaseAdapter implements DataAccess {
         }
     }
 }
+*/

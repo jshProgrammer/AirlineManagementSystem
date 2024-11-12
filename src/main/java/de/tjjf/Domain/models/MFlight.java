@@ -29,9 +29,15 @@ public class MFlight implements MModel {
 
     private int duration;
 
+    MTicket[] bookings;
+
     private MEmployee pilot;
 
     private MEmployee copilot;
+
+    private int currentInitialLuggageWeight = 0;
+
+    private int currentUpgradeLuggageWeight = 0;
 
     public MFlight(long flightNum, MAirplane airplane, Date departureDateTime, MAirport departureAirport, Date arrivalDateTime, MAirport arrivalAirport, Date boardingTime, FlyStatus status, int duration, MEmployee pilot, MEmployee copilot) {
         this.flightNum = flightNum;
@@ -45,6 +51,8 @@ public class MFlight implements MModel {
         this.duration = duration;
         this.pilot = pilot;
         this.copilot = copilot;
+        this.bookings = new MTicket[airplane.getAmountOfBusinessSeats() + airplane.getAmountOfEconomySeats() + airplane.getAmountOfFirstClassSeats()];
+
     }
 
     public void setAirplane(MAirplane airplane) {
@@ -133,5 +141,45 @@ public class MFlight implements MModel {
 
     public FlyStatus getStatus() {
         return status;
+    }
+
+    public MTicket[] getBookings() {
+        return bookings;
+    }
+
+    public int getCurrentInitialLuggageWeight() { return currentInitialLuggageWeight;  }
+
+    public void addCurrentInitialLuggageWeight(int currentInitialLuggageWeight) {
+        if(currentInitialLuggageWeight > 0){
+            this.currentInitialLuggageWeight += currentInitialLuggageWeight;
+        }else{
+            //Rather boolean or exceptions?
+            throw new IllegalArgumentException("Please enter a positive number, negative ones are prohibited");
+        }
+    }
+
+    public int getCurrentUpgradeLuggageWeight() { return currentUpgradeLuggageWeight; }
+
+    public void addCurrentUpgradeLuggageWeight(int currentUpgradeLuggageWeight) {
+        if(currentUpgradeLuggageWeight > 0){
+            this.currentUpgradeLuggageWeight += currentUpgradeLuggageWeight;
+        }else{
+            //Rather boolean or exceptions?
+            throw new IllegalArgumentException("Please enter a positive number, negative ones are prohibited");
+        }
+    }
+
+
+    public void addBooking(MTicket newBooking) {
+       for(int i=0; i<bookings.length; i++) {
+           if(bookings[i] == null) {
+               bookings[i] = newBooking;
+               break;
+           }
+       }
+    }
+
+    public void cancelFlight(){
+        this.status = FlyStatus.canceled;
     }
 }

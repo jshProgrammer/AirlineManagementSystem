@@ -1,4 +1,4 @@
-package de.tjjf.Infrastructure;
+package de.tjjf.Infrastructure.persistence;
 
 public class DataAccessException extends RuntimeException {
     public DataAccessException( )

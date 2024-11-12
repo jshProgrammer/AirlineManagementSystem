@@ -1,11 +1,11 @@
-package de.tjjf.Infrastructure.models;
+package de.tjjf.Infrastructure.persistence.entities;
 
 import jakarta.persistence.*;
 
 import java.util.Date;
 
 @Entity
-public class Booking implements Model {
+public class Ticket implements Model {
     //TODO: enums in der Klasse lassen?
     public enum SeatingClass {
         Economy,
@@ -49,9 +49,9 @@ public class Booking implements Model {
     @Column(nullable=false)
     private int maxWeightOfLuggage;
 
-    public Booking(){}
+    public Ticket(){}
 
-    public Booking(int bookingId, Person personId, Flight flightNum, Date dateTimeOfBooking, int totalPrice, int seatNum, SeatingClass seatingClass, BookingStatus bookingStatus, int maxWeightOfLuggage) {
+    public Ticket(int bookingId, Person personId, Flight flightNum, Date dateTimeOfBooking, int totalPrice, int seatNum, SeatingClass seatingClass, BookingStatus bookingStatus, int maxWeightOfLuggage) {
         this.bookingId = bookingId;
         this.personId = personId;
         this.flightNum = flightNum;

@@ -1,7 +1,4 @@
-package de.tjjf.Infrastructure.mapper;
-
-import de.tjjf.Domain.models.MFlight;
-import de.tjjf.Infrastructure.models.Flight;
+package de.tjjf.Infrastructure.persistence.mapper;
 
 /*
 public class FlightMapper extends Mapper<MFlight, Flight>{
