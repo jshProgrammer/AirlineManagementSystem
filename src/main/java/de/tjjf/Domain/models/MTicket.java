@@ -4,6 +4,7 @@ import de.tjjf.Domain.Exceptions.NoAvailableLuggageWeightException;
 import de.tjjf.Domain.Exceptions.NoSeatsLeftException;
 
 import java.util.Date;
+import java.util.List;
 
 public class MTicket implements MModel {
     //TODO: enums in der Klasse lassen?
@@ -21,7 +22,7 @@ public class MTicket implements MModel {
 
     private int ticketId;
 
-    private int personId;
+    private MPerson person;
 
     private MFlight flight;
 
@@ -37,13 +38,13 @@ public class MTicket implements MModel {
 
     private int weightOfLuggage;
 
-    public MTicket(int ticketId, int personId, MFlight flight, Date dateTimeOfBooking, int totalPrice, int seatNum, SeatingClass seatingClass, BookingStatus ticketStatus, int weightOfLuggage) {
+    public MTicket(int ticketId, MPerson person, MFlight flight, Date dateTimeOfBooking, int totalPrice, int seatNum, SeatingClass seatingClass, BookingStatus ticketStatus, int weightOfLuggage) {
 
         // check whether there is still a place for customer
         if(! (isSeatingUpdateAvailable(seatingClass))) throw new NoSeatsLeftException("Flight cannot be booked any more due to restricted amount");
 
         this.ticketId = ticketId;
-        this.personId = personId;
+        this.person = person;
         this.flight = flight;
         this.dateTimeOfBooking = dateTimeOfBooking;
         this.totalPrice = totalPrice;
@@ -65,8 +66,8 @@ public class MTicket implements MModel {
         this.flight = flight;
     }
 
-    public void setPersonId(int personId) {
-        this.personId = personId;
+    public void setPerson(MPerson person) {
+        this.person = person;
     }
 
     public void upgradeSeatingClass(SeatingClass newSeatingClass) {
@@ -126,8 +127,8 @@ public class MTicket implements MModel {
         return seatingClass;
     }
 
-    public int getPersonId() {
-        return personId;
+    public MPerson getPerson() {
+        return person;
     }
 
     public int getWeightOfLuggage() {
@@ -153,7 +154,7 @@ public class MTicket implements MModel {
     private boolean isSeatingUpdateAvailable( MTicket.SeatingClass newDesiredSeatingClass ) {
 
         MFlight belongingFlight = this.getFlight();
-        MTicket[] bookingsOfThisFlight = belongingFlight.getBookings();
+        List<MTicket> bookingsOfThisFlight = belongingFlight.getTickets();
 
         int totalNumberOfSeats = switch(newDesiredSeatingClass) {
             case MTicket.SeatingClass .Economy -> belongingFlight.getAirplane().getAmountOfEconomySeats();

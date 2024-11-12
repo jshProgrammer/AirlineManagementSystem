@@ -1,6 +1,10 @@
 package de.tjjf.Domain.models;
 
 import java.util.Date;
+import java.util.List;
+
+import de.tjjf.Domain.EmailSender;
+import org.apache.commons.validator.routines.EmailValidator;
 
 public class MPerson implements MModel
 {
@@ -23,7 +27,9 @@ public class MPerson implements MModel
 
     //TODO: nicht direkt in Klasse
     private String password;
+    private List<MTicket> tickets;
 
+    //TODO: validate whether phone number is valid
     public MPerson(long personId, String firstName, String middleNames, String lastName, Date dateOfBirth, String phonenumber, String address, String email, String password) {
         this.personId = personId;
         this.firstName = firstName;
@@ -112,6 +118,24 @@ public class MPerson implements MModel
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<MTicket> getTickets() {
+        return tickets;
+    }
+
+    public void addTickets(MTicket ticket) {
+        tickets.add(ticket);
+    }
+
+    public void cancelFlight(int flightnum){
+        for(MTicket ticket : tickets){
+            if(flightnum  == (int) ticket.getFlight().getFlightNum()){
+                MFlight mFlight = ticket.getFlight();
+                EmailSender.sendCancelationMailCustomer(mFlight);
+                mFlight.getTickets().remove(ticket);
+            }
+        }
     }
 }
 

@@ -1,25 +1,19 @@
 package de.tjjf.Domain.models;
 
-public class MClient implements MModel {
-    private int personID;
+import java.util.Date;
+
+public class MClient extends MPerson implements MModel {
 
     private boolean isBusinessClient;
 
-    public MClient(int personID, boolean isBusinessClient) {
-        this.personID = personID;
+    public MClient(long personId, String firstName, String middleNames, String lastName, Date dateOfBirth, String phonenumber, String address, String email, String password, boolean isBusinessClient) {
+        super(personId, firstName, middleNames, lastName, dateOfBirth, phonenumber, address, email, password);
         this.isBusinessClient = isBusinessClient;
     }
 
-    public int getPersonID() {
-        return personID;
-    }
 
     public boolean isBusinessClient() {
         return isBusinessClient;
-    }
-
-    public void setPersonID(int personID) {
-        this.personID = personID;
     }
 
     public void setBusinessClient(boolean businessClient) {

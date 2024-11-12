@@ -1,6 +1,12 @@
 package de.tjjf.Domain.models;
 
+import de.tjjf.Domain.EmailSender;
+import de.tjjf.Domain.Exceptions.NoSeatsLeftException;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 public class MFlight implements MModel {
 
     public enum FlyStatus {
@@ -29,7 +35,7 @@ public class MFlight implements MModel {
 
     private int duration;
 
-    MTicket[] bookings;
+    List<MTicket> tickets = new ArrayList<>();
 
     private MEmployee pilot;
 
@@ -51,8 +57,6 @@ public class MFlight implements MModel {
         this.duration = duration;
         this.pilot = pilot;
         this.copilot = copilot;
-        this.bookings = new MTicket[airplane.getAmountOfBusinessSeats() + airplane.getAmountOfEconomySeats() + airplane.getAmountOfFirstClassSeats()];
-
     }
 
     public void setAirplane(MAirplane airplane) {
@@ -143,8 +147,8 @@ public class MFlight implements MModel {
         return status;
     }
 
-    public MTicket[] getBookings() {
-        return bookings;
+    public List<MTicket> getTickets() {
+        return tickets;
     }
 
     public int getCurrentInitialLuggageWeight() { return currentInitialLuggageWeight;  }
@@ -171,15 +175,16 @@ public class MFlight implements MModel {
 
 
     public void addBooking(MTicket newBooking) {
-       for(int i=0; i<bookings.length; i++) {
-           if(bookings[i] == null) {
-               bookings[i] = newBooking;
-               break;
-           }
-       }
+      if(tickets.size() < this.airplane.getTotalNumberOfSeats()){
+          tickets.add(newBooking);
+      }
+      else{
+          throw new NoSeatsLeftException("Fully Booked out");
+      }
     }
 
     public void cancelFlight(){
         this.status = FlyStatus.canceled;
+        EmailSender.sendCancelationMail(this);
     }
 }
