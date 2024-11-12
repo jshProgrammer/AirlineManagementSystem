@@ -38,8 +38,22 @@ public class MPerson implements MModel
         this.dateOfBirth = dateOfBirth;
         this.phonenumber = phonenumber;
         this.address = address;
+
+        // E-Mail-validation
+        EmailValidator validator = EmailValidator.getInstance();
+        boolean isValid = validator.isValid(email);
+        if(!isValid) throw new IllegalArgumentException("Email is not a valid email");
+
         this.email = email;
         this.password = password;
+    }
+
+    public static void main(String[] args) {
+        // should not throw Illegal Argument Exception
+        //MPerson person = new MPerson(1, "A", null, "C", new Date(1998), "091234u", "Adresse", "jpfennig2403@gmail.com", "passwd");
+
+        // should throw IllegalArgumentException
+        //MPerson person2 = new MPerson(1, "A", null, "C", new Date(1998), "091234u", "Adresse", "a@aa", "passwd");
     }
 
     public String getFirstName( )

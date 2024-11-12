@@ -59,6 +59,11 @@
             <artifactId>javax.mail</artifactId>
             <version>1.6.2</version> <!-- oder die aktuellste Version -->
         </dependency>
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>1.7</version> <!-- Version je nach Projektbedarf anpassen -->
+        </dependency>
     </dependencies>
 
     <build>
