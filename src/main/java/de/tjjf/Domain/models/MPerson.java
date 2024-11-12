@@ -6,6 +6,8 @@ import java.util.List;
 import de.tjjf.Domain.EmailSender;
 import org.apache.commons.validator.routines.EmailValidator;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 public class MPerson implements MModel
 {
     private long personId;
@@ -25,9 +27,11 @@ public class MPerson implements MModel
 
     private String email;
 
-    //TODO: nicht direkt in Klasse
-    private String password;
+    BCryptPasswordEncoder passwordEncoder;
+    private String hashedPassword;
     private List<MTicket> tickets;
+
+
 
     //TODO: validate whether phone number is valid
     public MPerson(long personId, String firstName, String middleNames, String lastName, Date dateOfBirth, String phonenumber, String address, String email, String password) {
@@ -45,12 +49,21 @@ public class MPerson implements MModel
         if(!isValid) throw new IllegalArgumentException("Email is not a valid email");
 
         this.email = email;
-        this.password = password;
+
+        // encode the desired password: https://www.baeldung.com/java-password-hashing
+        passwordEncoder = new BCryptPasswordEncoder();
+        this.hashedPassword = passwordEncoder.encode(password);
+    }
+
+    // Passwort-Überprüfung
+    public boolean verifyPassword(String password) {
+        return passwordEncoder.matches(password, this.hashedPassword);
     }
 
     public static void main(String[] args) {
         // should not throw Illegal Argument Exception
-        //MPerson person = new MPerson(1, "A", null, "C", new Date(1998), "091234u", "Adresse", "jpfennig2403@gmail.com", "passwd");
+        MPerson person = new MPerson(1, "A", null, "C", new Date(1998), "091234u", "Adresse", "jpfennig2403@gmail.com", "fkgk rdof hhkj arwc");
+        System.out.println(person.getHashedPassword());
 
         // should throw IllegalArgumentException
         //MPerson person2 = new MPerson(1, "A", null, "C", new Date(1998), "091234u", "Adresse", "a@aa", "passwd");
@@ -101,8 +114,8 @@ public class MPerson implements MModel
         return email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getHashedPassword() {
+        return hashedPassword;
     }
 
     public void setLastName(String lastName )
@@ -128,10 +141,6 @@ public class MPerson implements MModel
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public List<MTicket> getTickets() {

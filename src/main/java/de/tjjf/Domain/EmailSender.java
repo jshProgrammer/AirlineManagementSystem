@@ -13,6 +13,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import java.io.File;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class EmailSender {
     public static void main(String[] args) {
@@ -26,10 +27,16 @@ public class EmailSender {
 
     public static void sendMail(String recipient, String subject, String htmlContent) {
 
+
         // Absender E-Mail und Passwort
         final String username = "airlinemanagementtestmail@gmail.com";
-        final String password = "fkgk rdof hhkj arwc";
-
+        final String password;
+        //TODO: eig dürfte man nicht key und enc hochladen, aber wie sollen wir es sonst hier entschlüsseln?
+        try {
+            password = PasswordDecryption.decryptPassword("src/main/java/de/tjjf/Domain/smtp_password.enc", "src/main/java/de/tjjf/Domain/aes_key.key");
+        } catch(Exception e) {
+            throw new RuntimeException("Password could not be decrypted");
+        }
         // Empfängeradresse und SMTP-Server-Einstellungen
 
         String host = "smtp.gmail.com";

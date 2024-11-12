@@ -64,6 +64,12 @@
             <artifactId>commons-validator</artifactId>
             <version>1.7</version> <!-- Version je nach Projektbedarf anpassen -->
         </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <!-- org.springframework.security.crypto.password -->
+            <artifactId>spring-security-crypto</artifactId>
+            <version>6.3.0</version>
+        </dependency>
     </dependencies>
 
     <build>
