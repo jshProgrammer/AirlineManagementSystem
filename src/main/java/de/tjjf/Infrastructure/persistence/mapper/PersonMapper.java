@@ -15,7 +15,7 @@ public class PersonMapper extends Mapper<MPerson, Person>{
                 mPerson.getPhonenumber(),
                 mPerson.getAddress(),
                 mPerson.getEmail(),
-                mPerson.getPassword()
+                mPerson.getHashedPassword()
         );
     }
 

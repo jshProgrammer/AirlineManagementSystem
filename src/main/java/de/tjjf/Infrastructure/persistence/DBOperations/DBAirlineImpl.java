@@ -2,7 +2,7 @@ package de.tjjf.Infrastructure.persistence.DBOperations;
 
 import de.tjjf.Infrastructure.persistence.entities.Airline;
 
-public class DBAirlineImpl extends DBOperationTemplate{
+/*public class DBAirlineImpl extends AbstractDatabaseOperation {
     Airline airline;
 
     public DBAirlineImpl(Airline airline) {
@@ -29,3 +29,4 @@ public class DBAirlineImpl extends DBOperationTemplate{
 
     }
 }
+*/
