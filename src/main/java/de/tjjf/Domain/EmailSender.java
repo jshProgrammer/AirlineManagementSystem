@@ -17,7 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class EmailSender {
     public static void main(String[] args) {
-        sendMail("jpfennig2403@gmail.com", "TEST", "<p>Dear "  + ",</p>" +
+        sendMail("tom.knoblach@study.thws.de", "TEST", "<p>Dear "  + ",</p>" +
                 "<p>Unfortunately, we have to inform you that your flight "  +
                 " from " +  " to "+
                 " has been canceled.</p>" +
