@@ -3,7 +3,7 @@ package de.tjjf.Infrastructure.persistence.DBOperations.AbstractOperations;
 import de.tjjf.Infrastructure.persistence.entities.Model;
 import de.tjjf.Infrastructure.persistence.results.NoContentResult;
 
-public class AbstractUpdateOperation<T extends Model, D> extends AbstractDatabaseOperation<NoContentResult>{
+public class AbstractUpdateOperation<T extends Model> extends AbstractDatabaseOperation<NoContentResult>{
 
     T modelToChange;
 

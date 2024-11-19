@@ -10,7 +10,7 @@ public class AbstractDeleteOperation<T extends Model, I> extends AbstractDatabas
     I identifier;
     Class<T> classOfModel;
 
-    public AbstractDeleteOperation(T classOfModel, I identifier) {
+    public AbstractDeleteOperation(Class<T> classOfModel, I identifier) {
         this.identifier = identifier;
     }
 
