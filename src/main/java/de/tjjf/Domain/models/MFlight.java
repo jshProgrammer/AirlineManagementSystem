@@ -174,13 +174,16 @@ public class MFlight implements MModel {
     }
 
 
-    public void addBooking(MTicket newBooking) {
+    public boolean addBooking(MTicket newBooking) {
+        boolean bookable;
       if(tickets.size() < this.airplane.getTotalNumberOfSeats()){
+          bookable = true;
           tickets.add(newBooking);
       }
       else{
-          throw new NoSeatsLeftException("Fully Booked out");
+          bookable = false;
       }
+      return bookable;
     }
 
     public void cancelFlight(){

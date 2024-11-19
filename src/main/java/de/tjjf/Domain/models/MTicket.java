@@ -40,12 +40,14 @@ public class MTicket implements MModel {
 
     public MTicket(int ticketId, MPerson person, MFlight flight, Date dateTimeOfBooking, int totalPrice, int seatNum, SeatingClass seatingClass, BookingStatus ticketStatus, int weightOfLuggage) {
 
+        this.flight = flight;
+
         // check whether there is still a place for customer
         if(! (isSeatingUpdateAvailable(seatingClass))) throw new NoSeatsLeftException("Flight cannot be booked any more due to restricted amount");
 
         this.ticketId = ticketId;
         this.person = person;
-        this.flight = flight;
+
         this.dateTimeOfBooking = dateTimeOfBooking;
         this.totalPrice = totalPrice;
         this.seatNum = seatNum;
@@ -70,18 +72,23 @@ public class MTicket implements MModel {
         this.person = person;
     }
 
-    public void upgradeSeatingClass(SeatingClass newSeatingClass) {
+    public boolean upgradeSeatingClass(SeatingClass newSeatingClass) {
+        boolean upgradeable;
         if(isSeatingUpdateAvailable(seatingClass)) {
+            upgradeable = true;
             this.seatingClass = newSeatingClass;
         } else {
-            throw new NoSeatsLeftException("No upgrade available as all seats of the desired class are reserved");
+            upgradeable = false;
         }
+        return upgradeable;
     }
 
-    public void upgradeLuggageWeight(int newWeight) {
+    public boolean upgradeLuggageWeight(int newWeight) {
+        boolean upgradeable;
         //Use only 25% of maximum luggage weight for luggage upgrade, the rest is reserved for standard bookings
         //Simplification: Added weight cannot be removed from booking anymore
         if((this.flight.getAirplane().getMaxWeightOfLuggage() * 0.25) >= this.flight.getCurrentUpgradeLuggageWeight() + newWeight ){
+            upgradeable = true;
 
             this.weightOfLuggage = this.weightOfLuggage + newWeight;
             this.flight.addCurrentUpgradeLuggageWeight(this.flight.getCurrentUpgradeLuggageWeight() + newWeight);
@@ -90,21 +97,28 @@ public class MTicket implements MModel {
             this.totalPrice = this.totalPrice + (newWeight * 5);
         }else{
             //Rather boolean or exceptions?
-            throw new NoAvailableLuggageWeightException("Not enough available luggage weight. Only " + (this.flight.getAirplane().getMaxWeightOfLuggage() * 0.25 - this.flight.getCurrentUpgradeLuggageWeight()) + "kg upgradeable luggageweight available");
+            //throw new NoAvailableLuggageWeightException("Not enough available luggage weight. Only " + (this.flight.getAirplane().getMaxWeightOfLuggage() * 0.25 - this.flight.getCurrentUpgradeLuggageWeight()) + "kg upgradeable luggageweight available");
+            upgradeable = false;
         }
+        return upgradeable;
     }
 
-    private void setLuggageWeight(int wishedLuggageWeight){
+    private boolean setLuggageWeight(int wishedLuggageWeight){
+        boolean suitableWeight;
         //checking if wishedLuggageWeight is suitable for standard booking
         if(this.flight.getAirplane().getMaxWeightOfLuggage() * 0.75 / this.flight.getAirplane().getTotalNumberOfSeats() >= wishedLuggageWeight){
+            suitableWeight = true;
+
             this.weightOfLuggage = wishedLuggageWeight;
             this.flight.addCurrentInitialLuggageWeight(this.flight.getCurrentInitialLuggageWeight() + weightOfLuggage);
 
             //Increasing the total price in addition to bring more luggage. Here only 4 because it's at the initial booking
             this.totalPrice = this.totalPrice + (wishedLuggageWeight * 4);
         }else{
-            throw new IllegalArgumentException("Luggage weight is to heavy, please upgrade after booking.");
+            //throw new IllegalArgumentException("Luggage weight is to heavy, please upgrade after booking.");
+            suitableWeight = false;
         }
+        return suitableWeight;
     }
 
     public void setSeatNum(int seatNum) {
