@@ -57,6 +57,7 @@ public class MPerson implements MModel
 
     // Passwort-Überprüfung
     public boolean verifyPassword(String password) {
+        //TODO implement verification with https://staging.api.fiw.thws.de/auth/api/users/me
         return passwordEncoder.matches(password, this.hashedPassword);
     }
 

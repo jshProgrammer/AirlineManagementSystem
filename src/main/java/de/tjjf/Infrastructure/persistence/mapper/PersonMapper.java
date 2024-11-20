@@ -3,9 +3,9 @@ package de.tjjf.Infrastructure.persistence.mapper;
 import de.tjjf.Domain.models.MPerson;
 import de.tjjf.Infrastructure.persistence.entities.Person;
 
-public class PersonMapper extends Mapper<MPerson, Person>{
+//public class PersonMapper extends Mapper<MPerson, Person>{
 
-    public Person toEntity(MPerson mPerson){
+    /*public Person toEntity(MPerson mPerson){
         return new Person(
                 mPerson.getPersonId(),
                 mPerson.getFirstName(),
@@ -15,7 +15,7 @@ public class PersonMapper extends Mapper<MPerson, Person>{
                 mPerson.getPhonenumber(),
                 mPerson.getAddress(),
                 mPerson.getEmail(),
-                mPerson.getPassword()
+                mPerson.getHashedPassword()
         );
     }
 
@@ -31,5 +31,5 @@ public class PersonMapper extends Mapper<MPerson, Person>{
                 person.getEmail(),
                 person.getPassword()
         );
-    }
-}
+    }*/
+//}

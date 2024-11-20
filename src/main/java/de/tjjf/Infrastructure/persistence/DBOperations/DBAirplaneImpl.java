@@ -5,7 +5,7 @@ import de.tjjf.Infrastructure.persistence.entities.Airplane;
 
 import java.util.Date;
 
-public class DBAirplaneImpl extends DBOperationTemplate{
+/*public class DBAirplaneImpl extends AbstractDatabaseOperation {
     Airplane a;
 
     public DBAirplaneImpl(Airplane a) {
@@ -45,3 +45,4 @@ public class DBAirplaneImpl extends DBOperationTemplate{
 
     }
 }
+*/
