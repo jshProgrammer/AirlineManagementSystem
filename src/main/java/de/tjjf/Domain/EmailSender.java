@@ -6,26 +6,32 @@ import de.tjjf.Domain.models.MTicket;
 
 import java.io.IOException;
 import java.util.Properties;
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
+import javax.lang.model.element.NestingKind;
 import javax.mail.*;
 import javax.mail.internet.*;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.sql.DataSource;
 import java.io.File;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import static de.tjjf.Domain.InvoicePDF.createPDF;
+
 public class EmailSender {
     public static void main(String[] args) {
-        sendMail("tom.knoblach@study.thws.de", "TEST", "<p>Dear "  + ",</p>" +
+        sendMail("tomknoblach@t-online.de", "TEST", "<p>Dear "  + ",</p>" +
                 "<p>Unfortunately, we have to inform you that your flight "  +
                 " from " +  " to "+
                 " has been canceled.</p>" +
                 "<p>We apologize for the inconvenience.</p>" +
-                "<p><img src='cid:logoImage'></p>");
+                "<p><img src='cid:logoImage'></p>","");
     }
 
-    public static void sendMail(String recipient, String subject, String htmlContent) {
+    public static void sendMail(String recipient, String subject, String htmlContent, String file) {
 
 
         // Absender E-Mail und Passwort
@@ -79,7 +85,15 @@ public class EmailSender {
             imagePart.setDisposition(MimeBodyPart.INLINE);
             multipart.addBodyPart(imagePart);
             message.setContent(multipart);
-            //
+
+            //PDF Anhängen
+            if(file != "") {
+                MimeBodyPart attachPart = new MimeBodyPart();
+                DataSource source = (DataSource) new FileDataSource(file);
+                attachPart.setDataHandler(new DataHandler((javax.activation.DataSource) source));
+                attachPart.setFileName("Rechnung.pdf");
+            }
+
             // E-Mail senden
             Transport.send(message);
 
@@ -103,9 +117,18 @@ public class EmailSender {
                     " has been canceled.</p>" +
                     "<p>We apologize for the inconvenience.</p>" +
                     "<p><img src='cid:logoImage'></p>";
-
-            sendMail(mailPerson, subject, htmlMessage);
+            String file = "";
+            sendMail(mailPerson, subject, htmlMessage, file);
         }
+    }
+
+    public static void sendInvoice(MTicket ticket){
+        String recipient = ticket.getPerson().getEmail();
+        String subject = "Rechnung zu Ticket: "+ticket.getTicketId();
+        String content = "<h1>Vielen Dank für Ihren Einkauf!</h1>"
+                + "<p>Sehr geehrter Kunde, anbei finden Sie Ihre Rechnung als PDF.</p>";
+        String PDFPath = createPDF(ticket);
+        sendMail(recipient,subject,content,PDFPath);
     }
 
     public static void sendCancelationMailCustomer(MFlight mFlight){
@@ -120,7 +143,8 @@ public class EmailSender {
                     " .</p>" +
                     "<p>Kind regards THE AIRLINE</p>" +
                     "<p><img src='cid:logoImage'></p>";
-            sendMail(mailPerson, subject, htmlmessage);
+            String file = "";
+            sendMail(mailPerson, subject, htmlmessage, file);
         }
     }
 
