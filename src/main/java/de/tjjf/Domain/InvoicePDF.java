@@ -14,17 +14,18 @@ import de.tjjf.Domain.models.MTicket;
 public class InvoicePDF {
 
     public static String createPDF(MTicket ticket){
-        Long personID = ticket.getPerson().getPersonId();
         MPerson person = ticket.getPerson();
         String dest = person.getEmail();
+        String fileName = "Rechnung_" + ticket.getTicketId() + ".pdf";
+        String filePath = "src/main/resources/" + fileName;
 
         try{
-            PdfWriter pdfWriter = new PdfWriter(dest);
+            PdfWriter pdfWriter = new PdfWriter(filePath);
             PdfDocument pdfDocument = new PdfDocument(pdfWriter);
             Document document = new Document(pdfDocument);
             //TODO: Evtl Adresse einfügen
             String companyName = ticket.getFlight().getAirplane().getBelongingAirline().getName();
-            String companyDetails = "Musterstraße 1, 12345 Berlin\\nTel: 123456789\\ninfo@mustermann.de";
+            String companyDetails = "Musterstraße 1, 12345 Berlin\nTel: 123456789\ninfo@mustermann.de";
             Paragraph header = new Paragraph(companyName)
                     .setBold()
                     .setFontSize(14)
@@ -56,9 +57,9 @@ public class InvoicePDF {
             String flight = Long.toString(ticket.getFlight().getFlightNum());
             String seatingclass = ticket.getSeatingClass().toString();
             String price = Integer.toString(ticket.getTotalPrice());
-            table.addCell(new Cell().add(new Paragraph(flight)));
+            table.addCell(new Cell().add(new Paragraph(flight)).setTextAlignment(TextAlignment.CENTER));
             table.addCell(new Cell().add(new Paragraph(seatingclass)).setTextAlignment(TextAlignment.CENTER));
-            table.addCell(new Cell().add(new Paragraph(price)).setTextAlignment(TextAlignment.RIGHT));
+            table.addCell(new Cell().add(new Paragraph(price)).setTextAlignment(TextAlignment.CENTER));
 
             document.add(table);
 
@@ -70,8 +71,8 @@ public class InvoicePDF {
             document.add(total);
             document.close();
 
-            System.out.println("PDF wurder erstellt");
-            return "Rechnung "+ticket.getTicketId();
+            System.out.println("PDF wurde erstellt");
+            return filePath;
         }
         catch (Exception e){
             e.printStackTrace();

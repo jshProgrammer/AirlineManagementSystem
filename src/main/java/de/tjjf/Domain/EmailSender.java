@@ -87,12 +87,20 @@ public class EmailSender {
             message.setContent(multipart);
 
             //PDF Anhängen
+            //TODO: nochmal überprüfen, irgendwo hier bei der PDF noch ein Fehler
             if(file != "") {
-                MimeBodyPart attachPart = new MimeBodyPart();
-                DataSource source = (DataSource) new FileDataSource(file);
-                attachPart.setDataHandler(new DataHandler((javax.activation.DataSource) source));
-                attachPart.setFileName("Rechnung.pdf");
+                try{
+                    MimeBodyPart attachPart = new MimeBodyPart();
+                    FileDataSource source = new FileDataSource(file);
+                    attachPart.setDataHandler(new DataHandler (source));
+                    attachPart.setFileName(new File(file).getName());
+                    multipart.addBodyPart(attachPart); //
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
             }
+            message.setContent(multipart);
 
             // E-Mail senden
             Transport.send(message);
