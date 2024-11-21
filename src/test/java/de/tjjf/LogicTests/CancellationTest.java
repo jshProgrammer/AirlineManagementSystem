@@ -14,8 +14,8 @@ public class CancellationTest {
     MAirplane airplane = new MAirplane(123, "Hersteller", "Boeing 5", 30, 15, 15, airline, true, 1000);
     MAirport depatureAirport = new MAirport("B12", "Frankturt Airport", "Germany", "Frankfurt", "UTC");
     MAirport arrivalAirport = new MAirport("ABC", "LA Airport", "USA", "LA", "UTC");
-    MEmployee pilot = new MEmployee(2, 5000, "pilot", airline, new Date(2020));
-    MEmployee copilot = new MEmployee(3, 4500, "copilot", airline, new Date(2021));
+    MEmployee pilot = new MEmployee( 2, 5000, "pilot", airline, new Date(2020));
+    MEmployee copilot = new MEmployee(3,"TET","","TED",new Date(2007,10,14), "27359824",new MAdress("TEST",23, 34533,"BErlin", "GER"), "tomknoblach@t-online.de", "skldjflks",200,"sf", airline, new Date(2024,10,13));
     MFlight flight = new MFlight(123456, airplane, new Date(2024, 12, 31), depatureAirport, new Date(2025, 1, 1), arrivalAirport, new Date(2024, 21, 31), MFlight.FlyStatus.scheduled, 1000, pilot, copilot);
     MTicket ticket = new MTicket(1, person, flight, new Date(2024, 11,18), 200, 1, MTicket.SeatingClass.Economy, MTicket.BookingStatus.Unpaid, 12 );
     MTicket ticket2 = new MTicket(2, person2, flight, new Date(2024, 11,18), 200, 1, MTicket.SeatingClass.Economy, MTicket.BookingStatus.Unpaid, 12 );

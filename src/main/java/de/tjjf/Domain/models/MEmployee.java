@@ -2,10 +2,8 @@ package de.tjjf.Domain.models;
 
 import java.util.Date;
 
-public class MEmployee implements MModel {
-    private int employeeId;
-
-    private int personId;
+public class MEmployee extends MPerson implements MModel {
+    private long employeeId;
 
     private int salary;
 
@@ -15,25 +13,15 @@ public class MEmployee implements MModel {
 
     private Date hireDate;
 
-    public MEmployee(int personId, int salary, String position, MAirline airline, Date hireDate) {
-        this.personId = personId;
-        this.salary = salary;
-        this.position = position;
-        this.airline = airline;
-        this.hireDate = hireDate;
-    }
-    public MEmployee(int employeeId, int personId, int salary, String position, MAirline airline, Date hireDate) {
-        this.employeeId = employeeId;
-        this.personId = personId;
+    public MEmployee(long personId, String firstName, String middleNames, String lastName, Date dateOfBirth, String phonenumber, MAdress address, String email, String password, int salary, String position, MAirline airline, Date hireDate) {
+        super(personId, firstName, middleNames, lastName, dateOfBirth, phonenumber, address, email, password);
+        this.employeeId = personId;
         this.salary = salary;
         this.position = position;
         this.airline = airline;
         this.hireDate = hireDate;
     }
 
-    public int getPersonId() {
-        return personId;
-    }
 
     public int getSalary() {
         return salary;
@@ -49,10 +37,6 @@ public class MEmployee implements MModel {
 
     public Date getHireDate() {
         return hireDate;
-    }
-
-    public void setPersonId(int personId) {
-        this.personId = personId;
     }
 
     public void setSalary(int salary) {
@@ -71,7 +55,7 @@ public class MEmployee implements MModel {
         this.hireDate = hireDate;
     }
 
-    public int getEmployeeId() {
+    public long getEmployeeId() {
         return employeeId;
     }
 
