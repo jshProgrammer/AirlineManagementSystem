@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class MFlight implements MModel {
+public class
+MFlight implements MModel {
 
     public enum FlyStatus {
         scheduled,
@@ -179,7 +180,7 @@ public class MFlight implements MModel {
       if(tickets.size() < this.airplane.getTotalNumberOfSeats()){
           bookable = true;
           tickets.add(newBooking);
-         // EmailSender.sendInvoice(newBooking);
+          EmailSender.sendInvoice(newBooking);
 
       }
 
