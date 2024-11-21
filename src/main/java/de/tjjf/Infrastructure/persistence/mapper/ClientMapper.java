@@ -1,10 +1,13 @@
 package de.tjjf.Infrastructure.persistence.mapper;
 
+
+import de.tjjf.Domain.models.MClient;
+import de.tjjf.Infrastructure.persistence.entities.Client;
 /*
 public class ClientMapper extends Mapper<MClient, Client>{
     public Client toEntity(MClient mClient){
         return new Client(
-                mClient.getPersonID(),
+                mClient.getPersonId(),
                 mClient.isBusinessClient()
         );
     }
@@ -15,4 +18,5 @@ public class ClientMapper extends Mapper<MClient, Client>{
                 client.isBusinessClient()
         );
     }
-}*/
+}
+*/

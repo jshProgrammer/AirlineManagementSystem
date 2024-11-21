@@ -4,7 +4,7 @@ import de.tjjf.Infrastructure.persistence.DBOperations.AbstractOperations.Abstra
 import de.tjjf.Infrastructure.persistence.entities.Ticket;
 
 public class TicketReadImpl extends AbstractReadOperation<Ticket, Integer> {
-    public TicketReadImpl(Class<Ticket> type, int identifier){
-        super(type, identifier);
+    public TicketReadImpl(int identifier){
+        super(Ticket.class, identifier);
     }
 }

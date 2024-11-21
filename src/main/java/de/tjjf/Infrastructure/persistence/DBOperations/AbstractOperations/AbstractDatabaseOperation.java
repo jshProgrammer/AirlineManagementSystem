@@ -1,13 +1,14 @@
 package de.tjjf.Infrastructure.persistence.DBOperations.AbstractOperations;
 
 import de.tjjf.Infrastructure.persistence.DataAccessException;
+import de.tjjf.Infrastructure.persistence.EntityManagerFactorySingleton;
 import de.tjjf.Infrastructure.persistence.results.AbstractResult;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 public abstract class AbstractDatabaseOperation<R extends AbstractResult> {
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory( "my-persistence-unit" );
+    private EntityManagerFactory emf = EntityManagerFactorySingleton.getInstance();
     protected EntityManager em = null;
 
     public void execute() {

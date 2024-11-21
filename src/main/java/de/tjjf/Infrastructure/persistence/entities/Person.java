@@ -6,6 +6,7 @@ import jakarta.persistence.Id;
 
 import java.util.Date;
 
+//TODO: auf Datenbankebene eher sinnlos, eher wie in Vererbung/Objektorientierung
 @Entity
 public class Person implements Model
 {

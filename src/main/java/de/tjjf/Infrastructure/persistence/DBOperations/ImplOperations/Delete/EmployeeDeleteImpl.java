@@ -4,7 +4,7 @@ import de.tjjf.Infrastructure.persistence.DBOperations.AbstractOperations.Abstra
 import de.tjjf.Infrastructure.persistence.entities.Employee;
 
 public class EmployeeDeleteImpl extends AbstractDeleteOperation<Employee, Integer> {
-    public EmployeeDeleteImpl(Class<Employee> type, int identifier){
-        super(type, identifier);
+    public EmployeeDeleteImpl(int identifier){
+        super(Employee.class, identifier);
     }
 }

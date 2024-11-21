@@ -4,7 +4,7 @@ import de.tjjf.Infrastructure.persistence.DBOperations.AbstractOperations.Abstra
 import de.tjjf.Infrastructure.persistence.entities.Airport;
 
 public class AirportReadImpl extends AbstractReadOperation<Airport, String> {
-    public AirportReadImpl(Class<Airport> type, String identifier){
-        super(type, identifier);
+    public AirportReadImpl(String identifier){
+        super(Airport.class, identifier);
     }
 }

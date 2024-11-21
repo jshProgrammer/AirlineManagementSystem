@@ -4,7 +4,7 @@ import de.tjjf.Infrastructure.persistence.DBOperations.AbstractOperations.Abstra
 import de.tjjf.Infrastructure.persistence.entities.Employee;
 
 public class EmployeeReadImpl extends AbstractReadOperation<Employee, Integer> {
-    public EmployeeReadImpl(Class<Employee> type, int identifier){
-        super(type, identifier);
+    public EmployeeReadImpl(int identifier){
+        super(Employee.class, identifier);
     }
 }
