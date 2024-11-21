@@ -4,10 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0eb50235-628a-4483-ab64-59f3939482c3" name="Changes" comment=" (whole group) change of folder structure">
+    <list default="true" id="0eb50235-628a-4483-ab64-59f3939482c3" name="Changes" comment=" (whole group) set database to persistent (not in memory) including test case, refactoring of delete and read classes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Domain/models/MBooking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Domain/models/MBooking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Domain/models/MFlight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Domain/models/MFlight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Domain/InvoicePDF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Domain/InvoicePDF.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Domain/models/MAirline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Domain/models/MAirline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/persistence/DBOperations/ImplOperations/Create/AirplaneCreateImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/persistence/DBOperations/ImplOperations/Create/AirplaneCreateImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/persistence/entities/Airline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/persistence/entities/Airline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/persistence/mapper/AirlineMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/tjjf/Infrastructure/persistence/mapper/AirlineMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/de/tjjf/DatabasePersistenceTest/DatabasePersistenceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/de/tjjf/DatabasePersistenceTest/DatabasePersistenceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/de/tjjf/LogicTests/CancellationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/de/tjjf/LogicTests/CancellationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/de/tjjf/LogicTests/SeatingTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/de/tjjf/LogicTests/SeatingTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/tjjf/Infrastructure/models/Person.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/de/tjjf/CRUDTests/CreateEntityTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/de/tjjf/CRUDTests/CreateEntityTest.class" afterDir="false" />
     </list>
     <list id="07d317b1-8995-4a1f-ae3c-703621936804" name="Changes by tomknoblach" comment="Changes by tomknoblach" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,23 +47,90 @@
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
 }</component>
-  <component name="RunManager">
-    <configuration name="DatabaseAdapter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="de.tjjf.Infrastructure.DatabaseAdapter" />
+  <component name="RunManager" selected="JUnit.DatabasePersistenceTest">
+    <configuration name="CancellationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AirlineManagement" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="de.tjjf.Infrastructure.*" />
+          <option name="PATTERN" value="de.tjjf.LogicTests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="de.tjjf.LogicTests" />
+      <option name="MAIN_CLASS_NAME" value="de.tjjf.LogicTests.CancellationTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CreateEntityTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AirlineManagement" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="de.tjjf.CRUDTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="de.tjjf.CRUDTests" />
+      <option name="MAIN_CLASS_NAME" value="de.tjjf.CRUDTests.CreateEntityTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DatabasePersistenceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AirlineManagement" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="de.tjjf.DatabasePersistenceTest.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="de.tjjf.DatabasePersistenceTest" />
+      <option name="MAIN_CLASS_NAME" value="de.tjjf.DatabasePersistenceTest.DatabasePersistenceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DatabasePersistenceTest.createExistingAirplane" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AirlineManagement" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="de.tjjf.DatabasePersistenceTest.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="de.tjjf.DatabasePersistenceTest" />
+      <option name="MAIN_CLASS_NAME" value="de.tjjf.DatabasePersistenceTest.DatabasePersistenceTest" />
+      <option name="METHOD_NAME" value="createExistingAirplane" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SeatingTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AirlineManagement" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="de.tjjf.LogicTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="de.tjjf.LogicTests" />
+      <option name="MAIN_CLASS_NAME" value="de.tjjf.LogicTests.SeatingTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.DatabaseAdapter" />
+        <item itemvalue="JUnit.DatabasePersistenceTest" />
+        <item itemvalue="JUnit.CancellationTest" />
+        <item itemvalue="JUnit.SeatingTest" />
+        <item itemvalue="JUnit.DatabasePersistenceTest.createExistingAirplane" />
+        <item itemvalue="JUnit.CreateEntityTest" />
       </list>
     </recent_temporary>
   </component>
@@ -68,7 +143,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731312434136</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary=" (whole group) set database to persistent (not in memory) including test case, refactoring of delete and read classes">
+      <option name="closed" value="true" />
+      <created>1732193945283</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1732193945283</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -77,6 +160,7 @@
     <MESSAGE value="Changes by tomknoblach" />
     <MESSAGE value=" (pair programming with Tom) Finish DatabaseAdapter, Refactoring with abstraction of Model, MModel, Mapper &#10; &#10; changed Java/Module JDK to 21 for switch-case-expression&#10; commented some Mapper classes until question is answered" />
     <MESSAGE value=" (whole group) change of folder structure" />
-    <option name="LAST_COMMIT_MESSAGE" value=" (whole group) change of folder structure" />
+    <MESSAGE value=" (whole group) set database to persistent (not in memory) including test case, refactoring of delete and read classes" />
+    <option name="LAST_COMMIT_MESSAGE" value=" (whole group) set database to persistent (not in memory) including test case, refactoring of delete and read classes" />
   </component>
 </project>

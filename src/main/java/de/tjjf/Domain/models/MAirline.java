@@ -1,5 +1,7 @@
 package de.tjjf.Domain.models;
 
+import org.apache.commons.validator.routines.EmailValidator;
+
 import java.util.Date;
 
 public class MAirline implements MModel {
@@ -9,16 +11,21 @@ public class MAirline implements MModel {
 
     private String headQuarters;
     private MAdress adress;
-    private int phoneNumber;
-    private String eMail;
+    private String phoneNumber;
+    private String email;
 
-    public MAirline(String name, Date foundationYear, String headQuarters, MAdress adress, int phoneNumber, String eMail) {
+    public MAirline(String name, Date foundationYear, String headQuarters, MAdress adress, String phoneNumber, String email) {
         this.name = name;
         this.foundationYear = foundationYear;
         this.headQuarters = headQuarters;
         this.adress = adress;
         this.phoneNumber=phoneNumber;
-        this.eMail=eMail;
+
+        EmailValidator validator = EmailValidator.getInstance();
+        boolean isValid = validator.isValid(email);
+        if(!isValid) throw new IllegalArgumentException("Email is not a valid email");
+
+        this.email =email;
     }
 
     public String getName() {
@@ -53,19 +60,19 @@ public class MAirline implements MModel {
         this.adress = adress;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public String geteMail() {
-        return eMail;
+    public String getEmail() {
+        return email;
     }
 
-    public void seteMail(String eMail) {
-        this.eMail = eMail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

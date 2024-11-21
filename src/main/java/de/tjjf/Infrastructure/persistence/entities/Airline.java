@@ -13,14 +13,14 @@ public class Airline implements Model {
 
     private String headQuarters;
     private String eMail;
-    private int phoneNumber;
+    private String phoneNumber;
     private String adress;
 
     //TODO: sollen wir hier mit OneToMany auch die Flugzeuge speichern => eig wird das ja selten abgerufen
 
     public Airline() {}
 
-    public Airline(String name, Date foundationYear, String headQuarters, String eMail, int phoneNumber, String adress) {
+    public Airline(String name, Date foundationYear, String headQuarters, String eMail, String phoneNumber, String adress) {
         this.name = name;
         this.foundationYear = foundationYear;
         this.headQuarters = headQuarters;
@@ -37,11 +37,11 @@ public class Airline implements Model {
         this.eMail = eMail;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

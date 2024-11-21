@@ -20,7 +20,7 @@ public class InvoicePDF {
         MAirline airline =ticket.getFlight().getAirplane().getBelongingAirline();
         MAdress adress = airline.getAdress();
         String informations = adress.street+" "+adress.number+", "+adress.zipcode+" "
-                +adress.city+"\nTel: "+ airline.getPhoneNumber()+"\n"+airline.geteMail();
+                +adress.city+"\nTel: "+ airline.getPhoneNumber()+"\n"+airline.getEmail();
         String fileName = "Rechnung_" + ticket.getTicketId() + ".pdf";
         String filePath = "src/main/resources/" + fileName;
 

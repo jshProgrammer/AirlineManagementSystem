@@ -1,5 +1,6 @@
 package de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Create;
 
+import de.tjjf.Domain.models.MAdress;
 import de.tjjf.Infrastructure.persistence.DBOperations.AbstractOperations.AbstractCreateOperation;
 import de.tjjf.Infrastructure.persistence.entities.Airline;
 import de.tjjf.Infrastructure.persistence.entities.Airplane;
@@ -13,7 +14,7 @@ public class AirplaneCreateImpl extends AbstractCreateOperation<Airplane> {
         }
 
         public static void main(String[] args) {
-            Airline a = new Airline("Lufthansa", new Date(1990), "München");
+            Airline a = new Airline("Lufthansa", new Date(1990), "München", "test;1;34534;Berlin;Germany", "0160123456", "testmail");
             new AirlineCreateImpl(a).execute();
             new AirplaneCreateImpl(new Airplane(123, "Boeing", "Test",200, 80, 50, a, true)).execute();
         }

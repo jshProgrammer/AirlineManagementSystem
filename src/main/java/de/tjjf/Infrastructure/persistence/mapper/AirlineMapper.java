@@ -12,7 +12,7 @@ public class AirlineMapper extends Mapper<MAirline, Airline> {
                 mAirline.getName(),
                 mAirline.getFoundationYear(),
                 mAirline.getHeadQuarters(),
-                mAirline.geteMail(),
+                mAirline.getEmail(),
                 mAirline.getPhoneNumber(),
                 adress
         );
