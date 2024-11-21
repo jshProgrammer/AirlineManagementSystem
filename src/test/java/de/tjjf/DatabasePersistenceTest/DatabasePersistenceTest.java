@@ -1,6 +1,5 @@
 package de.tjjf.DatabasePersistenceTest;
 
-import de.tjjf.Domain.models.MAdress;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Create.AirlineCreateImpl;
 import de.tjjf.Infrastructure.persistence.DataAccessException;
 import de.tjjf.Infrastructure.persistence.EntityManagerFactorySingleton;

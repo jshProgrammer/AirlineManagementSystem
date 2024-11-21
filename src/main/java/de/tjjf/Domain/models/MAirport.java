@@ -2,7 +2,7 @@ package de.tjjf.Domain.models;
 
 public class MAirport implements MModel {
 
-    private String code;
+    private final String code;
 
     private String name;
 
@@ -38,10 +38,6 @@ public class MAirport implements MModel {
 
     public String getTimezone() {
         return timezone;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 
     public void setName(String name) {

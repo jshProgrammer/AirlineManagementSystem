@@ -1,8 +1,6 @@
 package de.tjjf.Infrastructure.persistence.mapper;
 
-import de.tjjf.Domain.models.MAirline;
 import de.tjjf.Domain.models.MAirplane;
-import de.tjjf.Infrastructure.persistence.entities.Airline;
 import de.tjjf.Infrastructure.persistence.entities.Airplane;
 
 public class AirplaneMapper extends Mapper<MAirplane, Airplane> {
@@ -16,7 +14,7 @@ public class AirplaneMapper extends Mapper<MAirplane, Airplane> {
                 mAirplane.getAmountOfBusinessSeats(),
                 mAirplane.getAmountOfFirstClassSeats(),
                 new AirlineMapper().toEntity(mAirplane.getBelongingAirline()),
-                mAirplane.isOperatable()
+                mAirplane.isOperable()
         );
     }
 

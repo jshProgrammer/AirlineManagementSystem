@@ -1,9 +1,6 @@
 package de.tjjf.CRUDTests.BusinessLevel;
 
 import de.tjjf.Domain.models.*;
-import de.tjjf.Infrastructure.persistence.entities.Employee;
-import de.tjjf.Infrastructure.persistence.entities.Flight;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;
@@ -119,7 +116,7 @@ public class CreateMModelsTest {
         int totalPrice = 300;
         int seatNum = 15;
         MTicket.SeatingClass seatingClass = MTicket.SeatingClass.Economy;
-        MTicket.BookingStatus ticketStatus = MTicket.BookingStatus.Paid;
+        MTicket.TicketStatus ticketStatus = MTicket.TicketStatus.Paid;
         int weightOfLuggage = 20;
 
         MTicket mTicket = new MTicket(ticketId, person, mFlight, dateTimeOfBooking, totalPrice, seatNum, seatingClass, ticketStatus, weightOfLuggage);

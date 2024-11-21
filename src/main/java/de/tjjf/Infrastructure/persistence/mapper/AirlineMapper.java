@@ -1,13 +1,13 @@
 package de.tjjf.Infrastructure.persistence.mapper;
 
-import de.tjjf.Domain.models.MAdress;
+import de.tjjf.Domain.models.MAddress;
 import de.tjjf.Domain.models.MAirline;
 import de.tjjf.Infrastructure.persistence.entities.Airline;
 
 public class AirlineMapper extends Mapper<MAirline, Airline> {
 
     public Airline toEntity(MAirline mAirline) {
-        String adress = AdressMapper.toEntity(mAirline.getAdress());
+        String adress = AdressMapper.toEntity(mAirline.getAddress());
         return new Airline(
                 mAirline.getName(),
                 mAirline.getFoundationYear(),
@@ -19,14 +19,14 @@ public class AirlineMapper extends Mapper<MAirline, Airline> {
     }
 
     public MAirline toDomain(Airline airline) {
-        MAdress object = AdressMapper.toDomain(airline.getAdress());
+        MAddress object = AdressMapper.toDomain(airline.getAddress());
         return new MAirline(
                 airline.getName(),
                 airline.getFoundationYear(),
                 airline.getHeadQuarters(),
                 object,
                 airline.getPhoneNumber(),
-                airline.geteMail()
+                airline.getMail()
         );
     }
 

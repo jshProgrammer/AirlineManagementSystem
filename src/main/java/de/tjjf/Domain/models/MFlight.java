@@ -1,24 +1,16 @@
 package de.tjjf.Domain.models;
 
 import de.tjjf.Domain.EmailSender;
-import de.tjjf.Domain.Exceptions.NoSeatsLeftException;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class
-MFlight implements MModel {
+public class MFlight implements MModel {
 
-    public enum FlyStatus {
-        scheduled,
-        in_the_air,
-        landed,
-        delayed,
-        canceled
-    }
+    public enum FlightStatus { scheduled, in_the_air, landed, delayed, canceled }
 
-    private long flightNum;
+    private final long flightNum;
 
     private MAirplane airplane;
 
@@ -32,7 +24,7 @@ MFlight implements MModel {
 
     private Date boardingTime;
 
-    private FlyStatus status;
+    private FlightStatus status;
 
     private int duration;
 
@@ -46,7 +38,7 @@ MFlight implements MModel {
 
     private int currentUpgradeLuggageWeight = 0;
 
-    public MFlight(long flightNum, MAirplane airplane, Date departureDateTime, MAirport departureAirport, Date arrivalDateTime, MAirport arrivalAirport, Date boardingTime, FlyStatus status, int duration, MEmployee pilot, MEmployee copilot) {
+    public MFlight(long flightNum, MAirplane airplane, Date departureDateTime, MAirport departureAirport, Date arrivalDateTime, MAirport arrivalAirport, Date boardingTime, FlightStatus status, int duration, MEmployee pilot, MEmployee copilot) {
         this.flightNum = flightNum;
         this.airplane = airplane;
         this.departureDateTime = departureDateTime;
@@ -58,6 +50,58 @@ MFlight implements MModel {
         this.duration = duration;
         this.pilot = pilot;
         this.copilot = copilot;
+    }
+
+
+    public void addCurrentInitialLuggageWeight(int currentInitialLuggageWeight) {
+        if(currentInitialLuggageWeight > 0){
+            this.currentInitialLuggageWeight += currentInitialLuggageWeight;
+        } else{
+            throw new IllegalArgumentException("Please enter a positive number, negative ones are prohibited");
+        }
+    }
+
+    public void addCurrentUpgradeLuggageWeight(int currentUpgradeLuggageWeight) {
+        if(currentUpgradeLuggageWeight > 0){
+            this.currentUpgradeLuggageWeight += currentUpgradeLuggageWeight;
+        }else{
+            throw new IllegalArgumentException("Please enter a positive number, negative ones are prohibited");
+        }
+    }
+
+
+    public boolean addBooking(MTicket newBooking) {
+        boolean bookable = false;
+        if(tickets.size() < this.airplane.getTotalNumberOfSeats()){
+            bookable = true;
+            tickets.add(newBooking);
+            EmailSender.sendInvoice(newBooking);
+        }
+
+        return bookable;
+    }
+
+    public void cancelFlight(){
+        this.status = FlightStatus.canceled;
+        EmailSender.sendCancelationMail(this);
+    }
+
+
+    //TODO
+    public List<MFlight> showAlternativeFlights(int flightNum) {
+        List<MFlight> alternativeFlights = new ArrayList<>();
+
+        // Flight originalFlight = ;
+
+        //TODO: hier müsste ich ja auf Datenbank zugreifen?!
+        List<MFlight> allFlights = new ArrayList<>();
+
+        // search for flights that have the same destination and departure
+        for(MFlight alternativeFlight : allFlights) {
+
+        }
+
+        return  alternativeFlights;
     }
 
     public void setAirplane(MAirplane airplane) {
@@ -92,15 +136,11 @@ MFlight implements MModel {
         this.duration = duration;
     }
 
-    public void setFlightNum(long flightNum) {
-        this.flightNum = flightNum;
-    }
-
     public void setPilot(MEmployee pilot) {
         this.pilot = pilot;
     }
 
-    public void setStatus(FlyStatus status) {
+    public void setStatus(FlightStatus status) {
         this.status = status;
     }
 
@@ -111,6 +151,8 @@ MFlight implements MModel {
     public MAirport getArrivalAirport() {
         return arrivalAirport;
     }
+
+    public int getCurrentUpgradeLuggageWeight() { return currentUpgradeLuggageWeight; }
 
     public Date getArrivalDateTime() {
         return arrivalDateTime;
@@ -144,7 +186,7 @@ MFlight implements MModel {
         return pilot;
     }
 
-    public FlyStatus getStatus() {
+    public FlightStatus getStatus() {
         return status;
     }
 
@@ -153,42 +195,4 @@ MFlight implements MModel {
     }
 
     public int getCurrentInitialLuggageWeight() { return currentInitialLuggageWeight;  }
-
-    public void addCurrentInitialLuggageWeight(int currentInitialLuggageWeight) {
-        if(currentInitialLuggageWeight > 0){
-            this.currentInitialLuggageWeight += currentInitialLuggageWeight;
-        }else{
-            //Rather boolean or exceptions?
-            throw new IllegalArgumentException("Please enter a positive number, negative ones are prohibited");
-        }
-    }
-
-    public int getCurrentUpgradeLuggageWeight() { return currentUpgradeLuggageWeight; }
-
-    public void addCurrentUpgradeLuggageWeight(int currentUpgradeLuggageWeight) {
-        if(currentUpgradeLuggageWeight > 0){
-            this.currentUpgradeLuggageWeight += currentUpgradeLuggageWeight;
-        }else{
-            //Rather boolean or exceptions?
-            throw new IllegalArgumentException("Please enter a positive number, negative ones are prohibited");
-        }
-    }
-
-
-    public boolean addBooking(MTicket newBooking) {
-        boolean bookable = false;
-      if(tickets.size() < this.airplane.getTotalNumberOfSeats()){
-          bookable = true;
-          tickets.add(newBooking);
-          EmailSender.sendInvoice(newBooking);
-
-      }
-
-      return bookable;
-    }
-
-    public void cancelFlight(){
-        this.status = FlyStatus.canceled;
-        EmailSender.sendCancelationMail(this);
-    }
 }

@@ -7,18 +7,18 @@ import java.util.Date;
 public class MAirline implements MModel {
     private String name;
 
-    private Date foundationYear;
+    private final Date foundationYear;
 
     private String headQuarters;
-    private MAdress adress;
+    private MAddress address;
     private String phoneNumber;
     private String email;
 
-    public MAirline(String name, Date foundationYear, String headQuarters, MAdress adress, String phoneNumber, String email) {
+    public MAirline(String name, Date foundationYear, String headQuarters, MAddress address, String phoneNumber, String email) {
         this.name = name;
         this.foundationYear = foundationYear;
         this.headQuarters = headQuarters;
-        this.adress = adress;
+        this.address = address;
         this.phoneNumber=phoneNumber;
 
         EmailValidator validator = EmailValidator.getInstance();
@@ -44,20 +44,16 @@ public class MAirline implements MModel {
         this.name = name;
     }
 
-    public void setFoundationYear(Date foundationYear) {
-        this.foundationYear = foundationYear;
-    }
-
     public void setHeadQuarters(String headQuarters) {
         this.headQuarters = headQuarters;
     }
 
-    public MAdress getAdress() {
-        return adress;
+    public MAddress getAddress() {
+        return address;
     }
 
-    public void setAdress(MAdress adress) {
-        this.adress = adress;
+    public void setAddress(MAddress address) {
+        this.address = address;
     }
 
     public String getPhoneNumber() {

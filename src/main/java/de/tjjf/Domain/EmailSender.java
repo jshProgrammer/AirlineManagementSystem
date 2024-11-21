@@ -8,16 +8,12 @@ import java.io.IOException;
 import java.util.Properties;
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
-import javax.lang.model.element.NestingKind;
 import javax.mail.*;
 import javax.mail.internet.*;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import javax.sql.DataSource;
 import java.io.File;
-
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import static de.tjjf.Domain.InvoicePDF.createPDF;
 
@@ -115,7 +111,7 @@ public class EmailSender {
     }
     public static void sendCancelationMail(MFlight mFlight) {
         for (MTicket ticket : mFlight.getTickets()) {
-            ticket.cancelTicket();
+            ticket.setTicketStatus(MTicket.TicketStatus.canceled);
             MPerson person = ticket.getPerson();
             String mailPerson = person.getEmail();
             String subject = "Cancelation of flight " + mFlight.getFlightNum();
