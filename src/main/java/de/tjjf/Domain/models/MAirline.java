@@ -8,11 +8,17 @@ public class MAirline implements MModel {
     private Date foundationYear;
 
     private String headQuarters;
+    private MAdress adress;
+    private int phoneNumber;
+    private String eMail;
 
-    public MAirline(String name, Date foundationYear, String headQuarters) {
+    public MAirline(String name, Date foundationYear, String headQuarters, MAdress adress, int phoneNumber, String eMail) {
         this.name = name;
         this.foundationYear = foundationYear;
         this.headQuarters = headQuarters;
+        this.adress = adress;
+        this.phoneNumber=phoneNumber;
+        this.eMail=eMail;
     }
 
     public String getName() {
@@ -37,5 +43,29 @@ public class MAirline implements MModel {
 
     public void setHeadQuarters(String headQuarters) {
         this.headQuarters = headQuarters;
+    }
+
+    public MAdress getAdress() {
+        return adress;
+    }
+
+    public void setAdress(MAdress adress) {
+        this.adress = adress;
+    }
+
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String geteMail() {
+        return eMail;
+    }
+
+    public void seteMail(String eMail) {
+        this.eMail = eMail;
     }
 }

@@ -21,9 +21,7 @@ public class MPerson implements MModel
     private Date dateOfBirth;
 
     private String phonenumber;
-
-    //TODO: evtl. Adress-Objekt anlegen
-    private String address;
+    private MAdress address;
 
     private String email;
 
@@ -34,7 +32,7 @@ public class MPerson implements MModel
 
 
     //TODO: validate whether phone number is valid
-    public MPerson(long personId, String firstName, String middleNames, String lastName, Date dateOfBirth, String phonenumber, String address, String email, String password) {
+    public MPerson(long personId, String firstName, String middleNames, String lastName, Date dateOfBirth, String phonenumber, MAdress address, String email, String password) {
         this.personId = personId;
         this.firstName = firstName;
         this.middleNames = middleNames;
@@ -63,7 +61,7 @@ public class MPerson implements MModel
 
     public static void main(String[] args) {
         // should not throw Illegal Argument Exception
-        MPerson person = new MPerson(1, "A", null, "C", new Date(1998), "091234u", "Adresse", "jpfennig2403@gmail.com", "fkgk rdof hhkj arwc");
+        MPerson person = new MPerson(1, "A", null, "C", new Date(1998), "091234u", new MAdress("test", 1, 34534,"Berlin", "germany"), "jpfennig2403@gmail.com", "fkgk rdof hhkj arwc");
         System.out.println(person.getHashedPassword());
 
         // should throw IllegalArgumentException
@@ -107,7 +105,7 @@ public class MPerson implements MModel
         return phonenumber;
     }
 
-    public String getAddress() {
+    public MAdress getAddress() {
         return address;
     }
 
@@ -136,10 +134,6 @@ public class MPerson implements MModel
         this.phonenumber = phonenumber;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -160,6 +154,10 @@ public class MPerson implements MModel
                 mFlight.getTickets().remove(ticket);
             }
         }
+    }
+
+    public void setAddress(MAdress address) {
+        this.address = address;
     }
 }
 

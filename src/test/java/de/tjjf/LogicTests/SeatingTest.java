@@ -13,8 +13,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class SeatingTest {
-    MPerson person = new MPerson(1, "Jasmin", "", "Wander", new Date(2004, 10, 14), "23233", "München", "jpfennig2403@gmail.com", "fkgk rdof hhkj arwc");
-    MAirline airline = new MAirline("TestAirline", new Date(1990), "München");
+    MPerson person = new MPerson(1, "Jasmin", "", "Wander", new Date(2004, 10, 14), "23233", new MAdress("test", 1, 34534,"Berlin", "germany"), "jpfennig2403@gmail.com", "fkgk rdof hhkj arwc");
+    MAirline airline = new MAirline("TestAirline", new Date(1990), "München",new MAdress("test", 1, 34534,"Berlin", "germany"), 234234, "testmail");
     MAirplane airplane = new MAirplane(123, "Hersteller", "Boeing 5", 30, 15, 15, airline, true, 1000);
     MAirport depatureAirport = new MAirport("B12", "Frankturt Airport", "Germany", "Frankfurt", "UTC");
     MAirport arrivalAirport = new MAirport("ABC", "LA Airport", "USA", "LA", "UTC");

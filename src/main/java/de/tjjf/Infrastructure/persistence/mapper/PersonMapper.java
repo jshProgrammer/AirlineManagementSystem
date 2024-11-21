@@ -1,11 +1,13 @@
 package de.tjjf.Infrastructure.persistence.mapper;
 
+import de.tjjf.Domain.models.MAdress;
 import de.tjjf.Domain.models.MPerson;
 import de.tjjf.Infrastructure.persistence.entities.Person;
 
-//public class PersonMapper extends Mapper<MPerson, Person>{
+public class PersonMapper extends Mapper<MPerson, Person>{
 
-    /*public Person toEntity(MPerson mPerson){
+    public Person toEntity(MPerson mPerson){
+        String adress = AdressMapper.toEntity(mPerson.getAddress());
         return new Person(
                 mPerson.getPersonId(),
                 mPerson.getFirstName(),
@@ -13,13 +15,14 @@ import de.tjjf.Infrastructure.persistence.entities.Person;
                 mPerson.getLastName(),
                 mPerson.getDateOfBirth(),
                 mPerson.getPhonenumber(),
-                mPerson.getAddress(),
+                adress,
                 mPerson.getEmail(),
                 mPerson.getHashedPassword()
         );
     }
 
     public MPerson toDomain(Person person){
+        MAdress object = AdressMapper.toDomain(person.getAddress());
         return new MPerson(
                 person.getPersonId(),
                 person.getFirstName(),
@@ -27,9 +30,9 @@ import de.tjjf.Infrastructure.persistence.entities.Person;
                 person.getLastName(),
                 person.getDateOfBirth(),
                 person.getPhonenumber(),
-                person.getAddress(),
+                object,
                 person.getEmail(),
                 person.getPassword()
         );
-    }*/
-//}
+    }
+}

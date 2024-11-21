@@ -29,7 +29,7 @@ public class Person implements Model
     private String phonenumber;
 
     @Column(nullable = false)
-    //TODO: evtl. Adress-Objekt anlegen
+
     private String address;
 
     @Column(nullable = false)

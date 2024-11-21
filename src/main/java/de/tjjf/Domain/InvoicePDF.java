@@ -8,6 +8,8 @@ import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.properties.TextAlignment;
 import com.itextpdf.layout.properties.UnitValue;
+import de.tjjf.Domain.models.MAdress;
+import de.tjjf.Domain.models.MAirline;
 import de.tjjf.Domain.models.MPerson;
 import de.tjjf.Domain.models.MTicket;
 
@@ -15,7 +17,10 @@ public class InvoicePDF {
 
     public static String createPDF(MTicket ticket){
         MPerson person = ticket.getPerson();
-        String dest = person.getEmail();
+        MAirline airline =ticket.getFlight().getAirplane().getBelongingAirline();
+        MAdress adress = airline.getAdress();
+        String informations = adress.street+" "+adress.number+", "+adress.zipcode+" "
+                +adress.city+"\nTel: "+ airline.getPhoneNumber()+"\n"+airline.geteMail();
         String fileName = "Rechnung_" + ticket.getTicketId() + ".pdf";
         String filePath = "src/main/resources/" + fileName;
 
@@ -25,7 +30,7 @@ public class InvoicePDF {
             Document document = new Document(pdfDocument);
             //TODO: Evtl Adresse einfügen
             String companyName = ticket.getFlight().getAirplane().getBelongingAirline().getName();
-            String companyDetails = "Musterstraße 1, 12345 Berlin\nTel: 123456789\ninfo@mustermann.de";
+            String companyDetails = informations;
             Paragraph header = new Paragraph(companyName)
                     .setBold()
                     .setFontSize(14)
