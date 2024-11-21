@@ -26,38 +26,38 @@ public class SeatingTest {
 
     @Test
     public void testTicketAndLuggageCreation(){
-        MTicket mTicket = new MTicket(1, person, flight, new Date(2024, 11,18), 200, 1, MTicket.SeatingClass.Economy, MTicket.BookingStatus.Unpaid, 12 );
-        assertEquals(flight.getTickets().getFirst(), mTicket);
-        assertEquals(mTicket.getFlight().getCurrentInitialLuggageWeight(), 12);
-        assertEquals(mTicket.getTotalPrice(), 248);
+        MTicket ticket = new MTicket(1, person, flight, new Date(2024, 11,18), 200, 1, MTicket.SeatingClass.Economy, MTicket.BookingStatus.Unpaid, 12 );
+        assertEquals(flight.getTickets().getFirst(), ticket);
+        assertEquals(ticket.getFlight().getCurrentInitialLuggageWeight(), 12);
+        assertEquals(ticket.getTotalPrice(), 248);
 
     }
 
     @Test
     public void tooMuchLuggageTest(){
-        MTicket mTicket = new MTicket(1, person, flight, new Date(2024, 11,18), 200, 1, MTicket.SeatingClass.Economy, MTicket.BookingStatus.Unpaid, 50 );
-        assertEquals(mTicket.getFlight().getCurrentInitialLuggageWeight(), 0);
+        MTicket ticket = new MTicket(1, person, flight, new Date(2024, 11,18), 200, 1, MTicket.SeatingClass.Economy, MTicket.BookingStatus.Unpaid, 50 );
+        assertEquals(ticket.getFlight().getCurrentInitialLuggageWeight(), 0);
         //Wie boolean Rückgabetyp & Message abfragen?
 
     }
 
     @Test
     public void testLuggageUpgrade(){
-        MTicket mTicket = new MTicket(1, person, flight, new Date(2024, 11,18), 200, 1, MTicket.SeatingClass.Economy, MTicket.BookingStatus.Unpaid, 12 );
-        mTicket.upgradeLuggageWeight(5);
-        assertEquals(mTicket.getFlight().getCurrentUpgradeLuggageWeight(), 5);
-        assertEquals(mTicket.getFlight().getCurrentInitialLuggageWeight(), 12);
-        assertEquals(mTicket.getWeightOfLuggage(), 17);
+        MTicket ticket = new MTicket(1, person, flight, new Date(2024, 11,18), 200, 1, MTicket.SeatingClass.Economy, MTicket.BookingStatus.Unpaid, 12 );
+        ticket.upgradeLuggageWeight(5);
+        assertEquals(ticket.getFlight().getCurrentUpgradeLuggageWeight(), 5);
+        assertEquals(ticket.getFlight().getCurrentInitialLuggageWeight(), 12);
+        assertEquals(ticket.getWeightOfLuggage(), 17);
 
     }
 
     @Test
     public void testSeatingUpgrade(){
-        MTicket mTicket = new MTicket(1, person, flight, new Date(2024, 11,18), 200, 1, MTicket.SeatingClass.Economy, MTicket.BookingStatus.Unpaid, 12 );
-        mTicket.upgradeSeatingClass(MTicket.SeatingClass.Business);
-        assertEquals(mTicket.getSeatingClass(), MTicket.SeatingClass.Business);
-        mTicket.upgradeSeatingClass(MTicket.SeatingClass.First);
-        assertEquals(mTicket.getSeatingClass(), MTicket.SeatingClass.First);
+        MTicket ticket = new MTicket(1, person, flight, new Date(2024, 11,18), 200, 1, MTicket.SeatingClass.Economy, MTicket.BookingStatus.Unpaid, 12 );
+        ticket.upgradeSeatingClass(MTicket.SeatingClass.Business);
+        assertEquals(ticket.getSeatingClass(), MTicket.SeatingClass.Business);
+        ticket.upgradeSeatingClass(MTicket.SeatingClass.First);
+        assertEquals(ticket.getSeatingClass(), MTicket.SeatingClass.First);
 
     }
 
@@ -66,9 +66,9 @@ public class SeatingTest {
         MAirplane airplane2 = new MAirplane(123, "Hersteller", "Boeing 5", 1, 1, 1, airline, true, 1000);
         MFlight flight = new MFlight(123456, airplane2, new Date(2024, 12, 31), depatureAirport, new Date(2025, 1, 1), arrivalAirport, new Date(2024, 21, 31), MFlight.FlyStatus.scheduled, 1000, pilot, copilot);
 
-        MTicket mTicket = new MTicket(1, person, flight, new Date(2024, 11,18), 200, 1, MTicket.SeatingClass.Economy, MTicket.BookingStatus.Unpaid, 12 );
+        MTicket ticket = new MTicket(1, person, flight, new Date(2024, 11,18), 200, 1, MTicket.SeatingClass.Economy, MTicket.BookingStatus.Unpaid, 12 );
         try{
-            MTicket mTicket2 = new MTicket(2, person, flight, new Date(2024, 11,18), 200, 1, MTicket.SeatingClass.Economy, MTicket.BookingStatus.Unpaid, 12 );
+            MTicket ticket2 = new MTicket(2, person, flight, new Date(2024, 11,18), 200, 1, MTicket.SeatingClass.Economy, MTicket.BookingStatus.Unpaid, 12 );
             fail("NoSeatsLeftException expected");
         }
         catch(NoSeatsLeftException e){
