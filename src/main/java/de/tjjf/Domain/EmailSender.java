@@ -115,6 +115,7 @@ public class EmailSender {
     }
     public static void sendCancelationMail(MFlight mFlight) {
         for (MTicket ticket : mFlight.getTickets()) {
+            ticket.cancelTicket();
             MPerson person = ticket.getPerson();
             String mailPerson = person.getEmail();
             String subject = "Cancelation of flight " + mFlight.getFlightNum();

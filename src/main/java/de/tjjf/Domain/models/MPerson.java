@@ -1,5 +1,6 @@
 package de.tjjf.Domain.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class MPerson implements MModel
 
     BCryptPasswordEncoder passwordEncoder;
     private String hashedPassword;
-    private List<MTicket> tickets;
+    private List<MTicket> tickets = new ArrayList<>();
 
 
 
@@ -152,6 +153,7 @@ public class MPerson implements MModel
                 MFlight mFlight = ticket.getFlight();
                 EmailSender.sendCancelationMailCustomer(mFlight);
                 mFlight.getTickets().remove(ticket);
+                ticket.cancelTicket();
             }
         }
     }

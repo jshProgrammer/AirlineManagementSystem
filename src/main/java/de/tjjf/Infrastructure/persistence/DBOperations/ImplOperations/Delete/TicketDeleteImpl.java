@@ -4,7 +4,7 @@ import de.tjjf.Infrastructure.persistence.DBOperations.AbstractOperations.Abstra
 import de.tjjf.Infrastructure.persistence.entities.Ticket;
 
 public class TicketDeleteImpl extends AbstractDeleteOperation<Ticket, Integer> {
-    public TicketDeleteImpl(Class<Ticket> type, int identifier){
-        super(type, identifier);
+    public TicketDeleteImpl(int identifier){
+        super(Ticket.class, identifier);
     }
 }

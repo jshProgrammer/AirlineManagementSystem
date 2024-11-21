@@ -4,7 +4,7 @@ import de.tjjf.Infrastructure.persistence.DBOperations.AbstractOperations.Abstra
 import de.tjjf.Infrastructure.persistence.entities.Client;
 
 public class ClientReadImpl extends AbstractReadOperation<Client, Integer> {
-    public ClientReadImpl(Class<Client> type, int identifier){
-        super(type, identifier);
+    public ClientReadImpl(int identifier){
+        super(Client.class, identifier);
     }
 }

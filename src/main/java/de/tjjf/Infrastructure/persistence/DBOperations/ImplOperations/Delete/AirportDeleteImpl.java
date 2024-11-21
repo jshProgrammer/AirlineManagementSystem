@@ -4,7 +4,7 @@ import de.tjjf.Infrastructure.persistence.DBOperations.AbstractOperations.Abstra
 import de.tjjf.Infrastructure.persistence.entities.Airport;
 
 public class AirportDeleteImpl extends AbstractDeleteOperation<Airport, String> {
-    public AirportDeleteImpl(Class<Airport> type, String identifier){
-        super(type, identifier);
+    public AirportDeleteImpl(String identifier){
+        super(Airport.class, identifier);
     }
 }

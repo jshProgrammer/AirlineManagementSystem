@@ -4,7 +4,7 @@ import de.tjjf.Infrastructure.persistence.DBOperations.AbstractOperations.Abstra
 import de.tjjf.Infrastructure.persistence.entities.Person;
 
 public class PersonDeleteImpl extends AbstractDeleteOperation<Person, Integer> {
-    public PersonDeleteImpl(Class<Person> type, int identifier){
-        super(type, identifier);
+    public PersonDeleteImpl(int identifier){
+        super(Person.class, identifier);
     }
 }

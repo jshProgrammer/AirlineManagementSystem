@@ -4,7 +4,7 @@ import de.tjjf.Infrastructure.persistence.DBOperations.AbstractOperations.Abstra
 import de.tjjf.Infrastructure.persistence.entities.Person;
 
 public class PersonReadImpl extends AbstractReadOperation<Person, Integer> {
-    public PersonReadImpl(Class<Person> type, int identifier){
-        super(type, identifier);
+    public PersonReadImpl(int identifier){
+        super(Person.class, identifier);
     }
 }

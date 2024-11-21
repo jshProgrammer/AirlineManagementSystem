@@ -31,16 +31,28 @@
 
     <persistence-unit name="my-persistence-unit">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>de.tjjf.Infrastructure.persistence.entities.Airline</class>
+        <class>de.tjjf.Infrastructure.persistence.entities.Airplane</class>
+        <class>de.tjjf.Infrastructure.persistence.entities.Airport</class>
+        <class>de.tjjf.Infrastructure.persistence.entities.Client</class>
+        <class>de.tjjf.Infrastructure.persistence.entities.Employee</class>
+        <class>de.tjjf.Infrastructure.persistence.entities.Flight</class>
         <class>de.tjjf.Infrastructure.persistence.entities.Person</class>
-        <class>de.tjjf.Infrastructure.persistence.entities.Booking</class>
+        <class>de.tjjf.Infrastructure.persistence.entities.Ticket</class>
+
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:file:./data/mydb;AUTO_SERVER=TRUE"/>
+
             <property name="javax.persistence.jdbc.user" value="sa"/>
             <property name="javax.persistence.jdbc.password" value=""/>
+
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.show_sql" value="true"/>
+
+            <!-- Schema-Generierung -->
+            <!--<property name="jakarta.persistence.schema-generation.database.action" value="update"/>-->
         </properties>
     </persistence-unit>
 </persistence>
