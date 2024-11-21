@@ -54,6 +54,7 @@ public class MTicket implements MModel {
         this.seatingClass = seatingClass;
         this.ticketStatus = ticketStatus;
         setLuggageWeight(weightOfLuggage);
+        flight.addBooking(this);
     }
 
     public void setTicketStatus(BookingStatus ticketStatus) {
@@ -104,7 +105,7 @@ public class MTicket implements MModel {
     }
 
     private boolean setLuggageWeight(int wishedLuggageWeight){
-        boolean suitableWeight;
+        boolean suitableWeight = false;
         //checking if wishedLuggageWeight is suitable for standard booking
         if(this.flight.getAirplane().getMaxWeightOfLuggage() * 0.75 / this.flight.getAirplane().getTotalNumberOfSeats() >= wishedLuggageWeight){
             suitableWeight = true;
@@ -114,10 +115,9 @@ public class MTicket implements MModel {
 
             //Increasing the total price in addition to bring more luggage. Here only 4 because it's at the initial booking
             this.totalPrice = this.totalPrice + (wishedLuggageWeight * 4);
-        }else{
-            //throw new IllegalArgumentException("Luggage weight is to heavy, please upgrade after booking.");
-            suitableWeight = false;
         }
+            //throw new IllegalArgumentException("Luggage weight is to heavy, please upgrade after booking.");
+
         return suitableWeight;
     }
 
@@ -177,6 +177,8 @@ public class MTicket implements MModel {
         };
 
         int reservedNumberOfSeats = 0;
+
+        //alte Class entfernen?
 
         for(MTicket mTicketIter : bookingsOfThisFlight) {
             if(mTicketIter.getSeatingClass() == newDesiredSeatingClass) {

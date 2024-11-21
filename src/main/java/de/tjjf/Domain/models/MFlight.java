@@ -175,14 +175,14 @@ public class MFlight implements MModel {
 
 
     public boolean addBooking(MTicket newBooking) {
-        boolean bookable;
+        boolean bookable = false;
       if(tickets.size() < this.airplane.getTotalNumberOfSeats()){
           bookable = true;
           tickets.add(newBooking);
+         // EmailSender.sendInvoice(newBooking);
+
       }
-      else{
-          bookable = false;
-      }
+
       return bookable;
     }
 
