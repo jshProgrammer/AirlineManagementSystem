@@ -1,6 +1,7 @@
 package de.tjjf.Domain.models;
 
 public class MAirplane implements MModel {
+
     private final int serialNum;
 
     private final String manufacturer;
@@ -19,13 +20,7 @@ public class MAirplane implements MModel {
 
     private final int maxWeightOfLuggage;
 
-    //Construcotr for TestCases
-    public MAirplane(int amountOfEconomySeats, int amountOfBusinessSeats, int amountOfFirstClassSeats, int maxWeightOfLuggage) {
-        this.amountOfEconomySeats = amountOfEconomySeats;
-        this.amountOfBusinessSeats = amountOfBusinessSeats;
-        this.amountOfFirstClassSeats = amountOfFirstClassSeats;
-        this.maxWeightOfLuggage = maxWeightOfLuggage;
-    }
+
     public MAirplane(int serialNum, String manufacturer, String model, int amountOfEconomySeats, int amountOfBusinessSeats, int amountOfFirstClassSeats, MAirline belongingAirline, boolean isOperable, int maxWeightOfLuggage) {
         this.serialNum = serialNum;
         this.manufacturer = manufacturer;

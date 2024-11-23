@@ -6,7 +6,7 @@ import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Create.Air
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Read.AirlineReadImpl;
 import de.tjjf.Infrastructure.persistence.entities.Airline;
 import de.tjjf.Infrastructure.persistence.entities.Airplane;
-import de.tjjf.Infrastructure.persistence.entities.Person;
+//import de.tjjf.Infrastructure.persistence.entities.Person;
 import de.tjjf.Infrastructure.persistence.mapper.AirlineMapper;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;

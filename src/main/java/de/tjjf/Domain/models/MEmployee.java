@@ -3,6 +3,7 @@ package de.tjjf.Domain.models;
 import java.util.Date;
 
 public class MEmployee extends MPerson implements MModel {
+
     private long employeeId;
 
     private int salary;

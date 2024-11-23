@@ -3,13 +3,15 @@ package de.tjjf.Domain.models;
 public class MAddress {
     // simplification: leave out character after number (e.g. Street 12a => Street 12)
     public String street;
+
     public int number;
+
     public int zipcode;
+
     public String city;
+
     public String country;
 
-    //Constructor for TestCases
-    public MAddress() {}
     public MAddress(String street, int number, int zipcode, String city, String country) {
         this.street=street;
         this.number=number;

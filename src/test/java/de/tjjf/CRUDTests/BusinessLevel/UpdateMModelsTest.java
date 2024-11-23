@@ -9,57 +9,71 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UpdateMModelsTest {
 
+    MAddress mAddress;
+    MAirline mAirline;
+    MAirplane mAirplane;
+    MAirport departureMAirport;
+    MAirport arrivalmAirport;
+    MClient mClient;
+    MEmployee mEmployee;
+    MFlight mFlight;
+    MPerson mPerson;
+    MTicket mTicket;
+
     @BeforeEach
     public void beforeEach() {
-        Date d = new Date();
         String mAirlineName = "TestAirline";
-        String headQuarters = "TestHeadquarters";
-        MAirline mAirline = new MAirline(mAirlineName , d, headQuarters);
+        Date mAirlineDate = new Date();
+        String mAirlineHeadQuarters = "TestHeadquarters";
+        MAddress mAirlineMAddress = new MAddress(null, 0, 0, null, null);
+        String mAirlinePhoneNumber = "1234567890";
+        String mAirlineEmail = "testemail@gmail.com";
+        mAirline = new MAirline(mAirlineName , mAirlineDate, mAirlineHeadQuarters, mAirlineMAddress, mAirlinePhoneNumber, mAirlineEmail);
 
-        int serialNum = 1234;
-        String manufacturer = "TestManufacturer";
-        String model = "TestModel";
-        int amountOfEconomySeats = 50;
-        int amountOfBusinessSeats = 25;
-        int amountOfFirstClassSeats = 15;
-        boolean isOperable = true;
-        int maxWeightOfLuggage = 25;
-        MAirplane mAirplane = new MAirplane(serialNum, manufacturer, model, amountOfEconomySeats, amountOfBusinessSeats, amountOfFirstClassSeats,  mAirline, isOperable, maxWeightOfLuggage);
+        int mAirplaneSerialNum = 1234;
+        String mAirplaneManufacturer = "TestManufacturer";
+        String mAirplaneModel = "TestModel";
+        int mAirplaneAmountOfEconomySeats = 50;
+        int mAirplaneAmountOfBusinessSeats = 25;
+        int mAirplaneAmountOfFirstClassSeats = 15;
+        boolean mAirplaneIsOperable = true;
+        int mAirplaneMaxWeightOfLuggage = 25;
+        mAirplane = new MAirplane(mAirplaneSerialNum, mAirplaneManufacturer, mAirplaneModel, mAirplaneAmountOfEconomySeats, mAirplaneAmountOfBusinessSeats, mAirplaneAmountOfFirstClassSeats,  mAirline, mAirplaneIsOperable, mAirplaneMaxWeightOfLuggage);
 
         String departureMAirportCode = "departureTestCode";
         String departureMAirportName = "departureTestName";
         String departureMAirportCountry = "departureTestCountry";
         String departureMAirportCity = "departureTestCity";
         String departureMAirportTimezone = "departureTestTimezone";
-        MAirport departureMAirport = new MAirport(departureMAirportCode, departureMAirportName,departureMAirportCountry, departureMAirportCity, departureMAirportTimezone);
+        departureMAirport = new MAirport(departureMAirportCode, departureMAirportName,departureMAirportCountry, departureMAirportCity, departureMAirportTimezone);
 
         String arrivalMAirportCode = "arrivalTestCode";
         String arrivalMAirportName = "arrivalTestName";
         String arrivalMAirportCountry = "arrivalTestCountry";
         String arrivalMAirportCity = "arrivalTestCity";
         String arrivalMAirportTimezone = "arrivalTestTimezone";
-        MAirport arrivalmAirport = new MAirport(arrivalMAirportCode, arrivalMAirportName,arrivalMAirportCountry, arrivalMAirportCity, arrivalMAirportTimezone);
+        arrivalmAirport = new MAirport(arrivalMAirportCode, arrivalMAirportName,arrivalMAirportCountry, arrivalMAirportCity, arrivalMAirportTimezone);
 
-        long flightNum = 1234;
-        Date departureDateTime = new Date();
-        Date arrivalDateTime = new Date();
-        Date boardingTime = new Date();
-        MFlight.FlyStatus flyStatus = MFlight.FlyStatus.landed;
-        int duration = 123;
-        MEmployee pilot = new MEmployee();
-        MEmployee copilot = new MEmployee();
-        MFlight mFlight = new MFlight(flightNum, mAirplane, departureDateTime, departureMAirport, arrivalDateTime, arrivalmAirport, boardingTime, flyStatus, duration, pilot, copilot);
+        long mFLightFlightNum = 1234;
+        Date mAirplaneDepartureDateTime = new Date();
+        Date mAirplaneArrivalDateTime = new Date();
+        Date mAirplaneBoardingTime = new Date();
+        MFlight.FlightStatus mAirplaneFlightStatus = MFlight.FlightStatus.landed;
+        int mAirplaneDuration = 123;
+        MEmployee mAirplanePilot = new MEmployee(0,null,null,null,null,null,null,null,null,0,null,null,null);
+        MEmployee mAirplaneCopilot = new MEmployee(0,null,null,null,null,null,null,null,null,0,null,null,null);
+        mFlight = new MFlight(mFLightFlightNum, mAirplane, mAirplaneDepartureDateTime, departureMAirport, mAirplaneArrivalDateTime, arrivalmAirport, mAirplaneBoardingTime, mAirplaneFlightStatus, mAirplaneDuration, mAirplanePilot, mAirplaneCopilot);
 
 
-        int ticketId = 1234;
-        MPerson person = new MPerson();
-        Date dateTimeOfBooking = new Date();
-        int totalPrice = 300;
-        int seatNum = 15;
-        MTicket.SeatingClass seatingClass = MTicket.SeatingClass.Economy;
-        MTicket.TicketStatus ticketStatus = MTicket.TicketStatus.Paid;
-        int weightOfLuggage = 20;
-        MTicket mTicket = new MTicket(ticketId, person, mFlight, dateTimeOfBooking, totalPrice, seatNum, seatingClass, ticketStatus, weightOfLuggage);
+        int mTicketTicketId = 1234;
+        MPerson mTicketPerson = new MPerson(0,null,null,null,null,null,null,null,null);
+        Date mTicketDateTimeOfBooking = new Date();
+        int mTicketTotalPrice = 300;
+        int mTicketSeatNum = 15;
+        MTicket.SeatingClass mTicketSeatingClass = MTicket.SeatingClass.Economy;
+        MTicket.TicketStatus mTicketTicketStatus = MTicket.TicketStatus.paid;
+        int mTicketWeightOfLuggage = 20;
+        mTicket = new MTicket(mTicketTicketId, mTicketPerson, mFlight, mTicketDateTimeOfBooking, mTicketTotalPrice, mTicketSeatNum, mTicketSeatingClass, mTicketTicketStatus, mTicketWeightOfLuggage);
     }
 
     @Test
@@ -70,7 +84,6 @@ public class UpdateMModelsTest {
 
         // Update values
         mAirline.setName(newName);
-        mAirline.setFoundationYear(newFoundationYear);
         mAirline.setHeadQuarters(newHeadquarters);
 
         // Assertions

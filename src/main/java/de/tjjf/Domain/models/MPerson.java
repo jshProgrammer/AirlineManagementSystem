@@ -22,15 +22,16 @@ public class MPerson implements MModel
     private Date dateOfBirth;
 
     private String phonenumber;
+
     private MAddress address;
 
     private String email;
 
     BCryptPasswordEncoder passwordEncoder;
+
     private String hashedPassword;
+
     private List<MTicket> tickets = new ArrayList<>();
-
-
 
     //TODO: validate whether phone number is valid
     public MPerson(long personId, String firstName, String middleNames, String lastName, Date dateOfBirth, String phonenumber, MAddress address, String email, String password) {

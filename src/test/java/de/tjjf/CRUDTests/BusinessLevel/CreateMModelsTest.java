@@ -9,12 +9,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CreateMModelsTest {
 
-    //For quick and easy initialising of Airplane
-    int amountOfEconomySeats = 50;
-    int amountOfBusinessSeats = 25;
-    int amountOfFirstClassSeats = 15;
-    int maxWeightofLuggage = 1000;
-
     @Test
     public void testCreatingMAdress(){
         String street = "TestStreet";
@@ -37,7 +31,7 @@ public class CreateMModelsTest {
         String name = "TestAirline";
         Date date = new Date();
         String headQuarters = "TestHeadquarters";
-        MAddress address = new MAddress();
+        MAddress address = new MAddress(null,0,0, null, null);
         String phoneNumber = "1234567890";
         String email = "testmail@gmail.com";
 
@@ -60,7 +54,7 @@ public class CreateMModelsTest {
         int amountOfEconomySeats = 50;
         int amountOfBusinessSeats = 25;
         int amountOfFirstClassSeats = 15;
-        MAirline mAirline = new MAirline();
+        MAirline mAirline = new MAirline(null, null, null, null, null, null);
         boolean isOperable = true;
         int maxWeightOfLuggage = 25;
 
@@ -108,7 +102,7 @@ public class CreateMModelsTest {
         String middleName = "TestMiddleName";
         Date dateofBirth = new Date();
         String phoneNumber = "1234567890";
-        MAddress address = new MAddress();
+        MAddress address = new MAddress(null, 0, 0, null, null);
         String email = "testmail@gmail.com";
         String password = "TestPassword";
         Boolean isBusinessClient = true;
@@ -135,7 +129,7 @@ public class CreateMModelsTest {
         long emplyeeId = 987654321;
         int salary = 100;
         String position = "TestPosition";
-        MAirline mAirline = new MAirline();
+        MAirline mAirline = new MAirline(null, null, null, null, null, null);
         Date hireDate = new Date();
         long personId = 987654321;
         String firstName = "TestFirstName";
@@ -143,7 +137,7 @@ public class CreateMModelsTest {
         String middleName = "TestMiddleName";
         Date dateofBirth = new Date();
         String phoneNumber = "1234567890";
-        MAddress address = new MAddress();
+        MAddress address = new MAddress(null, 0, 0, null, null);
         String email = "testmail@gmail.com";
         String password = "TestPassword";
 
@@ -167,16 +161,16 @@ public class CreateMModelsTest {
     @Test
     public void testCreatingFlight(){
         long flightNum = 1234;
-        MAirplane mAirplane = new MAirplane(amountOfEconomySeats, amountOfBusinessSeats, amountOfFirstClassSeats, maxWeightofLuggage);
+        MAirplane mAirplane = new MAirplane(0, null, null, 0, 0, 0, null, true, 0);
         Date departureDateTime = new Date();
-        MAirport departureAirport = new MAirport();
+        MAirport departureAirport = new MAirport(null, null, null, null, null);
         Date arrivalDateTime = new Date();
-        MAirport arrivalAirport = new MAirport();
+        MAirport arrivalAirport = new MAirport(null, null, null, null, null);
         Date boardingTime = new Date();
         MFlight.FlightStatus flyStatus = MFlight.FlightStatus.landed;
         int duration = 123;
-        MEmployee pilot = new MEmployee();
-        MEmployee copilot = new MEmployee();
+        MEmployee pilot = new MEmployee(0, null, null, null, null, null,null, null, null, 0, null, null, null);
+        MEmployee copilot = new MEmployee(0, null, null, null, null, null,null, null, null, 0, null, null, null);
 
         MFlight mFlight = new MFlight(flightNum, mAirplane, departureDateTime, departureAirport, arrivalDateTime, arrivalAirport, boardingTime, flyStatus, duration, pilot, copilot);
 
@@ -196,14 +190,13 @@ public class CreateMModelsTest {
     @Test
     public void testCreatingMTicket() {
         int ticketId = 1234;
-        MPerson person = new MPerson();
-        MAirplane mAirplane = new MAirplane(amountOfEconomySeats, amountOfBusinessSeats, amountOfFirstClassSeats);
-        MFlight mFlight = new MFlight(mAirplane);
+        MPerson person = new MPerson(0,  null,  null, null, null, null, null, null, null);
+        MFlight mFlight = new MFlight(0, null, null, null, null, null, null, null, 0, null,  null);
         Date dateTimeOfBooking = new Date();
         int totalPrice = 300;
         int seatNum = 15;
         MTicket.SeatingClass seatingClass = MTicket.SeatingClass.Economy;
-        MTicket.TicketStatus ticketStatus = MTicket.TicketStatus.Paid;
+        MTicket.TicketStatus ticketStatus = MTicket.TicketStatus.paid;
         int weightOfLuggage = 20;
 
         MTicket mTicket = new MTicket(ticketId, person, mFlight, dateTimeOfBooking, totalPrice, seatNum, seatingClass, ticketStatus, weightOfLuggage);
