@@ -14,6 +14,8 @@ public class MAirline implements MModel {
     private String phoneNumber;
     private String email;
 
+    //Construtor for TestCases
+    public MAirline() {this.foundationYear = new Date();}
     public MAirline(String name, Date foundationYear, String headQuarters, MAddress address, String phoneNumber, String email) {
         this.name = name;
         this.foundationYear = foundationYear;

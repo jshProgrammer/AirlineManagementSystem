@@ -8,6 +8,8 @@ public class MAddress {
     public String city;
     public String country;
 
+    //Constructor for TestCases
+    public MAddress() {}
     public MAddress(String street, int number, int zipcode, String city, String country) {
         this.street=street;
         this.number=number;
