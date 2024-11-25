@@ -17,8 +17,8 @@ public class SeatingTest {
     MAirplane airplane = new MAirplane(123, "Hersteller", "Boeing 5", 30, 15, 15, airline, true, 1000);
     MAirport depatureAirport = new MAirport("B12", "Frankturt Airport", "Germany", "Frankfurt", "UTC");
     MAirport arrivalAirport = new MAirport("ABC", "LA Airport", "USA", "LA", "UTC");
-    MEmployee pilot = new MEmployee(2, 5000, "pilot", airline, new Date(2020));
-    MEmployee copilot = new MEmployee(3, 4500, "copilot", airline, new Date(2021));
+    MEmployee pilot = new MEmployee( 2, "Finn", null,"Krappitz",new Date(2003, 06, 05), "48484848484",new MAddress("TEST",23, 34533,"BErlin", "GER"), "tomKnoblach@t-online.de", "testpasword", 200, "sf", airline, new Date(2024, 10, 13) );
+    MEmployee copilot = new MEmployee(3,"Joshua","","Pfennig",new Date(2007,10,14), "27359824",new MAddress("TEST",23, 34533,"BErlin", "GER"), "tomknoblach@t-online.de", "skldjflks",200,"sf", airline, new Date(2024,10,13));
     MFlight flight = new MFlight(123456, airplane, new Date(2024, 12, 31), depatureAirport, new Date(2025, 1, 1), arrivalAirport, new Date(2024, 21, 31), MFlight.FlightStatus.scheduled, 1000, pilot, copilot);
 
 
