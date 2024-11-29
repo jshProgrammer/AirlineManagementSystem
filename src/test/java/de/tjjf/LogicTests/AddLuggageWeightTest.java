@@ -1,0 +1,48 @@
+package de.tjjf.LogicTests;
+
+import de.tjjf.Domain.models.MFlight;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class AddLuggageWeightTest {
+    MFlight mFlight = new MFlight(999999, null, null, null, null, null,null,null,0,null,null);
+
+    @Test
+    public void testNegativeValueInitial(){
+        int negativeValue = -1;
+        assertThrows(IllegalArgumentException.class, () -> {mFlight.addCurrentInitialLuggageWeight(negativeValue);});
+    }
+
+    @Test
+    public void testPositiveValueInitial(){
+        int positiveValue = 1;
+        assertDoesNotThrow(() -> {mFlight.addCurrentInitialLuggageWeight(positiveValue);});
+    }
+
+
+    @Test
+    public void testZeroValueInitial(){
+        int zeroValue = 0;
+        assertThrows(IllegalArgumentException.class, () -> {mFlight.addCurrentInitialLuggageWeight(zeroValue);});
+    }
+
+
+    @Test
+    public void testNegativeValueUpgrade(){
+        int negativeValue = -1;
+        assertThrows(IllegalArgumentException.class, () -> {mFlight.addCurrentUpgradeLuggageWeight(negativeValue);});
+    }
+
+    @Test
+    public void testPositiveValueUpgrade(){
+        int negativeValue = 1;
+        assertThrows(IllegalArgumentException.class, () -> {mFlight.addCurrentUpgradeLuggageWeight(negativeValue);});
+    }
+
+    @Test
+    public void testZeroValueUpgrade(){
+        int negativeValue = 0;
+        assertThrows(IllegalArgumentException.class, () -> {mFlight.addCurrentUpgradeLuggageWeight(negativeValue);});
+    }
+}

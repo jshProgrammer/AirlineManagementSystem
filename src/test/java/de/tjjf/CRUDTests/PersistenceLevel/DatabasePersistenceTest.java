@@ -1,4 +1,4 @@
-package de.tjjf.DatabasePersistenceTest;
+package de.tjjf.CRUDTests.PersistenceLevel;
 
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Create.AirlineCreateImpl;
 import de.tjjf.Infrastructure.persistence.DataAccessException;
