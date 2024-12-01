@@ -1,32 +1,28 @@
 package de.tjjf.Infrastructure.persistence.entities;
 
+import de.tjjf.Domain.models.MFlight;
 import jakarta.persistence.*;
 
 import java.util.Date;
 @Entity
 public class Flight implements Model {
 
-    public enum FlyStatus {
-        scheduled,
-        in_the_air,
-        landed,
-        delayed,
-        canceled
-    }
-
     //TODO: evtl @JoinColumn damit Anzeigen aller Buchungen
     @Id
     private long flightNum;
 
-
+    @Column
     @ManyToOne()
     private Airplane airplane;
 
+    @Column
     private Date departureDateTime;
 
+    @Column
     @OneToOne
     private Airport departureAirport;
 
+    @Column
     private Date arrivalDateTime;
 
     @OneToOne
@@ -36,7 +32,7 @@ public class Flight implements Model {
     private Date boardingTime;
 
     @Column(nullable = false)
-    private FlyStatus status;
+    private String status;
 
     @Column(nullable = false)
     private int duration;
@@ -51,7 +47,8 @@ public class Flight implements Model {
 
     public Flight(){}
 
-    public Flight(long flightNum, Airplane airplane, Date departureDateTime, Airport departureAirport, Date arrivalDateTime, Airport arrivalAirport, Date boardingTime, FlyStatus status, int duration, Employee pilot, Employee copilot) {
+
+    public Flight(long flightNum, Airplane airplane, Date departureDateTime, Airport departureAirport, Date arrivalDateTime, Airport arrivalAirport, Date boardingTime, String status, int duration, Employee pilot, Employee copilot) {
         this.flightNum = flightNum;
         this.airplane = airplane;
         this.departureDateTime = departureDateTime;
@@ -93,7 +90,7 @@ public class Flight implements Model {
         return boardingTime;
     }
 
-    public FlyStatus getStatus() {
+    public String getStatus() {
         return status;
     }
 
@@ -137,7 +134,7 @@ public class Flight implements Model {
         this.boardingTime = boardingTime;
     }
 
-    public void setStatus(FlyStatus status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

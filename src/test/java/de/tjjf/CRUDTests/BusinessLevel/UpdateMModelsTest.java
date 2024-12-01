@@ -33,7 +33,7 @@ public class UpdateMModelsTest {
         Date mAirlineDate = new Date();
         String mAirlineHeadQuarters = "TestHeadquarters";
         MAddress mAirlineMAddress = new MAddress(null, 0, 0, null, null);
-        String mAirlinePhoneNumber = "1234567890";
+        String mAirlinePhoneNumber = "+4915112345678";
         String mAirlineEmail = "testemail@gmail.com";
         mAirline = new MAirline(mAirlineName , mAirlineDate, mAirlineHeadQuarters, mAirlineMAddress, mAirlinePhoneNumber, mAirlineEmail);
 
@@ -66,7 +66,7 @@ public class UpdateMModelsTest {
         String mClientMiddleNames = "TestClientMiddleNames";
         String mClientLastName = "TestClientLastName";
         Date mClientDateOfBirth = new Date();
-        String mClientPhoneNumber = "1234567890";
+        String mClientPhoneNumber = "+4915112345678";
         MAddress mClientMAddress = new MAddress(null, 0, 0, null, null);
         String mClientEmail = "testemail@gmail.com";
         String mClientPassword = "testpassword";
@@ -78,13 +78,13 @@ public class UpdateMModelsTest {
         String mEmployeeMiddleNames = "TestEmployeeMiddleNames";
         String mEmployeeLastName = "TestEmployeeLastName";
         Date mEmployeeDateOfBirth = new Date();
-        String mEmployeePhoneNumber = "1234567890";
+        String mEmployeePhoneNumber = "+4915112345678";
         MAddress mEmployeeMAddress = new MAddress(null, 0, 0, null, null);
         String mEmployeeEmail = "testemail@gmail.com";
         String mEmployeePassword = "testpassword";
         int mEmployeeSalary = 100;
         String mEmployeePosition = "TestPosition";
-        MAirline mEmployeeMAirline = new MAirline(null, null, null, null ,null,null);
+        MAirline mEmployeeMAirline = new MAirline(null, null, null, null ,"+4915112345678","memployeeairline@gmail.com");
         Date mEmployeeHireDate = new Date();
         mEmployee = new MEmployee(mEmployeePersonId, mEmployeeFirstName, mEmployeeMiddleNames, mEmployeeLastName, mEmployeeDateOfBirth,  mEmployeePhoneNumber, mEmployeeMAddress, mEmployeeEmail, mEmployeePassword, mEmployeeSalary, mEmployeePosition,mEmployeeMAirline,mEmployeeHireDate);
 
@@ -94,8 +94,8 @@ public class UpdateMModelsTest {
         Date mAirplaneBoardingTime = new Date();
         MFlight.FlightStatus mAirplaneFlightStatus = MFlight.FlightStatus.landed;
         int mAirplaneDuration = 123;
-        MEmployee mAirplanePilot = new MEmployee(0,null,null,null,null,null,null,null,null,0,null,null,null);
-        MEmployee mAirplaneCopilot = new MEmployee(0,null,null,null,null,null,null,null,null,0,null,null,null);
+        MEmployee mAirplanePilot = new MEmployee(0, null, null, null, null, "+4915112345678",null, "mairlinepilot@gmail.com", "mAirlinePilotPassword", 0, null, null, null);
+        MEmployee mAirplaneCopilot = new MEmployee(0, null, null, null, null, "+4915112345678",null, "mairlinecopilot@gmail.com", "mArilineCopilotPassword", 0, null, null, null);
         mFlight = new MFlight(mFLightFlightNum, mAirplane, mAirplaneDepartureDateTime, departureMAirport, mAirplaneArrivalDateTime, arrivalmAirport, mAirplaneBoardingTime, mAirplaneFlightStatus, mAirplaneDuration, mAirplanePilot, mAirplaneCopilot);
 
         long mPersonPersonId = 9999999;
@@ -103,14 +103,14 @@ public class UpdateMModelsTest {
         String mPersonMiddleNames = "TestEmployeeMiddleNames";
         String mPersonLastName = "TestEmployeeLastName";
         Date mPersonDateOfBirth = new Date();
-        String mPersonPhoneNumber = "1234567890";
+        String mPersonPhoneNumber = "+4915112345678";
         MAddress mPersonMAddress = new MAddress(null, 0, 0, null, null);
         String mPersonEmail = "testemail@gmail.com";
         String mPersonPassword = "testpassword";
-        mPerson = new MPerson(mPersonPersonId, mPersonFirstName, mPersonMiddleNames, mPersonLastName,mPersonDateOfBirth,mPersonPhoneNumber,mPersonMAddress, mPersonEmail, mPersonPassword );
+        mPerson = new MPerson(mPersonPersonId, mPersonFirstName, mPersonMiddleNames, mPersonLastName,mPersonDateOfBirth,mPersonPhoneNumber,mPersonMAddress, mPersonEmail, mPersonPassword, null );
 
         int mTicketTicketId = 1234;
-        MPerson mTicketPerson = new MPerson(0,null,null,null,null,null,null,null,null);
+        MPerson mTicketPerson = new MPerson(0,null,null,null,null,"+4915112345678",null,"mticketperson@gmail.com","mTicketPersonPassword", null);
         Date mTicketDateTimeOfBooking = new Date();
         int mTicketTotalPrice = 300;
         int mTicketSeatNum = 15;
@@ -160,7 +160,7 @@ public class UpdateMModelsTest {
     @Test
     public void testUpdateMAirplane() {
         boolean updatedIsOperable = false;
-        MAirline updatedAirline = new MAirline(null, null, null, null ,null,null);
+        MAirline updatedAirline = new MAirline(null, null, null, null ,"+4915112345678","updatedairline@gmail.com");
 
         mAirplane.setBelongingAirline(updatedAirline);
         mAirplane.setOperable(updatedIsOperable);
@@ -200,7 +200,7 @@ public class UpdateMModelsTest {
     public void testUpdateEmployee(){
         int updatedSalary = 200;
         String updatedPosition = "UpdatedPosition";
-        MAirline updatedAirline = new MAirline(null, null, null, null ,null,null);
+        MAirline updatedAirline = new MAirline(null, null, null, null ,"+4915112345678","updatedariline@gmail.com");
         Date updatedHireDate= new Date();
 
         mEmployee.setHireDate(updatedHireDate);
@@ -224,9 +224,8 @@ public class UpdateMModelsTest {
         Date updatedBoardingTime = new Date();
         MFlight.FlightStatus updatedFlightStatus = MFlight.FlightStatus.landed;
         int updatedDuration = 123;
-        MEmployee updatedPilot = new MEmployee(0,null, null,null,null,null,null,null,null,0,null,null,null);
-        MEmployee updatedCoPilot = new MEmployee(0,null, null,null,null,null,null,null,null,0,null,null,null);
-
+        MEmployee updatedPilot = new MEmployee(0,null, null,null,null,"+4915112345678",null,"updatedpilot@gmail.com","updatedPilotPassword",0,null,null,null);
+        MEmployee updatedCoPilot = new MEmployee(0,null, null,null,null,"+4915112345678",null,"updatedcopilot@gmail.com","kupdatedCopilotPassword",0,null,null,null);
         mFlight.setAirplane(updatedAirplane);
         mFlight.setDepartureDateTime(updatedDepartureDateTime);
         mFlight.setArrivalDateTime(updatedArrivalDateTime);
@@ -256,7 +255,7 @@ public class UpdateMModelsTest {
         String updatedMiddleName = "UpdatedMiddleName";
         String updatedLastName = "UpdatedLastName";
         Date updatedDateOfBirth = new Date();
-        String updatedPhoneNumber = "UpdatedPhoneNumber";
+        String updatedPhoneNumber = "+49151987654321";
         String updatedEmail = "UpdatedEmail";
         MAddress updatedAdress = new MAddress(null,0,0,null,null);
 
@@ -281,7 +280,7 @@ public class UpdateMModelsTest {
     public void testUpdateTicket(){
         MTicket.TicketStatus updatedTicketStatus = MTicket.TicketStatus.unpaid;
         MFlight updatedFlight = new MFlight(0,null,null,null,null,null, null,null,0,null,null);
-        MPerson updatedPerson = new MPerson(0,null,null,null,null,null,null,null,null);
+        MPerson updatedPerson = new MPerson(0,null,null,null,null,"+4915112345678",null,"updatedperson@gmail.com","updatedPersonPassword", null);
         int updatedSeatNum = 100;
         int updatedPrice = 1000;
 

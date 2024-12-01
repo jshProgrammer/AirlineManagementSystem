@@ -28,9 +28,12 @@ public class Airplane implements Model {
     @Column(nullable=false)
     private boolean isOperatable;
 
+    @Column(nullable=false)
+    private int maxWeightOfLuggage;
+
     public Airplane() {}
 
-    public Airplane(int serialNum, String manufacturer, String model, int amoutOfEconomySeats, int amoutOfBusinessSeats, int amoutOfFirstClassSeats, Airline belongingAirline, boolean isOperatable) {
+    public Airplane(int serialNum, String manufacturer, String model, int amoutOfEconomySeats, int amoutOfBusinessSeats, int amoutOfFirstClassSeats, Airline belongingAirline, boolean isOperatable, int maxWeightOfLuggage) {
         this.serialNum = serialNum;
         this.manufacturer = manufacturer;
         this.model = model;
@@ -39,6 +42,7 @@ public class Airplane implements Model {
         this.amoutOfFirstClassSeats = amoutOfFirstClassSeats;
         this.belongingAirline = belongingAirline;
         this.isOperatable = isOperatable;
+        this.maxWeightOfLuggage = maxWeightOfLuggage;
     }
 
     public int getSerialNum() {
@@ -104,4 +108,8 @@ public class Airplane implements Model {
     public void setOperatable(boolean operatable) {
         isOperatable = operatable;
     }
+
+    public int getMaxWeightOfLuggage() {return maxWeightOfLuggage;}
+
+    public void setMaxWeightOfLuggage(int maxWeightOfLuggage) {}
 }

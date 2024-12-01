@@ -1,37 +1,41 @@
 package de.tjjf.Infrastructure.persistence.mapper;
 
-/*
-public class FlightMapper extends Mapper<MFlight, Flight>{
 
-    //TODO
-    public Flight toDomain(MFlight mFlight){
+import de.tjjf.Domain.models.MFlight;
+import de.tjjf.Infrastructure.persistence.entities.Flight;
+import de.tjjf.Infrastructure.persistence.entities.Ticket;
+
+public class FlightMapper extends Mapper<MFlight, Flight> {
+
+    public Flight toEntity(MFlight mFlight){
         return new Flight(
                 mFlight.getFlightNum(),
-                mFlight.getAirplane(),
+                new AirplaneMapper().toEntity(mFlight.getAirplane()),
                 mFlight.getDepartureDateTime(),
-                mFlight.getDepartureAirport(),
+                new AirportMapper().toEntity(mFlight.getDepartureAirport()),
                 mFlight.getArrivalDateTime(),
-                mFlight.getArrivalAirport(),
+                new AirportMapper().toEntity(mFlight.getArrivalAirport()),
                 mFlight.getBoardingTime(),
-                mFlight.getStatus(),
+                mFlight.getStatus().name(),
                 mFlight.getDuration(),
-                mFlight.getPilot(),
-                mFlight.getCopilot()
+                new EmployeeMapper().toEntity(mFlight.getPilot()),
+                new EmployeeMapper().toEntity(mFlight.getCopilot())
         );
     }
-    public MFlight toEntity(Flight flight){
+
+    public MFlight toDomain(Flight flight){
         return new MFlight(
                 flight.getFlightNum(),
-                flight.getAirplane(),
+                new AirplaneMapper().toDomain(flight.getAirplane()),
                 flight.getDepartureDateTime(),
-                flight.getDepartureAirport(),
+                new AirportMapper().toDomain(flight.getDepartureAirport()),
                 flight.getArrivalDateTime(),
-                flight.getArrivalAirport(),
+                new AirportMapper().toDomain(flight.getArrivalAirport()),
                 flight.getBoardingTime(),
-                flight.getStatus(),
+                MFlight.FlightStatus.valueOf(flight.getStatus()),
                 flight.getDuration(),
-                flight.getPilot(),
-                flight.getCopilot()
+                new EmployeeMapper().toDomain(flight.getPilot()),
+                new EmployeeMapper().toDomain(flight.getCopilot())
         );
     }
-}*/
+}

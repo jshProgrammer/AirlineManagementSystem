@@ -1,0 +1,38 @@
+# TODO: eigenen Datentypen Date entwickeln
+# https://stackoverflow.com/questions/49693928/date-and-json-in-type-definition-for-graphql
+scalar Date
+
+type MyType {
+    created: Date
+}
+
+type Airline {
+    name: String!,
+    foundationYear: Date,
+    headQuarters: String!,
+    address: String!,
+    phoneNumber: String!,
+    email: String!
+}
+
+type MFlight {
+    # flightStatus
+    flightNum: Int!,
+    #airplane:
+    departureDateTime: Date,
+    #departureAirport
+    arrivalDateTime: Date,
+    #arrivalAirport
+    boardingTime: Date,
+    #status
+    duration: Int!
+    #tickets
+    #pilot
+    #copilot
+}
+
+type Query {
+    flightByFlightNum(flightNum: Int): MFlight
+    airlineByName(name: String): Airline
+
+}

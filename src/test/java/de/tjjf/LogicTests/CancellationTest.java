@@ -8,8 +8,8 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CancellationTest {
-    MPerson person = new MPerson(1, "Jasmin", "", "Wander", new Date(2004, 10, 14), "23233", new MAddress("Teststraße", 1, 12345, "Teststadt", "Deutschland"), "airlinemanagementtestmail@gmail.com", "fkgk rdof hhkj arwc");
-    MPerson person2 = new MPerson(2, "Tom", "", "Knoblach", new Date(2004, 10, 14), "23233", new MAddress("Teststraße", 1, 12345, "Teststadt", "Deutschland"), "airlinemanagementtestmail@gmail.com", "fkgk rdof hhkj arwc");
+    MPerson person = new MPerson(1, "Jasmin", "", "Wander", new Date(2004, 10, 14), "23233", new MAddress("Teststraße", 1, 12345, "Teststadt", "Deutschland"), "airlinemanagementtestmail@gmail.com", "fkgk rdof hhkj arwc", null);
+    MPerson person2 = new MPerson(2, "Tom", "", "Knoblach", new Date(2004, 10, 14), "23233", new MAddress("Teststraße", 1, 12345, "Teststadt", "Deutschland"), "airlinemanagementtestmail@gmail.com", "fkgk rdof hhkj arwc", null);
     MAirline airline = new MAirline("TestAirline", new Date(1990), "München", new MAddress("Teststraße", 1, 12345, "Teststadt", "Deutschland"), "016012345", "airlinemanagementtestmail@gmail.com");
     MAirplane airplane = new MAirplane(123, "Hersteller", "Boeing 5", 30, 15, 15, airline, true, 1000);
     MAirport depatureAirport = new MAirport("B12", "Frankturt Airport", "Germany", "Frankfurt", "UTC");

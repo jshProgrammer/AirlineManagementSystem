@@ -7,19 +7,19 @@ import de.tjjf.Infrastructure.persistence.entities.Airline;
 public class AirlineMapper extends Mapper<MAirline, Airline> {
 
     public Airline toEntity(MAirline mAirline) {
-        String adress = AdressMapper.toEntity(mAirline.getAddress());
+        String address = AddressMapper.toEntity(mAirline.getAddress());
         return new Airline(
                 mAirline.getName(),
                 mAirline.getFoundationYear(),
                 mAirline.getHeadQuarters(),
                 mAirline.getEmail(),
                 mAirline.getPhoneNumber(),
-                adress
+                address
         );
     }
 
     public MAirline toDomain(Airline airline) {
-        MAddress object = AdressMapper.toDomain(airline.getAddress());
+        MAddress object = AddressMapper.toDomain(airline.getAddress());
         return new MAirline(
                 airline.getName(),
                 airline.getFoundationYear(),

@@ -6,25 +6,11 @@ import java.util.Date;
 
 @Entity
 public class Ticket implements Model {
-    //TODO: enums in der Klasse lassen?
-    public enum SeatingClass {
-        Economy,
-        Business,
-        First
-    }
-
-    public enum BookingStatus {
-        Paid,
-        Unpaid,
-        Canceled
-    }
-
-    @Column(nullable=false)
+   @Column(nullable=false)
     @Id
-    private int bookingId;
+    private int ticketId;
 
-    @ManyToOne()
-    private Person personId;
+    private long personId;
 
     //TODO: evtl eher Flight statt int als Datentyp?
     //Umbenennung der Variable
@@ -41,45 +27,45 @@ public class Ticket implements Model {
     private int seatNum;
 
     @Column(nullable=false)
-    private SeatingClass seatingClass;
+    private String seatingClass;
 
     @Column(nullable=false)
-    private BookingStatus bookingStatus;
+    private String ticketStatus;
 
     @Column(nullable=false)
     private int maxWeightOfLuggage;
 
     public Ticket(){}
 
-    public Ticket(int bookingId, Person personId, Flight flightNum, Date dateTimeOfBooking, int totalPrice, int seatNum, SeatingClass seatingClass, BookingStatus bookingStatus, int maxWeightOfLuggage) {
-        this.bookingId = bookingId;
+    public Ticket(int ticketId, long personId, Flight flightNum, Date dateTimeOfBooking, int totalPrice, int seatNum, String seatingClass, String ticketStatus, int maxWeightOfLuggage) {
+        this.ticketId = ticketId;
         this.personId = personId;
         this.flightNum = flightNum;
         this.dateTimeOfBooking = dateTimeOfBooking;
         this.totalPrice = totalPrice;
         this.seatNum = seatNum;
         this.seatingClass = seatingClass;
-        this.bookingStatus = bookingStatus;
+        this.ticketStatus = ticketStatus;
         this.maxWeightOfLuggage = maxWeightOfLuggage;
     }
 
-    public int getBookingId() {
-        return bookingId;
+    public int getTicketId() {
+        return ticketId;
     }
 
-    public void setBookingId(int bookingId) {
-        this.bookingId = bookingId;
+    public void setTicketId(int ticketId) {
+        this.ticketId = ticketId;
     }
 
-    public Person getPersonId() {
+    public long getPersonId() {
         return personId;
     }
 
-    public void setPersonId(Person personId) {
+    public void setPersonId(int personId) {
         this.personId = personId;
     }
 
-    public Flight getFlightNum() {
+    public Flight getFlight() {
         return flightNum;
     }
 
@@ -111,20 +97,20 @@ public class Ticket implements Model {
         this.seatNum = seatNum;
     }
 
-    public SeatingClass getSeatingClass() {
+    public String getSeatingClass() {
         return seatingClass;
     }
 
-    public void setSeatingClass(SeatingClass seatingClass) {
+    public void setSeatingClass(String seatingClass) {
         this.seatingClass = seatingClass;
     }
 
-    public BookingStatus getBookingStatus() {
-        return bookingStatus;
+    public String getTicketStatus() {
+        return ticketStatus;
     }
 
-    public void setBookingStatus(BookingStatus bookingStatus) {
-        this.bookingStatus = bookingStatus;
+    public void setTicketStatus(String ticketStatus) {
+        this.ticketStatus = ticketStatus;
     }
 
     public int getMaxWeightOfLuggage() {

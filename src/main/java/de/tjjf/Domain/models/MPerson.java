@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.google.i18n.phonenumbers.NumberParseException;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import com.google.i18n.phonenumbers.Phonenumber;
+
 import de.tjjf.Domain.EmailSender;
 import org.apache.commons.validator.routines.EmailValidator;
 
@@ -34,14 +38,16 @@ public class MPerson implements MModel
     private List<MTicket> tickets = new ArrayList<>();
 
     //TODO: validate whether phone number is valid
-    public MPerson(long personId, String firstName, String middleNames, String lastName, Date dateOfBirth, String phonenumber, MAddress address, String email, String password) {
+    public MPerson(long personId, String firstName, String middleNames, String lastName, Date dateOfBirth, String phonenumber, MAddress address, String email, String password, List<MTicket> tickets) {
         this.personId = personId;
         this.firstName = firstName;
         this.middleNames = middleNames;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
-        this.phonenumber = phonenumber;
         this.address = address;
+
+        //Phonenumber-validation
+        if(verifyPhonenumber(phonenumber)) this.phonenumber = phonenumber;
 
         // E-Mail-validation
         EmailValidator validator = EmailValidator.getInstance();
@@ -53,6 +59,9 @@ public class MPerson implements MModel
         // encode the desired password: https://www.baeldung.com/java-password-hashing
         passwordEncoder = new BCryptPasswordEncoder();
         this.hashedPassword = passwordEncoder.encode(password);
+
+        //TODO: geht hier scheinbar nicht
+        //if(this.tickets != null) this.tickets = tickets;
     }
 
     // Passwort-Überprüfung
@@ -63,11 +72,25 @@ public class MPerson implements MModel
 
     public static void main(String[] args) {
         // should not throw Illegal Argument Exception
-        MPerson person = new MPerson(1, "A", null, "C", new Date(1998), "091234u", new MAddress("test", 1, 34534,"Berlin", "germany"), "jpfennig2403@gmail.com", "fkgk rdof hhkj arwc");
+        MPerson person = new MPerson(1, "A", null, "C", new Date(1998), "091234u", new MAddress("test", 1, 34534,"Berlin", "germany"), "jpfennig2403@gmail.com", "fkgk rdof hhkj arwc", null);
         System.out.println(person.getHashedPassword());
 
         // should throw IllegalArgumentException
         //MPerson person2 = new MPerson(1, "A", null, "C", new Date(1998), "091234u", "Adresse", "a@aa", "passwd");
+    }
+
+
+    public static boolean verifyPhonenumber(String phoneNumber){
+        PhoneNumberUtil phoneNumberUtil = PhoneNumberUtil.getInstance();
+
+        try {
+            Phonenumber.PhoneNumber parsedNumber = phoneNumberUtil.parse(phoneNumber, "DE"); //Simplification only german phoneNumbers are allowed
+
+            return phoneNumberUtil.isValidNumber(parsedNumber);
+        } catch (NumberParseException e) {
+            System.out.println("Invalid Phonenumber: " + e.getMessage());
+            return false;
+        }
     }
 
     public String getFirstName( )
@@ -154,7 +177,7 @@ public class MPerson implements MModel
                 MFlight mFlight = ticket.getFlight();
                 EmailSender.sendCancelationMailCustomer(mFlight);
                 mFlight.getTickets().remove(ticket);
-                ticket.cancelTicket();
+                ticket.setTicketStatus(MTicket.TicketStatus.canceled);
             }
         }
     }

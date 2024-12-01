@@ -32,7 +32,7 @@ public class CreateMModelsTest {
         Date date = new Date();
         String headQuarters = "TestHeadquarters";
         MAddress address = new MAddress(null,0,0, null, null);
-        String phoneNumber = "1234567890";
+        String phoneNumber = "+4915112345678";
         String email = "testmail@gmail.com";
 
         MAirline mAirline = new MAirline(name , date, headQuarters, address, phoneNumber, email);
@@ -54,7 +54,7 @@ public class CreateMModelsTest {
         int amountOfEconomySeats = 50;
         int amountOfBusinessSeats = 25;
         int amountOfFirstClassSeats = 15;
-        MAirline mAirline = new MAirline(null, null, null, null, null, null);
+        MAirline mAirline = new MAirline(null, null, null, null, "+4915112345678", "airline@gmail.com");
         boolean isOperable = true;
         int maxWeightOfLuggage = 25;
 
@@ -101,7 +101,7 @@ public class CreateMModelsTest {
         String lastName = "TestLastName";
         String middleName = "TestMiddleName";
         Date dateofBirth = new Date();
-        String phoneNumber = "1234567890";
+        String phoneNumber = "+4915112345678";
         MAddress address = new MAddress(null, 0, 0, null, null);
         String email = "testmail@gmail.com";
         String password = "TestPassword";
@@ -129,14 +129,14 @@ public class CreateMModelsTest {
         long emplyeeId = 987654321;
         int salary = 100;
         String position = "TestPosition";
-        MAirline mAirline = new MAirline(null, null, null, null, null, null);
+        MAirline mAirline = new MAirline(null, null, null, null, "+4915112345678", "airline@gmail.com");
         Date hireDate = new Date();
         long personId = 987654321;
         String firstName = "TestFirstName";
         String lastName = "TestLastName";
         String middleName = "TestMiddleName";
         Date dateofBirth = new Date();
-        String phoneNumber = "1234567890";
+        String phoneNumber = "+4915112345678";
         MAddress address = new MAddress(null, 0, 0, null, null);
         String email = "testmail@gmail.com";
         String password = "TestPassword";
@@ -169,8 +169,8 @@ public class CreateMModelsTest {
         Date boardingTime = new Date();
         MFlight.FlightStatus flyStatus = MFlight.FlightStatus.landed;
         int duration = 123;
-        MEmployee pilot = new MEmployee(0, null, null, null, null, null,null, null, null, 0, null, null, null);
-        MEmployee copilot = new MEmployee(0, null, null, null, null, null,null, null, null, 0, null, null, null);
+        MEmployee pilot = new MEmployee(0, null, null, null, null, "+4915112345678",null, "pilot@gmail.com", "pilotPassword", 0, null, null, null);
+        MEmployee copilot = new MEmployee(0, null, null, null, null, "+4915112345678",null, "copilot@gmail.com", "copilotPassword", 0, null, null, null);
 
         MFlight mFlight = new MFlight(flightNum, mAirplane, departureDateTime, departureAirport, arrivalDateTime, arrivalAirport, boardingTime, flyStatus, duration, pilot, copilot);
 
@@ -190,8 +190,11 @@ public class CreateMModelsTest {
     @Test
     public void testCreatingMTicket() {
         int ticketId = 1234;
-        MPerson person = new MPerson(0,  null,  null, null, null, null, null, null, null);
-        MFlight mFlight = new MFlight(0, null, null, null, null, null, null, null, 0, null,  null);
+        MPerson person = new MPerson(0,  null,  null, null, null, "+4915112345678", null, "person@gmail.com", "personPassword", null);
+        MAddress mAddress = new MAddress("TestStreet",0,0, "Frankfurt", "Germany");
+        MAirline mAirline = new MAirline(null, null, null, mAddress, "+4915112345678", "airline@gmail.com");
+        MAirplane mAirplane = new MAirplane(0, null, null, 100, 50, 25, mAirline, true, 10000);
+        MFlight mFlight = new MFlight(0, mAirplane, null, null, null, null, null, null, 0, null,  null);
         Date dateTimeOfBooking = new Date();
         int totalPrice = 300;
         int seatNum = 15;

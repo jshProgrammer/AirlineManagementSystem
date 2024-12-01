@@ -5,7 +5,7 @@ import de.tjjf.Infrastructure.persistence.entities.Airplane;
 
 public class AirplaneMapper extends Mapper<MAirplane, Airplane> {
 
-    public  Airplane toEntity(MAirplane mAirplane){
+    public Airplane toEntity(MAirplane mAirplane){
         return new Airplane(
                 mAirplane.getSerialNum(),
                 mAirplane.getManufacturer(),
@@ -14,25 +14,22 @@ public class AirplaneMapper extends Mapper<MAirplane, Airplane> {
                 mAirplane.getAmountOfBusinessSeats(),
                 mAirplane.getAmountOfFirstClassSeats(),
                 new AirlineMapper().toEntity(mAirplane.getBelongingAirline()),
-                mAirplane.isOperable()
+                mAirplane.isOperable(),
+                mAirplane.getMaxWeightOfLuggage()
         );
     }
 
-    //TODO
-    public MAirplane toDomain(Airplane airplane) {
-        return new MAirplane(0, "", "", 0, 0, 0, null, false, 0);
-    }
-
-   /*public MAirplane toDomain(Airplane airplane){
+   public MAirplane toDomain(Airplane airplane){
         return new MAirplane(
                 airplane.getSerialNum(),
                 airplane.getManufacturer(),
                 airplane.getModel(),
-                airplane.getAmountOfEconomySeats(),
-                airplane.getAmountOfBusinessSeats(),
-                airplane.getAmountOfFirstClassSeats(),
-                new AirlineMapper().toDomain(mAirplane.getBelongingAirline()),
-                mAirplane.isOperatable()
+                airplane.getAmoutOfEconomySeats(),
+                airplane.getAmoutOfBusinessSeats(),
+                airplane.getAmoutOfFirstClassSeats(),
+                new AirlineMapper().toDomain(airplane.getBelongingAirline()),
+                airplane.isOperatable(),
+                airplane.getMaxWeightOfLuggage()
         );
-    }*/
+    }
 }

@@ -15,7 +15,7 @@ public class MEmployee extends MPerson implements MModel {
     private Date hireDate;
 
     public MEmployee(long personId, String firstName, String middleNames, String lastName, Date dateOfBirth, String phonenumber, MAddress address, String email, String password, int salary, String position, MAirline airline, Date hireDate) {
-        super(personId, firstName, middleNames, lastName, dateOfBirth, phonenumber, address, email, password);
+        super(personId, firstName, middleNames, lastName, dateOfBirth, phonenumber, address, email, password, null);
         this.employeeId = personId;
         this.salary = salary;
         this.position = position;

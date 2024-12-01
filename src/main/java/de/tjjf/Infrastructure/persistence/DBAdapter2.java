@@ -19,7 +19,7 @@ import java.sql.Statement;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-
+/*
 public class DBAdapter2 {
     public static void main(String[] args) {
 
@@ -42,3 +42,4 @@ public class DBAdapter2 {
         }
     }
 }
+*/

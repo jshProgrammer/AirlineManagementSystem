@@ -12,11 +12,6 @@ public class AirplaneCreateImpl extends AbstractCreateOperation<Airplane> {
             super(modelToPersist);
         }
 
-        public static void main(String[] args) {
-            Airline a = new Airline("Lufthansa", new Date(1990), "München", "test;1;34534;Berlin;Germany", "0160123456", "testmail");
-            new AirlineCreateImpl(a).execute();
-            new AirplaneCreateImpl(new Airplane(123, "Boeing", "Test",200, 80, 50, a, true)).execute();
-        }
 
 
 }
