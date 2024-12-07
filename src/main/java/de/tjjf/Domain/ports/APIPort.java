@@ -13,6 +13,7 @@ public interface APIPort {
     void cancelTicket(MPerson person, int flightnum);
 
     void createEmployee(MEmployee employee);
+    boolean verifyPassword(MEmployee employee, String password);
     MEmployee readEmployeeById(long id);
     MEmployee updateEmployee(MEmployee employee);
 
