@@ -1,8 +1,6 @@
 package de.tjjf.Infrastructure.persistence.mapper;
 
-
 import de.tjjf.Domain.models.MClient;
-import de.tjjf.Domain.models.MEmployee;
 import de.tjjf.Domain.models.MPerson;
 import de.tjjf.Domain.models.MTicket;
 import de.tjjf.Infrastructure.persistence.entities.Client;

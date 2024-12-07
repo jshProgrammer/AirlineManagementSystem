@@ -1,9 +1,7 @@
 package de.tjjf.Infrastructure.persistence.mapper;
 
-
 import de.tjjf.Domain.models.MFlight;
 import de.tjjf.Infrastructure.persistence.entities.Flight;
-import de.tjjf.Infrastructure.persistence.entities.Ticket;
 
 public class FlightMapper extends Mapper<MFlight, Flight> {
 

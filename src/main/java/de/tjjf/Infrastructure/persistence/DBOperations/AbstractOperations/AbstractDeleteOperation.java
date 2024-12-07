@@ -1,7 +1,6 @@
 package de.tjjf.Infrastructure.persistence.DBOperations.AbstractOperations;
 
 import de.tjjf.Infrastructure.persistence.entities.Model;
-import de.tjjf.Infrastructure.persistence.results.AbstractResult;
 import de.tjjf.Infrastructure.persistence.results.NoContentResult;
 
 // T is identifier => String or int

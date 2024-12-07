@@ -1,5 +1,7 @@
 package de.tjjf.LogicTests;
 
+import de.tjjf.Domain.UseCases.CancelCompleteFlightUseCase;
+import de.tjjf.Domain.UseCases.CancelTicketUseCase;
 import de.tjjf.Domain.models.*;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +25,7 @@ public class CancellationTest {
 
     @Test
     public void testCancellationFromAirlineSide() {
-        flight.cancelFlight();
+        CancelCompleteFlightUseCase.cancelFlight(flight);
         assertEquals(flight.getTickets().size(), 2);
         assertEquals(flight.getStatus(), MFlight.FlightStatus.canceled);
         for (MTicket ticket3 : flight.getTickets()){
@@ -33,7 +35,7 @@ public class CancellationTest {
 
     @Test
     public void testCancellationFromCustomerSide() {
-        person2.cancelFlight(123456);
+        CancelTicketUseCase.cancelTicket(person2, 123456);
         assertEquals(flight.getTickets().size(), 1);
         assertEquals(ticket.getTicketStatus(), MTicket.TicketStatus.unpaid);
         assertEquals(ticket2.getTicketStatus(), MTicket.TicketStatus.canceled);

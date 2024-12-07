@@ -5,19 +5,19 @@ import de.tjjf.Infrastructure.persistence.EntityManagerFactorySingleton;
 import de.tjjf.Infrastructure.persistence.results.AbstractResult;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 
 public abstract class AbstractDatabaseOperation<R extends AbstractResult> {
     private EntityManagerFactory emf = EntityManagerFactorySingleton.getInstance();
     protected EntityManager em = null;
 
-    public void execute() {
+    public R execute() {
 
         try {
             em = emf.createEntityManager();
             em.getTransaction().begin();
-            run();
+            R result = run();
             em.getTransaction().commit();
+            return result;
         } catch (Exception e) {
             if (em != null && em.getTransaction().isActive()) {
                 em.getTransaction().rollback();

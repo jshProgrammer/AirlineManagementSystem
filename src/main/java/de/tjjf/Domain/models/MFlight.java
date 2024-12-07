@@ -70,40 +70,6 @@ public class MFlight implements MModel {
     }
 
 
-    public boolean addBooking(MTicket newBooking) {
-        boolean bookable = false;
-        if(tickets.size() < this.airplane.getTotalNumberOfSeats()){
-            bookable = true;
-            tickets.add(newBooking);
-            EmailSender.sendInvoice(newBooking);
-        }
-
-        return bookable;
-    }
-
-    public void cancelFlight(){
-        this.status = FlightStatus.canceled;
-        EmailSender.sendCancelationMail(this);
-    }
-
-
-    //TODO
-    public List<MFlight> showAlternativeFlights(int flightNum) {
-        List<MFlight> alternativeFlights = new ArrayList<>();
-
-        // Flight originalFlight = ;
-
-        //TODO: hier müsste ich ja auf Datenbank zugreifen?!
-        List<MFlight> allFlights = new ArrayList<>();
-
-        // search for flights that have the same destination and departure
-        for(MFlight alternativeFlight : allFlights) {
-
-        }
-
-        return  alternativeFlights;
-    }
-
     public void setAirplane(MAirplane airplane) {
         this.airplane = airplane;
     }

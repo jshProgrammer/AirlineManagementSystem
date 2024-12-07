@@ -1,12 +1,11 @@
 package de.tjjf.Domain.models;
 
 import de.tjjf.Domain.Exceptions.NoSeatsAvailableException;
-
+import de.tjjf.Domain.UseCases.AddBookingUseCase;
 import java.util.Date;
 import java.util.List;
 
 public class MTicket implements MModel {
-    //TODO: enums in der Klasse lassen?
     public enum SeatingClass { Economy, Business, First }
 
     public enum TicketStatus { paid, unpaid, canceled }
@@ -35,7 +34,7 @@ public class MTicket implements MModel {
         this.flight = flight;
 
         // check whether there is still a seat for customer
-        if(! (isSeatingUpdateAvailable(seatingClass))) throw new NoSeatsAvailableException("Flight cannot be booked any more due to restricted amount");
+        if(isSeatingUpdateAvailable( seatingClass)) throw new NoSeatsAvailableException("Flight cannot be booked any more due to restricted amount");
 
         this.ticketId = ticketId;
         this.person = person;
@@ -46,10 +45,11 @@ public class MTicket implements MModel {
         this.ticketStatus = ticketStatus;
 
         setLuggageWeight(weightOfLuggage);
-        flight.addBooking(this);
+        AddBookingUseCase.addBooking(this);
         person.addTickets(this);
     }
 
+    //TODO: sollte eigentlich in Use-Case, aber dann fehlt uns die Funktion setSeating-class, die wir hier ja aber nicht auf public setzen dürfen?!
     public void upgradeSeatingClass(SeatingClass newSeatingClass) throws NoSeatsAvailableException {
         if(isSeatingUpdateAvailable(seatingClass)) {
             this.seatingClass = newSeatingClass;
@@ -58,6 +58,29 @@ public class MTicket implements MModel {
         }
     }
 
+    public boolean isSeatingUpdateAvailable(MTicket.SeatingClass newDesiredSeatingClass ) {
+
+        MFlight belongingFlight = this.flight;
+        List<MTicket> bookingsOfThisFlight = belongingFlight.getTickets();
+
+        int totalNumberOfSeats = switch(newDesiredSeatingClass) {
+            case MTicket.SeatingClass .Economy -> belongingFlight.getAirplane().getAmountOfEconomySeats();
+            case MTicket.SeatingClass .Business -> belongingFlight.getAirplane().getAmountOfBusinessSeats();
+            case MTicket.SeatingClass .First -> belongingFlight.getAirplane().getAmountOfFirstClassSeats();
+        };
+
+        int reservedNumberOfSeats = 0;
+
+        for(MTicket mTicketIter : bookingsOfThisFlight) {
+            if(mTicketIter.getSeatingClass() == newDesiredSeatingClass) {
+                reservedNumberOfSeats++;
+            }
+        }
+
+        return reservedNumberOfSeats < totalNumberOfSeats;
+    }
+
+    //TODO: gleiches Problem wie oben => dann müssten wir eine Methode setLuggageWeight bereitstellen
     public void upgradeLuggageWeight(int newWeight) throws IllegalArgumentException {
         //Use only 25% of maximum luggage weight for luggage upgrade, the rest is reserved for standard bookings
         //Simplification: Added weight cannot be removed from booking anymore
@@ -87,28 +110,6 @@ public class MTicket implements MModel {
         else {
             throw new IllegalArgumentException("Luggage weight is to heavy, please upgrade after booking.");
         }
-    }
-
-    private boolean isSeatingUpdateAvailable( MTicket.SeatingClass newDesiredSeatingClass ) {
-
-        MFlight belongingFlight = this.getFlight();
-        List<MTicket> bookingsOfThisFlight = belongingFlight.getTickets();
-
-        int totalNumberOfSeats = switch(newDesiredSeatingClass) {
-            case MTicket.SeatingClass .Economy -> belongingFlight.getAirplane().getAmountOfEconomySeats();
-            case MTicket.SeatingClass .Business -> belongingFlight.getAirplane().getAmountOfBusinessSeats();
-            case MTicket.SeatingClass .First -> belongingFlight.getAirplane().getAmountOfFirstClassSeats();
-        };
-
-        int reservedNumberOfSeats = 0;
-
-        for(MTicket mTicketIter : bookingsOfThisFlight) {
-            if(mTicketIter.getSeatingClass() == newDesiredSeatingClass) {
-                reservedNumberOfSeats++;
-            }
-        }
-
-        return reservedNumberOfSeats < totalNumberOfSeats;
     }
 
 

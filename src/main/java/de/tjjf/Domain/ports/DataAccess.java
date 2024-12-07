@@ -3,13 +3,14 @@ package de.tjjf.Domain.ports;
 
 import de.tjjf.Domain.models.*;
 
-//TODO: wofür brauchen wir den noch?!
-
 public interface DataAccess {
-    public void create(MModel mModel);
-
-
-    void update( MModel mModel );
-
+    //public interface MAddressRepository extends CRUDRepository<MAddress, >{}
+    interface MAirlineRepository extends CRUDRepository<MAirline, String>{}
+    interface MAirplaneRepository extends CRUDRepository<MAirplane, Integer>{}
+    interface MAirportRepository extends CRUDRepository<MAirport, String>{}
+    interface MClientRepository extends CRUDRepository<MClient, Long>{}
+    interface MEmployeeRepository extends CRUDRepository<MEmployee, Long>{}
+    interface MFlightRepository extends CRUDRepository<MFlight, Long>{}
+    interface MTicketRepository extends CRUDRepository<MTicket, Integer>{}
 
 }

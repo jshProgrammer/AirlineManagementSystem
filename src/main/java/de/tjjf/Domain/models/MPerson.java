@@ -13,6 +13,7 @@ import org.apache.commons.validator.routines.EmailValidator;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+//TODO: sollte die Klasse nicht noch abstract werden?
 public class MPerson implements MModel
 {
     private long personId;
@@ -37,7 +38,6 @@ public class MPerson implements MModel
 
     private List<MTicket> tickets = new ArrayList<>();
 
-    //TODO: validate whether phone number is valid
     public MPerson(long personId, String firstName, String middleNames, String lastName, Date dateOfBirth, String phonenumber, MAddress address, String email, String password, List<MTicket> tickets) {
         this.personId = personId;
         this.firstName = firstName;
@@ -46,7 +46,7 @@ public class MPerson implements MModel
         this.dateOfBirth = dateOfBirth;
         this.address = address;
 
-        //Phonenumber-validation
+        //PhoneNumber-validation
         if(verifyPhonenumber(phonenumber)) this.phonenumber = phonenumber;
 
         // E-Mail-validation
@@ -169,17 +169,6 @@ public class MPerson implements MModel
 
     public void addTickets(MTicket ticket) {
         tickets.add(ticket);
-    }
-
-    public void cancelFlight(int flightnum){
-        for(MTicket ticket : tickets){
-            if(flightnum  == (int) ticket.getFlight().getFlightNum()){
-                MFlight mFlight = ticket.getFlight();
-                EmailSender.sendCancelationMailCustomer(mFlight);
-                mFlight.getTickets().remove(ticket);
-                ticket.setTicketStatus(MTicket.TicketStatus.canceled);
-            }
-        }
     }
 
     public void setAddress(MAddress address) {

@@ -19,7 +19,6 @@ public class FlightQueryResolver extends AbstractQueryResolver<MFlight, Long> {
 
         //FlightReadImpl f = new FlightReadImpl(1);
         //Flight flight = f.run().model;
-        //TODO: FlightMapper bzw. alle auskommentierten Mapper müssen erstellt werden
 
         return new MFlight(1, null, null, null, null, null, null, null, 3, null, null);
     }

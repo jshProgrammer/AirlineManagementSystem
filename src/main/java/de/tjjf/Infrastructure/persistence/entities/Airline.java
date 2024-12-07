@@ -1,12 +1,15 @@
 package de.tjjf.Infrastructure.persistence.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.util.Date;
 @Entity
 public class Airline implements Model {
     @Id
+    @GeneratedValue() //TOOD: Strategie noch angeben
     private String name;
 
     private Date foundationYear;
