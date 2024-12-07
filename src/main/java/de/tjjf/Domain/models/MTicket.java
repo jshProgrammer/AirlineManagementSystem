@@ -34,7 +34,7 @@ public class MTicket implements MModel {
         this.flight = flight;
 
         // check whether there is still a seat for customer
-        if(isSeatingUpdateAvailable( seatingClass)) throw new NoSeatsAvailableException("Flight cannot be booked any more due to restricted amount");
+        if(!isSeatingUpdateAvailable(seatingClass)) throw new NoSeatsAvailableException("Flight cannot be booked any more due to restricted amount");
 
         this.ticketId = ticketId;
         this.person = person;
@@ -64,9 +64,9 @@ public class MTicket implements MModel {
         List<MTicket> bookingsOfThisFlight = belongingFlight.getTickets();
 
         int totalNumberOfSeats = switch(newDesiredSeatingClass) {
-            case MTicket.SeatingClass .Economy -> belongingFlight.getAirplane().getAmountOfEconomySeats();
-            case MTicket.SeatingClass .Business -> belongingFlight.getAirplane().getAmountOfBusinessSeats();
-            case MTicket.SeatingClass .First -> belongingFlight.getAirplane().getAmountOfFirstClassSeats();
+            case MTicket.SeatingClass.Economy -> belongingFlight.getAirplane().getAmountOfEconomySeats();
+            case MTicket.SeatingClass.Business -> belongingFlight.getAirplane().getAmountOfBusinessSeats();
+            case MTicket.SeatingClass.First -> belongingFlight.getAirplane().getAmountOfFirstClassSeats();
         };
 
         int reservedNumberOfSeats = 0;

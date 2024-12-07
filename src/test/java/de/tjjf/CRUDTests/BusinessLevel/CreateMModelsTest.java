@@ -190,11 +190,12 @@ public class CreateMModelsTest {
     @Test
     public void testCreatingMTicket() {
         int ticketId = 1234;
-        MPerson person = new MPerson(0,  null,  null, null, null, "+4915112345678", null, "person@gmail.com", "personPassword", null);
+        MPerson person = new MPerson(0,  "TestFirstName",  "TestMiddleName", "TestLastName", null, "+4915112345678", null, "person@gmail.com", "personPassword", null);
         MAddress mAddress = new MAddress("TestStreet",0,0, "Frankfurt", "Germany");
-        MAirline mAirline = new MAirline(null, null, null, mAddress, "+4915112345678", "airline@gmail.com");
-        MAirplane mAirplane = new MAirplane(0, null, null, 100, 50, 25, mAirline, true, 10000);
-        MFlight mFlight = new MFlight(0, mAirplane, null, null, null, null, null, null, 0, null,  null);
+        MAirline mAirline = new MAirline("TestAirlineName", null, "TestHeadquarters", mAddress, "+4915112345678", "airline@gmail.com");
+        MAirport mAirport = new MAirport("TestCode", "TestName", "TestCountry", "TestCity", "TestTimezone");
+        MAirplane mAirplane = new MAirplane(0, "TestManufacturer", "TestModel", 100, 50, 25, mAirline, true, 10000);
+        MFlight mFlight = new MFlight(0, mAirplane, new Date(), mAirport, new Date(), mAirport, new Date(), MFlight.FlightStatus.landed, 0, null,  null);
         Date dateTimeOfBooking = new Date();
         int totalPrice = 300;
         int seatNum = 15;
@@ -208,7 +209,7 @@ public class CreateMModelsTest {
         assertEquals(mTicket.getPerson(), person);
         assertEquals(mTicket.getFlight(), mFlight);
         assertEquals(mTicket.getDateTimeOfBooking(), dateTimeOfBooking);
-        assertEquals(mTicket.getTotalPrice(), totalPrice);
+        assertEquals(mTicket.getTotalPrice(), (totalPrice + weightOfLuggage * 4)); //see MTicket.setLuggageWeight()
         assertEquals(mTicket.getSeatNum(), seatNum);
         assertEquals(mTicket.getSeatingClass(), seatingClass);
         assertEquals(mTicket.getTicketStatus(), ticketStatus);

@@ -36,13 +36,13 @@ public class AddLuggageWeightTest {
 
     @Test
     public void testPositiveValueUpgrade(){
-        int negativeValue = 1;
-        assertThrows(IllegalArgumentException.class, () -> {mFlight.addCurrentUpgradeLuggageWeight(negativeValue);});
+        int positiveValue = 1;
+        assertDoesNotThrow(() -> mFlight.addCurrentUpgradeLuggageWeight(positiveValue));
     }
 
     @Test
     public void testZeroValueUpgrade(){
-        int negativeValue = 0;
-        assertThrows(IllegalArgumentException.class, () -> {mFlight.addCurrentUpgradeLuggageWeight(negativeValue);});
+        int zeroValue = 0;
+        assertThrows(IllegalArgumentException.class, () -> {mFlight.addCurrentUpgradeLuggageWeight(zeroValue);});
     }
 }

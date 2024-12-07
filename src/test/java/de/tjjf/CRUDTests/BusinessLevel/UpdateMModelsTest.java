@@ -44,7 +44,7 @@ public class UpdateMModelsTest {
         int mAirplaneAmountOfBusinessSeats = 25;
         int mAirplaneAmountOfFirstClassSeats = 15;
         boolean mAirplaneIsOperable = true;
-        int mAirplaneMaxWeightOfLuggage = 25;
+        int mAirplaneMaxWeightOfLuggage = 40000;
         mAirplane = new MAirplane(mAirplaneSerialNum, mAirplaneManufacturer, mAirplaneModel, mAirplaneAmountOfEconomySeats, mAirplaneAmountOfBusinessSeats, mAirplaneAmountOfFirstClassSeats,  mAirline, mAirplaneIsOperable, mAirplaneMaxWeightOfLuggage);
 
         String departureMAirportCode = "departureTestCode";
@@ -143,18 +143,25 @@ public class UpdateMModelsTest {
 
     @Test
     public void testUpdateMAirline() {
-        Date newFoundationYear = new Date();
-        String newName = "UpdatedAirline";
-        String newHeadquarters = "UpdatedHeadquarters";
+        String updatedName = "UpdatedAirline";
+        String updatedHeadquarters = "UpdatedHeadquarters";
+        String updatedEmail = "updatedEmail@gmail.com";
+        String updatedPhoneNumber = "+4915198765432";
+        MAddress updatedMAddress = new MAddress(null, 0, 0, null, null);
 
         // Update values
-        mAirline.setName(newName);
-        mAirline.setHeadQuarters(newHeadquarters);
+        mAirline.setName(updatedName);
+        mAirline.setHeadQuarters(updatedHeadquarters);
+        mAirline.setAddress(updatedMAddress);
+        mAirline.setEmail(updatedEmail);
+        mAirline.setPhoneNumber(updatedPhoneNumber);
 
         // Assertions
-        assertEquals(mAirline.getName(), newName);
-        assertEquals(mAirline.getFoundationYear(), newFoundationYear);
-        assertEquals(mAirline.getHeadQuarters(), newHeadquarters);
+        assertEquals(mAirline.getName(), updatedName);
+        assertEquals(mAirline.getHeadQuarters(), updatedHeadquarters);
+        assertEquals(mAirline.getAddress(), updatedMAddress);
+        assertEquals(mAirline.getPhoneNumber(), updatedPhoneNumber);
+        assertEquals(mAirline.getEmail(), updatedEmail);
     }
 
     @Test
