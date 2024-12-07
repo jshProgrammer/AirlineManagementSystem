@@ -1,6 +1,56 @@
 # TODO: eigenen Datentypen Date entwickeln
+# TODO: Sollte jetzt fuinktionieren, können aber auch ne Bibliothek verwenden:
+#<dependency>
+#    <groupId>com.graphql-java</groupId>
+#    <artifactId>graphql-java-extended-scalars</artifactId>
+#    <version>20.2</version>
+#</dependency>
+#import graphql.scalars.ExtendedScalars;
+#import graphql.schema.GraphQLScalarType;
+#import org.springframework.context.annotation.Bean;
+#import org.springframework.context.annotation.Configuration;
+#
+#@Configuration
+#public class GraphQlConfig {
+#
+#    @Bean
+#    public GraphQLScalarType longScalar() {
+#        return ExtendedScalars.GraphQLLong;
+#    }
+#}
+#TODO und hier noch des für Date
+#<dependency>
+#    <groupId>com.graphql-java</groupId>
+#    <artifactId>graphql-java-extended-scalars</artifactId>
+#    <version>20.2</version>
+#</dependency>
+#import graphql.scalars.ExtendedScalars;
+#import graphql.schema.GraphQLScalarType;
+#import org.springframework.context.annotation.Bean;
+#import org.springframework.context.annotation.Configuration;
+#
+#@Configuration
+#public class GraphQlConfig {
+#
+#    @Bean
+#    public GraphQLScalarType dateScalar() {
+#        return ExtendedScalars.Date; // Nur Datum
+#    }
+#
+#    @Bean
+#    public GraphQLScalarType dateTimeScalar() {
+#        return ExtendedScalars.DateTime; // Datum und Zeit
+#    }
+#
+#    @Bean
+#    public GraphQLScalarType timeScalar() {
+#        return ExtendedScalars.Time; // Nur Zeit
+#    }
+#}
 # https://stackoverflow.com/questions/49693928/date-and-json-in-type-definition-for-graphql
+
 scalar Date
+scalar Long
 
 #TODO: input-types definieren
 
