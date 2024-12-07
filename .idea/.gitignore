@@ -1,19 +1,74 @@
-# Default ignored files
-/shelf/
-/workspace.xml
-# Editor-based HTTP Client requests
-/httpRequests/
-# Datasource local storage ignored files
-/dataSources/
-/dataSources.local.xml
+# Allgemeine Java-Einstellungen
+*.class
+*.jar
+*.war
+*.ear
 
-# IntelliJ IDEA project files
-.idea/compiler.xml
-.idea/encodings.xml
-.idea/jarRepositories.xml
-.idea/misc.xml
-.idea/vcs.xml
+# IDE-spezifisch
+.idea/
+*.iml
+out/
+.vscode/
+*.launch
 
+# Maven
 target/
 
-target/
+# Gradle
+.gradle/
+build/
+
+# Hibernate und JPA
+hibernate.cfg.xml
+META-INF/persistence.xml
+
+# Hibernate and JPA generated files
+*.hbm.xml
+*.cache
+
+# Log-Dateien
+*.log
+
+# Temporäre und sensible Dateien
+*.tmp
+*.bak
+*.swp
+*~
+*.key
+*.enc
+
+# Anwendungsspezifisch
+# Verschlüsselungsschlüssel oder Passwörter
+aes_key.key
+smtp_password.enc
+
+# Ressourcen
+*.pdf
+*.docx
+*.xlsx
+
+# Tests und generierte Dateien
+/test-classes/
+coverage/
+reports/
+
+# GraphQL
+# Ignoriere generierte Dateien
+*.graphql.java
+*.graphqls.tmp
+# Behalte essentielle Dateien
+!*.graphqls
+
+# Node.js
+node_modules/
+npm-debug.log*
+
+# Betriebssystem-Spezifisch
+.DS_Store
+Thumbs.db
+desktop.ini
+*.crdownload
+
+# Docker
+*.dockerfile
+docker-compose.override.yml
