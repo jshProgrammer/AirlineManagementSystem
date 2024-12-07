@@ -8,6 +8,7 @@ import java.util.Date;
 public class Ticket implements Model {
    @Column(nullable=false)
     @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ticketId;
 
     private long personId;

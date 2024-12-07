@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 @Entity
 public class Airplane implements Model {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int serialNum;
 
     @Column(nullable=false)

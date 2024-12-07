@@ -9,6 +9,7 @@ public class Flight implements Model {
 
     //TODO: evtl @JoinColumn damit Anzeigen aller Buchungen
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long flightNum;
 
     @Column

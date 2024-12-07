@@ -9,7 +9,7 @@ import java.util.Date;
 @Entity
 public class Airline implements Model {
     @Id
-    @GeneratedValue() //TOOD: Strategie noch angeben
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String name;
 
     private Date foundationYear;

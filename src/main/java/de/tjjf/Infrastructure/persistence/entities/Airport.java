@@ -1,14 +1,13 @@
 package de.tjjf.Infrastructure.persistence.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Airport implements Model {
 
     @Column(nullable = false)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String code;
 
     @Column(nullable = false)

@@ -10,6 +10,7 @@ import java.util.List;
 public class Client implements Model {
     //TODO: hier evtl. mapped-Attribut nötig
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     //@JoinColumn(name = "personId", referencedColumnName = "personID s")
     private long personId;
 
