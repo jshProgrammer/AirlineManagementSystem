@@ -1,4 +1,4 @@
-package de.tjjf.APIDate;
+package de.tjjf.APIExtensions;
 
 import graphql.schema.GraphQLScalarType;
 import org.springframework.context.annotation.Bean;

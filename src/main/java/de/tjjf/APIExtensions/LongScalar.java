@@ -1,4 +1,4 @@
-package de.tjjf.APIDate;
+package de.tjjf.APIExtensions;
 
 import graphql.language.IntValue;
 import graphql.language.StringValue;
