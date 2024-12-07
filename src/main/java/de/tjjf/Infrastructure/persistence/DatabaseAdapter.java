@@ -1,14 +1,5 @@
 package de.tjjf.Infrastructure.persistence;
 
-import de.tjjf.Domain.models.*;
-import de.tjjf.Domain.ports.DataAccess;
-import de.tjjf.Infrastructure.persistence.mapper.*;
-import de.tjjf.Infrastructure.persistence.entities.*;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-
-import java.util.Date;
 /*
 public class DatabaseAdapter implements DataAccess {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory( "my-persistence-unit" );

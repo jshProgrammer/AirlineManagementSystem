@@ -2,37 +2,105 @@
 # https://stackoverflow.com/questions/49693928/date-and-json-in-type-definition-for-graphql
 scalar Date
 
+#TODO: input-types definieren
+
 type MyType {
     created: Date
 }
 
-type Airline {
+type APIAddress {
+    street: String!,
+    number: Int!,
+    zipcode: Int!,
+    city: String!
+    country: String!
+}
+
+type APIAirline {
     name: String!,
     foundationYear: Date,
-    headQuarters: String!,
-    address: String!,
+    address: APIAddress!,
     phoneNumber: String!,
     email: String!
 }
 
-type MFlight {
-    # flightStatus
-    flightNum: Int!,
-    #airplane:
-    departureDateTime: Date,
-    #departureAirport
-    arrivalDateTime: Date,
-    #arrivalAirport
-    boardingTime: Date,
-    #status
-    duration: Int!
-    #tickets
-    #pilot
-    #copilot
+type APIAirplane{
+    serialNum: Int!,
+    belongingAirlineName: String!,
+    isOperable: Boolean!
+}
+
+type APIAirport{
+    code: String!,
+    name: String!,
+    country: String!,
+    city: String!,
+    timezone: String!
+}
+
+type APIClient{
+    clientID: Float!,
+    firstName: String!,
+    middleName: String,
+    lastName: String!,
+    dateOfBith: Date!,
+    phoneNumber: String!,
+    address: APIAddress!,
+    email: String!,
+    isBusinessClient: Boolean!
+}
+
+type APIEmployee{
+    employeeID: Float!,
+    firstName: String!,
+    middleName: String,
+    lastName: String!,
+    dateOfBith: Date!,
+    phoneNumber: String!,
+    address: APIAddress!,
+    email: String!,
+    airlineName: String!
+}
+enum APIFlightStatus {
+    scheduled, in_the_air, landed, delayed, canceled
+}
+
+type APIFlight{
+    flightNum: Float!,
+    airplaneSerialNum: Int!,
+    departureDateTime: Date!,
+    departureAirportCode: String!,
+    arrivalDateTime: Date!,
+    arrivalAirportCode: String!,
+    boardingTime: Date!,
+    status: APIFlightStatus!,
+    duration: Int!,
+    pilotId: Float!,
+    copilotId: Float!
+}
+
+enum APISeatingClass {
+    Economy, Business, First
+}
+
+enum APITicketStatus {
+    paid, unpaid, canceled
+}
+
+type APITicket{
+    ticketID: Int!,
+    personID: Float!,
+    isCLient: Boolean!,
+    flightNum: Float!,
+    dateTimeOfBooking: Date!,
+    totalPrice: Int!,
+    seatNum: Int!,
+    seatingClass: APISeatingClass!,
+    ticketStatus: APITicketStatus!,
+    weightOfLuggage: Int!
 }
 
 type Query {
-    flightByFlightNum(flightNum: Int): MFlight
-    airlineByName(name: String): Airline
-
+    flightByFlightNum(flightNum: Int): APIFlight
+    readAirlineByName(name: String): APIAirline
 }

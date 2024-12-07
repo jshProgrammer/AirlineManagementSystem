@@ -16,7 +16,6 @@ public class APIFlight implements APIModel {
 
     private String departureAirportCode;
 
-
     private Date arrivalDateTime;
 
     private String arrivalAirportCode;
@@ -34,7 +33,19 @@ public class APIFlight implements APIModel {
 
     public APIFlight(){}
 
-
+    public APIFlight(long flightNum, int airplaneSerialNum, Date departureDateTime, String departureAirportCode, Date arrivalDateTime, String arrivalAirportCode, Date boardingTime, FlightStatus status, int duration, long pilotId, long copilotId) {
+        this.flightNum = flightNum;
+        this.airplaneSerialNum = airplaneSerialNum;
+        this.departureDateTime = departureDateTime;
+        this.departureAirportCode = departureAirportCode;
+        this.arrivalDateTime = arrivalDateTime;
+        this.arrivalAirportCode = arrivalAirportCode;
+        this.boardingTime = boardingTime;
+        this.status = status;
+        this.duration = duration;
+        this.pilotId = pilotId;
+        this.copilotId = copilotId;
+    }
 
     public long getFlightNum() {
         return flightNum;

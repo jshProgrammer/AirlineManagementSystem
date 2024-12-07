@@ -1,7 +1,7 @@
 package de.tjjf.Infrastructure.api;
 
-import de.tjjf.Infrastructure.api.resolvers.ImplResolvers.MutationResolvers.FlightMutationResolver;
-import de.tjjf.Infrastructure.api.resolvers.ImplResolvers.QueryResolvers.FlightQueryResolver;
+import de.tjjf.Infrastructure.api.resolvers.FlightResolver;
+import de.tjjf.Infrastructure.api.resolvers.QueryResolvers.FlightQueryResolver;
 import graphql.kickstart.servlet.GraphQLConfiguration;
 import graphql.kickstart.servlet.GraphQLHttpServlet;
 import graphql.kickstart.tools.SchemaParser;
@@ -25,7 +25,7 @@ public class DemoServlet extends GraphQLHttpServlet {
             //TODO: wie müssen wir hier alle Resolver hinzufügen?
             return SchemaParser.newParser( )
                     .schemaString( schemaString )
-                    .resolvers( new FlightQueryResolver( ), new FlightMutationResolver( ) )
+                    .resolvers( new FlightQueryResolver( ), new FlightResolver( ) )
                     .build( )
                     .makeExecutableSchema( );
         }

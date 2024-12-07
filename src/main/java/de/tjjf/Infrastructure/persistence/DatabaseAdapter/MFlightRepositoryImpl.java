@@ -1,17 +1,12 @@
 package de.tjjf.Infrastructure.persistence.DatabaseAdapter;
 
 import de.tjjf.Domain.models.MFlight;
-import de.tjjf.Domain.models.MTicket;
-import de.tjjf.Domain.ports.DataAccess;
+import de.tjjf.Domain.ports.DB.DataAccess;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Create.FlightCreateImpl;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Delete.FlightDeleteImpl;
-import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Delete.TicketDeleteImpl;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Read.FlightReadImpl;
-import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Read.TicketReadImpl;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Update.FlightUpdateImpl;
-import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Update.TicketUpdateImpl;
 import de.tjjf.Infrastructure.persistence.mapper.FlightMapper;
-import de.tjjf.Infrastructure.persistence.mapper.TicketMapper;
 
 public class MFlightRepositoryImpl implements DataAccess.MFlightRepository {
     @Override

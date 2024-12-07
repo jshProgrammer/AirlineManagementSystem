@@ -1,7 +1,7 @@
 package de.tjjf.Infrastructure.persistence.DatabaseAdapter;
 
 import de.tjjf.Domain.models.MClient;
-import de.tjjf.Domain.ports.DataAccess;
+import de.tjjf.Domain.ports.DB.DataAccess;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Create.ClientCreateImpl;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Delete.ClientDeleteImpl;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Read.ClientReadImpl;

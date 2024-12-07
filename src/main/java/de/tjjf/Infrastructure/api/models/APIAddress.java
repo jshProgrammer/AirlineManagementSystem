@@ -1,6 +1,6 @@
 package de.tjjf.Infrastructure.api.models;
 
-public class APIAddress {
+public class APIAddress implements APIModel {
     // simplification: leave out character after number (e.g. Street 12a => Street 12)
     public String street;
 

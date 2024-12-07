@@ -1,8 +1,6 @@
-package de.tjjf.Domain.ports;
+package de.tjjf.Domain.ports.DB;
 
 import de.tjjf.Domain.models.MModel;
-
-import java.util.List;
 
 public interface CRUDRepository<MMmod extends MModel, ID> {
     void create(MMmod entity); // Create

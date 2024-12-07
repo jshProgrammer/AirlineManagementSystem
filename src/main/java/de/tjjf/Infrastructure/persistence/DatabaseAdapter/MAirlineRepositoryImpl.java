@@ -1,7 +1,7 @@
 package de.tjjf.Infrastructure.persistence.DatabaseAdapter;
 
 import de.tjjf.Domain.models.MAirline;
-import de.tjjf.Domain.ports.DataAccess;
+import de.tjjf.Domain.ports.DB.DataAccess;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Create.AirlineCreateImpl;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Delete.AirlineDeleteImpl;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Read.AirlineReadImpl;

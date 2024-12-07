@@ -1,4 +1,4 @@
-package de.tjjf.Domain.ports;
+package de.tjjf.Domain.ports.DB;
 
 
 import de.tjjf.Domain.models.*;
