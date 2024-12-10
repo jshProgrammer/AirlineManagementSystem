@@ -45,7 +45,7 @@ public class MTicket implements MModel {
         this.ticketStatus = ticketStatus;
 
         setLuggageWeight(weightOfLuggage);
-        AddBookingUseCase.addBooking(this);
+        //AddBookingUseCase.addBooking(this);
         person.addTickets(this);
     }
 

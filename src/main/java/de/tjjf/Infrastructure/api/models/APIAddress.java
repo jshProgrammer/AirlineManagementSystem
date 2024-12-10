@@ -14,6 +14,14 @@ public class APIAddress implements APIModel {
 
     public APIAddress(){}
 
+    public APIAddress(String street, int number, int zipcode, String city, String country) {
+        this.street=street;
+        this.number=number;
+        this.zipcode=zipcode;
+        this.city=city;
+        this.country=country;
+    }
+
 
     public String getStreet() {
         return street;

@@ -1,4 +1,4 @@
-package de.tjjf.Infrastructure.persistence.DatabaseAdapter;
+package de.tjjf.Adapter.DatabaseAdapter;
 
 import de.tjjf.Domain.models.MTicket;
 import de.tjjf.Domain.ports.DB.DataAccess;

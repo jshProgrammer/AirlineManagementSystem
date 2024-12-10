@@ -1,4 +1,4 @@
-package de.tjjf.APIExtensions;
+package de.tjjf.Infrastructure.api.APIExtensions;
 import graphql.language.StringValue;
 import graphql.schema.*;
 

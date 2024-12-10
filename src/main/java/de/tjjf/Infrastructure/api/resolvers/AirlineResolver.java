@@ -1,9 +1,8 @@
 package de.tjjf.Infrastructure.api.resolvers;
 
-import de.tjjf.Domain.models.MAirline;
-import de.tjjf.Domain.ports.API.AirlinePort;
 import de.tjjf.Infrastructure.api.mapper.APIAirlineMapper;
 import de.tjjf.Infrastructure.api.models.APIAirline;
+import de.tjjf.Adapter.APIAdapter.AirlinePortImpl;
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import graphql.kickstart.tools.GraphQLQueryResolver;
 

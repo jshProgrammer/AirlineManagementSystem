@@ -2,6 +2,9 @@ package de.tjjf.Infrastructure.api.mapper;
 
 import de.tjjf.Domain.models.MFlight;
 import de.tjjf.Infrastructure.api.models.APIFlight;
+import de.tjjf.Adapter.APIAdapter.AirplanePortImpl;
+import de.tjjf.Adapter.APIAdapter.AirportPortImpl;
+import de.tjjf.Adapter.APIAdapter.EmployeePortImpl;
 
 public class APIFlightMapper extends AbstractAPIMapper<APIFlight, MFlight> {
     @Override
@@ -24,6 +27,19 @@ public class APIFlightMapper extends AbstractAPIMapper<APIFlight, MFlight> {
 
     @Override
     public MFlight toDomainEntity(APIFlight apiFlight){
-        return null;
+        return new MFlight(
+                apiFlight.getFlightNum(),
+                new AirplanePortImpl().readAirplaneBySerialNum(apiFlight.getAirplaneSerialNum()),
+                apiFlight.getDepartureDateTime(),
+                new AirportPortImpl().readAirportByCode(apiFlight.getDepartureAirport()),
+                apiFlight.getArrivalDateTime(),
+                new AirportPortImpl().readAirportByCode(apiFlight.getArrivalAirport()),
+                apiFlight.getBoardingTime(),
+                //TODO: enum Umwandlung noch durch mapper
+                MFlight.FlightStatus.valueOf(apiFlight.getStatus().name()),
+                apiFlight.getDuration(),
+                new EmployeePortImpl().readEmployeeById(apiFlight.getPilot()),
+                new EmployeePortImpl().readEmployeeById(apiFlight.getCopilot())
+        );
     }
 }

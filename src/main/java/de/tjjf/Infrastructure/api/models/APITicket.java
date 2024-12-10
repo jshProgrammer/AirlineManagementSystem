@@ -34,6 +34,18 @@ public class APITicket implements APIModel {
 
     public APITicket(){}
 
+    public APITicket(int ticketId, long personId, boolean isClient, long flightNum, Date dateTimeOfBooking, int totalPrice, int seatNum, SeatingClass seatingClass, TicketStatus ticketStatus, int weightOfLuggage) {
+        this.ticketId = ticketId;
+        this.personId = personId;
+        this.isClient = isClient;
+        this.flightNum = flightNum;
+        this.dateTimeOfBooking = dateTimeOfBooking;
+        this.totalPrice = totalPrice;
+        this.seatNum = seatNum;
+        this.seatingClass = seatingClass;
+        this.ticketStatus = ticketStatus;
+        this.weightOfLuggage = weightOfLuggage;
+    }
 
     public void setTicketStatus(TicketStatus ticketStatus) {
         this.ticketStatus = ticketStatus;
@@ -42,6 +54,8 @@ public class APITicket implements APIModel {
     public void setTicketId(int ticketId) {
         this.ticketId = ticketId;
     }
+
+    public int getTicketId() { return this.ticketId; }
 
     public long getPersonId() {
         return personId;

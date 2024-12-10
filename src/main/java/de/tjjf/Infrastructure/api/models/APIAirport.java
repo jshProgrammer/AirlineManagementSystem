@@ -14,6 +14,14 @@ public class APIAirport implements APIModel {
 
     public APIAirport(){}
 
+    public APIAirport(String code, String name, String country, String city, String timezone) {
+        this.code = code;
+        this.name = name;
+        this.country = country;
+        this.city = city;
+        this.timezone = timezone;
+    }
+
     public String getCode() {
         return code;
     }

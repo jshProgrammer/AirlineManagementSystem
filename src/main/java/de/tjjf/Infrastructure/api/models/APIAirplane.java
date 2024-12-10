@@ -10,6 +10,12 @@ public class APIAirplane implements APIModel {
 
     public APIAirplane(){}
 
+    public APIAirplane(int serialNum, String belongingAirlineName, boolean isOperable) {
+        this.serialNum = serialNum;
+        this.belongingAirlineName = belongingAirlineName;
+        this.isOperable = isOperable;
+    }
+
     public String getBelongingAirline() {
         return belongingAirlineName;
     }

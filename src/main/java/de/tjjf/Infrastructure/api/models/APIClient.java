@@ -28,6 +28,18 @@ public class APIClient implements APIModel {
 
     public APIClient(){}
 
+    public APIClient(long clientId, String firstName, String middleNames, String lastName, Date dateOfBirth, String phoneNumber, APIAddress address, String email, boolean isBusinessClient) {
+        this.clientId = clientId;
+        this.firstName = firstName;
+        this.middleNames = middleNames;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.email = email;
+        this.isBusinessClient = isBusinessClient;
+    }
+
     public long getClientId() {
         return clientId;
     }

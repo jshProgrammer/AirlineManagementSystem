@@ -1,54 +1,3 @@
-# TODO: eigenen Datentypen Date entwickeln
-# TODO: Sollte jetzt fuinktionieren, können aber auch ne Bibliothek verwenden:
-#<dependency>
-#    <groupId>com.graphql-java</groupId>
-#    <artifactId>graphql-java-extended-scalars</artifactId>
-#    <version>20.2</version>
-#</dependency>
-#import graphql.scalars.ExtendedScalars;
-#import graphql.schema.GraphQLScalarType;
-#import org.springframework.context.annotation.Bean;
-#import org.springframework.context.annotation.Configuration;
-#
-#@Configuration
-#public class GraphQlConfig {
-#
-#    @Bean
-#    public GraphQLScalarType longScalar() {
-#        return ExtendedScalars.GraphQLLong;
-#    }
-#}
-#TODO und hier noch des für Date
-#<dependency>
-#    <groupId>com.graphql-java</groupId>
-#    <artifactId>graphql-java-extended-scalars</artifactId>
-#    <version>20.2</version>
-#</dependency>
-#import graphql.scalars.ExtendedScalars;
-#import graphql.schema.GraphQLScalarType;
-#import org.springframework.context.annotation.Bean;
-#import org.springframework.context.annotation.Configuration;
-#
-#@Configuration
-#public class GraphQlConfig {
-#
-#    @Bean
-#    public GraphQLScalarType dateScalar() {
-#        return ExtendedScalars.Date; // Nur Datum
-#    }
-#
-#    @Bean
-#    public GraphQLScalarType dateTimeScalar() {
-#        return ExtendedScalars.DateTime; // Datum und Zeit
-#    }
-#
-#    @Bean
-#    public GraphQLScalarType timeScalar() {
-#        return ExtendedScalars.Time; // Nur Zeit
-#    }
-#}
-# https://stackoverflow.com/questions/49693928/date-and-json-in-type-definition-for-graphql
-
 scalar Date
 scalar Long
 
@@ -89,7 +38,7 @@ type APIAirport{
 }
 
 type APIClient{
-    clientID: Float!,
+    clientID: Long!,
     firstName: String!,
     middleName: String,
     lastName: String!,
@@ -101,7 +50,7 @@ type APIClient{
 }
 
 type APIEmployee{
-    employeeID: Float!,
+    employeeID: Long!,
     firstName: String!,
     middleName: String,
     lastName: String!,
@@ -116,7 +65,7 @@ enum APIFlightStatus {
 }
 
 type APIFlight{
-    flightNum: Float!,
+    flightNum: Long!,
     airplaneSerialNum: Int!,
     departureDateTime: Date!,
     departureAirportCode: String!,
@@ -125,8 +74,8 @@ type APIFlight{
     boardingTime: Date!,
     status: APIFlightStatus!,
     duration: Int!,
-    pilotId: Float!,
-    copilotId: Float!
+    pilotId: Long!,
+    copilotId: Long!
 }
 
 enum APISeatingClass {
@@ -139,9 +88,9 @@ enum APITicketStatus {
 
 type APITicket{
     ticketID: Int!,
-    personID: Float!,
+    personID: Long!,
     isCLient: Boolean!,
-    flightNum: Float!,
+    flightNum: Long!,
     dateTimeOfBooking: Date!,
     totalPrice: Int!,
     seatNum: Int!,

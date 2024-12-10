@@ -28,6 +28,18 @@ public class APIEmployee implements APIModel {
 
     public APIEmployee(){}
 
+    public APIEmployee(long employeeId, String firstName, String middleNames, String lastName, String airlineName, String email, APIAddress address, String phoneNumber, Date dateOfBirth) {
+        this.airlineName = airlineName;
+        this.email = email;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.dateOfBirth = dateOfBirth;
+        this.lastName = lastName;
+        this.middleNames = middleNames;
+        this.firstName = firstName;
+        this.employeeId = employeeId;
+    }
+
     public void setEmployeeId(long employeeId) {
         this.employeeId = employeeId;
     }
