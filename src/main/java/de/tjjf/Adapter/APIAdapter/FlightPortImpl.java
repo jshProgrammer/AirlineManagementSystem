@@ -15,8 +15,8 @@ public class FlightPortImpl implements FlightPort {
     }
 
     @Override
-    public MFlight updateFlight(MFlight flight) {
-        return null;
+    public void updateFlight(MFlight flight) {
+        //return null; Rauswerfen von MFlight und rückgabe auf Void
     }
 
     public void cancelFlight(MFlight flight) {

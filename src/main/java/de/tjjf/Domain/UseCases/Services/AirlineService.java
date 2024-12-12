@@ -1,6 +1,5 @@
-package de.tjjf.Domain.UseCases;
+package de.tjjf.Domain.UseCases.Services;
 
-import de.tjjf.Adapter.DatabaseAdapter.MAirlineRepositoryImpl;
 import de.tjjf.Domain.models.MAirline;
 import de.tjjf.Domain.ports.DB.DataAccess;
 

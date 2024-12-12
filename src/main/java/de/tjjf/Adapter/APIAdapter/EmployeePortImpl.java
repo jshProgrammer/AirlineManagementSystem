@@ -20,7 +20,7 @@ public class EmployeePortImpl implements EmployeePort {
     }
 
     @Override
-    public MEmployee updateEmployee(MEmployee employee){
-        return null;
+    public void updateEmployee(MEmployee employee){
+
     }
 }

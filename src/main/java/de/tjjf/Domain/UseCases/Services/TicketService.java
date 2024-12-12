@@ -1,4 +1,4 @@
-package de.tjjf.Domain.UseCases;
+package de.tjjf.Domain.UseCases.Services;
 
 import de.tjjf.Domain.Exceptions.NoSeatsAvailableException;
 import de.tjjf.Domain.models.MPayment;
