@@ -99,6 +99,98 @@ type APITicket{
     weightOfLuggage: Int!
 }
 
+type InputAddress {
+    street: String!,
+    number: Int!,
+    zipcode: Int!,
+    city: String!
+    country: String!
+}
+
+type InputAirline {
+    name: String!,
+    foundationYear: Date,
+    address: APIAddress!,
+    phoneNumber: String!,
+    email: String!
+}
+
+type InputAirplane{
+    serialNum: Int!,
+    belongingAirlineName: String!,
+    isOperable: Boolean!
+}
+
+type InputAirport{
+    code: String!,
+    name: String!,
+    country: String!,
+    city: String!,
+    timezone: String!
+}
+
+type InputClient{
+    clientID: Long!,
+    firstName: String!,
+    middleName: String,
+    lastName: String!,
+    dateOfBith: Date!,
+    phoneNumber: String!,
+    address: APIAddress!,
+    email: String!,
+    isBusinessClient: Boolean!
+}
+
+type InputEmployee{
+    employeeID: Long!,
+    firstName: String!,
+    middleName: String,
+    lastName: String!,
+    dateOfBith: Date!,
+    phoneNumber: String!,
+    address: APIAddress!,
+    email: String!,
+    airlineName: String!
+}
+enum InputFlightStatus {
+    scheduled, in_the_air, landed, delayed, canceled
+}
+
+type InputFlight{
+    flightNum: Long!,
+    airplaneSerialNum: Int!,
+    departureDateTime: Date!,
+    departureAirportCode: String!,
+    arrivalDateTime: Date!,
+    arrivalAirportCode: String!,
+    boardingTime: Date!,
+    status: APIFlightStatus!,
+    duration: Int!,
+    pilotId: Long!,
+    copilotId: Long!
+}
+
+enum InputSeatingClass {
+    Economy, Business, First
+}
+
+enum InputTicketStatus {
+    paid, unpaid, canceled
+}
+
+type InputTicket{
+    ticketID: Int!,
+    personID: Long!,
+    isCLient: Boolean!,
+    flightNum: Long!,
+    dateTimeOfBooking: Date!,
+    totalPrice: Int!,
+    seatNum: Int!,
+    seatingClass: APISeatingClass!,
+    ticketStatus: APITicketStatus!,
+    weightOfLuggage: Int!
+}
+
 type Query {
     flightByFlightNum(flightNum: Int): APIFlight
     readAirlineByName(name: String): APIAirline

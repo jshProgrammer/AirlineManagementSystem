@@ -12,4 +12,11 @@ public class AirlineResolver implements GraphQLQueryResolver, GraphQLMutationRes
         return new APIAirlineMapper().toAPIEntity(new AirlinePortImpl().readAirlineByName(name));
     }
 
+    public void createAirline(APIAirline airline) {
+        new AirlinePortImpl().createAirline(new APIAirlineMapper().toDomainEntity(airline));
+    }
+
+    public void updateAirline(APIAirline airline) {
+        new AirlinePortImpl().updateAirline(new APIAirlineMapper().toDomainEntity(airline));
+    }
 }

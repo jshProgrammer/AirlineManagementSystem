@@ -56,7 +56,7 @@ public class CreateMModelsTest {
         int amountOfFirstClassSeats = 15;
         MAirline mAirline = new MAirline(null, null, null, null, "+4915112345678", "airline@gmail.com");
         boolean isOperable = true;
-        int maxWeightOfLuggage = 25;
+        int maxWeightOfLuggage = 40000;
 
         MAirplane mAirplane = new MAirplane(serialNum, manufacturer, model, amountOfEconomySeats, amountOfBusinessSeats, amountOfFirstClassSeats,  mAirline, isOperable, maxWeightOfLuggage);
 
@@ -126,7 +126,6 @@ public class CreateMModelsTest {
 
     @Test
     public void testCreatingEmployee(){
-        long emplyeeId = 987654321;
         int salary = 100;
         String position = "TestPosition";
         MAirline mAirline = new MAirline(null, null, null, null, "+4915112345678", "airline@gmail.com");
