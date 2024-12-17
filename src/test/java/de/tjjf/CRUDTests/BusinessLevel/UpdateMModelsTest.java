@@ -12,7 +12,7 @@ public class UpdateMModelsTest {
     MAddress mAddress;
     MAirline mAirline;
     MAirplane mAirplane;
-    MAirport departureMAirport;
+    MAirport departuremAirport;
     MAirport arrivalmAirport;
     MClient mClient;
     MEmployee mEmployee;
@@ -52,7 +52,7 @@ public class UpdateMModelsTest {
         String departureMAirportCountry = "departureTestCountry";
         String departureMAirportCity = "departureTestCity";
         String departureMAirportTimezone = "departureTestTimezone";
-        departureMAirport = new MAirport(departureMAirportCode, departureMAirportName,departureMAirportCountry, departureMAirportCity, departureMAirportTimezone);
+        departuremAirport = new MAirport(departureMAirportCode, departureMAirportName,departureMAirportCountry, departureMAirportCity, departureMAirportTimezone);
 
         String arrivalMAirportCode = "arrivalTestCode";
         String arrivalMAirportName = "arrivalTestName";
@@ -96,7 +96,7 @@ public class UpdateMModelsTest {
         int mAirplaneDuration = 123;
         MEmployee mAirplanePilot = new MEmployee(0, null, null, null, null, "+4915112345678",null, "mairlinepilot@gmail.com", "mAirlinePilotPassword", 0, null, null, null);
         MEmployee mAirplaneCopilot = new MEmployee(0, null, null, null, null, "+4915112345678",null, "mairlinecopilot@gmail.com", "mArilineCopilotPassword", 0, null, null, null);
-        mFlight = new MFlight(mFLightFlightNum, mAirplane, mAirplaneDepartureDateTime, departureMAirport, mAirplaneArrivalDateTime, arrivalmAirport, mAirplaneBoardingTime, mAirplaneFlightStatus, mAirplaneDuration, mAirplanePilot, mAirplaneCopilot);
+        mFlight = new MFlight(mFLightFlightNum, mAirplane, mAirplaneDepartureDateTime, departuremAirport, mAirplaneArrivalDateTime, arrivalmAirport, mAirplaneBoardingTime, mAirplaneFlightStatus, mAirplaneDuration, mAirplanePilot, mAirplaneCopilot);
 
         long mPersonPersonId = 9999999;
         String mPersonFirstName = "TestEmployeetFirstName";
@@ -183,15 +183,15 @@ public class UpdateMModelsTest {
         String updatedCity = "UpdatedCity";
         String updatedTimezone = "UpdatedTimezone";
 
-        departureMAirport.setCity(updatedCity);
-        departureMAirport.setCountry(updatedCountry);
-        departureMAirport.setTimezone(updatedTimezone);
-        departureMAirport.setName(updatedName);
+        departuremAirport.setCity(updatedCity);
+        departuremAirport.setCountry(updatedCountry);
+        departuremAirport.setTimezone(updatedTimezone);
+        departuremAirport.setName(updatedName);
 
-        assertEquals(departureMAirport.getCity(), updatedCity);
-        assertEquals(departureMAirport.getCountry(), updatedCountry);
-        assertEquals(departureMAirport.getTimezone(), updatedTimezone);
-        assertEquals(departureMAirport.getName(), updatedName);
+        assertEquals(departuremAirport.getCity(), updatedCity);
+        assertEquals(departuremAirport.getCountry(), updatedCountry);
+        assertEquals(departuremAirport.getTimezone(), updatedTimezone);
+        assertEquals(departuremAirport.getName(), updatedName);
     }
 
     @Test

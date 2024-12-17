@@ -1,5 +1,6 @@
 package de.tjjf.CRUDTests.PersistenceLevel;
 
+import com.stripe.model.Person;
 import de.tjjf.Domain.models.*;
 import de.tjjf.Infrastructure.persistence.entities.*;
 import org.junit.jupiter.api.Test;
@@ -39,7 +40,7 @@ public class CreateModelTest {
         int amountOfEconomySeats = 50;
         int amountOfBusinessSeats = 25;
         int amountOfFirstClassSeats = 15;
-        Airline airline = new Airline(null, null, null, null, "+4915112345678", "airline@gmail.com");
+        Airline airline = new Airline();
         boolean isOperable = true;
         int maxWeightOfLuggage = 40000;
 
@@ -145,29 +146,54 @@ public class CreateModelTest {
     @Test
     public void testCreatingFlight(){
         long flightNum = 1234;
-        MAirplane mAirplane = new MAirplane(0, null, null, 0, 0, 0, null, true, 0);
+        Airplane airplane = new Airplane();
         Date departureDateTime = new Date();
-        MAirport departureAirport = new MAirport(null, null, null, null, null);
+        Airport departureAirport = new Airport();
         Date arrivalDateTime = new Date();
-        MAirport arrivalAirport = new MAirport(null, null, null, null, null);
+        Airport arrivalAirport = new Airport();
         Date boardingTime = new Date();
-        MFlight.FlightStatus flyStatus = MFlight.FlightStatus.landed;
+        String flyStatus = "testStatus";
         int duration = 123;
-        MEmployee pilot = new MEmployee(0, null, null, null, null, "+4915112345678",null, "pilot@gmail.com", "pilotPassword", 0, null, null, null);
-        MEmployee copilot = new MEmployee(0, null, null, null, null, "+4915112345678",null, "copilot@gmail.com", "copilotPassword", 0, null, null, null);
+        Employee pilot = new Employee();
+        Employee copilot = new Employee();
 
-        MFlight mFlight = new MFlight(flightNum, mAirplane, departureDateTime, departureAirport, arrivalDateTime, arrivalAirport, boardingTime, flyStatus, duration, pilot, copilot);
+        Flight flight = new Flight(flightNum, airplane, departureDateTime, departureAirport, arrivalDateTime, arrivalAirport, boardingTime, flyStatus, duration, pilot, copilot);
 
-        assertEquals(mFlight.getFlightNum(), flightNum);
-        assertEquals(mFlight.getAirplane(), mAirplane);
-        assertEquals(mFlight.getDepartureDateTime(), departureDateTime);
-        assertEquals(mFlight.getDepartureAirport(), departureAirport);
-        assertEquals(mFlight.getArrivalDateTime(), arrivalDateTime);
-        assertEquals(mFlight.getArrivalAirport(), arrivalAirport);
-        assertEquals(mFlight.getBoardingTime(), boardingTime);
-        assertEquals(mFlight.getStatus(), flyStatus);
-        assertEquals(mFlight.getDuration(), duration);
-        assertEquals(mFlight.getPilot(), pilot);
-        assertEquals(mFlight.getCopilot(), copilot);
+        assertEquals(flight.getFlightNum(), flightNum);
+        assertEquals(flight.getAirplane(), airplane);
+        assertEquals(flight.getDepartureDateTime(), departureDateTime);
+        assertEquals(flight.getDepartureAirport(), departureAirport);
+        assertEquals(flight.getArrivalDateTime(), arrivalDateTime);
+        assertEquals(flight.getArrivalAirport(), arrivalAirport);
+        assertEquals(flight.getBoardingTime(), boardingTime);
+        assertEquals(flight.getStatus(), flyStatus);
+        assertEquals(flight.getDuration(), duration);
+        assertEquals(flight.getPilot(), pilot);
+        assertEquals(flight.getCopilot(), copilot);
+    }
+
+    @Test
+    public void testCreatingMTicket() {
+        int ticketId = 1234;
+        long person = 12345678;
+        Flight mFlight = new Flight();
+        Date dateTimeOfBooking = new Date();
+        int totalPrice = 300;
+        int seatNum = 15;
+        String seatingClass = "testSeatingClass";
+        String ticketStatus = "testTicketStatus";
+        int weightOfLuggage = 20;
+
+        Ticket mTicket = new Ticket(ticketId, person, mFlight, dateTimeOfBooking, totalPrice, seatNum, seatingClass, ticketStatus, weightOfLuggage);
+
+        assertEquals(mTicket.getTicketId(), ticketId);
+        assertEquals(mTicket.getPersonId(), person);
+        assertEquals(mTicket.getFlight(), mFlight);
+        assertEquals(mTicket.getDateTimeOfBooking(), dateTimeOfBooking);
+        assertEquals(mTicket.getTotalPrice(), (totalPrice + weightOfLuggage * 4)); //see MTicket.setLuggageWeight()
+        assertEquals(mTicket.getSeatNum(), seatNum);
+        assertEquals(mTicket.getSeatingClass(), seatingClass);
+        assertEquals(mTicket.getTicketStatus(), ticketStatus);
+        assertEquals(mTicket.getMaxWeightOfLuggage(), weightOfLuggage);
     }
 }

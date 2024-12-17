@@ -62,7 +62,7 @@ public class Ticket implements Model {
         return personId;
     }
 
-    public void setPersonId(int personId) {
+    public void setPersonId(long personId) {
         this.personId = personId;
     }
 
