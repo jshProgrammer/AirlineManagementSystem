@@ -1,4 +1,7 @@
 package de.tjjf.Infrastructure.api.resolvers;
 
-public class PaymentResolver {
+import graphql.kickstart.tools.GraphQLMutationResolver;
+import graphql.kickstart.tools.GraphQLQueryResolver;
+
+public class PaymentResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
 }

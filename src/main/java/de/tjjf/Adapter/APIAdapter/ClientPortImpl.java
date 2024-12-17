@@ -1,19 +1,25 @@
 package de.tjjf.Adapter.APIAdapter;
 
+import de.tjjf.Adapter.DatabaseAdapter.MAirlineRepositoryImpl;
+import de.tjjf.Adapter.DatabaseAdapter.MClientRepositoryImpl;
+import de.tjjf.Domain.UseCases.Services.AirlineService;
+import de.tjjf.Domain.UseCases.Services.ClientService;
 import de.tjjf.Domain.models.MClient;
 import de.tjjf.Domain.ports.API.ClientPort;
 
 public class ClientPortImpl implements ClientPort {
     @Override
-    public void createClient(MClient client) {}
-
-    @Override
-    public MClient readClientById(long id) {
-        return null;
+    public void createClient(MClient client) {
+        new ClientService(new MClientRepositoryImpl()).createClient(client);
     }
 
     @Override
-    public MClient updateClient(MClient client) {
-        return null;
+    public MClient readClientById(long id) {
+        return new ClientService(new MClientRepositoryImpl()).readClientByID(id);
+    }
+
+    @Override
+    public void updateClient(MClient client) {
+        new ClientService(new MClientRepositoryImpl()).updateClient(client);
     }
 }

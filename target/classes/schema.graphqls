@@ -1,38 +1,233 @@
-# TODO: eigenen Datentypen Date entwickeln
-# https://stackoverflow.com/questions/49693928/date-and-json-in-type-definition-for-graphql
 scalar Date
+scalar Long
+
+#TODO: scalar void noch implementieren
+scalar Void
 
 type MyType {
     created: Date
 }
 
-type Airline {
+type APIAddress {
+    street: String!,
+    number: Int!,
+    zipcode: Int!,
+    city: String!
+    country: String!
+}
+
+type APIAirline {
     name: String!,
     foundationYear: Date,
-    headQuarters: String!,
-    address: String!,
+    address: APIAddress!,
     phoneNumber: String!,
     email: String!
 }
 
-type MFlight {
-    # flightStatus
-    flightNum: Int!,
-    #airplane:
-    departureDateTime: Date,
-    #departureAirport
-    arrivalDateTime: Date,
-    #arrivalAirport
-    boardingTime: Date,
-    #status
-    duration: Int!
-    #tickets
-    #pilot
-    #copilot
+type APIAirplane{
+    serialNum: Int!,
+    belongingAirlineName: String!,
+    isOperable: Boolean!
 }
 
+type APIAirport{
+    code: String!,
+    name: String!,
+    country: String!,
+    city: String!,
+    timezone: String!
+}
+
+type APIClient{
+    clientID: Long!,
+    firstName: String!,
+    middleName: String,
+    lastName: String!,
+    dateOfBith: Date!,
+    phoneNumber: String!,
+    address: APIAddress!,
+    email: String!,
+    isBusinessClient: Boolean!
+}
+
+type APIEmployee{
+    employeeID: Long!,
+    firstName: String!,
+    middleName: String,
+    lastName: String!,
+    dateOfBith: Date!,
+    phoneNumber: String!,
+    address: APIAddress!,
+    email: String!,
+    airlineName: String!
+}
+enum APIFlightStatus {
+    scheduled, in_the_air, landed, delayed, canceled
+}
+
+type APIFlight{
+    flightNum: Long!,
+    airplaneSerialNum: Int!,
+    departureDateTime: Date!,
+    departureAirportCode: String!,
+    arrivalDateTime: Date!,
+    arrivalAirportCode: String!,
+    boardingTime: Date!,
+    status: APIFlightStatus!,
+    duration: Int!,
+    pilotId: Long!,
+    copilotId: Long!
+}
+
+enum APISeatingClass {
+    Economy, Business, First
+}
+
+enum APITicketStatus {
+    paid, unpaid, canceled
+}
+
+type APITicket{
+    ticketID: Int!,
+    personID: Long!,
+    isCLient: Boolean!,
+    flightNum: Long!,
+    dateTimeOfBooking: Date!,
+    totalPrice: Int!,
+    seatNum: Int!,
+    seatingClass: APISeatingClass!,
+    ticketStatus: APITicketStatus!,
+    weightOfLuggage: Int!
+}
+
+type InputAddress {
+    street: String!,
+    number: Int!,
+    zipcode: Int!,
+    city: String!
+    country: String!
+}
+
+type InputAirline {
+    name: String!,
+    foundationYear: Date,
+    address: APIAddress!,
+    phoneNumber: String!,
+    email: String!
+}
+
+type InputAirplane{
+    serialNum: Int!,
+    belongingAirlineName: String!,
+    isOperable: Boolean!
+}
+
+type InputAirport{
+    code: String!,
+    name: String!,
+    country: String!,
+    city: String!,
+    timezone: String!
+}
+
+type InputClient{
+    clientID: Long!,
+    firstName: String!,
+    middleName: String,
+    lastName: String!,
+    dateOfBith: Date!,
+    phoneNumber: String!,
+    address: APIAddress!,
+    email: String!,
+    isBusinessClient: Boolean!
+}
+
+type InputEmployee{
+    employeeID: Long!,
+    firstName: String!,
+    middleName: String,
+    lastName: String!,
+    dateOfBith: Date!,
+    phoneNumber: String!,
+    address: APIAddress!,
+    email: String!,
+    airlineName: String!
+}
+enum InputFlightStatus {
+    scheduled, in_the_air, landed, delayed, canceled
+}
+
+type InputFlight{
+    flightNum: Long!,
+    airplaneSerialNum: Int!,
+    departureDateTime: Date!,
+    departureAirportCode: String!,
+    arrivalDateTime: Date!,
+    arrivalAirportCode: String!,
+    boardingTime: Date!,
+    status: APIFlightStatus!,
+    duration: Int!,
+    pilotId: Long!,
+    copilotId: Long!
+}
+
+enum InputSeatingClass {
+    Economy, Business, First
+}
+
+enum InputTicketStatus {
+    paid, unpaid, canceled
+}
+
+type InputTicket{
+    ticketID: Int!,
+    personID: Long!,
+    isCLient: Boolean!,
+    flightNum: Long!,
+    dateTimeOfBooking: Date!,
+    totalPrice: Int!,
+    seatNum: Int!,
+    seatingClass: APISeatingClass!,
+    ticketStatus: APITicketStatus!,
+    weightOfLuggage: Int!
+}
+
+#TODO: nochmal prüfen => eig haben InputModels wohl keine id
+
+#TODO: probably still add e.g. SeatingClassInput
 type Query {
-    flightByFlightNum(flightNum: Int): MFlight
-    airlineByName(name: String): Airline
+    createFlight(flight: APIFlightInput): Void
+    readFlightByNum(flightNum: Float): APIFlight
+    updateFlight(flight: APIFlightInput): Void
+    cancelFlight(flight: APIFlightInput): Void
+
+    createEmployee(employee: APIEmployeeInput): Void
+    verifyPassword(employee: APIEmployeeInput, password: String): Boolean
+    readEmployeeById(id: Float): APIEmployee
+    updateEmployee(employee: APIEmployeeInput): Void
+
+    createClient(client: APIClientInput): Void
+    readClientById(id: Float): APIClient
+    updateClient(client: APIClientInput): APIClient
+
+    addBooking(newBooking: TicketInput): Void
+    readTicketById(id: Int): APITicket
+    upgradeSeatingClass(newSeatingClass: SeatingClassInput): Void
+    upgradeLuggageWeight(newWeight: int): Void
+    cancelTicket(person: APIPersonInput, flightNum: int): Void
+
+    createAirport(airport: APIAirportInput): Void
+    readAirportByCode(code: String): APIAirport
+
+    flightByFlightNum(flightNum: Int): APIFlight
+    readAirlineByName(name: String): APIAirline
+
+    createAirline(airline: APIAirlineInput): Void
+    readAirlineByName( name: String): APIAirline
+    updateAirline(airline: APIAirline): Void
+
+    createAirplane(airplane: APIAirplane) Void
+    readAirplaneBySerialNumber(serialNum: Int): APIAirplane
+    setOperable(serialNum: Int, isOperable Boolean): Void
 
 }

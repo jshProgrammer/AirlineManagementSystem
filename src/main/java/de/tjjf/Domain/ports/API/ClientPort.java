@@ -6,5 +6,5 @@ public interface ClientPort {
     void createClient(MClient client);
     // no verification of password due to design decision of implementing employee api and not client api
     MClient readClientById(long id);
-    MClient updateClient(MClient client);
+    void updateClient(MClient client);
 }

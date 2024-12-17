@@ -1,25 +1,29 @@
 package de.tjjf.Adapter.APIAdapter;
 
+import de.tjjf.Adapter.DatabaseAdapter.MAirlineRepositoryImpl;
+import de.tjjf.Adapter.DatabaseAdapter.MFlightRepositoryImpl;
+import de.tjjf.Domain.UseCases.Services.AirlineService;
+import de.tjjf.Domain.UseCases.Services.FlightService;
 import de.tjjf.Domain.models.MFlight;
 import de.tjjf.Domain.ports.API.FlightPort;
 
 public class FlightPortImpl implements FlightPort {
     @Override
     public void createFlight(MFlight flight) {
-
+        new FlightService(new MFlightRepositoryImpl()).createFlight(flight);
     }
 
     @Override
     public MFlight readFlightByNum(long flightNum) {
-        return null;
+        return new FlightService(new MFlightRepositoryImpl()).readFlightByNum(flightNum);
     }
 
     @Override
     public void updateFlight(MFlight flight) {
-        //return null; Rauswerfen von MFlight und rückgabe auf Void
+        new FlightService(new MFlightRepositoryImpl()).updateFlight(flight);
     }
 
     public void cancelFlight(MFlight flight) {
-
+        new FlightService(new MFlightRepositoryImpl()).cancelFlight(flight);
     }
 }
