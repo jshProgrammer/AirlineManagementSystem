@@ -1,6 +1,7 @@
 package de.tjjf.Domain.UseCases.Services;
 
 import de.tjjf.Domain.Exceptions.NoSeatsAvailableException;
+import de.tjjf.Domain.UseCases.AddBookingUseCase;
 import de.tjjf.Domain.UseCases.CancelTicketUseCase;
 import de.tjjf.Domain.models.MPayment;
 import de.tjjf.Domain.models.MPerson;
@@ -14,7 +15,9 @@ public class TicketService {
         this.port = port;
     }
 
+    //TODO: Muss hier nicht AddBooking Use Case dranhängen
     public void addBooking(MTicket newBooking, MPayment mPayment) {
+        AddBookingUseCase.addBooking(newBooking, mPayment);
         port.create(newBooking);
     }
 
@@ -24,7 +27,8 @@ public class TicketService {
 
     public void upgradeSeatingClass(int ticketId, MTicket.SeatingClass newSeatingClass) throws NoSeatsAvailableException {
         MTicket ticket = readTicketById(ticketId);
-
+        //TODO: So ungefähr
+        upgradeSeatingClass(ticketId, newSeatingClass);
         //TODO => s. usecase
 
     }

@@ -6,15 +6,15 @@ import java.util.Date;
 
 public class APIAirline implements APIModel {
 
-    private String name;
+    public String name;
 
-    private Date foundationYear;
+    public Date foundationYear;
 
-    private APIAddress address;
+    public APIAddress address;
 
-    private String phoneNumber;
+    public String phoneNumber;
 
-    private String email;
+    public String email;
 
 
     public APIAirline(){}

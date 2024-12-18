@@ -1,7 +1,9 @@
 package de.tjjf.Infrastructure.api.resolvers;
 
 import de.tjjf.Infrastructure.api.InputModels.APIAirlineInput;
+import de.tjjf.Infrastructure.api.mapper.APIAddressMapper;
 import de.tjjf.Infrastructure.api.mapper.APIAirlineMapper;
+import de.tjjf.Infrastructure.api.models.APIAddress;
 import de.tjjf.Infrastructure.api.models.APIAirline;
 import de.tjjf.Adapter.APIAdapter.AirlinePortImpl;
 import graphql.kickstart.tools.GraphQLMutationResolver;
@@ -15,11 +17,14 @@ public class AirlineResolver implements GraphQLQueryResolver, GraphQLMutationRes
 
     //TODO: mapper für address
     public void createAirline(APIAirlineInput airline) {
-        APIAirline apiAirline = new APIAirline(airline.getName(), airline.getFoundationYear(), airline.getAddress(), airline.getPhoneNumber(), airline.getEmail());
+        APIAddress apiAddress = new APIAddress(airline.getAddress().street, airline.getAddress().number, airline.getAddress().zipcode, airline.getAddress().city, airline.getAddress().country);
+        APIAirline apiAirline = new APIAirline(airline.getName(), airline.getFoundationYear(), apiAddress, airline.getPhoneNumber(), airline.getEmail());
         new AirlinePortImpl().createAirline(new APIAirlineMapper().toDomainEntity(apiAirline));
     }
 
-    public void updateAirline(APIAirline airline) {
-        new AirlinePortImpl().updateAirline(new APIAirlineMapper().toDomainEntity(airline));
+    public void updateAirline(APIAirlineInput airline) {
+        APIAddress apiAddress = new APIAddress(airline.getAddress().street, airline.getAddress().number, airline.getAddress().zipcode, airline.getAddress().city, airline.getAddress().country);
+        APIAirline apiAirline = new APIAirline(airline.getName(), airline.getFoundationYear(), apiAddress, airline.getPhoneNumber(), airline.getEmail());
+        new AirlinePortImpl().updateAirline(new APIAirlineMapper().toDomainEntity(apiAirline));
     }
 }

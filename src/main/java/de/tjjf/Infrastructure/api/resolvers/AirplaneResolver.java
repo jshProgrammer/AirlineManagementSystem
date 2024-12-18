@@ -10,13 +10,13 @@ import graphql.kickstart.tools.GraphQLQueryResolver;
 
 public class AirplaneResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
 
+    public APIAirplane readAirplaneBySerialNum(int serialNum ){
+        return new APIAirplaneMapper().toAPIEntity(new AirplanePortImpl().readAirplaneBySerialNum(serialNum));
+    }
+
     public void createAirplane(APIAirplaneInput airplane) {
         APIAirplane apiAirplane = new APIAirplane(airplane.getSerialNum(), airplane.getBelongingAirline(), airplane.isOperable());
         new AirplanePortImpl().createAirplane(new APIAirplaneMapper().toDomainEntity(apiAirplane));
-    }
-
-    public APIAirplane readAirplaneBySerialNum(int serialNum ){
-        return new APIAirplaneMapper().toAPIEntity(new AirplanePortImpl().readAirplaneBySerialNum(serialNum));
     }
 
     public void setOperable(int serialNum, boolean isOperable){

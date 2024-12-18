@@ -115,4 +115,12 @@ public class APIEmployee implements APIModel {
     public void setEmployeeId(int employeeId) {
         this.employeeId = employeeId;
     }
+
+    public String getAirlineName() {
+        return airlineName;
+    }
+
+    public void setAirlineName(String airlineName) {
+        this.airlineName = airlineName;
+    }
 }

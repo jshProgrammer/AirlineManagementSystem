@@ -84,7 +84,6 @@ public class APIEmployeeInput implements APIModelInput {
     public String getAirline() {
         return airlineName;
     }
-
     public void setAirline(String airline) {
         this.airlineName = airline;
     }
