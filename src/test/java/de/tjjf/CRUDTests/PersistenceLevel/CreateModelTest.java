@@ -2,64 +2,109 @@ package de.tjjf.CRUDTests.PersistenceLevel;
 
 import com.stripe.model.Person;
 import de.tjjf.Domain.models.*;
+import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Create.AirlineCreateImpl;
+import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Create.AirplaneCreateImpl;
+import de.tjjf.Infrastructure.persistence.EntityManagerFactorySingleton;
 import de.tjjf.Infrastructure.persistence.entities.*;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CreateModelTest {
 
+    EntityManagerFactory emf = EntityManagerFactorySingleton.getInstance();
+    EntityManager em = emf.createEntityManager();
+
     @Test
-    public void testCreatingAirline(){
-        String name = "TestAirline";
+    public void testCreatingAirline() {
+
+        String name = "TestAirline" + UUID.randomUUID().getMostSignificantBits();
         Date date = new Date();
         String headQuarters = "TestHeadquarters";
         String phoneNumber = "+4915112345678";
         String email = "testmail@gmail.com";
         String address = "testAddress";
 
-        Airline airline = new Airline(name , date, headQuarters, email, phoneNumber, address);
+        AirlineCreateImpl airlineCreate = new AirlineCreateImpl(new Airline(name, date, headQuarters, email, phoneNumber, address));
+        airlineCreate.execute();
 
-        assertEquals(airline.getName(), name);
-        assertEquals(airline.getHeadQuarters(), headQuarters);
-        assertEquals(airline.getFoundationYear(), date);
-        assertEquals(airline.getAddress(), address);
-        assertEquals(airline.getPhoneNumber(), phoneNumber);
-        assertEquals(airline.getMail(), email);
+        Airline retrievedAirline = (Airline) em.createQuery("SELECT a FROM Airline a WHERE a.name = :name")
+                .setParameter("name", name)
+                .getSingleResult();
+
+        assertNotNull(retrievedAirline);
+        assertEquals(retrievedAirline.getName(), name);
+        assertEquals(retrievedAirline.getFoundationYear(), date);
+        assertEquals(retrievedAirline.getHeadQuarters(), headQuarters);
+        assertEquals(retrievedAirline.getAddress(), address);
+        assertEquals(retrievedAirline.getPhoneNumber(), phoneNumber);
+        assertEquals(retrievedAirline.getMail(), email);
+
+        em.getTransaction().begin();
+        em.remove(retrievedAirline);
+        em.getTransaction().commit();
+
+        List<Airline> airlinesAfterDeletion = em.createQuery("SELECT a FROM Airline a WHERE a.name = :name")
+                .setParameter("name", name)
+                .getResultList();
+        assertTrue(airlinesAfterDeletion.isEmpty());
     }
 
     @Test
-    public void testCreatingAirplane(){
+    public void testCreatingAirplane() {
+
         int serialNum = 1234;
         String manufacturer = "TestManufacturer";
         String model = "TestModel";
         int amountOfEconomySeats = 50;
         int amountOfBusinessSeats = 25;
         int amountOfFirstClassSeats = 15;
-        Airline airline = new Airline();
+        Airline airline =  new Airline("TestAirline" + UUID.randomUUID().getMostSignificantBits(),
+                new Date(), "TestHeadquarters",
+                "testairline@gmail.com", "+4915112345678", "TestAddress");
+        AirlineCreateImpl airlineCreate= new AirlineCreateImpl(airline);
+        airlineCreate.execute();
         boolean isOperable = true;
         int maxWeightOfLuggage = 40000;
 
-        Airplane airplane = new Airplane(serialNum, manufacturer, model, amountOfEconomySeats, amountOfBusinessSeats, amountOfFirstClassSeats,  airline, isOperable, maxWeightOfLuggage);
+        AirplaneCreateImpl airplane = new AirplaneCreateImpl( new Airplane(serialNum, manufacturer, model, amountOfEconomySeats,
+                amountOfBusinessSeats, amountOfFirstClassSeats,
+                airline, isOperable, maxWeightOfLuggage));
+        airplane.execute();
 
-        assertEquals(airplane.getSerialNum(), serialNum);
-        assertEquals(airplane.getManufacturer(), manufacturer);
-        assertEquals(airplane.getModel(), model);
-        assertEquals(airplane.getAmoutOfEconomySeats(), amountOfEconomySeats);
-        assertEquals(airplane.getAmoutOfBusinessSeats(), amountOfBusinessSeats);
-        assertEquals(airplane.getAmoutOfFirstClassSeats(), amountOfFirstClassSeats);
-        assertEquals(airplane.getBelongingAirline(), airline);
-        if(isOperable){
-            assertTrue(airplane.isOperatable());
-        }else{
-            assertFalse(airplane.isOperatable());
-        }
-        assertEquals(airplane.getMaxWeightOfLuggage(), maxWeightOfLuggage);
+        Airplane retrievedAirplane = (Airplane) em.createQuery("SELECT a FROM Airplane a WHERE a.serialNum = :serialNum")
+                .setParameter("serialNum", serialNum)
+                .getSingleResult();
+
+        assertNotNull(retrievedAirplane);
+        assertEquals(retrievedAirplane.getSerialNum(), serialNum);
+        assertEquals(retrievedAirplane.getManufacturer(), manufacturer);
+        assertEquals(retrievedAirplane.getModel(), model);
+        assertEquals(retrievedAirplane.getAmoutOfEconomySeats(), amountOfEconomySeats);
+        assertEquals(retrievedAirplane.getAmoutOfBusinessSeats(), amountOfBusinessSeats);
+        assertEquals(retrievedAirplane.getAmoutOfFirstClassSeats(), amountOfFirstClassSeats);
+        assertEquals(retrievedAirplane.getBelongingAirline(), airline);
+        assertEquals(retrievedAirplane.getMaxWeightOfLuggage(), maxWeightOfLuggage);
+        assertEquals(retrievedAirplane.isOperatable(), isOperable);
+
+        em.getTransaction().begin();
+        em.remove(retrievedAirplane);
+        em.remove(airline);
+        em.getTransaction().commit();
+
+        List<Airplane> airplanesAfterDeletion = em.createQuery("SELECT a FROM Airplane a WHERE a.serialNum = :serialNum")
+                .setParameter("serialNum", serialNum)
+                .getResultList();
+        assertTrue(airplanesAfterDeletion.isEmpty());
     }
+
 
     @Test
     public void testCreatingMAirport(){

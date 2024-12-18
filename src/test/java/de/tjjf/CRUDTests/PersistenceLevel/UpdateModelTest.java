@@ -1,11 +1,13 @@
 package de.tjjf.CRUDTests.PersistenceLevel;
 
 import de.tjjf.Domain.models.*;
+import de.tjjf.Infrastructure.persistence.EntityManagerFactorySingleton;
 import de.tjjf.Infrastructure.persistence.entities.*;
+import jakarta.persistence.Persistence;
 import org.glassfish.jaxb.core.v2.TODO;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.api.*;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,90 +24,113 @@ public class UpdateModelTest {
     Flight flight;
     Ticket ticket;
 
+    EntityManagerFactory emf = EntityManagerFactorySingleton.getInstance();
+    EntityManager em = emf.createEntityManager();
+
+    @BeforeEach
+    public void setup() {
+        em = emf.createEntityManager();
+        em.getTransaction().begin(); // Beginne die Transaktion
+    }
+
+    @AfterEach
+    public void teardown() {
+        if (em.getTransaction().isActive()) {
+            em.getTransaction().rollback(); // Rollback nach jedem Test
+        }
+        em.close();
+    }
+
+    @AfterAll
+    public static void closeEntityManagerFactory() {
+        if (emf != null) {
+            emf.close();
+        }
+    }
     @BeforeEach
     public void beforeEach() {
-        //ToDo rename instances
-        String mAirlineName = "TestAirline";
-        Date mAirlineDate = new Date();
-        String mAirlineHeadQuarters = "TestHeadquarters";
+        String airlineName = "TestAirline";
+        Date airlineDate = new Date();
+        String airlineHeadQuarters = "TestHeadquarters";
         String airlineAddress = "testAirlineAddress";
-        String mAirlinePhoneNumber = "+4915112345678";
-        String mAirlineEmail = "testemail@gmail.com";
-        airline = new Airline(mAirlineName , mAirlineDate, mAirlineHeadQuarters, mAirlineEmail, mAirlinePhoneNumber, airlineAddress);
+        String airlinePhoneNumber = "+4915112345678";
+        String airlineEmail = "testemail@gmail.com";
+        airline = new Airline(airlineName , airlineDate, airlineHeadQuarters, airlineEmail, airlinePhoneNumber, airlineAddress);
 
-        int mAirplaneSerialNum = 1234;
-        String mAirplaneManufacturer = "TestManufacturer";
-        String mAirplaneModel = "TestModel";
-        int mAirplaneAmountOfEconomySeats = 50;
-        int mAirplaneAmountOfBusinessSeats = 25;
-        int mAirplaneAmountOfFirstClassSeats = 15;
-        boolean mAirplaneIsOperable = true;
-        int mAirplaneMaxWeightOfLuggage = 40000;
-        airplane = new Airplane(mAirplaneSerialNum, mAirplaneManufacturer, mAirplaneModel, mAirplaneAmountOfEconomySeats, mAirplaneAmountOfBusinessSeats, mAirplaneAmountOfFirstClassSeats, airline, mAirplaneIsOperable, mAirplaneMaxWeightOfLuggage);
+        int airplaneSerialNum = 1234;
+        String airplaneManufacturer = "TestManufacturer";
+        String airplaneModel = "TestModel";
+        int airplaneAmountOfEconomySeats = 50;
+        int airplaneAmountOfBusinessSeats = 25;
+        int airplaneAmountOfFirstClassSeats = 15;
+        boolean airplaneIsOperable = true;
+        int airplaneMaxWeightOfLuggage = 40000;
+        airplane = new Airplane(airplaneSerialNum, airplaneManufacturer, airplaneModel, airplaneAmountOfEconomySeats, airplaneAmountOfBusinessSeats, airplaneAmountOfFirstClassSeats, airline, airplaneIsOperable, airplaneMaxWeightOfLuggage);
 
-        String departureMAirportCode = "departureTestCode";
-        String departureMAirportName = "departureTestName";
-        String departureMAirportCountry = "departureTestCountry";
-        String departureMAirportCity = "departureTestCity";
-        String departureMAirportTimezone = "departureTestTimezone";
-        departureAirport = new Airport(departureMAirportCode, departureMAirportName,departureMAirportCountry, departureMAirportCity, departureMAirportTimezone);
+        String departureAirportCode = "departureTestCode";
+        String departureAirportName = "departureTestName";
+        String departureAirportCountry = "departureTestCountry";
+        String departureAirportCity = "departureTestCity";
+        String departureAirportTimezone = "departureTestTimezone";
+        departureAirport = new Airport(departureAirportCode, departureAirportName, departureAirportCountry, departureAirportCity, departureAirportTimezone);
 
-        String arrivalMAirportCode = "arrivalTestCode";
-        String arrivalMAirportName = "arrivalTestName";
-        String arrivalMAirportCountry = "arrivalTestCountry";
-        String arrivalMAirportCity = "arrivalTestCity";
-        String arrivalMAirportTimezone = "arrivalTestTimezone";
-        arrivalAirport = new Airport(arrivalMAirportCode, arrivalMAirportName,arrivalMAirportCountry, arrivalMAirportCity, arrivalMAirportTimezone);
+        String arrivalAirportCode = "arrivalTestCode";
+        String arrivalAirportName = "arrivalTestName";
+        String arrivalAirportCountry = "arrivalTestCountry";
+        String arrivalAirportCity = "arrivalTestCity";
+        String arrivalAirportTimezone = "arrivalTestTimezone";
+        arrivalAirport = new Airport(arrivalAirportCode, arrivalAirportName, arrivalAirportCountry, arrivalAirportCity, arrivalAirportTimezone);
 
-        long mClientPersonId = 9999999;
-        String mClientFirstName = "TestClientFirstName";
-        String mClientMiddleNames = "TestClientMiddleNames";
-        String mClientLastName = "TestClientLastName";
-        Date mClientDateOfBirth = new Date();
-        String mClientPhoneNumber = "+4915112345678";
+        long clientPersonId = 9999999;
+        String clientFirstName = "TestClientFirstName";
+        String clientMiddleNames = "TestClientMiddleNames";
+        String clientLastName = "TestClientLastName";
+        Date clientDateOfBirth = new Date();
+        String clientPhoneNumber = "+4915112345678";
         String clientAddress = "testClientAddress";
-        String mClientEmail = "testemail@gmail.com";
-        String mClientPassword = "testpassword";
+        String clientEmail = "testemail@gmail.com";
+        String clientPassword = "testpassword";
         List<Ticket> clientTickets = new ArrayList<Ticket>();
-        boolean mClientIsBusinessClient = true;
-        client = new Client(mClientPersonId, mClientFirstName, mClientMiddleNames, mClientLastName, mClientDateOfBirth,  mClientPhoneNumber, clientAddress, mClientEmail, mClientPassword,clientTickets, mClientIsBusinessClient);
+        boolean clientIsBusinessClient = true;
+        client = new Client(clientPersonId, clientFirstName, clientMiddleNames, clientLastName, clientDateOfBirth, clientPhoneNumber, clientAddress, clientEmail, clientPassword, clientTickets, clientIsBusinessClient);
 
-        long mEmployeePersonId = 9999999;
-        String mEmployeeFirstName = "TestEmployeetFirstName";
-        String mEmployeeMiddleNames = "TestEmployeeMiddleNames";
-        String mEmployeeLastName = "TestEmployeeLastName";
-        Date mEmployeeDateOfBirth = new Date();
-        String mEmployeePhoneNumber = "+4915112345678";
+        long employeePersonId = 9999999;
+        String employeeFirstName = "TestEmployeetFirstName";
+        String employeeMiddleNames = "TestEmployeeMiddleNames";
+        String employeeLastName = "TestEmployeeLastName";
+        Date employeeDateOfBirth = new Date();
+        String employeePhoneNumber = "+4915112345678";
         String employeeAddress = "testEmployeeAddress";
-        String mEmployeeEmail = "testemail@gmail.com";
-        String mEmployeePassword = "testpassword";
-        int mEmployeeSalary = 100;
-        String mEmployeePosition = "TestPosition";
-        //ToDo check if different constructor is neccessary
-        Airline mEmployeeMAirline = new Airline();
-        Date mEmployeeHireDate = new Date();
+        String employeeEmail = "testemail@gmail.com";
+        String employeePassword = "testpassword";
+        int employeeSalary = 100;
+        String employeePosition = "TestPosition";
+//ToDo check if different constructor is neccessary
+        Airline employeeAirline = new Airline();
+        Date employeeHireDate = new Date();
         List<Ticket> employeeTickets = new ArrayList<>();
-        employee = new Employee(mEmployeePersonId, mEmployeeFirstName, mEmployeeMiddleNames, mEmployeeLastName, mEmployeeDateOfBirth,  mEmployeePhoneNumber, employeeAddress, mEmployeeEmail, mEmployeePassword,employeeTickets, mEmployeeSalary, mEmployeePosition,mEmployeeMAirline,mEmployeeHireDate);
+        employee = new Employee(employeePersonId, employeeFirstName, employeeMiddleNames, employeeLastName, employeeDateOfBirth, employeePhoneNumber, employeeAddress, employeeEmail, employeePassword, employeeTickets, employeeSalary, employeePosition, employeeAirline, employeeHireDate);
 
-        long mFLightFlightNum = 1234;
-        Date mAirplaneDepartureDateTime = new Date();
-        Date mAirplaneArrivalDateTime = new Date();
-        Date mAirplaneBoardingTime = new Date();
+        long flightFlightNum = 1234;
+        Date airplaneDepartureDateTime = new Date();
+        Date airplaneArrivalDateTime = new Date();
+        Date airplaneBoardingTime = new Date();
         String airplaneFlightStatus = "testFlightStatus";
-        int mAirplaneDuration = 123;
-        Employee mAirplanePilot = new Employee();
-        Employee mAirplaneCopilot = new Employee();
-        flight = new Flight(mFLightFlightNum, airplane, mAirplaneDepartureDateTime, departureAirport, mAirplaneArrivalDateTime, arrivalAirport, mAirplaneBoardingTime, airplaneFlightStatus, mAirplaneDuration, mAirplanePilot, mAirplaneCopilot);
+        int airplaneDuration = 123;
+        Employee airplanePilot = new Employee();
+        Employee airplaneCopilot = new Employee();
+        flight = new Flight(flightFlightNum, airplane, airplaneDepartureDateTime, departureAirport, airplaneArrivalDateTime, arrivalAirport, airplaneBoardingTime, airplaneFlightStatus, airplaneDuration, airplanePilot, airplaneCopilot);
 
-        int mTicketTicketId = 1234;
+        int ticketTicketId = 1234;
         long ticketPersonId = 9999999;
-        Date mTicketDateTimeOfBooking = new Date();
-        int mTicketTotalPrice = 300;
-        int mTicketSeatNum = 15;
+        Date ticketDateTimeOfBooking = new Date();
+        int ticketTotalPrice = 300;
+        int ticketSeatNum = 15;
         String ticketSeatingClass = "testSeatingClass";
         String ticketTicketStatus = "testTicketStatus";
-        int mTicketWeightOfLuggage = 20;
-        ticket = new Ticket(mTicketTicketId, ticketPersonId, flight, mTicketDateTimeOfBooking, mTicketTotalPrice, mTicketSeatNum, ticketSeatingClass, ticketTicketStatus, mTicketWeightOfLuggage);
+        int ticketWeightOfLuggage = 20;
+        ticket = new Ticket(ticketTicketId, ticketPersonId, flight, ticketDateTimeOfBooking, ticketTotalPrice, ticketSeatNum, ticketSeatingClass, ticketTicketStatus, ticketWeightOfLuggage);
+
     }
 
     @Test
