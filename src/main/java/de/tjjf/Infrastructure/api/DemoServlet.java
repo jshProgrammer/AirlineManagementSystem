@@ -24,7 +24,7 @@ public class DemoServlet extends GraphQLHttpServlet {
             //TODO: wie müssen wir hier alle Resolver hinzufügen?
             return SchemaParser.newParser( )
                     .schemaString( schemaString )
-                    .resolvers( new AirlineResolver(), new AirplaneResolver(), new AirportResolver(), new ClientResolver(), new EmployeeResolver(), new FlightResolver( ), new PaymentResolver(), new TicketResolver() )
+                    .resolvers( new AirlineResolver(), new AirplaneResolver(), new AirportResolver(), new ClientResolver(), new EmployeeResolver(), new FlightResolver( ), new TicketResolver() )
                     .build( )
                     .makeExecutableSchema( );
         }

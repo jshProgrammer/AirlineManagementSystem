@@ -17,8 +17,9 @@ public class TicketService {
 
     //TODO: Muss hier nicht AddBooking Use Case dranhängen
     public void addBooking(MTicket newBooking, MPayment mPayment) {
-        AddBookingUseCase.addBooking(newBooking, mPayment);
-        port.create(newBooking);
+        if(AddBookingUseCase.addBooking(newBooking, mPayment)){
+            port.create(newBooking);
+        }
     }
 
     public MTicket readTicketById(int id) {
