@@ -3,6 +3,18 @@ package de.tjjf.Infrastructure.api.InputModels;
 import java.util.Date;
 
 public class APIEmployeeInput implements APIModelInput {
+    public APIEmployeeInput(long employeeId, String firstName, String middleNames, String lastName, Date dateOfBirth, String phoneNumber, APIAddressInput address, String email, String airlineName) {
+        this.employeeId = employeeId;
+        this.firstName = firstName;
+        this.middleNames = middleNames;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.email = email;
+        this.airlineName = airlineName;
+    }
+
     private long employeeId;
 
     private String firstName;

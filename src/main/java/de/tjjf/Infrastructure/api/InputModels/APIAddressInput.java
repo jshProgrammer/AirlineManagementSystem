@@ -1,6 +1,14 @@
 package de.tjjf.Infrastructure.api.InputModels;
 
 public class APIAddressInput implements APIModelInput {
+    public APIAddressInput(String street, int number, int zipcode, String city, String country) {
+        this.street = street;
+        this.number = number;
+        this.zipcode = zipcode;
+        this.city = city;
+        this.country = country;
+    }
+
     // simplification: leave out character after number (e.g. Street 12a => Street 12)
     public String street;
 
@@ -51,4 +59,5 @@ public class APIAddressInput implements APIModelInput {
     public void setCountry(String country) {
         this.country = country;
     }
+
 }

@@ -11,7 +11,7 @@ import graphql.kickstart.tools.GraphQLQueryResolver;
 
 public class FlightResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
 
-    public APIFlight flightByFlightNum(int flightNum) {
+    public APIFlight readFlightByFlightNum(int flightNum) {
         return new APIFlightMapper().toAPIEntity(new FlightPortImpl().readFlightByNum(flightNum));
     }
 }

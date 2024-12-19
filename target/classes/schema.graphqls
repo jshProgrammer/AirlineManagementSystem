@@ -1,7 +1,5 @@
 scalar Date
 scalar Long
-
-#TODO: scalar void noch implementieren
 scalar Void
 
 type MyType {
@@ -100,29 +98,29 @@ type APITicket{
     weightOfLuggage: Int!
 }
 
-type InputAddress {
+input APIAddressInput {
     street: String!,
     number: Int!,
-    zipcode: Int!,
+    zipCode: Int!,
     city: String!
     country: String!
 }
 
-type InputAirline {
+input APIAirlineInput {
     name: String!,
     foundationYear: Date,
-    address: APIAddress!,
+    address: APIAddressInput!,
     phoneNumber: String!,
     email: String!
 }
 
-type InputAirplane{
+input APIAirplaneInput{
     serialNum: Int!,
     belongingAirlineName: String!,
     isOperable: Boolean!
 }
 
-type InputAirport{
+input APIAirportInput{
     code: String!,
     name: String!,
     country: String!,
@@ -130,34 +128,34 @@ type InputAirport{
     timezone: String!
 }
 
-type InputClient{
+input APIClientInput{
     clientID: Long!,
     firstName: String!,
     middleName: String,
     lastName: String!,
     dateOfBith: Date!,
     phoneNumber: String!,
-    address: APIAddress!,
+    address: APIAddressInput!,
     email: String!,
     isBusinessClient: Boolean!
 }
 
-type InputEmployee{
+input APIEmployeeInput{
     employeeID: Long!,
     firstName: String!,
     middleName: String,
     lastName: String!,
     dateOfBith: Date!,
     phoneNumber: String!,
-    address: APIAddress!,
+    address: APIAddressInput!,
     email: String!,
     airlineName: String!
 }
-enum InputFlightStatus {
+enum APIFlightStatusInput {
     scheduled, in_the_air, landed, delayed, canceled
 }
 
-type InputFlight{
+input APIFlightInput{
     flightNum: Long!,
     airplaneSerialNum: Int!,
     departureDateTime: Date!,
@@ -171,18 +169,18 @@ type InputFlight{
     copilotId: Long!
 }
 
-enum InputSeatingClass {
+enum APISeatingClassInput {
     Economy, Business, First
 }
 
-enum InputTicketStatus {
+enum APITicketStatusInput {
     paid, unpaid, canceled
 }
 
-type InputTicket{
+input APITicketInput{
     ticketID: Int!,
     personID: Long!,
-    isCLient: Boolean!,
+    isClient: Boolean!,
     flightNum: Long!,
     dateTimeOfBooking: Date!,
     totalPrice: Int!,
@@ -196,38 +194,46 @@ type InputTicket{
 
 #TODO: probably still add e.g. SeatingClassInput
 type Query {
+    #readFlightByNum(flightNum: Long): APIFlight
+
+    #verifyPassword(employee: APIEmployeeInput, password: String): Boolean
+    #readEmployeeById(id: Long): APIEmployee
+
+    #readClientById(id: Long): APIClient
+
+    #readTicketById(id: Int): APITicket
+
+    readAirportByCode(code: String): APIAirport
+
+    readFlightByFlightNum(flightNum: Int): APIFlight
+    readAirlineByName(name: String): APIAirline
+
+    #readAirlineByName( name: String): APIAirline
+
+    readAirplaneBySerialNum(serialNum: Int): APIAirplane
+}
+
+type Mutation {
     createFlight(flight: APIFlightInput): Void
-    readFlightByNum(flightNum: Float): APIFlight
     updateFlight(flight: APIFlightInput): Void
     cancelFlight(flight: APIFlightInput): Void
 
-    createEmployee(employee: APIEmployeeInput): Void
-    verifyPassword(employee: APIEmployeeInput, password: String): Boolean
-    readEmployeeById(id: Float): APIEmployee
-    updateEmployee(employee: APIEmployeeInput): Void
+    #createEmployee(employee: APIEmployeeInput): Void
+    #updateEmployee(employee: APIEmployeeInput): Void
 
-    createClient(client: APIClientInput): Void
-    readClientById(id: Float): APIClient
-    updateClient(client: APIClientInput): APIClient
+    #createClient(client: APIClientInput): Void
+    #updateClient(client: APIClientInput): APIClient
 
-    addBooking(newBooking: TicketInput): Void
-    readTicketById(id: Int): APITicket
-    upgradeSeatingClass(newSeatingClass: SeatingClassInput): Void
-    upgradeLuggageWeight(newWeight: int): Void
-    cancelTicket(person: APIPersonInput, flightNum: int): Void
+    #addBooking(newBooking: TicketInput): Void
+    #upgradeSeatingClass(newSeatingClass: SeatingClassInput): Void
+    #upgradeLuggageWeight(newWeight: int): Void
+    #cancelTicket(person: APIPersonInput, flightNum: int): Void
 
     createAirport(airport: APIAirportInput): Void
-    readAirportByCode(code: String): APIAirport
-
-    flightByFlightNum(flightNum: Int): APIFlight
-    readAirlineByName(name: String): APIAirline
 
     createAirline(airline: APIAirlineInput): Void
-    readAirlineByName( name: String): APIAirline
-    updateAirline(airline: APIAirline): Void
+    updateAirline(airline: APIAirlineInput): Void
 
-    createAirplane(airplane: APIAirplane) Void
-    readAirplaneBySerialNumber(serialNum: Int): APIAirplane
-    setOperable(serialNum: Int, isOperable Boolean): Void
-
+    createAirplane(airplane: APIAirplaneInput): Void
+    #setOperable(serialNum: Int, isOperable Boolean): Void
 }

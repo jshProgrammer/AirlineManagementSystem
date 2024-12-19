@@ -3,6 +3,13 @@ package de.tjjf.Infrastructure.api.InputModels;
 import java.util.Date;
 
 public class APIAirlineInput implements APIModelInput {
+    public APIAirlineInput(String name, Date foundationYear, APIAddressInput address, String phoneNumber, String email) {
+        this.name = name;
+        this.foundationYear = foundationYear;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
 
     private String name;
 
@@ -49,6 +56,12 @@ public class APIAirlineInput implements APIModelInput {
 
     public Date getFoundationYear() {
         return foundationYear;
+    }
+
+    public String getFoundationYearInRFC3339() {
+        return foundationYear.getYear() + "-" +
+                String.format("%02d", foundationYear.getMonth()) + "-" +
+                String.format("%02d", foundationYear.getDate());
     }
 
     public void setFoundationYear(Date foundationYear) {

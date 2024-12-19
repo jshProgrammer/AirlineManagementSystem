@@ -8,6 +8,12 @@ public class APIAirplaneInput implements APIModelInput {
 
     private boolean isOperable;
 
+    public APIAirplaneInput(int serialNum, String belongingAirline, boolean operable) {
+        this.serialNum=serialNum;
+        this.belongingAirlineName=belongingAirline;
+        this.isOperable=operable;
+    }
+
     public String getBelongingAirline() {
         return belongingAirlineName;
     }
