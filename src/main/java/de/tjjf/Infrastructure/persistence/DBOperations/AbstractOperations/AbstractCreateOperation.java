@@ -14,7 +14,7 @@ public class AbstractCreateOperation<T extends Model> extends AbstractDatabaseOp
 
     @Override
     public NoContentResult run() {
-        this.em.persist( this.modelToPersist );
+        em.persist(this.modelToPersist);
         return new NoContentResult();
     }
 }

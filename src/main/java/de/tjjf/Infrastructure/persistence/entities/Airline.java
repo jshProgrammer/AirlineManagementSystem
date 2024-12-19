@@ -1,23 +1,34 @@
 package de.tjjf.Infrastructure.persistence.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 @Entity
 public class Airline implements Model {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable=false)
     private String name;
 
+    @Column(nullable=false)
     private Date foundationYear;
 
+    @Column(nullable=false)
     private String headQuarters;
+
+    @Column(nullable=false)
     private String mail;
+
+    @Column(nullable=false)
     private String phoneNumber;
+
+    @Column(nullable=false)
     private String address;
+
+    @OneToMany(mappedBy = "belongingAirline", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Airplane> airplanes = new ArrayList<>();
 
     //TODO: sollen wir hier mit OneToMany auch die Flugzeuge speichern => eig wird das ja selten abgerufen
 

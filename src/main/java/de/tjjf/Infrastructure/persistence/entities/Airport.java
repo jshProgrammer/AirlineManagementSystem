@@ -7,7 +7,6 @@ public class Airport implements Model {
 
     @Column(nullable = false)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String code;
 
     @Column(nullable = false)

@@ -9,17 +9,18 @@ public class Flight implements Model {
 
     //TODO: evtl @JoinColumn damit Anzeigen aller Buchungen
     @Id
+    @Column(nullable=false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long flightNum;
 
-    @Column
+    @JoinColumn
     @ManyToOne()
     private Airplane airplane;
 
     @Column
     private Date departureDateTime;
 
-    @Column
+
     @OneToOne
     private Airport departureAirport;
 
@@ -40,10 +41,14 @@ public class Flight implements Model {
 
     //TODO: evtl ManyToOne-Beziehung?
     @OneToOne()
+    //@JoinColumn(name = "employee_id")
     private Employee pilot;
 
     @OneToOne()
+    //@JoinColumn(name = "employee_id")
     private Employee copilot;
+
+
 
 
     public Flight(){}

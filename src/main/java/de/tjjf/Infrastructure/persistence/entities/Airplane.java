@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 @Entity
 public class Airplane implements Model {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable=false)
     private int serialNum;
 
     @Column(nullable=false)
@@ -23,7 +23,8 @@ public class Airplane implements Model {
     @Column(nullable=false)
     private int amoutOfFirstClassSeats;
 
-    @ManyToOne()
+    @ManyToOne
+    @JoinColumn(name = "airline_id")
     private Airline belongingAirline;
 
     @Column(nullable=false)

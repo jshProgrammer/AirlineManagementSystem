@@ -13,8 +13,17 @@ public class Ticket implements Model {
 
     private long personId;
 
-    //TODO: evtl eher Flight statt int als Datentyp?
-    //Umbenennung der Variable
+    //@ManyToOne
+    //@JoinColumn(name = "employee_id", nullable = false)
+    //private Employee employee;
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
+
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
+
     @ManyToOne()
     private Flight flightNum;
 

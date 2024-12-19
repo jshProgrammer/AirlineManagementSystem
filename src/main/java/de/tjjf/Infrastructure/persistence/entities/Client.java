@@ -11,6 +11,7 @@ public class Client implements Model {
     //TODO: hier evtl. mapped-Attribut nötig
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable=false)
     //@JoinColumn(name = "personId", referencedColumnName = "personID s")
     private long personId;
 
@@ -38,8 +39,7 @@ public class Client implements Model {
     @Column(nullable = false)
     private String hashedPassword;
 
-    @Column(nullable = false)
-    @OneToMany
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Ticket> tickets;
 
     @Column(nullable=false)

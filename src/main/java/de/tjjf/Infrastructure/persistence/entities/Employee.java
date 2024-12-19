@@ -7,6 +7,7 @@ import java.util.List;
 
 @Entity
 public class Employee implements Model {
+
     @Column(nullable=false)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,8 +37,7 @@ public class Employee implements Model {
     @Column(nullable = false)
     private String hashedPassword;
 
-    @Column(nullable = false)
-    @OneToMany
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL,  orphanRemoval = true)
     private List<Ticket> tickets;
 
     @Column(nullable=false)

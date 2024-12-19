@@ -1,21 +1,20 @@
 package de.tjjf.CRUDTests.PersistenceLevel;
 
-import de.tjjf.Domain.models.*;
+import com.stripe.model.billingportal.Session;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Create.*;
-import de.tjjf.Infrastructure.persistence.EntityManagerFactorySingleton;
+import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Delete.*;
+import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Read.*;
+import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Update.*;
 import de.tjjf.Infrastructure.persistence.entities.*;
 import org.junit.jupiter.api.*;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UpdateModelTest {
-    EntityManagerFactory emf = EntityManagerFactorySingleton.getInstance();
-    EntityManager em = emf.createEntityManager();
+
     static Airline airline;
     static Airplane airplane;
     static Airport departureAirport;
@@ -25,103 +24,178 @@ public class UpdateModelTest {
     static Flight flight;
     static Ticket ticket;
 
-    @BeforeAll
+   @BeforeAll
     public static void setup() {
-        EntityManager em = EntityManagerFactorySingleton.getInstance().createEntityManager();
-        em.getTransaction().begin();
+       String salt = UUID.randomUUID().toString();
 
-        airline = new Airline("TestAirline", new Date(), "TestHeadquarters", "testemail@gmail.com", "+4915112345678", "TestAddress");
-        AirlineCreateImpl airlineCreate = new AirlineCreateImpl(airline);
-        airlineCreate.execute();
+        airline = new Airline(
+                "TestAirline_" + salt,
+                new Date(),
+                "TestHeadquarters",
+                "testemail_" + salt + "@gmail.com",
+                "+4915112345678",
+                "TestAddress"
+        );
+        new AirlineCreateImpl(airline).execute();
 
-        airplane = new Airplane(9999999, "TestManufacturer", "TestModel", 50, 25, 15, airline, true, 40000);
-        AirplaneCreateImpl airplaneCreate = new AirplaneCreateImpl(airplane);
-        airplaneCreate.execute();
+        airplane = new Airplane(
+                9999999 + salt.hashCode(),
+                "TestManufacturer",
+                "TestModel",
+                50,
+                25,
+                15,
+                airline,
+                true,
+                40000
+        );
+        new AirplaneCreateImpl(airplane).execute();
 
-        departureAirport = new Airport("DPT", "Departure Airport", "CountryA", "CityA", "TimezoneA");
-        AirportCreateImpl departureAirportCreate = new AirportCreateImpl(departureAirport);
-        departureAirportCreate.execute();
+        departureAirport = new Airport(
+                "DPT_" + salt,
+                "Departure Airport",
+                "CountryA",
+                "CityA",
+                "TimezoneA"
+        );
+        new AirportCreateImpl(departureAirport).execute();
 
-        arrivalAirport = new Airport("ARR", "Arrival Airport", "CountryB", "CityB", "TimezoneB");
-        AirportCreateImpl arrivalAirportCreate = new AirportCreateImpl(arrivalAirport);
-        arrivalAirportCreate.execute();
+        arrivalAirport = new Airport(
+                "ARR_" + salt,
+                "Arrival Airport",
+                "CountryB",
+                "CityB",
+                "TimezoneB"
+        );
+        new AirportCreateImpl(arrivalAirport).execute();
 
-        client = new Client(8888888, "TestFirstName", "TestMiddleNames", "TestLastName", new Date(), "+4915112345678", "TestAddress", "testemail@gmail.com", "TestPassword", new ArrayList<>(), true);
-        ClientCreateImpl clientCreate = new ClientCreateImpl(client);
-        clientCreate.execute();
+        client = new Client(
+                8888888 + salt.hashCode(),
+                "TestFirstName",
+                "TestMiddleNames",
+                "TestLastName",
+                new Date(),
+                "+4915112345678",
+                "TestAddress",
+                "testemail_" + salt + "@gmail.com",
+                "TestPassword",
+                new ArrayList<>(),
+                true
+        );
+        new ClientCreateImpl(client).execute();
 
-        employee = new Employee(7777777, "TestEmployee", "TestMiddleNames", "TestLastName", new Date(), "+4915112345678", "TestAddress", "employee@gmail.com", "password", new ArrayList<>(), 100, "TestPosition", airline, new Date());
-        EmployeeCreateImpl employeeCreate = new EmployeeCreateImpl(employee);
-        employeeCreate.execute();
+        employee = new Employee(
+                7777777 + salt.hashCode(),
+                "TestEmployee",
+                "TestMiddleNames",
+                "TestLastName",
+                new Date(),
+                "+4915112345678",
+                "TestAddress",
+                "employee_" + salt + "@gmail.com",
+                "password",
+                new ArrayList<>(),
+                100,
+                "TestPosition",
+                airline,
+                new Date()
+        );
+        new EmployeeCreateImpl(employee).execute();
 
-        flight = new Flight(6666666, airplane, new Date(), departureAirport, new Date(), arrivalAirport, new Date(), "testStatus", 123, employee, employee);
-        FlightCreateImpl flightCreate = new FlightCreateImpl(flight);
-        flightCreate.execute();
+        flight = new Flight(
+                6666666 + salt.hashCode(),
+                airplane,
+                new Date(),
+                departureAirport,
+                new Date(),
+                arrivalAirport,
+                new Date(),
+                "testStatus",
+                123,
+                employee,
+                employee
+        );
+        new FlightCreateImpl(flight).execute();
 
-        ticket = new Ticket(5555555, 8888888, flight, new Date(), 300, 15, "Economy", "Active", 20);
-        TicketCreateImpl ticketCreate = new TicketCreateImpl(ticket);
-        ticketCreate.execute();
-
-        em.getTransaction().commit();
-        em.close();
+        ticket = new Ticket(
+                5555555 + salt.hashCode(),
+                client.getPersonId(),
+                flight,
+                new Date(),
+                300,
+                15,
+                "Economy",
+                "Active",
+                20
+        );
+        new TicketCreateImpl(ticket).execute();
     }
+
+
 
     @AfterAll
     public static void teardown() {
-        EntityManager em = EntityManagerFactorySingleton.getInstance().createEntityManager();
-        em.getTransaction().begin();
-
-        em.remove(em.find(Ticket.class, ticket.getTicketId()));
-        em.remove(em.find(Flight.class, flight.getFlightNum()));
-        em.remove(em.find(Airplane.class, airplane.getSerialNum()));
-        em.remove(em.find(Airport.class, departureAirport.getCode()));
-        em.remove(em.find(Airport.class, arrivalAirport.getCode()));
-        em.remove(em.find(Employee.class, employee.getPersonId()));
-        em.remove(em.find(Client.class, client.getPersonId()));
-        em.remove(em.find(Airline.class, airline.getName()));
-
-        em.getTransaction().commit();
-        em.close();
+        if (ticket != null) {
+            new TicketDeleteImpl(ticket.getTicketId()).execute();
+        }
+        if (flight != null) {
+            new FlightDeleteImpl(flight.getFlightNum()).execute();
+        }
+        if (airplane != null) {
+            new AirplaneDeleteImpl(airplane.getSerialNum()).execute();
+        }
+        if (departureAirport != null) {
+            new AirportDeleteImpl(departureAirport.getCode()).execute();
+        }
+        if (arrivalAirport != null) {
+            new AirportDeleteImpl(arrivalAirport.getCode()).execute();
+        }
+        if (employee != null) {
+            new EmployeeDeleteImpl(employee.getPersonId()).execute();
+        }
+        if (client != null) {
+            new ClientDeleteImpl(client.getPersonId()).execute();
+        }
+        if (airline != null) {
+            new AirlineDeleteImpl(airline.getName()).execute();
+        }
     }
 
 
+
     @Test
-    public void testUpdateMAirline() {
-        String updatedName = "UpdatedAirline";
+    public void testUpdateAirline() {
+        //String updatedName = "UpdatedAirline";
         String updatedHeadquarters = "UpdatedHeadquarters";
         String updatedEmail = "updatedEmail@gmail.com";
         String updatedPhoneNumber = "+4915198765432";
         String updatedAddress = "updatedAddress";
 
-        em.getTransaction().begin();
-        Airline airline = em.createQuery("SELECT a FROM Airline a", Airline.class).getSingleResult();
-        airline.setName(updatedName);
+        //airline.setName(updatedName);
         airline.setHeadQuarters(updatedHeadquarters);
         airline.setMail(updatedEmail);
         airline.setPhoneNumber(updatedPhoneNumber);
         airline.setAddress(updatedAddress);
-        em.merge(airline);
-        em.getTransaction().commit();
 
-        Airline updatedAirline = em.createQuery("SELECT a FROM Airline a", Airline.class).getSingleResult();
-        assertEquals(updatedAirline.getName(), updatedName);
-        assertEquals(updatedAirline.getHeadQuarters(), updatedHeadquarters);
-        assertEquals(updatedAirline.getMail(), updatedEmail);
-        assertEquals(updatedAirline.getPhoneNumber(), updatedPhoneNumber);
-        assertEquals(updatedAirline.getAddress(), updatedAddress);
+        new AirlineUpdateImpl(airline).execute();
+
+
+        Airline updatedAirline = new AirlineReadImpl(airline.getName()).execute().model;
+        //assertEquals(updatedName, updatedAirline.getName());
+        assertEquals(updatedHeadquarters, updatedAirline.getHeadQuarters());
+        assertEquals(updatedEmail, updatedAirline.getMail());
+        assertEquals(updatedPhoneNumber, updatedAirline.getPhoneNumber());
+        assertEquals(updatedAddress, updatedAirline.getAddress());
     }
 
     @Test
-    public void testUpdateMAirplane() {
-        boolean updatedIsOperable = false;
-        em.getTransaction().begin();
-        Airplane airplane = em.createQuery("SELECT a FROM Airplane a", Airplane.class).getSingleResult();
-        airplane.setOperatable(updatedIsOperable);
-        em.merge(airplane);
-        em.getTransaction().commit();
+    public void testUpdateAirplane() {
+        boolean updatedOperatable = false;
 
-        Airplane updatedAirplane = em.createQuery("SELECT a FROM Airplane a", Airplane.class).getSingleResult();
-        assertEquals(updatedAirplane.isOperatable(), updatedIsOperable);
+        airplane.setOperatable(updatedOperatable);
+
+        new AirplaneUpdateImpl(airplane).execute();
+        assertEquals(updatedOperatable, new AirplaneReadImpl(airplane.getSerialNum()).execute().model.isOperatable());
     }
 
     @Test
@@ -131,34 +205,26 @@ public class UpdateModelTest {
         String updatedCity = "UpdatedCity";
         String updatedTimezone = "UpdatedTimezone";
 
-        em.getTransaction().begin();
-        Airport departureAirport = em.createQuery("SELECT a FROM Airport a WHERE a.code = 'DPT'", Airport.class).getSingleResult();
         departureAirport.setName(updatedName);
         departureAirport.setCountry(updatedCountry);
         departureAirport.setCity(updatedCity);
         departureAirport.setTimezone(updatedTimezone);
-        em.merge(departureAirport);
-        em.getTransaction().commit();
 
-        Airport updatedAirport = em.createQuery("SELECT a FROM Airport a WHERE a.code = 'DPT'", Airport.class).getSingleResult();
-        assertEquals(updatedAirport.getName(), updatedName);
-        assertEquals(updatedAirport.getCountry(), updatedCountry);
-        assertEquals(updatedAirport.getCity(), updatedCity);
-        assertEquals(updatedAirport.getTimezone(), updatedTimezone);
+        new AirportUpdateImpl(departureAirport).execute();
+        Airport updatedAirport = new AirportReadImpl(departureAirport.getCode()).execute().model;
+
+        assertEquals(updatedName, updatedAirport.getName());
+        assertEquals(updatedCountry, updatedAirport.getCountry());
+        assertEquals(updatedCity, updatedAirport.getCity());
+        assertEquals(updatedTimezone, updatedAirport.getTimezone());
     }
 
     @Test
     public void testUpdateClient() {
         boolean updatedIsBusinessClient = false;
-
-        em.getTransaction().begin();
-        Client client = em.createQuery("SELECT c FROM Client c", Client.class).getSingleResult();
         client.setBusinessClient(updatedIsBusinessClient);
-        em.merge(client);
-        em.getTransaction().commit();
-
-        Client updatedClient = em.createQuery("SELECT c FROM Client c", Client.class).getSingleResult();
-        assertEquals(updatedClient.isBusinessClient(), updatedIsBusinessClient);
+        new ClientUpdateImpl(client).execute();
+        assertEquals(updatedIsBusinessClient, new ClientReadImpl(client.getPersonId()).execute().model.isBusinessClient());
     }
 
     @Test
@@ -166,43 +232,32 @@ public class UpdateModelTest {
         int updatedSalary = 200;
         String updatedPosition = "UpdatedPosition";
 
-        em.getTransaction().begin();
-        Employee employee = em.createQuery("SELECT e FROM Employee e", Employee.class).getSingleResult();
         employee.setSalary(updatedSalary);
         employee.setPosition(updatedPosition);
-        em.merge(employee);
-        em.getTransaction().commit();
 
-        Employee updatedEmployee = em.createQuery("SELECT e FROM Employee e", Employee.class).getSingleResult();
-        assertEquals(updatedEmployee.getSalary(), updatedSalary);
-        assertEquals(updatedEmployee.getPosition(), updatedPosition);
+        new EmployeeUpdateImpl(employee).execute();
+
+        Employee updatedEmployee = new EmployeeReadImpl(employee.getPersonId()).execute().model;
+
+        assertEquals(updatedSalary, updatedEmployee.getSalary());
+        assertEquals(updatedPosition, updatedEmployee.getPosition());
     }
 
     @Test
     public void testUpdateFlight() {
         String updatedStatus = "UpdatedStatus";
-
-        em.getTransaction().begin();
-        Flight flight = em.createQuery("SELECT f FROM Flight f", Flight.class).getSingleResult();
         flight.setStatus(updatedStatus);
-        em.merge(flight);
-        em.getTransaction().commit();
-
-        Flight updatedFlight = em.createQuery("SELECT f FROM Flight f", Flight.class).getSingleResult();
-        assertEquals(updatedFlight.getStatus(), updatedStatus);
+        new FlightUpdateImpl(flight).execute();
+        assertEquals(updatedStatus, new FlightReadImpl(flight.getFlightNum()).execute().model.getStatus());
     }
 
     @Test
     public void testUpdateTicket() {
         String updatedTicketStatus = "UpdatedTicketStatus";
-
-        em.getTransaction().begin();
-        Ticket ticket = em.createQuery("SELECT t FROM Ticket t", Ticket.class).getSingleResult();
         ticket.setTicketStatus(updatedTicketStatus);
-        em.merge(ticket);
-        em.getTransaction().commit();
-
-        Ticket updatedTicket = em.createQuery("SELECT t FROM Ticket t", Ticket.class).getSingleResult();
-        assertEquals(updatedTicket.getTicketStatus(), updatedTicketStatus);
+        new TicketUpdateImpl(ticket).execute();
+        assertEquals(updatedTicketStatus, new TicketReadImpl(ticket.getTicketId()).execute().model.getTicketStatus());
     }
+
+
 }
