@@ -3,6 +3,19 @@ package de.tjjf.Infrastructure.api.InputModels;
 import java.util.Date;
 
 public class APIFlightInput implements APIModelInput {
+    public APIFlightInput(long flightNum, int airplaneSerialNum, Date departureDateTime, String departureAirportCode, Date arrivalDateTime, String arrivalAirportCode, Date boardingTime, FlightStatus status, int duration, long pilotId, long copilotId) {
+        this.flightNum = flightNum;
+        this.airplaneSerialNum = airplaneSerialNum;
+        this.departureDateTime = departureDateTime;
+        this.departureAirportCode = departureAirportCode;
+        this.arrivalDateTime = arrivalDateTime;
+        this.arrivalAirportCode = arrivalAirportCode;
+        this.boardingTime = boardingTime;
+        this.status = status;
+        this.duration = duration;
+        this.pilotId = pilotId;
+        this.copilotId = copilotId;
+    }
 
     public enum FlightStatus { scheduled, in_the_air, landed, delayed, canceled }
 

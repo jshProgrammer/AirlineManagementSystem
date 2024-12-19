@@ -1,6 +1,13 @@
 package de.tjjf.Infrastructure.api.InputModels;
 
 public class APIPaymentInput implements APIModelInput {
+    public APIPaymentInput(String cardNumber, String expMonth, String expYear, String cvc) {
+        this.cardNumber = cardNumber;
+        this.expMonth = expMonth;
+        this.expYear = expYear;
+        this.cvc = cvc;
+    }
+
     private String cardNumber;
     private String expMonth;
     private String expYear;

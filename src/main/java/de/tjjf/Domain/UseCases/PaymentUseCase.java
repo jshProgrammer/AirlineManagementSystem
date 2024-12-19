@@ -41,9 +41,9 @@ public class PaymentUseCase {
         */
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         boolean a = paymentCall(1000);
         System.out.println(a);
 
-    }
+    }*/
 }

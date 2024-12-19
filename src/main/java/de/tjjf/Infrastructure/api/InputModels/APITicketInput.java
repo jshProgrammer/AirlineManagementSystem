@@ -3,6 +3,20 @@ package de.tjjf.Infrastructure.api.InputModels;
 import java.util.Date;
 
 public class APITicketInput implements APIModelInput {
+    public APITicketInput(int ticketId, long personId, boolean isClient, long flightNum, Date dateTimeOfBooking, int totalPrice, int seatNum, SeatingClass seatingClass, TicketStatus ticketStatus, int weightOfLuggage) {
+        this.ticketId = ticketId;
+        this.personId = personId;
+        this.isClient = isClient;
+        this.flightNum = flightNum;
+        this.dateTimeOfBooking = dateTimeOfBooking;
+        this.totalPrice = totalPrice;
+        this.seatNum = seatNum;
+        this.seatingClass = seatingClass;
+        this.ticketStatus = ticketStatus;
+        this.weightOfLuggage = weightOfLuggage;
+    }
+
+
     //TODO: sollen die enums hier wirklich drin bleiben?
     public enum SeatingClass { Economy, Business, First }
 

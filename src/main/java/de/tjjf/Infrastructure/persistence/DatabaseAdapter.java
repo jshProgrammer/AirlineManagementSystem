@@ -53,7 +53,7 @@ public class DatabaseAdapter implements DataAccess {
             case MPerson mPerson -> new PersonMapper();
             //case MTicket mBooking -> new BookingMapper();
             //case MClient mClient -> new ClientMapper();
-            //case MEmployee mEmployee -> new EmployeeMapper();
+            //case MEmployee mEmployee -> new EmployeeMapperInput();
             //case MFlight mFlight -> new FlightMapper();
             default -> throw new DataAccessException("No entity of this type existing");
         };
@@ -98,7 +98,7 @@ public class DatabaseAdapter implements DataAccess {
         return (MClient) read(Client.class, personId, new ClientMapper());
     }*/
     /*public MEmployee readEmployee(int employeeid) {
-        return (MEmployee) read(Employee.class, employeeid, new EmployeeMapper());
+        return (MEmployee) read(Employee.class, employeeid, new EmployeeMapperInput());
     }*/
     /*public MFlight readFlight(long flightnum) {
         return  (MFlight) read(Flight.class, flightnum, new FlightMapper());
@@ -158,7 +158,7 @@ public class DatabaseAdapter implements DataAccess {
             case MPerson mPerson -> new PersonMapper();
             //case MTicket mBooking -> new BookingMapper();
             //case MClient mClient -> new ClientMapper();
-            //case MEmployee mEmployee -> new EmployeeMapper();
+            //case MEmployee mEmployee -> new EmployeeMapperInput();
             //case MFlight mFlight -> new FlightMapper();
             default -> throw new DataAccessException("No entity of this type existing");
         };
