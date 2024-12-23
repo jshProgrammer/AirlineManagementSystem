@@ -1,10 +1,7 @@
-package de.tjjf.Infrastructure.Client.ClientOperations.AbstractOperations;
+package de.tjjf.Infrastructure.Client.ClientOperations.APIOperations;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.tjjf.Infrastructure.Client.ClientOperations.results.AbstractResult;
-import de.tjjf.Infrastructure.api.models.APIAirline;
-import de.tjjf.Infrastructure.api.models.APIModel;
 
 import java.io.IOException;
 import java.net.URI;

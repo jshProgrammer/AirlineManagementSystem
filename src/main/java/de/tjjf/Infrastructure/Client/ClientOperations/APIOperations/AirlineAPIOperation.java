@@ -1,6 +1,5 @@
-package de.tjjf.Infrastructure.Client.ClientOperations.ImplOperations;
+package de.tjjf.Infrastructure.Client.ClientOperations.APIOperations;
 
-import de.tjjf.Infrastructure.Client.ClientOperations.AbstractOperations.AbstractAPIOperation;
 import de.tjjf.Infrastructure.api.InputModels.APIAirlineInput;
 import de.tjjf.Infrastructure.api.models.APIAirline;
 

@@ -65,6 +65,12 @@ public class APIEmployeeInput implements APIModelInput {
         return dateOfBirth;
     }
 
+    public String getDateOfBirthInRFC3339() {
+        return dateOfBirth.getYear() + "-" +
+                String.format("%02d", dateOfBirth.getMonth()) + "-" +
+                String.format("%02d", dateOfBirth.getDate());
+    }
+
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }

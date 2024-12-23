@@ -15,8 +15,8 @@ public class EmployeeResolver implements GraphQLQueryResolver, GraphQLMutationRe
         new EmployeePortImpl().createEmployee(new APIEmployeeMapper().toDomainEntity(apiEmployee));
     }
 
-    public APIEmployee readEmployeeByID(long id){
-        return new APIEmployeeMapper().toAPIEntity(new EmployeePortImpl().readEmployeeById(id));
+    public APIEmployee readEmployeeById(long employeeId){
+        return new APIEmployeeMapper().toAPIEntity(new EmployeePortImpl().readEmployeeById(employeeId));
     }
 
     public void updateEmloyee(APIEmployeeInput employee) {

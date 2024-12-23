@@ -11,6 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 public class AuthenticationUseCase {
+    public String token;
 
     public static void main(String[] args) {
         authenticate("testest", "testtestse");
@@ -41,6 +42,14 @@ public class AuthenticationUseCase {
             System.out.println(e.getMessage());
             throw new AuthException("Authentication failed, Username or Password are not Valid", e);
         }
+    }
+
+    public boolean isAuthorized() {
+        return token != null && !token.isEmpty();
+    }
+
+    public String getToken() {
+        return token;
     }
 
 }

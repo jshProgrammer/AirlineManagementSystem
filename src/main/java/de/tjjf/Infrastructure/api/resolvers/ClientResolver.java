@@ -13,7 +13,7 @@ import graphql.kickstart.tools.GraphQLQueryResolver;
 public class ClientResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
 
     public void createClient(APIClientInput client){
-        APIClient apiClient = new ClientMapperInput().toClient(client);
+        APIClient apiClient = new ClientMapperInput().toDomain(client);
         new ClientPortImpl().createClient(new APIClientMapper().toDomainEntity(apiClient));
     }
 
@@ -22,7 +22,7 @@ public class ClientResolver implements GraphQLQueryResolver, GraphQLMutationReso
     }
 
     public void updateClient(APIClientInput client){
-        APIClient apiClient = new ClientMapperInput().toClient(client);
+        APIClient apiClient = new ClientMapperInput().toDomain(client);
         new ClientPortImpl().updateClient(new APIClientMapper().toDomainEntity(apiClient));
     }
 

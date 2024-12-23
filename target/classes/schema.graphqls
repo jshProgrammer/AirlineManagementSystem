@@ -145,7 +145,7 @@ input APIEmployeeInput{
     firstName: String!,
     middleName: String,
     lastName: String!,
-    dateOfBith: Date!,
+    dateOfBirth: Date!,
     phoneNumber: String!,
     address: APIAddressInput!,
     email: String!,
@@ -190,44 +190,56 @@ input APITicketInput{
     weightOfLuggage: Int!
 }
 
+input APIPaymentInput {
+    cardNumber: String!,
+    expMont: String!,
+    expYear: String!,
+    cvv: Int!
+}
+
 #TODO: nochmal prüfen => eig haben InputModels wohl keine id
 
-#TODO: probably still add e.g. SeatingClassInput
 type Query {
-    #readFlightByNum(flightNum: Long): APIFlight
-
     #verifyPassword(employee: APIEmployeeInput, password: String): Boolean
-    #readEmployeeById(id: Long): APIEmployee
+    #TODO: readEmployeeById funktioniert noch nicht => Vermutung: wegen float/long
+    #readEmployeeById(employeeId: Float): APIEmployee
 
-    #readClientById(id: Long): APIClient
+    #TODO: readClientById funktioniert noch nicht => Vermutung: wegen float/long
+    #readClientById(clientId: Long): APIClient
 
-    #readTicketById(id: Int): APITicket
+    #TODO: readTicketById funktioniert noch nicht
+    readTicketById(ticketId: Int): APITicket
 
     readAirportByCode(code: String): APIAirport
 
     readFlightByFlightNum(flightNum: Int): APIFlight
     readAirlineByName(name: String): APIAirline
 
-    #readAirlineByName( name: String): APIAirline
-
     readAirplaneBySerialNum(serialNum: Int): APIAirplane
 }
 
 type Mutation {
-    createFlight(flight: APIFlightInput): Void
-    updateFlight(flight: APIFlightInput): Void
-    cancelFlight(flight: APIFlightInput): Void
+    #TODO: überall noch wegen enums Probleme
+    #createFlight(flight: APIFlightInput): Void
+    #updateFlight(flight: APIFlightInput): Void
+    #TODO: Parameter geändert => nur noch int -> prüfen, ob an allen Stellen geändert
+    #cancelFlight(flightNum: Int): Void
 
+    #TODO: die folgenden vier Methoden funktionieren noch nicht
     #createEmployee(employee: APIEmployeeInput): Void
     #updateEmployee(employee: APIEmployeeInput): Void
 
     #createClient(client: APIClientInput): Void
-    #updateClient(client: APIClientInput): APIClient
+    #updateClient(client: APIClientInput): Void
 
-    #addBooking(newBooking: TicketInput): Void
-    #upgradeSeatingClass(newSeatingClass: SeatingClassInput): Void
-    #upgradeLuggageWeight(newWeight: int): Void
-    #cancelTicket(person: APIPersonInput, flightNum: int): Void
+    #TODO addBooking und upgradeSeatingClass funktionieren noch nicht!
+    #addBooking(newBooking: APITicketInput, payment: APIPaymentInput): Void
+    #upgradeSeatingClass(ticketId: Int, newSeatingClass: APISeatingClassInput): Void
+    upgradeLuggageWeight(ticketId: Int, newLuggageWeight: Int): Void
+
+    #TODO: hier noch klären, ob nicht wirklich nur id ausreichend ist
+    #cancelTicketEmployee(employeeId: Int, flightNum: Int): Void
+    #cancelTicketClient(clientId: Int, flightNum: Int): Void
 
     createAirport(airport: APIAirportInput): Void
 
@@ -235,5 +247,5 @@ type Mutation {
     updateAirline(airline: APIAirlineInput): Void
 
     createAirplane(airplane: APIAirplaneInput): Void
-    #setOperable(serialNum: Int, isOperable Boolean): Void
+    setOperable(serialNum: Int, isOperable: Boolean): Void
 }

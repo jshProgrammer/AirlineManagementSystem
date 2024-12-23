@@ -1,6 +1,5 @@
 package de.tjjf.Infrastructure.api.resolvers;
 
-import de.tjjf.Adapter.APIAdapter.AirlinePortImpl;
 import de.tjjf.Adapter.APIAdapter.BookingPortImpl;
 import de.tjjf.Domain.models.MTicket;
 import de.tjjf.Infrastructure.api.InputModels.APIClientInput;
@@ -24,11 +23,11 @@ public class TicketResolver implements GraphQLQueryResolver, GraphQLMutationReso
         new BookingPortImpl().addBooking(new APITicketMapper().toDomainEntity(apiTicket), new APIPaymentMapper().toDomainEntity(apiPayment));
     }
 
-    public APITicket readTicketById(int id) {
-        return new APITicketMapper().toAPIEntity(new BookingPortImpl().readTicketById(id));
+    public APITicket readTicketById(int ticketId) {
+        return new APITicketMapper().toAPIEntity(new BookingPortImpl().readTicketById(ticketId));
     }
 
-    //TODO: Seating class evtl anders übergeben, bzw. nochmal Mapper überprüfen
+    //TODO: Seating class evtl anders übergeben, so funktioniert es aktuell noch nicht
     public void upgradeSeatingClass(int ticketId, APITicketInput.SeatingClass newSeatingClass) {
         MTicket.SeatingClass seatingClass = Enum.valueOf(MTicket.SeatingClass.class, newSeatingClass.name());
         new BookingPortImpl().upgradeSeatingClass(ticketId, seatingClass);
@@ -38,8 +37,9 @@ public class TicketResolver implements GraphQLQueryResolver, GraphQLMutationReso
         new BookingPortImpl().upgradeLuggageWeight(ticketId, newWeight);
     }
     //TODO: Nochmal drüberschauen ob das so grob passt
+    //TODO: hier vlt. ändern auf id?!
     public void cancelTicketClient(APIClientInput client, int flightNum) {
-        APIClient apiClient = new ClientMapperInput().toClient(client);
+        APIClient apiClient = new ClientMapperInput().toDomain(client);
         new BookingPortImpl().cancelTicket(new APIClientMapper().toDomainEntity(apiClient), flightNum);
     }
 

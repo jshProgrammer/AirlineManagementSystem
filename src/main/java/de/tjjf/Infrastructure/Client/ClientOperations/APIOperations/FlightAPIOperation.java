@@ -1,7 +1,5 @@
-package de.tjjf.Infrastructure.Client.ClientOperations.ImplOperations;
+package de.tjjf.Infrastructure.Client.ClientOperations.APIOperations;
 
-import de.tjjf.Infrastructure.Client.ClientOperations.AbstractOperations.AbstractAPIOperation;
-import de.tjjf.Infrastructure.api.InputModels.APIAirlineInput;
 import de.tjjf.Infrastructure.api.InputModels.APIFlightInput;
 import de.tjjf.Infrastructure.api.models.APIFlight;
 
@@ -51,17 +49,43 @@ public class FlightAPIOperation extends AbstractAPIOperation {
         execute(transformToQuery(apiFlightInput, "createFlight"), "createFlight", APIFlight.class);
     }
 
-    //TODO: hier noch weiter machen
     public void updateFlight(APIFlightInput apiFlightInput) {
-
+        execute(transformToQuery(apiFlightInput, "updateFlight"), "updateFlight", APIFlight.class);
     }
 
-    //TODO: reicht hier nicht auch nur flightnum?!
-    public void cancelFlight(APIFlightInput apiFlightInput) {
+    public void cancelFlight(int flightNum) {
+        String query = """
+        {
+            "query": "mutation {
+                cancelFlight(flightNum: %d)
+            }"
+        }
+        """.formatted(flightNum);
 
+        execute(query, "cancelFlight", APIFlight.class);
     }
 
    public APIFlight readFlightByFlightNum(int flightNum){
-        return null;
+        String query = """
+                {
+                    "query": "{
+                        readFlightByFlightNum(flightNum: %d) {
+                            flightNum
+                            airplaneSerialNum
+                            departureDateTime
+                            departureAirportCode
+                            arrivalDateTime
+                            arrivalAirportCode
+                            boardingTime
+                            status
+                            duration
+                            pilotId
+                            copilotId
+                        }
+                    }"
+                }
+                """.formatted(flightNum);
+
+        return execute(query, "readFlightByFlightNum", APIFlight.class);
    }
 }
