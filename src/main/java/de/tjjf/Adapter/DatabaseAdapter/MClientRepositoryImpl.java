@@ -10,8 +10,8 @@ import de.tjjf.Infrastructure.persistence.mapper.ClientMapper;
 
 public class MClientRepositoryImpl implements DataAccess.MClientRepository {
     @Override
-    public void create(MClient entity) {
-        new ClientCreateImpl(new ClientMapper().toEntity(entity)).execute();
+    public MClient create(MClient entity) {
+        return new ClientMapper().toDomain(new ClientCreateImpl(new ClientMapper().toEntity(entity)).execute().model);
     }
 
     @Override

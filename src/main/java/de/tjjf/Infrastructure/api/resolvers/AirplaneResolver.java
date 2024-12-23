@@ -5,19 +5,20 @@ import de.tjjf.Infrastructure.api.InputModels.APIAirplaneInput;
 import de.tjjf.Infrastructure.api.MapperInput.AirplaneMapperInput;
 import de.tjjf.Infrastructure.api.mapper.APIAirplaneMapper;
 import de.tjjf.Infrastructure.api.models.APIAirplane;
-import de.tjjf.Infrastructure.persistence.entities.Airplane;
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import graphql.kickstart.tools.GraphQLQueryResolver;
 
 public class AirplaneResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
 
     public APIAirplane readAirplaneBySerialNum(int serialNum ){
+
         return new APIAirplaneMapper().toAPIEntity(new AirplanePortImpl().readAirplaneBySerialNum(serialNum));
     }
 
-    public void createAirplane(APIAirplaneInput airplane) {
+    public APIAirplane createAirplane(APIAirplaneInput airplane) {
         APIAirplane apiAirplane = new AirplaneMapperInput().toDomain(airplane);
-        new AirplanePortImpl().createAirplane(new APIAirplaneMapper().toDomainEntity(apiAirplane));
+        return new APIAirplaneMapper().toAPIEntity(new AirplanePortImpl().createAirplane(new APIAirplaneMapper().toDomainEntity(apiAirplane)));
+
     }
 
     public void setOperable(int serialNum, boolean isOperable){

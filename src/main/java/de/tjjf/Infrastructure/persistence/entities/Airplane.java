@@ -76,7 +76,7 @@ public class Airplane implements Model {
         this.model = model;
     }
 
-    public int getAmoutOfEconomySeats() {
+    public int getAmountOfEconomySeats() {
         return amoutOfEconomySeats;
     }
 
@@ -84,7 +84,7 @@ public class Airplane implements Model {
         this.amoutOfEconomySeats = amoutOfEconomySeats;
     }
 
-    public int getAmoutOfBusinessSeats() {
+    public int getAmountOfBusinessSeats() {
         return amoutOfBusinessSeats;
     }
 
@@ -92,7 +92,7 @@ public class Airplane implements Model {
         this.amoutOfBusinessSeats = amoutOfBusinessSeats;
     }
 
-    public int getAmoutOfFirstClassSeats() {
+    public int getAmountOfFirstClassSeats() {
         return amoutOfFirstClassSeats;
     }
 
@@ -108,12 +108,12 @@ public class Airplane implements Model {
         this.belongingAirline = belongingAirline;
     }
 
-    public boolean isOperatable() {
+    public boolean isOperable() {
         return isOperatable;
     }
 
-    public void setOperatable(boolean operatable) {
-        isOperatable = operatable;
+    public void setOperable(boolean operable) {
+        isOperatable = operable;
     }
 
     public int getMaxWeightOfLuggage() {return maxWeightOfLuggage;}

@@ -10,9 +10,7 @@ import java.util.List;
 public class Client implements Model {
     //TODO: hier evtl. mapped-Attribut nötig
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable=false)
-    //@JoinColumn(name = "personId", referencedColumnName = "personID s")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long personId;
 
     @Column(nullable = false)
@@ -48,8 +46,7 @@ public class Client implements Model {
 
     public Client() {}
 
-    public Client(/*long personId,*/ String firstName, String middleName, String lastName, Date dateOfBirth, String phonenumber, String address, String email, String hashedPassword, List<Ticket> tickets, boolean isBusinessClient) {
-        //this.personId = personId;
+    public Client(String firstName, String middleName, String lastName, Date dateOfBirth, String phonenumber, String address, String email, String hashedPassword, List<Ticket> tickets, boolean isBusinessClient) {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;

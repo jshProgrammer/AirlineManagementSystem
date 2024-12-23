@@ -9,8 +9,8 @@ import de.tjjf.Domain.ports.API.EmployeePort;
 
 public class EmployeePortImpl implements EmployeePort {
     @Override
-    public void createEmployee(MEmployee employee){
-        new EmployeeService(new MEmployeeRepositoryImpl()).createEmployee(employee);
+    public MEmployee createEmployee(MEmployee employee){
+        return new EmployeeService(new MEmployeeRepositoryImpl()).createEmployee(employee);
     }
 
     //TODO: implement authentication here

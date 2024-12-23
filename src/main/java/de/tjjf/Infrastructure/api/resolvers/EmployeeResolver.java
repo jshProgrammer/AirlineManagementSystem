@@ -10,9 +10,9 @@ import graphql.kickstart.tools.GraphQLMutationResolver;
 import graphql.kickstart.tools.GraphQLQueryResolver;
 
 public class EmployeeResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
-    public void createEmployee(APIEmployeeInput employee){
+    public APIEmployee createEmployee(APIEmployeeInput employee){
         APIEmployee apiEmployee = new EmployeeMapperInput().toDomain(employee);
-        new EmployeePortImpl().createEmployee(new APIEmployeeMapper().toDomainEntity(apiEmployee));
+        return new APIEmployeeMapper().toAPIEntity(new EmployeePortImpl().createEmployee(new APIEmployeeMapper().toDomainEntity(apiEmployee)));
     }
 
     public APIEmployee readEmployeeById(long employeeId){

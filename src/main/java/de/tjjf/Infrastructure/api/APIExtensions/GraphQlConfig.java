@@ -5,7 +5,6 @@ import graphql.schema.Coercing;
 import graphql.schema.GraphQLScalarType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Configuration;
 
 
 @Configuration

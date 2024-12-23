@@ -12,8 +12,8 @@ import de.tjjf.Domain.ports.API.TicketPort;
 
 public class BookingPortImpl implements TicketPort {
     @Override
-    public void addBooking(MTicket newBooking, MPayment mPayment) {
-        new TicketService(new MTicketRepositoryImpl()).addBooking(newBooking, mPayment);
+    public MTicket addBooking(MTicket newBooking, MPayment mPayment) {
+        return new TicketService(new MTicketRepositoryImpl()).addBooking(newBooking, mPayment);
 
     }
 

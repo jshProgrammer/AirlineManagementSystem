@@ -4,7 +4,7 @@ import de.tjjf.Infrastructure.persistence.DBOperations.AbstractOperations.Abstra
 import de.tjjf.Infrastructure.persistence.entities.Client;
 
 public class ClientDeleteImpl extends AbstractDeleteOperation<Client, Long> {
-    public ClientDeleteImpl(long identifier){
+    public ClientDeleteImpl(Long identifier){
         super(Client.class, identifier);
     }
 }

@@ -83,7 +83,6 @@ public class CreateModelTest {
 
     @Test
     public void testClientCreation() {
-        long personId = 8888888 + salt.hashCode();
         String firstName = "TestFirstName";
         String middleName = "TestMiddleNames";
         String lastName = "TestLastName";
@@ -93,14 +92,14 @@ public class CreateModelTest {
         String email = "testemail_" + salt + "@gmail.com";
         String password = "TestPassword";
         boolean isBusinessClient = true;
-//personId,
-        Client client = new Client( /*personId,*/ firstName, middleName, lastName, dateOfBirth, phoneNumber, address, email, password, new ArrayList<>(), isBusinessClient);
-        new ClientCreateImpl(client).execute();
+
+        Client client = new Client( firstName, middleName, lastName, dateOfBirth, phoneNumber, address, email, password, new ArrayList<>(), isBusinessClient);
+        Client clientReturned = new ClientCreateImpl(client).execute().model;
 
         assertNotNull(client);
         assertEquals(firstName, client.getFirstName());
 
-        new ClientDeleteImpl(personId).execute();
+        new ClientDeleteImpl(clientReturned.getPersonId()).execute();
     }
 
     @Test
@@ -115,7 +114,6 @@ public class CreateModelTest {
         Airline airline = new Airline(airlineName, foundationYear, headQuarters, email, phoneNumber, address);
         new AirlineCreateImpl(airline).execute();
 
-        long personId = 7777777 + salt.hashCode();
         String firstName = "EmployeeFirstName";
         String middleName = "EmployeeMiddleName";
         String lastName = "EmployeeLastName";
@@ -127,14 +125,13 @@ public class CreateModelTest {
         int salary = 5000;
         String position = "Manager";
         Date hireDate = new Date();
-//personId,
-        Employee employee = new Employee(/*personId,*/ firstName, middleName, lastName, dateOfBirth, employeePhoneNumber, employeeAddress, employeeEmail, password, new ArrayList<>(), salary, position, airline, hireDate);
+        Employee employee = new Employee(firstName, middleName, lastName, dateOfBirth, employeePhoneNumber, employeeAddress, employeeEmail, password, new ArrayList<>(), salary, position, airline, hireDate);
         new EmployeeCreateImpl(employee).execute();
 
         assertNotNull(employee);
         assertEquals(position, employee.getPosition());
 
-        new EmployeeDeleteImpl(personId).execute();
+        new EmployeeDeleteImpl(employee.getPersonId()).execute();
         new AirlineDeleteImpl(airlineName).execute();
     }
 
@@ -180,29 +177,110 @@ public class CreateModelTest {
         Airport arrivalAirport = new Airport(arrivalCode, arrivalName, arrivalCountry, arrivalCity, arrivalTimezone);
         new AirportCreateImpl(arrivalAirport).execute();
 
-        long pilotId = 6666668 + salt.hashCode();
         String pilotFirstName = "PilotFirstName";
         String pilotLastName = "PilotLastName";
         String pilotPosition = "Captain";
-//pilotId,
-        Employee pilot = new Employee(/*pilotId,*/ pilotFirstName, "", pilotLastName, new Date(), "+491512345678", "PilotAddress", "pilot@gmail.com", "password", new ArrayList<>(), 100000, pilotPosition, airline, new Date());
+        Employee pilot = new Employee(pilotFirstName, "", pilotLastName, new Date(), "+491512345678", "PilotAddress", "pilot@gmail.com", "password", new ArrayList<>(), 100000, pilotPosition, airline, new Date());
         new EmployeeCreateImpl(pilot).execute();
 
-        long flightNum = 6666666 + salt.hashCode();
         String status = "Scheduled";
         int duration = 180;
 
-        Flight flight = new Flight(flightNum, airplane, new Date(), departureAirport, new Date(), arrivalAirport, new Date(), status, duration, pilot, pilot);
+        Flight flight = new Flight( airplane, new Date(), departureAirport, new Date(), arrivalAirport, new Date(), status, duration, pilot, pilot);
         new FlightCreateImpl(flight).execute();
 
         assertNotNull(flight);
         assertEquals(status, flight.getStatus());
 
-        new FlightDeleteImpl(flightNum).execute();
-        new EmployeeDeleteImpl(pilotId).execute();
+        new FlightDeleteImpl(flight.getFlightNum()).execute();
+        new EmployeeDeleteImpl(pilot.getPersonId()).execute();
         new AirplaneDeleteImpl(serialNum).execute();
         new AirportDeleteImpl(departureCode).execute();
         new AirportDeleteImpl(arrivalCode).execute();
         new AirlineDeleteImpl(airlineName).execute();
     }
+
+    @Test
+    public void createTicketTest() {
+        String airlineName = "TestAirline_" + salt;
+        Date foundationYear = new Date();
+        String headQuarters = "TestHeadquarters";
+        String email = "testemail_" + salt + "@gmail.com";
+        String phoneNumber = "+4915112345678";
+        String address = "TestAddress";
+
+        Airline airline = new Airline(airlineName, foundationYear, headQuarters, email, phoneNumber, address);
+        new AirlineCreateImpl(airline).execute();
+
+        int serialNum = 9999999 + salt.hashCode();
+        String manufacturer = "TestManufacturer";
+        String model = "TestModel";
+        int economySeats = 50;
+        int businessSeats = 25;
+        int firstClassSeats = 15;
+        boolean isOperatable = true;
+        int maxWeightOfLuggage = 40000;
+
+        Airplane airplane = new Airplane(serialNum, manufacturer, model, economySeats, businessSeats, firstClassSeats, airline, isOperatable, maxWeightOfLuggage);
+        new AirplaneCreateImpl(airplane).execute();
+
+        String departureCode = "DPT_" + salt;
+        String departureName = "Departure Airport";
+        String departureCountry = "CountryA";
+        String departureCity = "CityA";
+        String departureTimezone = "TimezoneA";
+
+        Airport departureAirport = new Airport(departureCode, departureName, departureCountry, departureCity, departureTimezone);
+        new AirportCreateImpl(departureAirport).execute();
+
+        String arrivalCode = "ARR_" + salt;
+        String arrivalName = "Arrival Airport";
+        String arrivalCountry = "CountryB";
+        String arrivalCity = "CityB";
+        String arrivalTimezone = "TimezoneB";
+
+        Airport arrivalAirport = new Airport(arrivalCode, arrivalName, arrivalCountry, arrivalCity, arrivalTimezone);
+        new AirportCreateImpl(arrivalAirport).execute();
+
+        String status = "Scheduled";
+        int duration = 180;
+
+        Flight flight = new Flight(airplane, new Date(), departureAirport, new Date(), arrivalAirport, new Date(), status, duration, null, null);
+        new FlightCreateImpl(flight).execute();
+
+
+        String firstName = "TestFirstName";
+        String middleName = "TestMiddleNames";
+        String lastName = "TestLastName";
+        Date dateOfBirth = new Date();
+        String clientPhoneNumber = "+4915112345678";
+        String clientAddress = "TestAddress";
+        String clientEmail = "testemail_" + salt + "@gmail.com";
+        String password = "TestPassword";
+        boolean isBusinessClient = true;
+
+        Client client = new Client( firstName, middleName, lastName, dateOfBirth, clientPhoneNumber, clientAddress, clientEmail, password, new ArrayList<>(), isBusinessClient);
+        new ClientCreateImpl(client).execute();
+        Date bookingDate = new Date();
+        int totalPrice = 200;
+        int seatNum = 1;
+        String seatingClass = "Economy";
+        String ticketStatus = "Confirmed";
+        int weightOfLuggage = 20;
+
+        Ticket ticket = new Ticket(client.getPersonId(), flight, bookingDate, totalPrice, seatNum, seatingClass, ticketStatus, weightOfLuggage);
+        Ticket ticketReturned = new TicketCreateImpl(ticket).execute().model;
+
+        assertNotNull(ticketReturned);
+        assertEquals(seatingClass, ticketReturned.getSeatingClass());
+        assertEquals(totalPrice, ticketReturned.getTotalPrice());
+
+        new TicketDeleteImpl(ticketReturned.getTicketId()).execute();
+        new FlightDeleteImpl(flight.getFlightNum()).execute();
+        new AirplaneDeleteImpl(serialNum).execute();
+        new AirportDeleteImpl(departureCode).execute();
+        new AirportDeleteImpl(arrivalCode).execute();
+        new AirlineDeleteImpl(airlineName).execute();
+    }
+
 }

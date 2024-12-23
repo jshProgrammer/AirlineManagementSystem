@@ -222,7 +222,7 @@ type Mutation {
     #TODO: überall noch wegen enums Probleme
     #createFlight(flight: APIFlightInput): Void
     #updateFlight(flight: APIFlightInput): Void
-    #TODO: Parameter geändert => nur noch int -> prüfen, ob an allen Stellen geändert
+    #TODO: Parameter geändert => nur noch int -> prüfen, ob an allen Stellen geändert -> existiert noch garnicht?
     #cancelFlight(flightNum: Int): Void
 
     #TODO: die folgenden vier Methoden funktionieren noch nicht
@@ -238,8 +238,8 @@ type Mutation {
     upgradeLuggageWeight(ticketId: Int, newLuggageWeight: Int): Void
 
     #TODO: hier noch klären, ob nicht wirklich nur id ausreichend ist
-    #cancelTicketEmployee(employeeId: Int, flightNum: Int): Void
-    #cancelTicketClient(clientId: Int, flightNum: Int): Void
+    cancelTicketEmployee(employeeId: Int, flightNum: Int): Void
+    cancelTicketClient(clientId: Int, flightNum: Int): Void
 
     createAirport(airport: APIAirportInput): Void
 

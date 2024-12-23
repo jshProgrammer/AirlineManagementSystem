@@ -4,7 +4,7 @@ import de.tjjf.Infrastructure.persistence.DBOperations.AbstractOperations.Abstra
 import de.tjjf.Infrastructure.persistence.entities.Airplane;
 
 public class AirplaneDeleteImpl extends AbstractDeleteOperation<Airplane, Integer> {
-    public AirplaneDeleteImpl(int identifier){
+    public AirplaneDeleteImpl(Integer identifier){
         super(Airplane.class, identifier);
     }
 }

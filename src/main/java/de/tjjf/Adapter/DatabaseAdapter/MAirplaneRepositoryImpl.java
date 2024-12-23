@@ -10,8 +10,8 @@ import de.tjjf.Infrastructure.persistence.mapper.AirplaneMapper;
 
 public class MAirplaneRepositoryImpl implements DataAccess.MAirplaneRepository {
     @Override
-    public void create(MAirplane entity) {
-        new AirplaneCreateImpl(new AirplaneMapper().toEntity(entity)).execute();
+    public MAirplane create(MAirplane entity) {
+        return new AirplaneMapper().toDomain(new AirplaneCreateImpl(new AirplaneMapper().toEntity(entity)).execute().model);
     }
 
     @Override

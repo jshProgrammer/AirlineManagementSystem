@@ -46,12 +46,14 @@ public class MTicket implements MModel {
 
         setLuggageWeight(weightOfLuggage);
         //AddBookingUseCase.addBooking(this);
+
+        flight.addTicket(this);
         person.addTickets(this);
     }
 
     //TODO: sollte eigentlich in Use-Case, aber dann fehlt uns die Funktion setSeating-class, die wir hier ja aber nicht auf public setzen dürfen?!
     public void upgradeSeatingClass(SeatingClass newSeatingClass) throws NoSeatsAvailableException {
-        if(isSeatingUpdateAvailable(seatingClass)) {
+        if(isSeatingUpdateAvailable(newSeatingClass)) {
             this.seatingClass = newSeatingClass;
         } else {
             throw new NoSeatsAvailableException("Seat could not be upgraded");

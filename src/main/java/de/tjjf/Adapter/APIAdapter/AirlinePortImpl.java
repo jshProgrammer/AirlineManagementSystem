@@ -7,8 +7,8 @@ import de.tjjf.Domain.ports.API.AirlinePort;
 
 public class AirlinePortImpl implements AirlinePort {
     @Override
-    public void createAirline(MAirline airline) {
-        new AirlineService(new MAirlineRepositoryImpl()).create(airline);
+    public MAirline createAirline(MAirline airline) {
+        return new AirlineService(new MAirlineRepositoryImpl()).create(airline);
     }
 
     @Override

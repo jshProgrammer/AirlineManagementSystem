@@ -10,7 +10,7 @@ public abstract class AuthorizedUseCase {
         this.authenticationUseCase = authenticationUseCase;
     }
 
-    protected void authorize() throws UnauthorizedException {
+    public void authorize() throws UnauthorizedException {
         if (!authenticationUseCase.isAuthorized()) {
             throw new UnauthorizedException("User is not authorized to perform this action.");
         }

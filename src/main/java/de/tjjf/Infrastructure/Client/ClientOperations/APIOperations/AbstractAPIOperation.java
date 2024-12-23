@@ -2,6 +2,7 @@ package de.tjjf.Infrastructure.Client.ClientOperations.APIOperations;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.tjjf.Infrastructure.api.GraphQLUnauthorizedException;
 
 import java.io.IOException;
 import java.net.URI;
@@ -34,11 +35,15 @@ public abstract class AbstractAPIOperation {
             );
             if (result.containsKey("errors")) {
                 List<Map<String, Object>> errors = (List<Map<String, Object>>) result.get("errors");
+
                 for (Map<String, Object> error : errors) {
                     String message = (String) error.get("message");
                     System.err.println("GraphQL Error: " + message);
+                    if (message.contains("Unauthorized")) {
+                        throw new GraphQLUnauthorizedException("GraphQL Error: " + message);
+                    }
                 }
-                throw new RuntimeException("GraphQL request failed with errors.");
+
             }
 
             Map<String, Object> dataMap = (Map<String, Object>) result.get("data");

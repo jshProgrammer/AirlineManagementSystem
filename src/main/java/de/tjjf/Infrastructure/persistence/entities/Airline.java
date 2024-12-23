@@ -27,8 +27,8 @@ public class Airline implements Model {
     @Column(nullable=false)
     private String address;
 
-    @OneToMany(mappedBy = "belongingAirline", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Airplane> airplanes;
+    /*@OneToMany(mappedBy = "belongingAirline", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Airplane> airplanes;*/
 
     @OneToMany(mappedBy = "airline")
     private List<Employee> employees;

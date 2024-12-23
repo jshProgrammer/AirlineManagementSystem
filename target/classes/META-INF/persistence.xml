@@ -37,7 +37,6 @@
         <class>de.tjjf.Infrastructure.persistence.entities.Client</class>
         <class>de.tjjf.Infrastructure.persistence.entities.Employee</class>
         <class>de.tjjf.Infrastructure.persistence.entities.Flight</class>
-        <class>de.tjjf.Infrastructure.persistence.entities.Person</class>
         <class>de.tjjf.Infrastructure.persistence.entities.Ticket</class>
 
         <properties>

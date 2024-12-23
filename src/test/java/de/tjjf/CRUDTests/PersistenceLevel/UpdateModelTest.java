@@ -1,6 +1,5 @@
 package de.tjjf.CRUDTests.PersistenceLevel;
 
-import com.stripe.model.billingportal.Session;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Create.*;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Delete.*;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Read.*;
@@ -70,7 +69,6 @@ public class UpdateModelTest {
         new AirportCreateImpl(arrivalAirport).execute();
 
         client = new Client(
-                //8888888 + salt.hashCode(),
                 "TestFirstName",
                 "TestMiddleNames",
                 "TestLastName",
@@ -85,7 +83,6 @@ public class UpdateModelTest {
         new ClientCreateImpl(client).execute();
 
         employee = new Employee(
-                //7777777 + salt.hashCode(),
                 "TestEmployee",
                 "TestMiddleNames",
                 "TestLastName",
@@ -103,7 +100,6 @@ public class UpdateModelTest {
         new EmployeeCreateImpl(employee).execute();
 
         flight = new Flight(
-                6666666 + salt.hashCode(),
                 airplane,
                 new Date(),
                 departureAirport,
@@ -118,7 +114,6 @@ public class UpdateModelTest {
         new FlightCreateImpl(flight).execute();
 
         ticket = new Ticket(
-                //5555555 + salt.hashCode(),
                 client.getPersonId(),
                 flight,
                 new Date(),
@@ -192,10 +187,10 @@ public class UpdateModelTest {
     public void testUpdateAirplane() {
         boolean updatedOperatable = false;
 
-        airplane.setOperatable(updatedOperatable);
+        airplane.setOperable(updatedOperatable);
 
         new AirplaneUpdateImpl(airplane).execute();
-        assertEquals(updatedOperatable, new AirplaneReadImpl(airplane.getSerialNum()).execute().model.isOperatable());
+        assertEquals(updatedOperatable, new AirplaneReadImpl(airplane.getSerialNum()).execute().model.isOperable());
     }
 
     @Test

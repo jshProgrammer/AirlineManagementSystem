@@ -9,16 +9,12 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+//should work 23.12.24
 public class CancellationTest {
-    MPerson person = new MPerson(1, "Jasmin", "", "Wander", new Date(2004, 10, 14), "23233", new MAddress("Teststraße", 1, 12345, "Teststadt", "Deutschland"), "airlinemanagementtestmail@gmail.com", "fkgk rdof hhkj arwc", null);
-    MPerson person2 = new MPerson(2, "Tom", "", "Knoblach", new Date(2004, 10, 14), "23233", new MAddress("Teststraße", 1, 12345, "Teststadt", "Deutschland"), "airlinemanagementtestmail@gmail.com", "fkgk rdof hhkj arwc", null);
-    MAirline airline = new MAirline("TestAirline", new Date(1990), "München", new MAddress("Teststraße", 1, 12345, "Teststadt", "Deutschland"), "016012345", "airlinemanagementtestmail@gmail.com");
-    MAirplane airplane = new MAirplane(123, "Hersteller", "Boeing 5", 30, 15, 15, airline, true, 1000);
-    MAirport depatureAirport = new MAirport("B12", "Frankturt Airport", "Germany", "Frankfurt", "UTC");
-    MAirport arrivalAirport = new MAirport("ABC", "LA Airport", "USA", "LA", "UTC");
-    MEmployee pilot = new MEmployee( 2, "Finn", null,"Krappitz",new Date(2003, 06, 05), "48484848484",new MAddress("TEST",23, 34533,"BErlin", "GER"), "tomKnoblach@t-online.de", "testpasword", 200, "sf", airline, new Date(2024, 10, 13) );
-    MEmployee copilot = new MEmployee(3,"Joshua","","Pfennig",new Date(2007,10,14), "27359824",new MAddress("TEST",23, 34533,"BErlin", "GER"), "tomknoblach@t-online.de", "skldjflks",200,"sf", airline, new Date(2024,10,13));
-    MFlight flight = new MFlight(123456, airplane, new Date(2024, 12, 31), depatureAirport, new Date(2025, 1, 1), arrivalAirport, new Date(2024, 21, 31), MFlight.FlightStatus.scheduled, 1000, pilot, copilot);
+    MPerson person = new MPerson(1, "Jasmin", "", "Wander", new Date(), "+4915112345678", new MAddress(null, 1234, 1234, null, null), "airlinemanagementtestmail@gmail.com", "fkgk rdof hhkj arwc", null);
+    MPerson person2 = new MPerson(2, "Tom", "", "Knoblach", new Date(), "+4915112345678", new MAddress(null, 1234, 1234, null, null), "airlinemanagementtestmail@gmail.com", "fkgk rdof hhkj arwc", null);
+    //TODO: airplane muss gesetzt werden
+    MFlight flight = new MFlight(123456, null, new Date(2024, 12, 31), null, new Date(2025, 1, 1), null, new Date(2024, 21, 31), MFlight.FlightStatus.scheduled, 1000, null, null);
     MTicket ticket = new MTicket(1, person, flight, new Date(2024, 11,18), 200, 1, MTicket.SeatingClass.Economy, MTicket.TicketStatus.unpaid, 12 );
     MTicket ticket2 = new MTicket(2, person2, flight, new Date(2024, 11,18), 200, 1, MTicket.SeatingClass.Economy, MTicket.TicketStatus.unpaid, 12 );
 
@@ -28,8 +24,8 @@ public class CancellationTest {
         CancelCompleteFlightUseCase.cancelFlight(flight);
         assertEquals(flight.getTickets().size(), 2);
         assertEquals(flight.getStatus(), MFlight.FlightStatus.canceled);
-        for (MTicket ticket3 : flight.getTickets()){
-            assertEquals(ticket3.getTicketStatus(), MTicket.TicketStatus.canceled);
+        for (MTicket ticket : flight.getTickets()){
+            assertEquals(ticket.getTicketStatus(), MTicket.TicketStatus.canceled);
         }
     }
 

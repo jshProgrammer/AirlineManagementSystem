@@ -7,8 +7,7 @@ import java.util.Date;
 @Entity
 public class Ticket implements Model {
     @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable=false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int ticketId;
 
    @Column(nullable=false, insertable = true, updatable = true)
@@ -57,10 +56,9 @@ public class Ticket implements Model {
 
     public Ticket(){}
 
-    public Ticket(/*int ticketId,*/ long personId, Flight flightNum, Date dateTimeOfBooking, int totalPrice, int seatNum, String seatingClass, String ticketStatus, int maxWeightOfLuggage) {
-        //this.ticketId = ticketId;
+    public Ticket(long personId, Flight flight, Date dateTimeOfBooking, int totalPrice, int seatNum, String seatingClass, String ticketStatus, int maxWeightOfLuggage) {
         this.personId = personId;
-        this.flight = flightNum;
+        this.flight = flight;
         this.dateTimeOfBooking = dateTimeOfBooking;
         this.totalPrice = totalPrice;
         this.seatNum = seatNum;

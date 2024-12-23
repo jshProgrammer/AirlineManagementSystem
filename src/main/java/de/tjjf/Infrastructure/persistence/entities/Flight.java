@@ -10,11 +10,9 @@ import java.util.List;
 @Entity
 @Table(name = "flights")
 public class Flight implements Model {
-
     //TODO: evtl @JoinColumn damit Anzeigen aller Buchungen
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable=false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long flightNum;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -60,8 +58,8 @@ public class Flight implements Model {
     public Flight(){}
 
 
-    public Flight(long flightNum, Airplane airplane, Date departureDateTime, Airport departureAirport, Date arrivalDateTime, Airport arrivalAirport, Date boardingTime, String status, int duration, Employee pilot, Employee copilot) {
-        this.flightNum = flightNum;
+    //TODO: boardingTime has to be DateTime
+    public Flight(Airplane airplane, Date departureDateTime, Airport departureAirport, Date arrivalDateTime, Airport arrivalAirport, Date boardingTime, String status, int duration, Employee pilot, Employee copilot) {
         this.airplane = airplane;
         this.departureDateTime = departureDateTime;
         this.departureAirport = departureAirport;

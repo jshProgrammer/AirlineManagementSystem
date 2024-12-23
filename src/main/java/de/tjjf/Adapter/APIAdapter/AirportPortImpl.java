@@ -9,8 +9,8 @@ import de.tjjf.Domain.ports.API.AirportPort;
 
 public class AirportPortImpl implements AirportPort {
     @Override
-    public void createAirport(MAirport airport){
-        new AirportService(new MAirportRepsoitoryImp()).createAirport(airport);
+    public MAirport createAirport(MAirport airport){
+        return new AirportService(new MAirportRepsoitoryImp()).createAirport(airport);
 
     }
 

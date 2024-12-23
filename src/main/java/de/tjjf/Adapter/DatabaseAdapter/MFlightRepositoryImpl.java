@@ -10,8 +10,8 @@ import de.tjjf.Infrastructure.persistence.mapper.FlightMapper;
 
 public class MFlightRepositoryImpl implements DataAccess.MFlightRepository {
     @Override
-    public void create(MFlight flight) {
-        new FlightCreateImpl(new FlightMapper().toEntity(flight)).execute();
+    public MFlight create(MFlight flight) {
+        return new FlightMapper().toDomain(new FlightCreateImpl(new FlightMapper().toEntity(flight)).execute().model);
     }
 
     @Override

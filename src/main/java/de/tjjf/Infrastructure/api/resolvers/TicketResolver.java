@@ -17,10 +17,10 @@ import graphql.kickstart.tools.GraphQLQueryResolver;
 
 public class TicketResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
     //TODO: Ticket Port Impl, bzw rename von booking zu ticket außer ich bin zu blöd die Logik zu verstehen - Tom
-    public void addBooking(APITicketInput ticket, APIPaymentInput payment) {
+    public APITicket addBooking(APITicketInput ticket, APIPaymentInput payment) {
         APITicket apiTicket = new TicketMapperInput().toDomain(ticket);
         APIPayment apiPayment = new PaymentMapperInput().toDomain(payment);
-        new BookingPortImpl().addBooking(new APITicketMapper().toDomainEntity(apiTicket), new APIPaymentMapper().toDomainEntity(apiPayment));
+        return new APITicketMapper().toAPIEntity(new BookingPortImpl().addBooking(new APITicketMapper().toDomainEntity(apiTicket), new APIPaymentMapper().toDomainEntity(apiPayment)));
     }
 
     public APITicket readTicketById(int ticketId) {
@@ -38,13 +38,13 @@ public class TicketResolver implements GraphQLQueryResolver, GraphQLMutationReso
     }
     //TODO: Nochmal drüberschauen ob das so grob passt
     //TODO: hier vlt. ändern auf id?!
-    public void cancelTicketClient(APIClientInput client, int flightNum) {
-        APIClient apiClient = new ClientMapperInput().toDomain(client);
+    public void cancelTicketClient(int clientId, int flightNum) {
+        APIClient apiClient = new ClientResolver().readClientById(clientId);
         new BookingPortImpl().cancelTicket(new APIClientMapper().toDomainEntity(apiClient), flightNum);
     }
 
-    public void cancelTicketEmployee(APIEmployeeInput employee, int flightNum) {
-        APIEmployee apiEmployee = new EmployeeMapperInput().toDomain(employee);
+    public void cancelTicketEmployee(int employeeId, int flightNum) {
+        APIEmployee apiEmployee = new EmployeeResolver().readEmployeeById(employeeId);
         new BookingPortImpl().cancelTicket(new APIEmployeeMapper().toDomainEntity(apiEmployee), flightNum);
     }
 

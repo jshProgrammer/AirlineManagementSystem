@@ -1,6 +1,7 @@
 package de.tjjf.Infrastructure.persistence.mapper;
 
 import de.tjjf.Domain.models.MAirplane;
+import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Read.AirlineReadImpl;
 import de.tjjf.Infrastructure.persistence.entities.Airplane;
 
 public class AirplaneMapper extends Mapper<MAirplane, Airplane> {
@@ -24,11 +25,11 @@ public class AirplaneMapper extends Mapper<MAirplane, Airplane> {
                 airplane.getSerialNum(),
                 airplane.getManufacturer(),
                 airplane.getModel(),
-                airplane.getAmoutOfEconomySeats(),
-                airplane.getAmoutOfBusinessSeats(),
-                airplane.getAmoutOfFirstClassSeats(),
-                new AirlineMapper().toDomain(airplane.getBelongingAirline()),
-                airplane.isOperatable(),
+                airplane.getAmountOfEconomySeats(),
+                airplane.getAmountOfBusinessSeats(),
+                airplane.getAmountOfFirstClassSeats(),
+                new AirlineMapper().toDomain(new AirlineReadImpl(airplane.getBelongingAirline().getName()).execute().model),
+                airplane.isOperable(),
                 airplane.getMaxWeightOfLuggage()
         );
     }

@@ -11,15 +11,22 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 public class AuthenticationUseCase {
+    private static AuthenticationUseCase instance;
     public String token;
 
-    public static void main(String[] args) {
-        authenticate("testest", "testtestse");
+    private AuthenticationUseCase() {}
+
+    public static AuthenticationUseCase getInstance() {
+        if (instance == null) {
+            instance = new AuthenticationUseCase();
+        }
+        return instance;
     }
 
     private static String serverURL = "https://staging.api.fiw.thws.de/auth/api/users/me";
 
     public static String authenticate(String username, String password) throws AuthException {
+        AuthenticationUseCase authenticationUseCase = getInstance();
         try (final HttpClient httpClient = HttpClient.newHttpClient()) {
             //TODO: implement test token
 
@@ -33,8 +40,8 @@ public class AuthenticationUseCase {
 
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
             if (response.statusCode() == 200) {
-                String token = response.headers().map().get("X-fhws-jwt-token").getFirst(); //extract the token from the response header
-                return token;
+                authenticationUseCase.token = response.headers().map().get("X-fhws-jwt-token").getFirst(); //extract the token from the response header
+                return authenticationUseCase.token;
             } else {
                 throw new RuntimeException("Authentication failed, Username or Password are not Valid");
             }
@@ -45,11 +52,36 @@ public class AuthenticationUseCase {
     }
 
     public boolean isAuthorized() {
-        return token != null && !token.isEmpty();
+        AuthenticationUseCase authenticationUseCase = getInstance();
+        if(authenticationUseCase.token == null || authenticationUseCase.token.isEmpty()) return false;
+        // check whether token is still valid
+        try (final HttpClient httpClient = HttpClient.newHttpClient()) {
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(serverURL))
+                    .header("Authorization", "Bearer " + token)
+                    .build();
+
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public String getToken() {
         return token;
+    }
+
+    public static void main(String[] args) {
+        //authenticate("testest", "testtestse");
+        AuthenticationUseCase auth = new AuthenticationUseCase();
+        auth.token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrNjUzODkiLCJleHAiOjE3MzQ5NTIyOTl9.IdLVLC42usbm2finQGgNxVpSLnt4cAI59toz1rN066kylTdxQU-7E0YUBjJUqeL72slB5ZZAH85rKSUHCr2NSw";
+        System.out.println(auth.isAuthorized());
     }
 
 }

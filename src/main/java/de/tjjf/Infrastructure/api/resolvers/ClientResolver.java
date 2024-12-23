@@ -11,10 +11,9 @@ import graphql.kickstart.tools.GraphQLMutationResolver;
 import graphql.kickstart.tools.GraphQLQueryResolver;
 
 public class ClientResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
-
-    public void createClient(APIClientInput client){
+    public APIClient createClient(APIClientInput client){
         APIClient apiClient = new ClientMapperInput().toDomain(client);
-        new ClientPortImpl().createClient(new APIClientMapper().toDomainEntity(apiClient));
+        return new APIClientMapper().toAPIEntity(new ClientPortImpl().createClient(new APIClientMapper().toDomainEntity(apiClient)));
     }
 
     public APIClient readClientById(long id){

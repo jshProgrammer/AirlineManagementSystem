@@ -1,10 +1,12 @@
 package de.tjjf.LogicTests;
 
+import de.tjjf.Domain.models.MAirplane;
 import de.tjjf.Domain.models.MFlight;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//should work 23.12.24
 public class AddLuggageWeightTest {
     MFlight mFlight = new MFlight(999999, null, null, null, null, null,null,null,0,null,null);
 

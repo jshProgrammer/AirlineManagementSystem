@@ -10,8 +10,8 @@ import de.tjjf.Infrastructure.persistence.mapper.EmployeeMapper;
 
 public class MEmployeeRepositoryImpl implements DataAccess.MEmployeeRepository{
     @Override
-    public void create(MEmployee entity) {
-        new EmployeeCreateImpl(new EmployeeMapper().toEntity(entity)).execute();
+    public MEmployee create(MEmployee entity) {
+        return new EmployeeMapper().toDomain(new EmployeeCreateImpl(new EmployeeMapper().toEntity(entity)).execute().model);
     }
 
     @Override

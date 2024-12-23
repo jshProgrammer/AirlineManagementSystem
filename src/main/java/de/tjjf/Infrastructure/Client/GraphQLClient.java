@@ -2,6 +2,7 @@ package de.tjjf.Infrastructure.Client;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.tjjf.Domain.UseCases.AuthenticationUseCase;
 import de.tjjf.Infrastructure.Client.ClientOperations.APIOperations.*;
 import de.tjjf.Infrastructure.api.models.APIAirline;
 
@@ -30,13 +31,14 @@ public class GraphQLClient {
         //new EmployeeAPIOperation().readEmployeeById(123);
         //new ClientAPIOperation().readClientById(123);
         //new TicketAPIOperation().readTicketById(1);
-        new AirportAPIOperation().readAirportByCode("FRA");
-        new FlightAPIOperation().readFlightByFlightNum(123);
-        new AirlineAPIOperation().readAirlineByName("Test");
+        //new AirportAPIOperation().readAirportByCode("FRA"); //funktioniert schon mit DB
+        //new FlightAPIOperation().readFlightByFlightNum(102); // funktioniert noch nicht mit DB
+        new AirplaneAPIOperation().readAirplaneBySerialNum(1232147119);
+        //new AirlineAPIOperation().readAirlineByName("Test");
 
         //new FlightAPIOperation().updateFlight(new APIFlightInput(1, 1, new Date(2000, 01, 01), "Test", new Date(2000, 01, 01), "Test", new Date(2000, 01, 01), APIFlightInput.FlightStatus.canceled, 1, 1, 1));
         //new TicketAPIOperation().cancelClientTicket(1, 1);
-        new TicketAPIOperation().upgradeLuggageWeight(1, 20);
+        //new TicketAPIOperation().upgradeLuggageWeight(1, 20);
         //TODO: addBooking und upgradeSeatingClass funktioniert noch nicht!
         //new TicketAPIOperation().upgradeSeatingClass(1, APITicket.SeatingClass.Business.name());
         //new TicketAPIOperation().addBooking(new APITicketInput(1, 1, true, 1, new Date(2000, 01, 01), 1, 1, APITicketInput.SeatingClass.Business, APITicketInput.TicketStatus.paid, 1), new APIPaymentInput("1", "Jan", "2005", "na"));

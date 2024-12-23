@@ -8,8 +8,8 @@ public class AirplaneMapperInput {
     public APIAirplaneInput toClient(APIAirplane airplane){
         return new APIAirplaneInput(
                 airplane.getSerialNum(),
-                airplane.getBelongingAirline(),
-                airplane.isOperable()
+                airplane.getBelongingAirlineName(),
+                airplane.getIsOperable()
         );
     }
 

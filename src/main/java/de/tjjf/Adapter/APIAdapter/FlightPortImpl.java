@@ -9,8 +9,8 @@ import de.tjjf.Domain.ports.API.FlightPort;
 
 public class FlightPortImpl implements FlightPort {
     @Override
-    public void createFlight(MFlight flight) {
-        new FlightService(new MFlightRepositoryImpl()).createFlight(flight);
+    public MFlight createFlight(MFlight flight) {
+        return new FlightService(new MFlightRepositoryImpl()).createFlight(flight);
     }
 
     @Override

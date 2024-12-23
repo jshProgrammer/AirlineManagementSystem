@@ -11,8 +11,8 @@ import de.tjjf.Infrastructure.persistence.mapper.AirportMapper;
 public class MAirportRepsoitoryImp implements DataAccess.MAirportRepository {
 
     @Override
-    public void create(MAirport entity) {
-        new AirportCreateImpl(new AirportMapper().toEntity(entity)).execute();
+    public MAirport create(MAirport entity) {
+        return new AirportMapper().toDomain(new AirportCreateImpl(new AirportMapper().toEntity(entity)).execute().model);
     }
 
     @Override

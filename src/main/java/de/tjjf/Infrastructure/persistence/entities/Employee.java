@@ -11,7 +11,7 @@ public class Employee implements Model {
 
     @Id
     @Column(nullable=false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long personId;
 
     @Column(nullable = false)

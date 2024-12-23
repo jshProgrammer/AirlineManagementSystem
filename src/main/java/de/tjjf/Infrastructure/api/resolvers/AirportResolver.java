@@ -9,9 +9,9 @@ import graphql.kickstart.tools.GraphQLQueryResolver;
 
 public class AirportResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
 
-    public void createAirport(APIAirportInput airport){
+    public APIAirport createAirport(APIAirportInput airport){
         APIAirport apiAirport = new APIAirport(airport.getCode(), airport.getName(), airport.getCountry(), airport.getCity(), airport.getTimezone());
-        new AirportPortImpl().createAirport(new APIAirportMapper().toDomainEntity(apiAirport));
+        return new APIAirportMapper().toAPIEntity(new AirportPortImpl().createAirport(new APIAirportMapper().toDomainEntity(apiAirport)));
     }
 
     public APIAirport readAirportByCode(String code){

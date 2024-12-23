@@ -9,8 +9,8 @@ import de.tjjf.Domain.ports.API.ClientPort;
 
 public class ClientPortImpl implements ClientPort {
     @Override
-    public void createClient(MClient client) {
-        new ClientService(new MClientRepositoryImpl()).createClient(client);
+    public MClient createClient(MClient client) {
+        return new ClientService(new MClientRepositoryImpl()).createClient(client);
     }
 
     @Override

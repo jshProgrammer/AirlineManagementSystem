@@ -17,9 +17,9 @@ public class AirlineResolver implements GraphQLQueryResolver, GraphQLMutationRes
     }
 
     //TODO: mapper für address
-    public void createAirline(APIAirlineInput airline) {
+    public APIAirline createAirline(APIAirlineInput airline) {
         APIAirline apiAirline = new AirlineMapperInput().toDomain(airline);
-        new AirlinePortImpl().createAirline(new APIAirlineMapper().toDomainEntity(apiAirline));
+        return new APIAirlineMapper().toAPIEntity(new AirlinePortImpl().createAirline(new APIAirlineMapper().toDomainEntity(apiAirline)));
     }
 
     public void updateAirline(APIAirlineInput airline) {

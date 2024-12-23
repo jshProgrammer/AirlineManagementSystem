@@ -69,6 +69,9 @@ public class MFlight implements MModel {
         }
     }
 
+    public void addTicket(MTicket ticket) {
+        tickets.add(ticket);
+    }
 
     public void setAirplane(MAirplane airplane) {
         this.airplane = airplane;
