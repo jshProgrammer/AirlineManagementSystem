@@ -14,7 +14,7 @@ public class TicketMapper extends Mapper<MTicket, Ticket> {
 
     public Ticket toEntity(MTicket mTicket){
         return new Ticket(
-                mTicket.getTicketId(),
+                //mTicket.getTicketId(),
                 mTicket.getPerson().getPersonId(),
                 new FlightMapper().toEntity(mTicket.getFlight()),
                 mTicket.getDateTimeOfBooking(),

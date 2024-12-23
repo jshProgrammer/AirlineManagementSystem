@@ -28,7 +28,10 @@ public class Airline implements Model {
     private String address;
 
     @OneToMany(mappedBy = "belongingAirline", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Airplane> airplanes = new ArrayList<>();
+    private List<Airplane> airplanes;
+
+    @OneToMany(mappedBy = "airline")
+    private List<Employee> employees;
 
     //TODO: sollen wir hier mit OneToMany auch die Flugzeuge speichern => eig wird das ja selten abgerufen
 

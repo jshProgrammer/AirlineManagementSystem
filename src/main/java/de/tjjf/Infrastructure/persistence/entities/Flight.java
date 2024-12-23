@@ -2,32 +2,38 @@ package de.tjjf.Infrastructure.persistence.entities;
 
 import de.tjjf.Domain.models.MFlight;
 import jakarta.persistence.*;
+import jakarta.persistence.Entity;
 
 import java.util.Date;
+import java.util.List;
+
 @Entity
+@Table(name = "flights")
 public class Flight implements Model {
 
     //TODO: evtl @JoinColumn damit Anzeigen aller Buchungen
     @Id
-    @Column(nullable=false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable=false)
     private long flightNum;
 
-    @JoinColumn
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "airplane_id", referencedColumnName = "serialNum")
     private Airplane airplane;
 
     @Column
     private Date departureDateTime;
 
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "departure_airport_id", referencedColumnName = "code")
     private Airport departureAirport;
 
     @Column
     private Date arrivalDateTime;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "arrival_airport_id", referencedColumnName = "code")
     private Airport arrivalAirport;
 
     @Column(nullable = false)
@@ -40,12 +46,12 @@ public class Flight implements Model {
     private int duration;
 
     //TODO: evtl ManyToOne-Beziehung?
-    @OneToOne()
-    //@JoinColumn(name = "employee_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pilot_id", insertable = false, updatable = false)
     private Employee pilot;
 
-    @OneToOne()
-    //@JoinColumn(name = "employee_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "copilot_id", insertable = false, updatable = false)
     private Employee copilot;
 
 

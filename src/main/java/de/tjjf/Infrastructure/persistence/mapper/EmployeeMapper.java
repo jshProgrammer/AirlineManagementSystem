@@ -19,7 +19,7 @@ public class EmployeeMapper extends Mapper<MEmployee, Employee>{
         }
 
         return new Employee(
-                mEmployee.getPersonId(),
+                //mEmployee.getPersonId(),
                 mEmployee.getFirstName(),
                 mEmployee.getMiddleNames(),
                 mEmployee.getLastName(),

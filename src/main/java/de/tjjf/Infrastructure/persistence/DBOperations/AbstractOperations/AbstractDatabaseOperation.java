@@ -5,7 +5,9 @@ import de.tjjf.Infrastructure.persistence.EntityManagerFactorySingleton;
 import de.tjjf.Infrastructure.persistence.results.AbstractResult;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.transaction.Transactional;
 
+@Transactional
 public abstract class AbstractDatabaseOperation<R extends AbstractResult> {
     private EntityManagerFactory emf = EntityManagerFactorySingleton.getInstance();
     protected EntityManager em = null;

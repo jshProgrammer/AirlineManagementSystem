@@ -70,7 +70,7 @@ public class UpdateModelTest {
         new AirportCreateImpl(arrivalAirport).execute();
 
         client = new Client(
-                8888888 + salt.hashCode(),
+                //8888888 + salt.hashCode(),
                 "TestFirstName",
                 "TestMiddleNames",
                 "TestLastName",
@@ -85,7 +85,7 @@ public class UpdateModelTest {
         new ClientCreateImpl(client).execute();
 
         employee = new Employee(
-                7777777 + salt.hashCode(),
+                //7777777 + salt.hashCode(),
                 "TestEmployee",
                 "TestMiddleNames",
                 "TestLastName",
@@ -118,7 +118,7 @@ public class UpdateModelTest {
         new FlightCreateImpl(flight).execute();
 
         ticket = new Ticket(
-                5555555 + salt.hashCode(),
+                //5555555 + salt.hashCode(),
                 client.getPersonId(),
                 flight,
                 new Date(),

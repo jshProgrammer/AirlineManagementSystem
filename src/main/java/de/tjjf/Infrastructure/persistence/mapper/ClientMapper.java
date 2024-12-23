@@ -19,7 +19,7 @@ public class ClientMapper extends Mapper<MClient, Client>{
         }
         
         return new Client(
-                mClient.getPersonId(),
+                //mClient.getPersonId(),
                 mClient.getFirstName(),
                 mClient.getMiddleNames(),
                 mClient.getLastName(),

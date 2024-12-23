@@ -93,8 +93,8 @@ public class CreateModelTest {
         String email = "testemail_" + salt + "@gmail.com";
         String password = "TestPassword";
         boolean isBusinessClient = true;
-
-        Client client = new Client(personId, firstName, middleName, lastName, dateOfBirth, phoneNumber, address, email, password, new ArrayList<>(), isBusinessClient);
+//personId,
+        Client client = new Client( /*personId,*/ firstName, middleName, lastName, dateOfBirth, phoneNumber, address, email, password, new ArrayList<>(), isBusinessClient);
         new ClientCreateImpl(client).execute();
 
         assertNotNull(client);
@@ -127,8 +127,8 @@ public class CreateModelTest {
         int salary = 5000;
         String position = "Manager";
         Date hireDate = new Date();
-
-        Employee employee = new Employee(personId, firstName, middleName, lastName, dateOfBirth, employeePhoneNumber, employeeAddress, employeeEmail, password, new ArrayList<>(), salary, position, airline, hireDate);
+//personId,
+        Employee employee = new Employee(/*personId,*/ firstName, middleName, lastName, dateOfBirth, employeePhoneNumber, employeeAddress, employeeEmail, password, new ArrayList<>(), salary, position, airline, hireDate);
         new EmployeeCreateImpl(employee).execute();
 
         assertNotNull(employee);
@@ -184,8 +184,8 @@ public class CreateModelTest {
         String pilotFirstName = "PilotFirstName";
         String pilotLastName = "PilotLastName";
         String pilotPosition = "Captain";
-
-        Employee pilot = new Employee(pilotId, pilotFirstName, "", pilotLastName, new Date(), "+491512345678", "PilotAddress", "pilot@gmail.com", "password", new ArrayList<>(), 100000, pilotPosition, airline, new Date());
+//pilotId,
+        Employee pilot = new Employee(/*pilotId,*/ pilotFirstName, "", pilotLastName, new Date(), "+491512345678", "PilotAddress", "pilot@gmail.com", "password", new ArrayList<>(), 100000, pilotPosition, airline, new Date());
         new EmployeeCreateImpl(pilot).execute();
 
         long flightNum = 6666666 + salt.hashCode();

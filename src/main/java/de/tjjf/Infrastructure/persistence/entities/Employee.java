@@ -2,14 +2,15 @@ package de.tjjf.Infrastructure.persistence.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 public class Employee implements Model {
 
-    @Column(nullable=false)
     @Id
+    @Column(nullable=false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long personId;
 
@@ -37,8 +38,9 @@ public class Employee implements Model {
     @Column(nullable = false)
     private String hashedPassword;
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL,  orphanRemoval = true)
-    private List<Ticket> tickets;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    //@JoinColumn(name = "personId", referencedColumnName = "personId")
+    private List<Ticket> tickets = new ArrayList<>();
 
     @Column(nullable=false)
     private int salary;
@@ -46,8 +48,8 @@ public class Employee implements Model {
     @Column(nullable=false)
     private String position;
 
-    @ManyToOne()
-    //@JoinColumn(name = "airline_name", referencedColumnName = "name")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "airline_name", referencedColumnName = "name")
     private Airline airline;
 
     @Column(nullable=false)
@@ -55,8 +57,8 @@ public class Employee implements Model {
 
     public Employee() {}
 
-    public Employee(long personId, String firstName, String middleName, String lastName, Date dateOfBirth, String phonenumber, String address, String email, String hashedPassword, List<Ticket> tickets, int salary, String position, Airline airline, Date hireDate) {
-        this.personId = personId;
+    public Employee(/*long personId,*/ String firstName, String middleName, String lastName, Date dateOfBirth, String phonenumber, String address, String email, String hashedPassword, List<Ticket> tickets, int salary, String position, Airline airline, Date hireDate) {
+        //this.personId = personId;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;

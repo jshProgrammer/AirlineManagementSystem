@@ -2,6 +2,8 @@ package de.tjjf.Infrastructure.persistence.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Airplane implements Model {
     @Id
@@ -32,6 +34,9 @@ public class Airplane implements Model {
 
     @Column(nullable=false)
     private int maxWeightOfLuggage;
+
+    @OneToMany(mappedBy = "airplane")
+    private List<Flight> flights;
 
     public Airplane() {}
 

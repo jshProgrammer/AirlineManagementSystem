@@ -2,6 +2,8 @@ package de.tjjf.Infrastructure.persistence.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Airport implements Model {
 
@@ -20,6 +22,12 @@ public class Airport implements Model {
 
     @Column(nullable = false)
     private String timezone;
+
+    @OneToMany(mappedBy = "departureAirport")
+    private List<Flight> departingFlights;
+
+    @OneToMany(mappedBy = "arrivalAirport")
+    private List<Flight> arrivingFlights;
 
     public Airport(){}
 

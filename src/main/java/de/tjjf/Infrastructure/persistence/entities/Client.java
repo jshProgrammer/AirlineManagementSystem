@@ -39,16 +39,17 @@ public class Client implements Model {
     @Column(nullable = false)
     private String hashedPassword;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Ticket> tickets;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
+
+    private List<Ticket> tickets = new ArrayList<>();
 
     @Column(nullable=false)
     private boolean isBusinessClient;
 
     public Client() {}
 
-    public Client(long personId, String firstName, String middleName, String lastName, Date dateOfBirth, String phonenumber, String address, String email, String hashedPassword, List<Ticket> tickets, boolean isBusinessClient) {
-        this.personId = personId;
+    public Client(/*long personId,*/ String firstName, String middleName, String lastName, Date dateOfBirth, String phonenumber, String address, String email, String hashedPassword, List<Ticket> tickets, boolean isBusinessClient) {
+        //this.personId = personId;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
