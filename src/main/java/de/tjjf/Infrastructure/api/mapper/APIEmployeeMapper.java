@@ -36,7 +36,7 @@ public class APIEmployeeMapper extends AbstractAPIMapper<APIEmployee, MEmployee>
                 //TODO: was hier tun? salary echt einfach auf 0 initalisieren?
                 0,
                 null,
-                new AirlinePortImpl().readAirlineByName(apiEmployee.getAirline()),
+                new AirlinePortImpl().readAirlineByName(apiEmployee.getAirlineName()),
                 null
         );
     }
