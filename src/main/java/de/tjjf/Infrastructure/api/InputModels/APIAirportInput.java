@@ -1,6 +1,9 @@
 package de.tjjf.Infrastructure.api.InputModels;
 
 public class APIAirportInput implements APIModelInput {
+
+    public APIAirportInput(){}
+
     public APIAirportInput(String code, String name, String country, String city, String timezone) {
         this.code = code;
         this.name = name;

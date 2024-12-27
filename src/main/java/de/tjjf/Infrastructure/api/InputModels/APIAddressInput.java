@@ -1,10 +1,13 @@
 package de.tjjf.Infrastructure.api.InputModels;
 
 public class APIAddressInput implements APIModelInput {
-    public APIAddressInput(String street, int number, int zipcode, String city, String country) {
+
+    public APIAddressInput() {}
+
+    public APIAddressInput(String street, int number, int zipCode, String city, String country) {
         this.street = street;
         this.number = number;
-        this.zipcode = zipcode;
+        this.zipCode = zipCode;
         this.city = city;
         this.country = country;
     }
@@ -14,7 +17,7 @@ public class APIAddressInput implements APIModelInput {
 
     public int number;
 
-    public int zipcode;
+    public int zipCode;
 
     public String city;
 
@@ -36,12 +39,12 @@ public class APIAddressInput implements APIModelInput {
         this.number = number;
     }
 
-    public int getZipcode() {
-        return zipcode;
+    public int getZipCode() {
+        return zipCode;
     }
 
-    public void setZipcode(int zipcode) {
-        this.zipcode = zipcode;
+    public void setZipCode(int zipCode) {
+        this.zipCode = zipCode;
     }
 
     public String getCity() {

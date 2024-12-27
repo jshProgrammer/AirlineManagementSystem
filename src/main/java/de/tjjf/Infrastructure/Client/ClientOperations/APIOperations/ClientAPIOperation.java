@@ -8,11 +8,11 @@ import java.net.URISyntaxException;
 
 public class ClientAPIOperation extends AbstractAPIOperation {
 
-    private String transformToQuery(APIClientInput apiClientInput, String commandName) {
+    private String transformToQuery(APIClientInput apiClientInput, Long clientId, String commandName) {
         String query = """
         {
             "query": "mutation {
-                %s (client: {
+                %s ( %s client: {
                     clientID: %d,
                     firstName: \\"%s\\",
                     middleName: \\"%s\\",
@@ -33,7 +33,7 @@ public class ClientAPIOperation extends AbstractAPIOperation {
         }
         """.formatted(
                 commandName,
-                apiClientInput.getClientId(),
+                (clientId == null) ? "" : "clientId: %d,".formatted(clientId),
                 apiClientInput.getFirstName(),
                 apiClientInput.getMiddleNames(),
                 apiClientInput.getLastName(),
@@ -41,7 +41,7 @@ public class ClientAPIOperation extends AbstractAPIOperation {
                 apiClientInput.getPhoneNumber(),
                 apiClientInput.getAddress().getStreet(),
                 apiClientInput.getAddress().getNumber(),
-                apiClientInput.getAddress().getZipcode(),
+                apiClientInput.getAddress().getZipCode(),
                 apiClientInput.getAddress().getCity(),
                 apiClientInput.getAddress().getCountry(),
                 apiClientInput.getEmail(),
@@ -53,11 +53,11 @@ public class ClientAPIOperation extends AbstractAPIOperation {
     }
 
         public void createClient(APIClientInput apiClientInput) {
-            execute(transformToQuery(apiClientInput, "createClient"), "createClient", APIClient.class);
+            execute(transformToQuery(apiClientInput, null, "createClient"), "createClient", APIClient.class);
         }
 
-        public void updateClient(APIClientInput apiClientInput) {
-            execute(transformToQuery(apiClientInput, "updateClient"), "updateClient", APIClient.class);
+        public void updateClient(Long clientId, APIClientInput apiClientInput) {
+            execute(transformToQuery(apiClientInput, clientId, "updateClient"), "updateClient", APIClient.class);
         }
 
         public APIClient readClientById(int clientId) throws URISyntaxException, IOException, InterruptedException {

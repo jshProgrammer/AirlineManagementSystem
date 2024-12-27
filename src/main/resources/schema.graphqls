@@ -9,7 +9,7 @@ type MyType {
 type APIAddress {
     street: String!,
     number: Int!,
-    zipcode: Int!,
+    zipCode: Int!,
     city: String!
     country: String!
 }
@@ -49,11 +49,11 @@ type APIClient{
 }
 
 type APIEmployee{
-    employeeID: Long!,
+    employeeId: Long!,
     firstName: String!,
-    middleName: String,
+    middleNames: String,
     lastName: String!,
-    dateOfBith: Date!,
+    dateOfBirth: Date!,
     phoneNumber: String!,
     address: APIAddress!,
     email: String!,
@@ -129,7 +129,6 @@ input APIAirportInput{
 }
 
 input APIClientInput{
-    clientID: Long!,
     firstName: String!,
     middleName: String,
     lastName: String!,
@@ -141,9 +140,8 @@ input APIClientInput{
 }
 
 input APIEmployeeInput{
-    employeeID: Long!,
     firstName: String!,
-    middleName: String,
+    middleNames: String,
     lastName: String!,
     dateOfBirth: Date!,
     phoneNumber: String!,
@@ -212,7 +210,7 @@ type Query {
 
     readAirportByCode(code: String): APIAirport
 
-    readFlightByFlightNum(flightNum: Int): APIFlight
+    ##readFlightByFlightNum(flightNum: Int): APIFlight
     readAirlineByName(name: String): APIAirline
 
     readAirplaneBySerialNum(serialNum: Int): APIAirplane
@@ -226,8 +224,8 @@ type Mutation {
     #cancelFlight(flightNum: Int): Void
 
     #TODO: die folgenden vier Methoden funktionieren noch nicht
-    #createEmployee(employee: APIEmployeeInput): Void
-    #updateEmployee(employee: APIEmployeeInput): Void
+    #createEmployee(employee: APIEmployeeInput): APIEmployee
+    #updateEmployee(employeeId: Float, employee: APIEmployeeInput): Void
 
     #createClient(client: APIClientInput): Void
     #updateClient(client: APIClientInput): Void
@@ -235,17 +233,17 @@ type Mutation {
     #TODO addBooking und upgradeSeatingClass funktionieren noch nicht!
     #addBooking(newBooking: APITicketInput, payment: APIPaymentInput): Void
     #upgradeSeatingClass(ticketId: Int, newSeatingClass: APISeatingClassInput): Void
-    upgradeLuggageWeight(ticketId: Int, newLuggageWeight: Int): Void
+    ##upgradeLuggageWeight(ticketId: Int, newLuggageWeight: Int): Void
 
     #TODO: hier noch klären, ob nicht wirklich nur id ausreichend ist
-    cancelTicketEmployee(employeeId: Int, flightNum: Int): Void
-    cancelTicketClient(clientId: Int, flightNum: Int): Void
+    ##cancelTicketEmployee(employeeId: Int, flightNum: Int): Void
+    ##cancelTicketClient(clientId: Int, flightNum: Int): Void
 
     createAirport(airport: APIAirportInput): Void
 
     createAirline(airline: APIAirlineInput): Void
-    updateAirline(airline: APIAirlineInput): Void
+    ##updateAirline(airline: APIAirlineInput): Void
 
-    createAirplane(airplane: APIAirplaneInput): Void
-    setOperable(serialNum: Int, isOperable: Boolean): Void
+    ##createAirplane(airplane: APIAirplaneInput): Void
+    ##setOperable(serialNum: Int, isOperable: Boolean): Void
 }

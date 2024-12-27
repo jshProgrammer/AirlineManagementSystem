@@ -3,6 +3,9 @@ package de.tjjf.Infrastructure.api.InputModels;
 import java.util.Date;
 
 public class APIAirlineInput implements APIModelInput {
+
+    public APIAirlineInput() {}
+
     public APIAirlineInput(String name, Date foundationYear, APIAddressInput address, String phoneNumber, String email) {
         this.name = name;
         this.foundationYear = foundationYear;

@@ -1,10 +1,14 @@
 package de.tjjf.Infrastructure.api.InputModels;
 
+import de.tjjf.Infrastructure.api.models.APIEmployee;
+
 import java.util.Date;
 
 public class APIEmployeeInput implements APIModelInput {
-    public APIEmployeeInput(long employeeId, String firstName, String middleNames, String lastName, Date dateOfBirth, String phoneNumber, APIAddressInput address, String email, String airlineName) {
-        this.employeeId = employeeId;
+
+    public APIEmployeeInput() {}
+
+    public APIEmployeeInput(String firstName, String middleNames, String lastName, Date dateOfBirth, String phoneNumber, APIAddressInput address, String email, String airlineName) {
         this.firstName = firstName;
         this.middleNames = middleNames;
         this.lastName = lastName;
@@ -14,8 +18,6 @@ public class APIEmployeeInput implements APIModelInput {
         this.email = email;
         this.airlineName = airlineName;
     }
-
-    private long employeeId;
 
     private String firstName;
 
@@ -32,10 +34,6 @@ public class APIEmployeeInput implements APIModelInput {
     private String email;
 
     private String airlineName;
-
-    public void setEmployeeId(long employeeId) {
-        this.employeeId = employeeId;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -104,13 +102,5 @@ public class APIEmployeeInput implements APIModelInput {
     }
     public void setAirline(String airline) {
         this.airlineName = airline;
-    }
-
-    public long getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
     }
 }

@@ -3,6 +3,9 @@ package de.tjjf.Infrastructure.api.InputModels;
 import java.util.Date;
 
 public class APIFlightInput implements APIModelInput {
+
+    public APIFlightInput() {}
+
     public APIFlightInput(long flightNum, int airplaneSerialNum, Date departureDateTime, String departureAirportCode, Date arrivalDateTime, String arrivalAirportCode, Date boardingTime, FlightStatus status, int duration, long pilotId, long copilotId) {
         this.flightNum = flightNum;
         this.airplaneSerialNum = airplaneSerialNum;

@@ -8,7 +8,7 @@ import graphql.GraphqlErrorBuilder;
 import graphql.kickstart.execution.error.GraphQLErrorHandler;
 import graphql.kickstart.spring.error.ThrowableGraphQLError;
 import graphql.schema.DataFetchingEnvironment;
-import org.springframework.graphql.execution.DataFetcherExceptionResolverAdapter;
+
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.annotation.ApplicationScope;
@@ -16,7 +16,7 @@ import org.springframework.web.context.annotation.ApplicationScope;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
+/*
 @Component
 public class UnauthorizedExceptionHandler implements GraphQLErrorHandler {
 
@@ -59,3 +59,4 @@ public class UnauthorizedExceptionHandler implements GraphQLErrorHandler {
 
 
 }
+*/
