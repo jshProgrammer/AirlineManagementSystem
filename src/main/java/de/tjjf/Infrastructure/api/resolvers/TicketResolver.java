@@ -14,7 +14,9 @@ import de.tjjf.Infrastructure.api.mapper.*;
 import de.tjjf.Infrastructure.api.models.*;
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import graphql.kickstart.tools.GraphQLQueryResolver;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TicketResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
     //TODO: Ticket Port Impl, bzw rename von booking zu ticket außer ich bin zu blöd die Logik zu verstehen - Tom
     public APITicket addBooking(APITicketInput ticket, APIPaymentInput payment) {

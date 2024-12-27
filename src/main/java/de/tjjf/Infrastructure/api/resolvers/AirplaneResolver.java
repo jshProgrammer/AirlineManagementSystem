@@ -7,7 +7,9 @@ import de.tjjf.Infrastructure.api.mapper.APIAirplaneMapper;
 import de.tjjf.Infrastructure.api.models.APIAirplane;
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import graphql.kickstart.tools.GraphQLQueryResolver;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AirplaneResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
 
     public APIAirplane readAirplaneBySerialNum(int serialNum ){

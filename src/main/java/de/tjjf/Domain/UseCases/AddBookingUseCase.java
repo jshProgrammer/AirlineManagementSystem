@@ -16,7 +16,7 @@ public class AddBookingUseCase extends AuthorizedUseCase {
     //4242424242424242 erfolgreiche Zahlung
     //4000000000000069 abgelaufene Karte/erfloglose Zahlung
     public static boolean addBooking(MTicket newBooking, MPayment mPayment) {
-        new CancelTicketUseCase().authorize();
+        //new CancelTicketUseCase().authorize();
         boolean bookable = false;
         boolean paid = PaymentUseCase.paymentCall(newBooking.getTotalPrice(), mPayment);
         if (paid) {

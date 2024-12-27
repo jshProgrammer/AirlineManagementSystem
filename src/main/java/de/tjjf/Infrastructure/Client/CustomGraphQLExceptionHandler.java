@@ -1,30 +1,28 @@
 package de.tjjf.Infrastructure.Client;
 
-import de.tjjf.Domain.Exceptions.UnauthorizedException;
-import graphql.ErrorType;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
 import graphql.GraphQLError;
-import graphql.GraphqlErrorBuilder;
-import org.springframework.web.context.request.WebRequest;
+import graphql.kickstart.execution.error.GraphQLErrorHandler;
+import graphql.kickstart.execution.error.GenericGraphQLError;
+import org.springframework.stereotype.Component;
 
-import java.util.Map;
+import java.util.List;
+import java.util.stream.Collectors;
 
-@ControllerAdvice
-public class CustomGraphQLExceptionHandler {
+@Component
+public class CustomGraphQLExceptionHandler implements GraphQLErrorHandler {
 
-    @ExceptionHandler(UnauthorizedException.class)
-    @ResponseBody
-    public GraphQLError handleUnauthorizedException(UnauthorizedException ex, WebRequest request) {
-        System.out.println("UnauthorizedException recognized");
-        return GraphqlErrorBuilder.newError()
-                .message(ex.getMessage())
-                .errorType(ErrorType.ValidationError)
-                .extensions(Map.of(
-                        "code", "UNAUTHORIZED",
-                        "classification", "AuthenticationError"
-                ))
-                .build();
+    @Override
+    public List<GraphQLError> processErrors(List<GraphQLError> errors) {
+        return errors.stream()
+                .map(this::getCustomError)
+                .collect(Collectors.toList());
+    }
+
+    private GraphQLError getCustomError(GraphQLError error) {
+        System.out.println("geht hier rein" + error.getMessage());
+        if (error.getMessage().contains("UnauthorizedException")) {
+            return new GenericGraphQLError("User is not authorized to perform this action.");
+        }
+        return error;
     }
 }

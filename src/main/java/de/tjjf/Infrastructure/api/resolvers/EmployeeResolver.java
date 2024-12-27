@@ -8,7 +8,9 @@ import de.tjjf.Infrastructure.api.models.APIAddress;
 import de.tjjf.Infrastructure.api.models.APIEmployee;
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import graphql.kickstart.tools.GraphQLQueryResolver;
+import org.springframework.stereotype.Component;
 
+@Component
 public class EmployeeResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
     public APIEmployee createEmployee(APIEmployeeInput employee){
         APIEmployee apiEmployee = new EmployeeMapperInput().toDomain(employee);

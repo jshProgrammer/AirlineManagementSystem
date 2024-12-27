@@ -9,7 +9,9 @@ import de.tjjf.Infrastructure.api.models.APIAirline;
 import de.tjjf.Adapter.APIAdapter.AirlinePortImpl;
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import graphql.kickstart.tools.GraphQLQueryResolver;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AirlineResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
 
     public APIAirline readAirlineByName(String name) {

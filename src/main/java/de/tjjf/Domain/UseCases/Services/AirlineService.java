@@ -18,22 +18,22 @@ public class AirlineService extends AuthorizedUseCase {
     }
 
     public MAirline create(MAirline entity) {
-        new CancelTicketUseCase().authorize();
+        //new CancelTicketUseCase().authorize();
         return port.create(entity);
     }
 
     public MAirline readById(String s) {
-        new CancelTicketUseCase().authorize();
+        //new CancelTicketUseCase().authorize();
         return port.readById(s);
     }
 
     public void update(MAirline entity) {
-        new CancelTicketUseCase().authorize();
+        //new CancelTicketUseCase().authorize();
         port.update(entity);
     }
 
     public void delete(String s) {
-        new CancelTicketUseCase().authorize();
+        //new CancelTicketUseCase().authorize();
         port.delete(s);
     }
 }
