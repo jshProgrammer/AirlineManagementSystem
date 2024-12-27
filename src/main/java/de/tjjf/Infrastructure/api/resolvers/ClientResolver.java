@@ -9,7 +9,9 @@ import de.tjjf.Infrastructure.api.models.APIAddress;
 import de.tjjf.Infrastructure.api.models.APIClient;
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import graphql.kickstart.tools.GraphQLQueryResolver;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ClientResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
     public APIClient createClient(APIClientInput client){
         APIClient apiClient = new ClientMapperInput().toDomain(client);

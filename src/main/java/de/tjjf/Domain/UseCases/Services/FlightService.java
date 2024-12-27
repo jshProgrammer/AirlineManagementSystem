@@ -16,22 +16,22 @@ public class FlightService extends AuthorizedUseCase {
     }
 
     public MFlight createFlight(MFlight toEntity){
-        new CancelTicketUseCase().authorize();
+        //new CancelTicketUseCase().authorize();
         return port.create(toEntity);
     }
 
     public MFlight readFlightByNum(long num){
-        new CancelTicketUseCase().authorize();
+        //new CancelTicketUseCase().authorize();
         return port.readById(num);
     }
 
     public void updateFlight(MFlight toEntity){
-        new CancelTicketUseCase().authorize();
+        //new CancelTicketUseCase().authorize();
         port.update(toEntity);
     }
 
     public void cancelFlight(MFlight toEntity){
-        new CancelTicketUseCase().authorize();
+        //new CancelTicketUseCase().authorize();
         toEntity.setStatus(MFlight.FlightStatus.canceled);
         CancelCompleteFlightUseCase.cancelFlight(toEntity);
         port.update(toEntity);

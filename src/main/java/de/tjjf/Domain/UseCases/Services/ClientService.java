@@ -14,17 +14,17 @@ public class ClientService extends AuthorizedUseCase {
     }
 
     public MClient createClient(MClient entity){
-        new CancelTicketUseCase().authorize();
+        //new CancelTicketUseCase().authorize();
         return port.create(entity);
     }
 
     public MClient readClientByID(Long id){
-        new CancelTicketUseCase().authorize();
+        //new CancelTicketUseCase().authorize();
         return port.readById(id);
     }
 
     public void updateClient(MClient entity){
-        new CancelTicketUseCase().authorize();
+        //new CancelTicketUseCase().authorize();
         port.update(entity);
     }
 }

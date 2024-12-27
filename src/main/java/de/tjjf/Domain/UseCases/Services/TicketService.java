@@ -20,7 +20,7 @@ public class TicketService extends AuthorizedUseCase {
 
     //TODO: Muss hier nicht AddBooking Use Case dranhängen
     public MTicket addBooking(MTicket newBooking, MPayment mPayment) {
-        new CancelTicketUseCase().authorize();
+        //new CancelTicketUseCase().authorize();
         if(AddBookingUseCase.addBooking(newBooking, mPayment)){
             return port.create(newBooking);
         }
@@ -28,12 +28,12 @@ public class TicketService extends AuthorizedUseCase {
     }
 
     public MTicket readTicketById(int id) {
-        new CancelTicketUseCase().authorize();
+        //new CancelTicketUseCase().authorize();
         return port.readById(id);
     }
 
     public void upgradeSeatingClass(int ticketId, MTicket.SeatingClass newSeatingClass) throws NoSeatsAvailableException {
-        new CancelTicketUseCase().authorize();
+        //new CancelTicketUseCase().authorize();
         MTicket ticket = readTicketById(ticketId);
         //TODO: So ungefähr
         upgradeSeatingClass(ticketId, newSeatingClass);
@@ -42,14 +42,14 @@ public class TicketService extends AuthorizedUseCase {
     }
 
     public void upgradeLuggageWeight(int ticketId, int newWeight) throws IllegalArgumentException {
-        new CancelTicketUseCase().authorize();
+        //new CancelTicketUseCase().authorize();
         MTicket ticket = port.readById(ticketId);
         ticket.upgradeLuggageWeight(newWeight);
         port.update(ticket);
     }
 
     public void cancelTicket(MPerson person, int flightnum){
-        new CancelTicketUseCase().authorize();
+        //new CancelTicketUseCase().authorize();
         CancelTicketUseCase.cancelTicket(person, flightnum);
     }
 }

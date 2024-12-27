@@ -18,7 +18,7 @@ public class PaymentUseCase extends AuthorizedUseCase {
     }
 
     public static boolean paymentCall(int amountEuros, MPayment mPayment) throws UnauthorizedException {
-        new CancelTicketUseCase().authorize();
+        //new CancelTicketUseCase().authorize();
 
         Stripe.apiKey = ("sk_test_51QKmmwGprcegLKPYNfuU5wgoOLFCnINfPbpKDClrxDfgfzYbSNoJyjjyLDM4xW14NuMTkU2g7J2Cg7WEbQQYjfTI00G5oHMHD0");
         Map<String, Object> params = new HashMap<>();

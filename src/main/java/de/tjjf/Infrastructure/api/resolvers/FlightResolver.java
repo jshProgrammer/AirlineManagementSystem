@@ -8,7 +8,9 @@ import de.tjjf.Infrastructure.api.mapper.APIFlightMapper;
 import de.tjjf.Infrastructure.api.models.APIFlight;
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import graphql.kickstart.tools.GraphQLQueryResolver;
+import org.springframework.stereotype.Component;
 
+@Component
 public class FlightResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
 
     public APIFlight readFlightByFlightNum(int flightNum) {

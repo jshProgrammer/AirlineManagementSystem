@@ -15,12 +15,12 @@ public class AirportService extends AuthorizedUseCase{
     }
 
     public MAirport createAirport(MAirport airport){
-        new CancelTicketUseCase().authorize();
+        //new CancelTicketUseCase().authorize();
         return port.create(airport);
     }
 
     public MAirport readAirportByCode(String code) {
-        new CancelTicketUseCase().authorize();
+        //new CancelTicketUseCase().authorize();
         return port.readById(code);
     }
 }

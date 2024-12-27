@@ -17,17 +17,17 @@ public class AirplaneService extends AuthorizedUseCase {
     }
 
     public MAirplane createAirplane(MAirplane airplane) {
-        new CancelTicketUseCase().authorize();
+        //new CancelTicketUseCase().authorize();
         return port.create(airplane);
     }
 
     public MAirplane readAirplaneBySerialNum(int serialNum) throws UnauthorizedException {
-        new CancelTicketUseCase().authorize();
+        //new CancelTicketUseCase().authorize();
         return port.readById(serialNum);
     }
 
     public void setOperable(int serialNum, boolean isOperable) {
-        new CancelTicketUseCase().authorize();
+        //new CancelTicketUseCase().authorize();
         MAirplane mAirplane = readAirplaneBySerialNum(serialNum);
         mAirplane.setOperable(isOperable);
         port.update(mAirplane);

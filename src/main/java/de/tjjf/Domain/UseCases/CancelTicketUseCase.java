@@ -12,7 +12,7 @@ public class CancelTicketUseCase extends AuthorizedUseCase {
     }
 
     public static void cancelTicket(MPerson person, int flightnum) throws UnauthorizedException {
-        new CancelTicketUseCase().authorize();
+        //new CancelTicketUseCase().authorize();
 
         for (MTicket ticket : person.getTickets()) {
             if (flightnum == (int) ticket.getFlight().getFlightNum()) {
