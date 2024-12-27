@@ -20,7 +20,7 @@ public class APIAddressMapper extends AbstractAPIMapper<APIAddress, MAddress> {
         return new MAddress(
                 apiAddress.getStreet(),
                 apiAddress.getNumber(),
-                apiAddress.getZipcode(),
+                apiAddress.getZipCode(),
                 apiAddress.getCity(),
                 apiAddress.getCountry()
         );

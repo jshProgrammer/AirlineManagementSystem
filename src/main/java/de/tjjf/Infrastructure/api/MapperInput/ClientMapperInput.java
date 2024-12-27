@@ -10,7 +10,6 @@ public class ClientMapperInput {
     public APIClientInput toClient(APIClient client) {
         APIAddressInput apiAddress = new AddressMapperInput().toClient(client.getAddress());
         return new APIClientInput(
-                client.getClientId(),
                 client.getFirstName(),
                 client.getMiddleNames(),
                 client.getLastName(),
@@ -21,10 +20,10 @@ public class ClientMapperInput {
                 client.isBusinessClient()
         );
     }
-    public APIClient toDomain(APIClientInput client) {
+    public APIClient toDomain(Long clientId, APIClientInput client) {
         APIAddress apiAddress = new AddressMapperInput().toDomain(client.getAddress());
         return new APIClient(
-                client.getClientId(),
+                clientId,
                 client.getFirstName(),
                 client.getMiddleNames(),
                 client.getLastName(),

@@ -34,7 +34,7 @@ public class AirlineAPIOperation extends AbstractAPIOperation {
                 apiAirlineInput.getFoundationYearInRFC3339(),
                 apiAirlineInput.getAddress().getStreet(),
                 apiAirlineInput.getAddress().getNumber(),
-                apiAirlineInput.getAddress().getZipcode(),
+                apiAirlineInput.getAddress().getZipCode(),
                 apiAirlineInput.getAddress().getCity(),
                 apiAirlineInput.getAddress().getCountry(),
                 apiAirlineInput.getPhoneNumber(),

@@ -7,6 +7,7 @@ import graphql.language.SourceLocation;
 import java.util.List;
 import java.util.Map;
 
+/*
 public class CustomGraphQLError implements GraphQLError {
     private final String message;
     private final List<SourceLocation> locations;
@@ -49,5 +50,5 @@ public class CustomGraphQLError implements GraphQLError {
     public Map<String, Object> getExtensions() {
         return GraphQLError.super.getExtensions();
     }
-}
+}*/
 

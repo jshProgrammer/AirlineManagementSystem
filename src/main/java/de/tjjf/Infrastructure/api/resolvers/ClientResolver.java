@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ClientResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
     public APIClient createClient(APIClientInput client){
-        APIClient apiClient = new ClientMapperInput().toDomain(client);
+        APIClient apiClient = new ClientMapperInput().toDomain(null, client);
         return new APIClientMapper().toAPIEntity(new ClientPortImpl().createClient(new APIClientMapper().toDomainEntity(apiClient)));
     }
 
@@ -22,8 +22,8 @@ public class ClientResolver implements GraphQLQueryResolver, GraphQLMutationReso
         return new APIClientMapper().toAPIEntity(new ClientPortImpl().readClientById(id));
     }
 
-    public void updateClient(APIClientInput client){
-        APIClient apiClient = new ClientMapperInput().toDomain(client);
+    public void updateClient(Long clientId, APIClientInput client){
+        APIClient apiClient = new ClientMapperInput().toDomain(clientId, client);
         new ClientPortImpl().updateClient(new APIClientMapper().toDomainEntity(apiClient));
     }
 

@@ -8,16 +8,16 @@ import java.net.URISyntaxException;
 
 public class EmployeeAPIOperation extends AbstractAPIOperation {
 
-    private String transformToQuery(APIEmployeeInput apiEmployeeInput, String commandName) {
+    private String transformToQuery(APIEmployeeInput apiEmployeeInput, Long employeeId, String commandName) {
         String query = """
         {
             "query": "mutation {
-                %s (employee: {
-                    employeeID: %d,
+                %s ( %s employee: {
                     firstName: \\"%s\\",
-                    middleName: \\"%s\\",
+                    middleNames: \\"%s\\",
                     lastName: \\"%s\\",
                     dateOfBirth: \\"%s\\",
+                    phoneNumber: \\"%s\\",
                     address: {
                         street: \\"%s\\",
                         number: %d,
@@ -27,19 +27,36 @@ public class EmployeeAPIOperation extends AbstractAPIOperation {
                     },
                     email: \\"%s\\"
                     airlineName: \\"%s\\",
-                })
+                }) {
+                    employeeId
+                    firstName
+                    middleNames
+                    lastName
+                    dateOfBirth
+                    phoneNumber
+                    address {
+                        street
+                        number
+                        zipCode
+                        city
+                        country
+                    }
+                    email
+                    airlineName
+                }
             }"
         }
         """.formatted(
                 commandName,
-                apiEmployeeInput.getEmployeeId(),
+                (employeeId == 0L) ? "" : "employeeId: %d,".formatted(employeeId),
                 apiEmployeeInput.getFirstName(),
                 apiEmployeeInput.getMiddleNames(),
                 apiEmployeeInput.getLastName(),
                 apiEmployeeInput.getDateOfBirthInRFC3339(),
+                apiEmployeeInput.getPhoneNumber(),
                 apiEmployeeInput.getAddress().getStreet(),
                 apiEmployeeInput.getAddress().getNumber(),
-                apiEmployeeInput.getAddress().getZipcode(),
+                apiEmployeeInput.getAddress().getZipCode(),
                 apiEmployeeInput.getAddress().getCity(),
                 apiEmployeeInput.getAddress().getCountry(),
                 apiEmployeeInput.getEmail(),
@@ -50,12 +67,12 @@ public class EmployeeAPIOperation extends AbstractAPIOperation {
 
     }
 
-        public void createEmployee(APIEmployeeInput apiEmployeeInput) {
-            execute(transformToQuery(apiEmployeeInput, "createEmployee"), "createEmployee", APIEmployee.class);
+        public APIEmployee createEmployee(APIEmployeeInput apiEmployeeInput) {
+            return execute(transformToQuery(apiEmployeeInput, 0L, "createEmployee"), "createEmployee", APIEmployee.class);
         }
 
-        public void updateEmployee(APIEmployeeInput apiEmployeeInput) {
-            execute(transformToQuery(apiEmployeeInput, "updateEmployee"), "updateEmployee", APIEmployee.class);
+        public void updateEmployee(Long employeeId, APIEmployeeInput apiEmployeeInput) {
+            execute(transformToQuery(apiEmployeeInput,  employeeId, "updateEmployee"), "updateEmployee", APIEmployee.class);
         }
 
         public APIEmployee readEmployeeById(int employeeId) throws URISyntaxException, IOException, InterruptedException {
@@ -63,11 +80,12 @@ public class EmployeeAPIOperation extends AbstractAPIOperation {
             {
                 "query": "{
                     readEmployeeById(employeeId: %d) {
-                        employeeID
+                        employeeId
                         firstName
-                        middleName
+                        middleNames
                         lastName
                         dateOfBirth
+                        phoneNumber
                         address {
                             street
                             number

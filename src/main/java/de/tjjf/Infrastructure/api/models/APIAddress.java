@@ -6,7 +6,7 @@ public class APIAddress implements APIModel {
 
     public int number;
 
-    public int zipcode;
+    public int zipCode;
 
     public String city;
 
@@ -14,10 +14,10 @@ public class APIAddress implements APIModel {
 
     public APIAddress(){}
 
-    public APIAddress(String street, int number, int zipcode, String city, String country) {
+    public APIAddress(String street, int number, int zipCode, String city, String country) {
         this.street=street;
         this.number=number;
-        this.zipcode=zipcode;
+        this.zipCode =zipCode;
         this.city=city;
         this.country=country;
     }
@@ -39,12 +39,12 @@ public class APIAddress implements APIModel {
         this.number = number;
     }
 
-    public int getZipcode() {
-        return zipcode;
+    public int getZipCode() {
+        return zipCode;
     }
 
-    public void setZipcode(int zipcode) {
-        this.zipcode = zipcode;
+    public void setZipCode(int zipCode) {
+        this.zipCode = zipCode;
     }
 
     public String getCity() {

@@ -3,8 +3,10 @@ package de.tjjf.Infrastructure.api.InputModels;
 import java.util.Date;
 
 public class APIClientInput implements APIModelInput {
-    public APIClientInput(long clientId, String firstName, String middleNames, String lastName, Date dateOfBirth, String phoneNumber, APIAddressInput address, String email, boolean isBusinessClient) {
-        this.clientId = clientId;
+
+    public APIClientInput() {}
+
+    public APIClientInput(String firstName, String middleNames, String lastName, Date dateOfBirth, String phoneNumber, APIAddressInput address, String email, boolean isBusinessClient) {
         this.firstName = firstName;
         this.middleNames = middleNames;
         this.lastName = lastName;
@@ -14,8 +16,6 @@ public class APIClientInput implements APIModelInput {
         this.email = email;
         this.isBusinessClient = isBusinessClient;
     }
-
-    private long clientId;
 
     private String firstName;
 
@@ -32,14 +32,6 @@ public class APIClientInput implements APIModelInput {
     private String email;
 
     private boolean isBusinessClient;
-
-    public long getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(long clientId) {
-        this.clientId = clientId;
-    }
 
     public String getFirstName() {
         return firstName;

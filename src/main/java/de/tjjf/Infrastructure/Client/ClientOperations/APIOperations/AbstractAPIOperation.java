@@ -2,6 +2,7 @@ package de.tjjf.Infrastructure.Client.ClientOperations.APIOperations;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.IOException;
 import java.net.URI;
@@ -28,6 +29,7 @@ public abstract class AbstractAPIOperation {
             System.out.println("Response Body: " + responseBody);
 
             ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.registerModule(new JavaTimeModule());
             var result = objectMapper.readValue(responseBody,
                     new TypeReference<Map>() {
                     }

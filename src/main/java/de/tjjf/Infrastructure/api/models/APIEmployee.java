@@ -100,20 +100,8 @@ public class APIEmployee implements APIModel {
         this.email = email;
     }
 
-    public String getAirline() {
-        return airlineName;
-    }
-
-    public void setAirline(String airline) {
-        this.airlineName = airline;
-    }
-
     public long getEmployeeId() {
         return employeeId;
-    }
-
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
     }
 
     public String getAirlineName() {

@@ -5,12 +5,14 @@ import de.tjjf.Infrastructure.api.InputModels.APIEmployeeInput;
 import de.tjjf.Infrastructure.api.models.APIAddress;
 import de.tjjf.Infrastructure.api.models.APIEmployee;
 
+import java.util.Optional;
+
 public class EmployeeMapperInput {
 
     public APIEmployeeInput toClient(APIEmployee employee) {
         APIAddressInput apiAddress = new AddressMapperInput().toClient(employee.getAddress());
         return new APIEmployeeInput(
-                employee.getEmployeeId(),
+                //employee.getEmployeeId(),
                 employee.getFirstName(),
                 employee.getMiddleNames(),
                 employee.getLastName(),
@@ -22,10 +24,10 @@ public class EmployeeMapperInput {
         );
     }
 
-    public APIEmployee toDomain(APIEmployeeInput employee) {
+    public APIEmployee toDomain(Long employeeId, APIEmployeeInput employee) {
         APIAddress apiAddress = new AddressMapperInput().toDomain(employee.getAddress());
         return new APIEmployee(
-                employee.getEmployeeId(),
+                employeeId,
                 employee.getFirstName(),
                 employee.getMiddleNames(),
                 employee.getLastName(),
@@ -36,4 +38,5 @@ public class EmployeeMapperInput {
                 employee.getDateOfBirth()
         );
     }
+
 }

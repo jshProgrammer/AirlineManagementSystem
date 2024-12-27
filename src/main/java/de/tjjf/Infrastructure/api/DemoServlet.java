@@ -2,7 +2,7 @@ package de.tjjf.Infrastructure.api;
 
 import de.tjjf.Infrastructure.Client.CustomGraphQLExceptionHandler;
 import de.tjjf.Infrastructure.api.APIExtensions.GraphQlConfig;
-import de.tjjf.Infrastructure.api.exceptions.UnauthorizedExceptionHandler;
+
 import de.tjjf.Infrastructure.api.resolvers.*;
 import graphql.kickstart.execution.error.GraphQLErrorHandler;
 import graphql.kickstart.servlet.GraphQLConfiguration;

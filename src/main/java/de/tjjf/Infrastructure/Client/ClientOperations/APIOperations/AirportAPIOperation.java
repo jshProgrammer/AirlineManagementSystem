@@ -14,7 +14,7 @@ public class AirportAPIOperation extends AbstractAPIOperation {
                     name: \\"%s\\",
                     country: \\"%s\\",
                     city: \\"%s\\",
-                    timezone: \\"%s\\"                  
+                    timezone: \\"%s\\"
                 })
             }"
         }
@@ -33,7 +33,7 @@ public class AirportAPIOperation extends AbstractAPIOperation {
 
 
     public void createAirport(APIAirportInput apiAirportInput) {
-        execute(transformToQuery(apiAirportInput, "createAirport"), "createAirport", APIAirportInput.class);
+        execute(transformToQuery(apiAirportInput, "createAirport"), "createAirport", APIAirport.class);
     }
 
     public APIAirport readAirportByCode(String code) {

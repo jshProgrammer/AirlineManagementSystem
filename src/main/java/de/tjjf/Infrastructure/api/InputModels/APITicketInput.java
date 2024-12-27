@@ -3,6 +3,9 @@ package de.tjjf.Infrastructure.api.InputModels;
 import java.util.Date;
 
 public class APITicketInput implements APIModelInput {
+
+    public APITicketInput(){}
+
     public APITicketInput(int ticketId, long personId, boolean isClient, long flightNum, Date dateTimeOfBooking, int totalPrice, int seatNum, SeatingClass seatingClass, TicketStatus ticketStatus, int weightOfLuggage) {
         this.ticketId = ticketId;
         this.personId = personId;
