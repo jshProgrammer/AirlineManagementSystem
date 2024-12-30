@@ -6,7 +6,7 @@ public class APIClientInput implements APIModelInput {
 
     public APIClientInput() {}
 
-    public APIClientInput(String firstName, String middleNames, String lastName, Date dateOfBirth, String phoneNumber, APIAddressInput address, String email, boolean isBusinessClient) {
+    public APIClientInput(String firstName, String middleNames, String lastName, String dateOfBirth, String phoneNumber, APIAddressInput address, String email, Boolean isBusinessClient) {
         this.firstName = firstName;
         this.middleNames = middleNames;
         this.lastName = lastName;
@@ -23,7 +23,7 @@ public class APIClientInput implements APIModelInput {
 
     private String lastName;
 
-    private Date dateOfBirth;
+    private String dateOfBirth;
 
     private String phoneNumber;
 
@@ -31,7 +31,7 @@ public class APIClientInput implements APIModelInput {
 
     private String email;
 
-    private boolean isBusinessClient;
+    private Boolean isBusinessClient;
 
     public String getFirstName() {
         return firstName;
@@ -57,17 +57,34 @@ public class APIClientInput implements APIModelInput {
         this.lastName = lastName;
     }
 
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
     public String getDateOfBirthInRFC3339() {
-        return dateOfBirth.getYear() + "-" +
-                String.format("%02d", dateOfBirth.getMonth()) + "-" +
-                String.format("%02d", dateOfBirth.getDate());
+        System.out.println(dateOfBirth);
+        String[] dateArr = dateOfBirth.split(" ");
+
+        String month = switch (dateArr[1]) {
+            case "Jan" -> "01";
+            case "Feb" -> "02";
+            case "Mar" -> "03";
+            case "Apr" -> "04";
+            case "May" -> "05";
+            case "Jun" -> "06";
+            case "Jul" -> "07";
+            case "Aug" -> "08";
+            case "Sep" -> "09";
+            case "Oct" -> "10";
+            case "Nov" -> "11";
+            case "Dec" -> "12";
+            default -> "00";
+        };
+
+        return dateArr[5] + "-" + month + "-" + dateArr[2];
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -95,11 +112,11 @@ public class APIClientInput implements APIModelInput {
         this.email = email;
     }
 
-    public boolean isBusinessClient() {
+    public Boolean isBusinessClient() {
         return isBusinessClient;
     }
 
-    public void setBusinessClient(boolean businessClient) {
-        isBusinessClient = businessClient;
+    public void setIsBusinessClient(Boolean isBusinessClient) {
+        isBusinessClient = isBusinessClient;
     }
 }

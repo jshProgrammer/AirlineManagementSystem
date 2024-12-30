@@ -76,7 +76,6 @@ public class UpdateModelTest {
                 "+4915112345678",
                 "TestAddress",
                 "testemail_" + salt + "@gmail.com",
-                "TestPassword",
                 new ArrayList<>(),
                 true
         );
@@ -90,7 +89,6 @@ public class UpdateModelTest {
                 "+4915112345678",
                 "TestAddress",
                 "employee_" + salt + "@gmail.com",
-                "password",
                 new ArrayList<>(),
                 100,
                 "TestPosition",

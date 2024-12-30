@@ -28,7 +28,6 @@ public class PersonMapper {
                 employee.getPhonenumber(),
                 new AddressMapper().toDomain(employee.getAddress()),
                 employee.getEmail(),
-                employee.getHashedPassword(),
                 tickets
         );
     }
@@ -36,7 +35,7 @@ public class PersonMapper {
     public MPerson toDomain(Client client) {
         List<MTicket> tickets = new ArrayList<>();
         for(Ticket ticket : client.getTickets()){
-            tickets.add(new TicketMapper().toDomain(new TicketReadImpl(ticket.getTicketId()).run().model));
+            tickets.add(new TicketMapper().toDomain(new TicketReadImpl(ticket.getTicketId()).execute().model));
         }
         return new MPerson(
                 client.getPersonId(),
@@ -47,7 +46,6 @@ public class PersonMapper {
                 client.getPhonenumber(),
                 new AddressMapper().toDomain(client.getAddress()),
                 client.getEmail(),
-                client.getHashedPassword(),
                 tickets
         );
     }

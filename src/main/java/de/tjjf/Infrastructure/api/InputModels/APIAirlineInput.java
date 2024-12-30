@@ -1,5 +1,8 @@
 package de.tjjf.Infrastructure.api.InputModels;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 
 public class APIAirlineInput implements APIModelInput {
@@ -7,6 +10,14 @@ public class APIAirlineInput implements APIModelInput {
     public APIAirlineInput() {}
 
     public APIAirlineInput(String name, Date foundationYear, APIAddressInput address, String phoneNumber, String email) {
+        this.name = name;
+        this.foundationYear = foundationYear.toString();
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
+
+    public APIAirlineInput(String name, String foundationYear, APIAddressInput address, String phoneNumber, String email) {
         this.name = name;
         this.foundationYear = foundationYear;
         this.address = address;
@@ -16,7 +27,7 @@ public class APIAirlineInput implements APIModelInput {
 
     private String name;
 
-    private Date foundationYear;
+    private String foundationYear;
 
     private APIAddressInput address;
 
@@ -57,17 +68,34 @@ public class APIAirlineInput implements APIModelInput {
         this.email = email;
     }
 
-    public Date getFoundationYear() {
+    public String getFoundationYear() {
         return foundationYear;
     }
 
     public String getFoundationYearInRFC3339() {
-        return foundationYear.getYear() + "-" +
-                String.format("%02d", foundationYear.getMonth()) + "-" +
-                String.format("%02d", foundationYear.getDate());
+        System.out.println(foundationYear);
+        String[] dateArr = foundationYear.split(" ");
+
+        String month = switch (dateArr[1]) {
+            case "Jan" -> "01";
+            case "Feb" -> "02";
+            case "Mar" -> "03";
+            case "Apr" -> "04";
+            case "May" -> "05";
+            case "Jun" -> "06";
+            case "Jul" -> "07";
+            case "Aug" -> "08";
+            case "Sep" -> "09";
+            case "Oct" -> "10";
+            case "Nov" -> "11";
+            case "Dec" -> "12";
+            default -> "00";
+        };
+
+        return dateArr[5] + "-" + month + "-" + dateArr[2];
     }
 
-    public void setFoundationYear(Date foundationYear) {
+    public void setFoundationYear(String foundationYear) {
         this.foundationYear = foundationYear;
     }
 }

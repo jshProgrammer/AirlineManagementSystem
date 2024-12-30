@@ -34,11 +34,7 @@ public class Client implements Model {
     @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false)
-    private String hashedPassword;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
-
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "client")
     private List<Ticket> tickets = new ArrayList<>();
 
     @Column(nullable=false)
@@ -46,7 +42,7 @@ public class Client implements Model {
 
     public Client() {}
 
-    public Client(String firstName, String middleName, String lastName, Date dateOfBirth, String phonenumber, String address, String email, String hashedPassword, List<Ticket> tickets, boolean isBusinessClient) {
+    public Client(String firstName, String middleName, String lastName, Date dateOfBirth, String phonenumber, String address, String email, List<Ticket> tickets, boolean isBusinessClient) {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -54,7 +50,6 @@ public class Client implements Model {
         this.phonenumber = phonenumber;
         this.address = address;
         this.email = email;
-        this.hashedPassword = hashedPassword;
         this.tickets = tickets;
         this.isBusinessClient = isBusinessClient;
     }
@@ -121,14 +116,6 @@ public class Client implements Model {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getHashedPassword() {
-        return hashedPassword;
-    }
-
-    public void setHashedPassword(String hashedPassword) {
-        this.hashedPassword = hashedPassword;
     }
 
     public List<Ticket> getTickets() {

@@ -15,13 +15,14 @@ public class MClientRepositoryImpl implements DataAccess.MClientRepository {
     }
 
     @Override
-    public MClient readById(Long id){
-        new ClientReadImpl(id).execute();
+    public MClient readById(Long id) {
         return new ClientMapper().toDomain(new ClientReadImpl(id).execute().model);
     }
 
     @Override
     public void update(MClient entity){
+        //TODO: hier ist der Fehler: ClientMapper().toEntity macht die person id platt zu 0 => wir müssen bei update immer noch eine id mit übergeben zstl. zu entity bei ClientUpdateImpl
+        System.out.println("TEST:Z : geht hier rein + " + new ClientMapper().toEntity(entity).getPersonId() + " " + new ClientMapper().toEntity(entity).getFirstName());
         new ClientUpdateImpl(new ClientMapper().toEntity(entity)).execute();
     }
 

@@ -37,7 +37,7 @@ public class UpdateAPIModelsTest {
         APIAddress apiAirlineMAddress = new APIAddress();
         String apiAirlinePhoneNumber = "+4915112345678";
         String apiAirlineEmail = "testemail@gmail.com";
-        apiAirline = new APIAirline(apiAirlineName , apiAirlineDate, apiAirlineMAddress, apiAirlinePhoneNumber, apiAirlineEmail);
+        apiAirline = new APIAirline(apiAirlineName , apiAirlineDate.toString(), apiAirlineMAddress, apiAirlinePhoneNumber, apiAirlineEmail);
 
         int apiAirplaneSerialNum = 1234;
         String apiAirplaneAirlineName = "TestAirline";
@@ -66,8 +66,8 @@ public class UpdateAPIModelsTest {
         String apiClientPhoneNumber = "+4915112345678";
         APIAddress apiClientMAddress = new APIAddress(null, 0, 0, null, null);
         String apiClientEmail = "testemail@gmail.com";
-        boolean mClientIsBusinessClient = true;
-        apiClient = new APIClient(apiClientPersonId, apiClientFirstName, apiClientMiddleNames, apiClientLastName, apiClientDateOfBirth,  apiClientPhoneNumber, apiClientMAddress, apiClientEmail, mClientIsBusinessClient);
+        boolean apiClientIsBusinessClient = true;
+        apiClient = new APIClient(apiClientPersonId, apiClientFirstName, apiClientMiddleNames, apiClientLastName, apiClientDateOfBirth.toString(),  apiClientPhoneNumber, apiClientMAddress, apiClientEmail, apiClientIsBusinessClient);
 
         long apiEmployeePersonId = 9999999;
         String apiEmployeeFirstName = "TestEmployeetFirstName";
@@ -93,15 +93,16 @@ public class UpdateAPIModelsTest {
         long apiFlightCopilotId = 77777777;
         apiFlight = new APIFlight(apiFlightFlightNum, airplansSerialNum, departureDateTime, departureAirlineCode, arrivalDateTime, arrivalAirlineName, boardingTime, flightStatus, apiFlightDuration, apiFlightPilotId, apiFlightCopilotId);
 
-        long mPersonPersonId = 9999999;
-        String mPersonFirstName = "TestEmployeetFirstName";
-        String mPersonMiddleNames = "TestEmployeeMiddleNames";
-        String mPersonLastName = "TestEmployeeLastName";
-        Date mPersonDateOfBirth = new Date();
-        String mPersonPhoneNumber = "+4915112345678";
-        APIAddress mPersonMAddress = new APIAddress(null, 0, 0, null, null);
-        String mPersonEmail = "testemail@gmail.com";
-        APIClient apiTicketClient = new APIClient(mPersonPersonId, mPersonFirstName, mPersonMiddleNames, mPersonLastName, mPersonDateOfBirth, mPersonPhoneNumber, mPersonMAddress, mPersonEmail, true);
+        long apiPersonPersonId = 9999999;
+        String apiPersonFirstName = "TestEmployeetFirstName";
+        String apiPersonMiddleNames = "TestEmployeeMiddleNames";
+        String apiPersonLastName = "TestEmployeeLastName";
+        Date apiPersonDateOfBirth = new Date();
+        String apiPersonPhoneNumber = "+4915112345678";
+        APIAddress apiPersonMAddress = new APIAddress(null, 0, 0, null, null);
+        String apiPersonEmail = "testemail@gmail.com";
+        boolean isBuissenesClient = true;
+        APIClient apiTicketClient = new APIClient(apiPersonPersonId, apiPersonFirstName, apiPersonMiddleNames, apiPersonLastName, apiPersonDateOfBirth.toString(), apiPersonPhoneNumber, apiPersonMAddress, apiPersonEmail, isBuissenesClient);
 
         String cardNumber = "TestCardNumber";
         String expMonth  = "TestExpMonth";
@@ -109,18 +110,18 @@ public class UpdateAPIModelsTest {
         String cvc = "TestCVC";
         apiPayment = new APIPayment(cardNumber, expMonth, expYear, cvc);
 
-        int mTicketTicketId = 1234;
-        Date mTicketDateTimeOfBooking = new Date();
-        int mTicketTotalPrice = 300;
-        int mTicketSeatNum = 15;
-        APITicket.SeatingClass mTicketSeatingClass = APITicket.SeatingClass.Economy;
-        APITicket.TicketStatus mTicketTicketStatus = APITicket.TicketStatus.paid;
-        int mTicketWeightOfLuggage = 20;
-        apiTicket = new APITicket(mTicketTicketId, apiTicketClient.getClientId(), true, apiFlight.getFlightNum(), mTicketDateTimeOfBooking, mTicketTotalPrice, mTicketSeatNum, mTicketSeatingClass, mTicketTicketStatus, mTicketWeightOfLuggage);
+        int apiTicketTicketId = 1234;
+        Date apiTicketDateTimeOfBooking = new Date();
+        int apiTicketTotalPrice = 300;
+        int apiTicketSeatNum = 15;
+        APITicket.SeatingClass apiTicketSeatingClass = APITicket.SeatingClass.Economy;
+        APITicket.TicketStatus apiTicketTicketStatus = APITicket.TicketStatus.paid;
+        int apiTicketWeightOfLuggage = 20;
+        apiTicket = new APITicket(apiTicketTicketId, apiTicketClient.getClientId(), true, apiFlight.getFlightNum(), apiTicketDateTimeOfBooking, apiTicketTotalPrice, apiTicketSeatNum, apiTicketSeatingClass, apiTicketTicketStatus, apiTicketWeightOfLuggage);
     }
 
     @Test
-    public void testUpdateAddress(){
+    public void testUpdateAPIAddress(){
         String updatedStreet = "UpdatedStreet";
         int updatedNumber = 2;
         int updatedZipcode = 67890;
@@ -131,17 +132,17 @@ public class UpdateAPIModelsTest {
         apiAddress.setCountry(updatedCountry);
         apiAddress.setStreet(updatedStreet);
         apiAddress.setNumber(updatedNumber);
-        apiAddress.setZipcode(updatedZipcode);
+        apiAddress.setZipCode(updatedZipcode);
 
         assertEquals(updatedStreet, apiAddress.getStreet());
         assertEquals(updatedNumber, apiAddress.getNumber());
-        assertEquals(updatedZipcode, apiAddress.getZipcode());
+        assertEquals(updatedZipcode, apiAddress.getZipCode());
         assertEquals(updatedCity, apiAddress.getCity());
         assertEquals(updatedCountry, apiAddress.getCountry());
     }
 
     @Test
-    public void testUpdateMAirline() {
+    public void testUpdateAPIAirline() {
         String updatedName = "UpdatedAirline";
         String updatedEmail = "updatedEmail@gmail.com";
         String updatedPhoneNumber = "+4915198765432";
@@ -161,7 +162,7 @@ public class UpdateAPIModelsTest {
     }
 
     @Test
-    public void testUpdateMAirplane() {
+    public void testUpdateAPIAirplane() {
         boolean updatedIsOperable = false;
         APIAirline updatedAirline = new APIAirline(null, null, null,"+4915112345678","updatedairline@gmail.com");
 
@@ -173,7 +174,7 @@ public class UpdateAPIModelsTest {
     }
 
     @Test
-    public void testUpdateAirport(){
+    public void testUpdateAPIAirport(){
         String updatedName = "UpdatedAirport";
         String updatedCountry = "UpdatedCountry";
         String updatedCity = "UpdatedCity";
@@ -191,7 +192,7 @@ public class UpdateAPIModelsTest {
     }
 
     @Test
-    public void testUpdateClient(){
+    public void testUpdateAPIClient(){
         String updatedFirstName = "UpdatedClient";
         String updatedMiddleName = "UpdatedMiddleName";
         String updatedLastName = "UpdatedLastName";
@@ -204,18 +205,18 @@ public class UpdateAPIModelsTest {
         apiClient.setLastName(updatedLastName);
         apiClient.setPhoneNumber(updatedPhoneNumber);
         apiClient.setEmail(updatedEmail);
-        apiClient.setBusinessClient(updatedIsBusinessClient);
+        apiClient.setIsBusinessClient(updatedIsBusinessClient);
 
         assertEquals(updatedFirstName, apiClient.getFirstName());
         assertEquals(updatedMiddleName, apiClient.getMiddleNames());
         assertEquals(updatedLastName, apiClient.getLastName());
         assertEquals(updatedPhoneNumber, apiClient.getPhoneNumber());
         assertEquals(updatedEmail, apiClient.getEmail());
-        assertEquals(updatedIsBusinessClient, apiClient.isBusinessClient());
+        assertEquals(updatedIsBusinessClient, apiClient.getIsBusinessClient());
     }
 
     @Test
-    public void testUpdateEmployee(){
+    public void testUpdateAPIEmployee(){
 
         APIAirline updatedAirline = new APIAirline(null, null, null,"+4915112345678","updatedariline@gmail.com");
         String updatedFirstName = "UpdatedEmployee";
@@ -240,7 +241,7 @@ public class UpdateAPIModelsTest {
     }
 
     @Test
-    public void testUpdateFlight(){
+    public void testUpdateAPIFlight(){
         APIAirplane updatedAirplane = new APIAirplane(0, null,true);
         Date updatedDepartureDateTime = new Date();
         APIAirport updatedDepartureAirport = new APIAirport(null, null,null,null,null);
@@ -275,7 +276,7 @@ public class UpdateAPIModelsTest {
     }
 
     @Test
-    public void testUpdateTicket(){
+    public void testUpdateAPITicket(){
         APITicket.TicketStatus updatedTicketStatus = APITicket.TicketStatus.unpaid;
         APIFlight updatedFlight = new APIFlight(0,333,null,null,null,null, null,null,0,3,3);
         APIClient updatedPerson = new APIClient(0,null,null,null,null,"+4915112345678",null,"updatedperson@gmail.com",true);
@@ -296,7 +297,7 @@ public class UpdateAPIModelsTest {
     }
 
     @Test
-    public void testUpdatePayment(){
+    public void testUpdateAPIPayment(){
         String updatedCardNumber = "UpdatedCardNumber";
         String updatedExpMonth = "UpdatedExpMonth";
         String updatedExpYear = "UpdatedExpYear";

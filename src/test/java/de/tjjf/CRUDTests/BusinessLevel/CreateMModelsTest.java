@@ -104,10 +104,9 @@ public class CreateMModelsTest {
         String phoneNumber = "+4915112345678";
         MAddress address = new MAddress(null, 0, 0, null, null);
         String email = "testmail@gmail.com";
-        String password = "TestPassword";
         Boolean isBusinessClient = true;
 
-        MClient mClient = new MClient(personId, firstName, middleName, lastName, dateofBirth, phoneNumber, address, email, password, isBusinessClient);
+        MClient mClient = new MClient(personId, firstName, middleName, lastName, dateofBirth, phoneNumber, address, email, isBusinessClient);
 
         assertEquals(mClient.getPersonId(), personId);
         assertEquals(mClient.getFirstName(), firstName);
@@ -138,9 +137,8 @@ public class CreateMModelsTest {
         String phoneNumber = "+4915112345678";
         MAddress address = new MAddress(null, 0, 0, null, null);
         String email = "testmail@gmail.com";
-        String password = "TestPassword";
 
-        MEmployee mEmployee = new MEmployee(personId, firstName, middleName, lastName, dateofBirth, phoneNumber, address, email, password, salary, position, mAirline, hireDate);
+        MEmployee mEmployee = new MEmployee(personId, firstName, middleName, lastName, dateofBirth, phoneNumber, address, email, salary, position, mAirline, hireDate);
 
         assertEquals(mEmployee.getPersonId(), personId);
         assertEquals(mEmployee.getFirstName(), firstName);
@@ -168,8 +166,8 @@ public class CreateMModelsTest {
         Date boardingTime = new Date();
         MFlight.FlightStatus flyStatus = MFlight.FlightStatus.landed;
         int duration = 123;
-        MEmployee pilot = new MEmployee(0, null, null, null, null, "+4915112345678",null, "pilot@gmail.com", "pilotPassword", 0, null, null, null);
-        MEmployee copilot = new MEmployee(0, null, null, null, null, "+4915112345678",null, "copilot@gmail.com", "copilotPassword", 0, null, null, null);
+        MEmployee pilot = new MEmployee(0, null, null, null, null, "+4915112345678",null, "pilot@gmail.com",  0, null, null, null);
+        MEmployee copilot = new MEmployee(0, null, null, null, null, "+4915112345678",null, "copilot@gmail.com", 0, null, null, null);
 
         MFlight mFlight = new MFlight(flightNum, mAirplane, departureDateTime, departureAirport, arrivalDateTime, arrivalAirport, boardingTime, flyStatus, duration, pilot, copilot);
 
@@ -189,7 +187,7 @@ public class CreateMModelsTest {
     @Test
     public void testCreatingMTicket() {
         int ticketId = 1234;
-        MPerson person = new MPerson(0,  "TestFirstName",  "TestMiddleName", "TestLastName", null, "+4915112345678", null, "person@gmail.com", "personPassword", null);
+        MPerson person = new MPerson(0,  "TestFirstName",  "TestMiddleName", "TestLastName", null, "+4915112345678", null, "person@gmail.com", null);
         MAddress mAddress = new MAddress("TestStreet",0,0, "Frankfurt", "Germany");
         MAirline mAirline = new MAirline("TestAirlineName", null, "TestHeadquarters", mAddress, "+4915112345678", "airline@gmail.com");
         MAirport mAirport = new MAirport("TestCode", "TestName", "TestCountry", "TestCity", "TestTimezone");

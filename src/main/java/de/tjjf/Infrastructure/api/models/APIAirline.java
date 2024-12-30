@@ -8,7 +8,7 @@ public class APIAirline implements APIModel {
 
     public String name;
 
-    public Date foundationYear;
+    public String foundationYear;
 
     public APIAddress address;
 
@@ -19,7 +19,7 @@ public class APIAirline implements APIModel {
 
     public APIAirline(){}
 
-    public APIAirline(String name, Date foundationYear, APIAddress address, String phoneNumber, String email) {
+    public APIAirline(String name, String foundationYear, APIAddress address, String phoneNumber, String email) {
         this.name = name;
         this.foundationYear = foundationYear;
         this.address = address;
@@ -59,11 +59,11 @@ public class APIAirline implements APIModel {
         this.email = email;
     }
 
-    public Date getFoundationYear() {
+    public String getFoundationYear() {
         return foundationYear;
     }
 
-    public void setFoundationYear(Date foundationYear) {
+    public void setFoundationYear(String foundationYear) {
         this.foundationYear = foundationYear;
     }
 }

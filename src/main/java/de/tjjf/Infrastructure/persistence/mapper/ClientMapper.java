@@ -27,7 +27,6 @@ public class ClientMapper extends Mapper<MClient, Client>{
                 mClient.getPhonenumber(),
                 AddressMapper.toEntity(mClient.getAddress()),
                 mClient.getEmail(),
-                mClient.getHashedPassword(),
                 tickets,
                 mClient.isBusinessClient()
         );
@@ -45,7 +44,6 @@ public class ClientMapper extends Mapper<MClient, Client>{
                 person.getPhonenumber(),
                 person.getAddress(),
                 person.getEmail(),
-                person.getHashedPassword(),
                 client.isBusinessClient()
         );
     }

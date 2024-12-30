@@ -6,7 +6,10 @@ import de.tjjf.Infrastructure.api.models.APIClient;
 import de.tjjf.Infrastructure.api.models.APIEmployee;
 import de.tjjf.Infrastructure.api.models.APITicket;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class PersonMapper {
@@ -27,7 +30,6 @@ public class PersonMapper {
                 apiEmployee.getPhoneNumber(),
                 new APIAddressMapper().toDomainEntity(apiEmployee.getAddress()),
                 apiEmployee.getEmail(),
-                null,
                 null
         );
     }
@@ -38,17 +40,26 @@ public class PersonMapper {
             tickets.add(new TicketMapper().toDomain(new TicketReadImpl(ticket.getTicketId()).run().model));
         }*/
 
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date date;
+        try {
+            date = formatter.parse(apiClient.getDateOfBirth());
+            System.out.println("Parsed date: " + date);
+        } catch (ParseException e) {
+            throw new RuntimeException("Error parsing date: " + e.getMessage());
+        }
+
         //TODO: darf ich das wirklich auf null setzen?!
         return new MPerson(
                 apiClient.getClientId(),
                 apiClient.getFirstName(),
                 apiClient.getMiddleNames(),
                 apiClient.getLastName(),
-                apiClient.getDateOfBirth(),
+                date,
                 apiClient.getPhoneNumber(),
                 new APIAddressMapper().toDomainEntity(apiClient.getAddress()),
                 apiClient.getEmail(),
-                null,
                 null
         );
     }

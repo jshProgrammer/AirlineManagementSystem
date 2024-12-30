@@ -12,7 +12,7 @@ public class PaymentTest {
 
     @Test
     void successfulPaymentTest(){
-        MPayment mp = new MPayment("4242424242424242", "234", "1234", "1234");
+        MPayment mp = new MPayment("4242424242424242", "2", "2034", "1234");
         assertTrue(puc.paymentCall(250, mp));
     }
 

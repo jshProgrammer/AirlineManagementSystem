@@ -35,9 +35,6 @@ public class Employee implements Model {
     @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false)
-    private String hashedPassword;
-
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
     //@JoinColumn(name = "personId", referencedColumnName = "personId")
     private List<Ticket> tickets = new ArrayList<>();
@@ -57,8 +54,7 @@ public class Employee implements Model {
 
     public Employee() {}
 
-    public Employee(/*long personId,*/ String firstName, String middleName, String lastName, Date dateOfBirth, String phonenumber, String address, String email, String hashedPassword, List<Ticket> tickets, int salary, String position, Airline airline, Date hireDate) {
-        //this.personId = personId;
+    public Employee(String firstName, String middleName, String lastName, Date dateOfBirth, String phonenumber, String address, String email, List<Ticket> tickets, int salary, String position, Airline airline, Date hireDate) {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -66,7 +62,6 @@ public class Employee implements Model {
         this.phonenumber = phonenumber;
         this.address = address;
         this.email = email;
-        this.hashedPassword = hashedPassword;
         this.tickets = tickets;
         this.salary = salary;
         this.position = position;
@@ -136,14 +131,6 @@ public class Employee implements Model {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getHashedPassword() {
-        return hashedPassword;
-    }
-
-    public void setHashedPassword(String hashedPassword) {
-        this.hashedPassword = hashedPassword;
     }
 
     public List<Ticket> getTickets() {

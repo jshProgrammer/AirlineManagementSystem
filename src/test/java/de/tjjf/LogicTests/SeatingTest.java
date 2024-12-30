@@ -11,7 +11,7 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SeatingTest {
-    MPerson person = new MPerson(1, "Jasmin", "", "Wander", new Date(), "+4915112345678", new MAddress(null, 1, 34534,null, null), "jpfennig2403@gmail.com", "fkgk rdof hhkj arwc", null);
+    MPerson person = new MPerson(1, "Jasmin", "", "Wander", new Date(), "+4915112345678", new MAddress(null, 1, 34534,null, null), "airlinemanagementtestmail@gmail.com", null);
 
     @Test
     public void successfulSeatingClassUpgradeTest(){

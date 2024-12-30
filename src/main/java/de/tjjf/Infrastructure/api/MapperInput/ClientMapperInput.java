@@ -17,7 +17,7 @@ public class ClientMapperInput {
                 client.getPhoneNumber(),
                 apiAddress,
                 client.getEmail(),
-                client.isBusinessClient()
+                client.getIsBusinessClient()
         );
     }
     public APIClient toDomain(Long clientId, APIClientInput client) {

@@ -1,18 +1,20 @@
 package de.tjjf.Domain;
 
-import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
+import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 public class PasswordEncryption {
 
     // Verschlüsselt das Passwort und speichert es in einer Datei
-    public static void encryptAndSavePassword(String password, String filePath, String keyPath) throws Exception {
+    public static void encryptAndSavePassword(String password, String filePath, String keyPath) throws NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, NoSuchPaddingException, InvalidKeyException, IOException {
         // AES-Schlüssel erzeugen
         KeyGenerator keyGen = KeyGenerator.getInstance("AES");
         keyGen.init(256, new SecureRandom()); // 256-Bit AES-Schlüssel

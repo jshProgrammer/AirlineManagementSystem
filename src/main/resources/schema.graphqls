@@ -16,7 +16,7 @@ type APIAddress {
 
 type APIAirline {
     name: String!,
-    foundationYear: Date,
+    foundationYear: String,
     address: APIAddress!,
     phoneNumber: String!,
     email: String!
@@ -37,11 +37,11 @@ type APIAirport{
 }
 
 type APIClient{
-    clientID: Long!,
+    clientId: Long!,
     firstName: String!,
-    middleName: String,
+    middleNames: String,
     lastName: String!,
-    dateOfBith: Date!,
+    dateOfBirth: String!,
     phoneNumber: String!,
     address: APIAddress!,
     email: String!,
@@ -108,7 +108,7 @@ input APIAddressInput {
 
 input APIAirlineInput {
     name: String!,
-    foundationYear: Date,
+    foundationYear: String,
     address: APIAddressInput!,
     phoneNumber: String!,
     email: String!
@@ -130,9 +130,9 @@ input APIAirportInput{
 
 input APIClientInput{
     firstName: String!,
-    middleName: String,
+    middleNames: String,
     lastName: String!,
-    dateOfBith: Date!,
+    dateOfBirth: String!,
     phoneNumber: String!,
     address: APIAddressInput!,
     email: String!,
@@ -203,7 +203,7 @@ type Query {
     #readEmployeeById(employeeId: Float): APIEmployee
 
     #TODO: readClientById funktioniert noch nicht => Vermutung: wegen float/long
-    #readClientById(clientId: Long): APIClient
+    readClientById(clientId: Long): APIClient
 
     #TODO: readTicketById funktioniert noch nicht => WARUM?!
     #readTicketById(ticketId: Int): APITicket
@@ -211,7 +211,7 @@ type Query {
     readAirportByCode(code: String): APIAirport
 
     ##readFlightByFlightNum(flightNum: Int): APIFlight
-    readAirlineByName(name: String): APIAirline
+    readAirlineByName(name: String): APIAirline #funktioniert
 
     readAirplaneBySerialNum(serialNum: Int): APIAirplane
 }
@@ -227,8 +227,8 @@ type Mutation {
     #createEmployee(employee: APIEmployeeInput): APIEmployee
     #updateEmployee(employeeId: Float, employee: APIEmployeeInput): Void
 
-    #createClient(client: APIClientInput): Void
-    #updateClient(client: APIClientInput): Void
+    createClient(client: APIClientInput): APIClient #funktioniert
+    updateClient(clientId: Long, client: APIClientInput): Void
 
     #TODO addBooking und upgradeSeatingClass funktionieren noch nicht!
     #addBooking(newBooking: APITicketInput, payment: APIPaymentInput): Void
@@ -241,9 +241,9 @@ type Mutation {
 
     createAirport(airport: APIAirportInput): Void
 
-    createAirline(airline: APIAirlineInput): Void
+    createAirline(airline: APIAirlineInput): Void #funktioniert
     ##updateAirline(airline: APIAirlineInput): Void
 
-    ##createAirplane(airplane: APIAirplaneInput): Void
+     createAirplane(airplane: APIAirplaneInput): Void
     ##setOperable(serialNum: Int, isOperable: Boolean): Void
 }

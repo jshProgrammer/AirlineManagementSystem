@@ -10,7 +10,7 @@ public class MPayment implements MModel
     public MPayment(String cardNumber, String expMonth, String expYear, String cvc) {
         this.cardNumber = cardNumber;
         this.expMonth = expMonth;
-        this.expYear = expMonth;
+        this.expYear = expYear;
         this.cvc=cvc;
     }
 

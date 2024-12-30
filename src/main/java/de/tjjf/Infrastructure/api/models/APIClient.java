@@ -15,7 +15,7 @@ public class APIClient implements APIModel {
 
     private String lastName;
 
-    private Date dateOfBirth;
+    private String dateOfBirth;
 
     private String phoneNumber;
 
@@ -23,12 +23,12 @@ public class APIClient implements APIModel {
 
     private String email;
 
-    private boolean isBusinessClient;
+    private Boolean isBusinessClient;
 
 
     public APIClient(){}
 
-    public APIClient(long clientId, String firstName, String middleNames, String lastName, Date dateOfBirth, String phoneNumber, APIAddress address, String email, boolean isBusinessClient) {
+    public APIClient(long clientId, String firstName, String middleNames, String lastName, String dateOfBirth, String phoneNumber, APIAddress address, String email, Boolean isBusinessClient) {
         this.clientId = clientId;
         this.firstName = firstName;
         this.middleNames = middleNames;
@@ -72,11 +72,11 @@ public class APIClient implements APIModel {
         this.lastName = lastName;
     }
 
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -104,11 +104,11 @@ public class APIClient implements APIModel {
         this.email = email;
     }
 
-    public boolean isBusinessClient() {
+    public Boolean getIsBusinessClient() {
         return isBusinessClient;
     }
 
-    public void setBusinessClient(boolean businessClient) {
-        isBusinessClient = businessClient;
+    public void setIsBusinessClient(Boolean isBusinessClient) {
+        this.isBusinessClient = isBusinessClient;
     }
 }

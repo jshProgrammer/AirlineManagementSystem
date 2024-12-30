@@ -2,7 +2,11 @@ package de.tjjf.CRUDTests.PersistenceLevel;
 
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Create.*;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Delete.*;
+import de.tjjf.Infrastructure.persistence.EntityManagerFactorySingleton;
 import de.tjjf.Infrastructure.persistence.entities.*;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -90,10 +94,9 @@ public class CreateModelTest {
         String phoneNumber = "+4915112345678";
         String address = "TestAddress";
         String email = "testemail_" + salt + "@gmail.com";
-        String password = "TestPassword";
         boolean isBusinessClient = true;
 
-        Client client = new Client( firstName, middleName, lastName, dateOfBirth, phoneNumber, address, email, password, new ArrayList<>(), isBusinessClient);
+        Client client = new Client( firstName, middleName, lastName, dateOfBirth, phoneNumber, address, email, new ArrayList<>(), isBusinessClient);
         Client clientReturned = new ClientCreateImpl(client).execute().model;
 
         assertNotNull(client);
@@ -121,11 +124,10 @@ public class CreateModelTest {
         String employeePhoneNumber = "+491512345678";
         String employeeAddress = "EmployeeAddress";
         String employeeEmail = "employee@" + salt + ".com";
-        String password = "EmployeePassword";
         int salary = 5000;
         String position = "Manager";
         Date hireDate = new Date();
-        Employee employee = new Employee(firstName, middleName, lastName, dateOfBirth, employeePhoneNumber, employeeAddress, employeeEmail, password, new ArrayList<>(), salary, position, airline, hireDate);
+        Employee employee = new Employee(firstName, middleName, lastName, dateOfBirth, employeePhoneNumber, employeeAddress, employeeEmail, new ArrayList<>(), salary, position, airline, hireDate);
         new EmployeeCreateImpl(employee).execute();
 
         assertNotNull(employee);
@@ -180,7 +182,7 @@ public class CreateModelTest {
         String pilotFirstName = "PilotFirstName";
         String pilotLastName = "PilotLastName";
         String pilotPosition = "Captain";
-        Employee pilot = new Employee(pilotFirstName, "", pilotLastName, new Date(), "+491512345678", "PilotAddress", "pilot@gmail.com", "password", new ArrayList<>(), 100000, pilotPosition, airline, new Date());
+        Employee pilot = new Employee(pilotFirstName, "", pilotLastName, new Date(), "+491512345678", "PilotAddress", "pilot@gmail.com", new ArrayList<>(), 100000, pilotPosition, airline, new Date());
         new EmployeeCreateImpl(pilot).execute();
 
         String status = "Scheduled";
@@ -256,10 +258,9 @@ public class CreateModelTest {
         String clientPhoneNumber = "+4915112345678";
         String clientAddress = "TestAddress";
         String clientEmail = "testemail_" + salt + "@gmail.com";
-        String password = "TestPassword";
         boolean isBusinessClient = true;
 
-        Client client = new Client( firstName, middleName, lastName, dateOfBirth, clientPhoneNumber, clientAddress, clientEmail, password, new ArrayList<>(), isBusinessClient);
+        Client client = new Client( firstName, middleName, lastName, dateOfBirth, clientPhoneNumber, clientAddress, clientEmail, new ArrayList<>(), isBusinessClient);
         new ClientCreateImpl(client).execute();
         Date bookingDate = new Date();
         int totalPrice = 200;

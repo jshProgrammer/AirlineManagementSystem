@@ -32,13 +32,9 @@ public class MPerson implements MModel
 
     private String email;
 
-    BCryptPasswordEncoder passwordEncoder;
-
-    private String hashedPassword;
-
     private List<MTicket> tickets = new ArrayList<>();
 
-    public MPerson(long personId, String firstName, String middleNames, String lastName, Date dateOfBirth, String phonenumber, MAddress address, String email, String password, List<MTicket> tickets) {
+    public MPerson(long personId, String firstName, String middleNames, String lastName, Date dateOfBirth, String phonenumber, MAddress address, String email, List<MTicket> tickets) {
         this.personId = personId;
         this.firstName = firstName;
         this.middleNames = middleNames;
@@ -56,24 +52,13 @@ public class MPerson implements MModel
 
         this.email = email;
 
-        // encode the desired password: https://www.baeldung.com/java-password-hashing
-        passwordEncoder = new BCryptPasswordEncoder();
-        this.hashedPassword = passwordEncoder.encode(password);
-
         //TODO: geht hier scheinbar nicht
         //if(this.tickets != null) this.tickets = tickets;
     }
 
-    // Passwort-Überprüfung
-    public boolean verifyPassword(String password) {
-        //TODO implement verification with https://staging.api.fiw.thws.de/auth/api/users/me
-        return passwordEncoder.matches(password, this.hashedPassword);
-    }
-
     public static void main(String[] args) {
         // should not throw Illegal Argument Exception
-        MPerson person = new MPerson(1, "A", null, "C", new Date(1998), "091234u", new MAddress("test", 1, 34534,"Berlin", "germany"), "jpfennig2403@gmail.com", "fkgk rdof hhkj arwc", null);
-        System.out.println(person.getHashedPassword());
+        MPerson person = new MPerson(1, "A", null, "C", new Date(1998), "091234u", new MAddress("test", 1, 34534,"Berlin", "germany"), "test@test.com", null);
 
         // should throw IllegalArgumentException
         //MPerson person2 = new MPerson(1, "A", null, "C", new Date(1998), "091234u", "Adresse", "a@aa", "passwd");
@@ -136,10 +121,6 @@ public class MPerson implements MModel
 
     public String getEmail() {
         return email;
-    }
-
-    public String getHashedPassword() {
-        return hashedPassword;
     }
 
     public void setLastName(String lastName )

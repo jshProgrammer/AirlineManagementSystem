@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class TicketLuggageTest {
     MAirplane mAirplane = new MAirplane(123123, null, null, 30, 15 , 15, null, true, 1000);
     MFlight mFlight = new MFlight(999999, mAirplane, null, null, null, null,null,null,0,null,null);
-    MPerson mPerson = new MPerson(1, "Max", null,null  , new Date(), "01231231", new MAddress("street", 1, 92341, "Berlin", "Germany"), "test@test.de", "passwd", null);
+    MPerson mPerson = new MPerson(1, "Max", null,null  , new Date(), "01231231", new MAddress("street", 1, 92341, "Berlin", "Germany"), "airlinemanagementtestmail@gmail.com", null);
 
     @Test
     public void acceptableLuggageIncreasePriceTest(){

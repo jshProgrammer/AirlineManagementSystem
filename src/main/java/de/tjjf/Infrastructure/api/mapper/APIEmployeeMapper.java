@@ -32,7 +32,6 @@ public class APIEmployeeMapper extends AbstractAPIMapper<APIEmployee, MEmployee>
                 person.getDateOfBirth(),
                 person.getPhonenumber(),
                 new APIAddressMapper().toDomainEntity(apiEmployee.getAddress()), person.getEmail(),
-                null,
                 //TODO: was hier tun? salary echt einfach auf 0 initalisieren?
                 0,
                 null,
