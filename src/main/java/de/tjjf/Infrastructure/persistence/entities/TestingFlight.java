@@ -74,7 +74,7 @@ public class TestingFlight {
             //TODO: Flight funktioniert, sogar mit unseren ImplOperations
 
             //TODO: update funktioniert icht
-            new AirlineUpdateImpl(new Airline("Lufthansa", new Date(2000, 10, 10), "Munich", "test@test.de", "9123123", "street;1;91241;Berlin;France")).execute();
+            new AirlineUpdateImpl(new Airline("Lufthansa", new Date(2000, 10, 10), "Munich", "test@test.de", "9123123", "street;1;91241;Berlin;France"), "Lufthansa").execute();
 
             System.out.println("Test whether update worked: " + new AirlineReadImpl("Lufthansa").execute().model.getAddress());
 

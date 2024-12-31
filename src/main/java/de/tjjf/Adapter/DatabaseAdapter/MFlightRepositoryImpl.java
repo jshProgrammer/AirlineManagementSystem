@@ -21,7 +21,7 @@ public class MFlightRepositoryImpl implements DataAccess.MFlightRepository {
 
     @Override
     public void update(MFlight entity) {
-        new FlightUpdateImpl(new FlightMapper().toEntity(entity)).execute();
+        new FlightUpdateImpl(new FlightMapper().toEntity(entity), entity.getFlightNum()).execute();
     }
 
     @Override

@@ -22,7 +22,7 @@ public class MAirlineRepositoryImpl implements DataAccess.MAirlineRepository {
 
     @Override
     public void update(MAirline entity) {
-        new AirlineUpdateImpl(new AirlineMapper().toEntity(entity)).execute();
+        new AirlineUpdateImpl(new AirlineMapper().toEntity(entity), entity.getName()).execute();
     }
 
     @Override

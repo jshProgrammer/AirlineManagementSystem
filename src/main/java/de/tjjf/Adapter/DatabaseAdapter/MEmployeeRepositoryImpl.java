@@ -22,7 +22,7 @@ public class MEmployeeRepositoryImpl implements DataAccess.MEmployeeRepository{
 
     @Override
     public void update(MEmployee entity){
-        new EmployeeUpdateImpl(new EmployeeMapper().toEntity(entity)).execute();
+        new EmployeeUpdateImpl(new EmployeeMapper().toEntity(entity), entity.getEmployeeId()).execute();
     }
 
     @Override

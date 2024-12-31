@@ -21,7 +21,7 @@ public class MAirplaneRepositoryImpl implements DataAccess.MAirplaneRepository {
 
     @Override
     public void update(MAirplane entity) {
-        new AirplaneUpdateImpl(new AirplaneMapper().toEntity(entity)).execute();
+        new AirplaneUpdateImpl(new AirplaneMapper().toEntity(entity), entity.getSerialNum()).execute();
     }
 
     @Override

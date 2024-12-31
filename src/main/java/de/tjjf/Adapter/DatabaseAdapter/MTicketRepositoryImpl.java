@@ -21,7 +21,7 @@ public class MTicketRepositoryImpl implements DataAccess.MTicketRepository {
 
     @Override
     public void update(MTicket entity) {
-        new TicketUpdateImpl(new TicketMapper().toEntity(entity)).execute();
+        new TicketUpdateImpl(new TicketMapper().toEntity(entity), entity.getTicketId()).execute();
     }
 
     @Override

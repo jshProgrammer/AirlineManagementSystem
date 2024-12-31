@@ -22,7 +22,7 @@ public class MAirportRepsoitoryImp implements DataAccess.MAirportRepository {
 
     @Override
     public void update(MAirport entity) {
-        new AirportUpdateImpl(new AirportMapper().toEntity(entity)).execute();
+        new AirportUpdateImpl(new AirportMapper().toEntity(entity), entity.getCode()).execute();
 
     }
 
