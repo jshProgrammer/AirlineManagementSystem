@@ -170,7 +170,7 @@ public class UpdateModelTest {
         airline.setPhoneNumber(updatedPhoneNumber);
         airline.setAddress(updatedAddress);
 
-        new AirlineUpdateImpl(airline).execute();
+        new AirlineUpdateImpl(airline, airline.getName()).execute();
 
 
         Airline updatedAirline = new AirlineReadImpl(airline.getName()).execute().model;
@@ -187,7 +187,7 @@ public class UpdateModelTest {
 
         airplane.setOperable(updatedOperatable);
 
-        new AirplaneUpdateImpl(airplane).execute();
+        new AirplaneUpdateImpl(airplane, airplane.getSerialNum()).execute();
         assertEquals(updatedOperatable, new AirplaneReadImpl(airplane.getSerialNum()).execute().model.isOperable());
     }
 
@@ -203,7 +203,7 @@ public class UpdateModelTest {
         departureAirport.setCity(updatedCity);
         departureAirport.setTimezone(updatedTimezone);
 
-        new AirportUpdateImpl(departureAirport).execute();
+        new AirportUpdateImpl(departureAirport, departureAirport.getCode()).execute();
         Airport updatedAirport = new AirportReadImpl(departureAirport.getCode()).execute().model;
 
         assertEquals(updatedName, updatedAirport.getName());
@@ -216,7 +216,7 @@ public class UpdateModelTest {
     public void testUpdateClient() {
         boolean updatedIsBusinessClient = false;
         client.setBusinessClient(updatedIsBusinessClient);
-        new ClientUpdateImpl(client).execute();
+        new ClientUpdateImpl(client, client.getPersonId()).execute();
         assertEquals(updatedIsBusinessClient, new ClientReadImpl(client.getPersonId()).execute().model.isBusinessClient());
     }
 
@@ -228,7 +228,7 @@ public class UpdateModelTest {
         employee.setSalary(updatedSalary);
         employee.setPosition(updatedPosition);
 
-        new EmployeeUpdateImpl(employee).execute();
+        new EmployeeUpdateImpl(employee, employee.getPersonId()).execute();
 
         Employee updatedEmployee = new EmployeeReadImpl(employee.getPersonId()).execute().model;
 
@@ -240,7 +240,7 @@ public class UpdateModelTest {
     public void testUpdateFlight() {
         String updatedStatus = "UpdatedStatus";
         flight.setStatus(updatedStatus);
-        new FlightUpdateImpl(flight).execute();
+        new FlightUpdateImpl(flight, flight.getFlightNum()).execute();
         assertEquals(updatedStatus, new FlightReadImpl(flight.getFlightNum()).execute().model.getStatus());
     }
 
@@ -248,7 +248,7 @@ public class UpdateModelTest {
     public void testUpdateTicket() {
         String updatedTicketStatus = "UpdatedTicketStatus";
         ticket.setTicketStatus(updatedTicketStatus);
-        new TicketUpdateImpl(ticket).execute();
+        new TicketUpdateImpl(ticket, ticket.getTicketId()).execute();
         assertEquals(updatedTicketStatus, new TicketReadImpl(ticket.getTicketId()).execute().model.getTicketStatus());
     }
 

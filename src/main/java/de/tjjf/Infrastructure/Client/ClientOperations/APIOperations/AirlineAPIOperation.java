@@ -62,6 +62,13 @@ public class AirlineAPIOperation extends AbstractAPIOperation {
                         readAirlineByName(name: \\"%s\\") {
                             name
                             foundationYear
+                            address {
+                                street
+                                number
+                                zipCode
+                                city
+                                country
+                            }
                             phoneNumber
                             email
                         }

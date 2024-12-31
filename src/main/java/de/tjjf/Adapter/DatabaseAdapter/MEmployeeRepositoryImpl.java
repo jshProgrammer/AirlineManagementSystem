@@ -16,7 +16,6 @@ public class MEmployeeRepositoryImpl implements DataAccess.MEmployeeRepository{
 
     @Override
     public MEmployee readById(Long id){
-        new EmployeeReadImpl(id).execute();
         return new EmployeeMapper().toDomain(new EmployeeReadImpl(id).execute().model);
     }
 

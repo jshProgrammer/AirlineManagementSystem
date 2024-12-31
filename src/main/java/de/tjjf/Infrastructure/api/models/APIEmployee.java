@@ -15,7 +15,7 @@ public class APIEmployee implements APIModel {
 
     private String lastName;
 
-    private Date dateOfBirth;
+    private String dateOfBirth;
 
     private String phoneNumber;
 
@@ -28,7 +28,7 @@ public class APIEmployee implements APIModel {
 
     public APIEmployee(){}
 
-    public APIEmployee(long employeeId, String firstName, String middleNames, String lastName, String airlineName, String email, APIAddress address, String phoneNumber, Date dateOfBirth) {
+    public APIEmployee(long employeeId, String firstName, String middleNames, String lastName, String airlineName, String email, APIAddress address, String phoneNumber, String dateOfBirth) {
         this.airlineName = airlineName;
         this.email = email;
         this.address = address;
@@ -68,11 +68,11 @@ public class APIEmployee implements APIModel {
         this.lastName = lastName;
     }
 
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

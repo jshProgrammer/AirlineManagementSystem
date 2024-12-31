@@ -5,8 +5,6 @@ import de.tjjf.Infrastructure.api.InputModels.APIEmployeeInput;
 import de.tjjf.Infrastructure.api.models.APIAddress;
 import de.tjjf.Infrastructure.api.models.APIEmployee;
 
-import java.util.Optional;
-
 public class EmployeeMapperInput {
 
     public APIEmployeeInput toClient(APIEmployee employee) {
@@ -31,10 +29,10 @@ public class EmployeeMapperInput {
                 employee.getFirstName(),
                 employee.getMiddleNames(),
                 employee.getLastName(),
-                employee.getAirline(),
-                employee.getPhoneNumber(),
-                apiAddress,
+                employee.getAirlineName(),
                 employee.getEmail(),
+                apiAddress,
+                employee.getPhoneNumber(),
                 employee.getDateOfBirth()
         );
     }

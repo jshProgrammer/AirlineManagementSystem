@@ -53,7 +53,7 @@ type APIEmployee{
     firstName: String!,
     middleNames: String,
     lastName: String!,
-    dateOfBirth: Date!,
+    dateOfBirth: String!,
     phoneNumber: String!,
     address: APIAddress!,
     email: String!,
@@ -143,7 +143,7 @@ input APIEmployeeInput{
     firstName: String!,
     middleNames: String,
     lastName: String!,
-    dateOfBirth: Date!,
+    dateOfBirth: String!,
     phoneNumber: String!,
     address: APIAddressInput!,
     email: String!,
@@ -199,10 +199,8 @@ input APIPaymentInput {
 
 type Query {
     #verifyPassword(employee: APIEmployeeInput, password: String): Boolean
-    #TODO: readEmployeeById funktioniert noch nicht => Vermutung: wegen float/long
-    #readEmployeeById(employeeId: Float): APIEmployee
 
-    #TODO: readClientById funktioniert noch nicht => Vermutung: wegen float/long
+    readEmployeeById(employeeId: Long): APIEmployee
     readClientById(clientId: Long): APIClient
 
     #TODO: readTicketById funktioniert noch nicht => WARUM?!
@@ -224,8 +222,8 @@ type Mutation {
     #cancelFlight(flightNum: Int): Void
 
     #TODO: die folgenden vier Methoden funktionieren noch nicht
-    #createEmployee(employee: APIEmployeeInput): APIEmployee
-    #updateEmployee(employeeId: Float, employee: APIEmployeeInput): Void
+    createEmployee(employee: APIEmployeeInput): APIEmployee
+    updateEmployee(employeeId: Float, employee: APIEmployeeInput): Void
 
     createClient(client: APIClientInput): APIClient #funktioniert
     updateClient(clientId: Long, client: APIClientInput): Void
@@ -242,7 +240,7 @@ type Mutation {
     createAirport(airport: APIAirportInput): Void
 
     createAirline(airline: APIAirlineInput): Void #funktioniert
-    ##updateAirline(airline: APIAirlineInput): Void
+    updateAirline(airline: APIAirlineInput): Void
 
      createAirplane(airplane: APIAirplaneInput): Void
     ##setOperable(serialNum: Int, isOperable: Boolean): Void

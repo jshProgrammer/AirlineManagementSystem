@@ -62,8 +62,10 @@ public class APIClientInput implements APIModelInput {
     }
 
     public String getDateOfBirthInRFC3339() {
-        System.out.println(dateOfBirth);
         String[] dateArr = dateOfBirth.split(" ");
+
+        // if date format is already in RFC3339
+        if(dateArr.length == 2) return dateOfBirth;
 
         String month = switch (dateArr[1]) {
             case "Jan" -> "01";

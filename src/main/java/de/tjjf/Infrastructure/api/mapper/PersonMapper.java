@@ -26,12 +26,25 @@ public class PersonMapper {
                 apiEmployee.getFirstName(),
                 apiEmployee.getMiddleNames(),
                 apiEmployee.getLastName(),
-                apiEmployee.getDateOfBirth(),
+                parseDate(apiEmployee.getDateOfBirth()),
                 apiEmployee.getPhoneNumber(),
                 new APIAddressMapper().toDomainEntity(apiEmployee.getAddress()),
                 apiEmployee.getEmail(),
                 null
         );
+    }
+
+    private Date parseDate(String date){
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date parsedDate;
+        try {
+            parsedDate = formatter.parse(date);
+            System.out.println("Parsed date: " + date);
+        } catch (ParseException e) {
+            throw new RuntimeException("Error parsing date: " + e.getMessage());
+        }
+        return parsedDate;
     }
 
     public MPerson toDomain(APIClient apiClient){
@@ -40,23 +53,13 @@ public class PersonMapper {
             tickets.add(new TicketMapper().toDomain(new TicketReadImpl(ticket.getTicketId()).run().model));
         }*/
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
-        Date date;
-        try {
-            date = formatter.parse(apiClient.getDateOfBirth());
-            System.out.println("Parsed date: " + date);
-        } catch (ParseException e) {
-            throw new RuntimeException("Error parsing date: " + e.getMessage());
-        }
-
         //TODO: darf ich das wirklich auf null setzen?!
         return new MPerson(
                 apiClient.getClientId(),
                 apiClient.getFirstName(),
                 apiClient.getMiddleNames(),
                 apiClient.getLastName(),
-                date,
+                parseDate(apiClient.getDateOfBirth()),
                 apiClient.getPhoneNumber(),
                 new APIAddressMapper().toDomainEntity(apiClient.getAddress()),
                 apiClient.getEmail(),

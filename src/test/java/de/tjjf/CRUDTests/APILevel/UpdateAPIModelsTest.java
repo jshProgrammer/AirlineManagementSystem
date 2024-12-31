@@ -78,7 +78,7 @@ public class UpdateAPIModelsTest {
         APIAddress apiEmployeeAPIAddress = new APIAddress(null, 0, 0, null, null);
         String apiEmployeeEmail = "testemail@gmail.com";
         Date apiEmployeeDateOfBirth = new Date();
-        apiEmployee = new APIEmployee(apiEmployeePersonId, apiEmployeeFirstName, apiEmployeeMiddleNames, apiEmployeeLastName, apiEmployeeAirlineName, apiEmployeeEmail, apiEmployeeAPIAddress, apiEmployeePhoneNumber, apiEmployeeDateOfBirth);
+        apiEmployee = new APIEmployee(apiEmployeePersonId, apiEmployeeFirstName, apiEmployeeMiddleNames, apiEmployeeLastName, apiEmployeeAirlineName, apiEmployeeEmail, apiEmployeeAPIAddress, apiEmployeePhoneNumber, apiEmployeeDateOfBirth.toString());
 
         long apiFlightFlightNum = 123456789;
         int airplansSerialNum = 987654321;

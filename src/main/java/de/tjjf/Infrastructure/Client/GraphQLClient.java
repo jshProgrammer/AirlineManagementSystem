@@ -6,6 +6,8 @@ import de.tjjf.Domain.UseCases.AuthenticationUseCase;
 import de.tjjf.Domain.models.MAirline;
 import de.tjjf.Infrastructure.Client.ClientOperations.APIOperations.*;
 import de.tjjf.Infrastructure.api.InputModels.*;
+import de.tjjf.Infrastructure.api.MapperInput.EmployeeMapperInput;
+import de.tjjf.Infrastructure.api.mapper.APIEmployeeMapper;
 import de.tjjf.Infrastructure.api.models.APIAddress;
 import de.tjjf.Infrastructure.api.models.APIAirline;
 import de.tjjf.Infrastructure.api.models.APIClient;
@@ -27,22 +29,14 @@ public class GraphQLClient {
 
     public static void main(String[] args) throws URISyntaxException, IOException, InterruptedException {
 
-
-
-        //TODO: can be extracted to a test class
         GraphQLClient client = new GraphQLClient();
         Calendar calendar = Calendar.getInstance();
         calendar.set(2005, Calendar.FEBRUARY, 2);
         Date date = calendar.getTime();
 
-        // funktioniert:
-        APIClient apiClient = new ClientAPIOperation().createClient(new APIClientInput("Jan", "M", "Kowalski", date.toString(), "0234214234", new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"), "test@test.de", true));
-        System.out.println(apiClient.getClientId());
-        //new ClientAPIOperation().readClientById(apiClient.getClientId());
+       //TODO: alles funktionierende ist schon in Test klasse
 
-        // funktioniert noch nicht:
-        new ClientAPIOperation().updateClient(apiClient.getClientId(), new APIClientInput("Test", "Test", "Kowalski", date.toString(), "0234214234", new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"),"test@test.de", true));
-        System.out.println("Should be Test: " + new ClientAPIOperation().readClientById(apiClient.getClientId()).getMiddleNames());
+
 
         // noch nicht getestet:
 
@@ -54,7 +48,7 @@ public class GraphQLClient {
 
 
         //new AirlineAPIOperation().createAirline(new APIAirlineInput("Test1423112381231", new Date(2005, 01, 01), new APIAddressInput("Test", 1, 91237, "Berlin", "Germany" ), "+4915112345678", "test@test.de"));
-        //APIEmployee apiEmployee = new EmployeeAPIOperation().createEmployee(new APIEmployeeInput("Jan", "M", "Kowalski", new Date(2000, 2, 1) , "+4915112345678", new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"), "test@test.de", "Test"));
+
         //new EmployeeAPIOperation().readEmployeeById(123);
         //new TicketAPIOperation().readTicketById(1);
         //new AirportAPIOperation().readAirportByCode("FRA"); //funktioniert schon mit DB

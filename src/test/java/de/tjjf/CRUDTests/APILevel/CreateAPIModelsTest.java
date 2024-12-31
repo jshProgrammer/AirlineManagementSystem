@@ -128,7 +128,7 @@ public class CreateAPIModelsTest {
         APIAddress address = new APIAddress(null, 0, 0, null, null);
         String email = "testmail@gmail.com";
 
-        APIEmployee apiEmployee = new APIEmployee(personId, firstName, middleName, lastName,apiAirline.getName(), email, address, phoneNumber, dateofBirth);
+        APIEmployee apiEmployee = new APIEmployee(personId, firstName, middleName, lastName,apiAirline.getName(), email, address, phoneNumber, dateofBirth.toString());
 
         assertEquals(personId, apiEmployee.getEmployeeId());
         assertEquals(firstName, apiEmployee.getFirstName());

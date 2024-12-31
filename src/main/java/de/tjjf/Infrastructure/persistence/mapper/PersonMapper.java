@@ -17,7 +17,7 @@ public class PersonMapper {
     public MPerson toDomain(Employee employee){
         List<MTicket> tickets = new ArrayList<>();
         for(Ticket ticket : employee.getTickets()){
-            tickets.add(new TicketMapper().toDomain(new TicketReadImpl(ticket.getTicketId()).run().model));
+            tickets.add(new TicketMapper().toDomain(new TicketReadImpl(ticket.getTicketId()).execute().model));
         }
         return new MPerson(
                 employee.getPersonId(),

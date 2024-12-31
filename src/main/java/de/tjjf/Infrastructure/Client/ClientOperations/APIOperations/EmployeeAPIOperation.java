@@ -8,7 +8,7 @@ import java.net.URISyntaxException;
 
 public class EmployeeAPIOperation extends AbstractAPIOperation {
 
-    private String transformToQuery(APIEmployeeInput apiEmployeeInput, Long employeeId, String commandName) {
+    private String transformToQuery(APIEmployeeInput apiEmployeeInput, Long employeeId, String commandName, boolean hasResult) {
         String query = """
         {
             "query": "mutation {
@@ -25,25 +25,9 @@ public class EmployeeAPIOperation extends AbstractAPIOperation {
                         city: \\"%s\\",
                         country: \\"%s\\"
                     },
-                    email: \\"%s\\"
-                    airlineName: \\"%s\\",
-                }) {
-                    employeeId
-                    firstName
-                    middleNames
-                    lastName
-                    dateOfBirth
-                    phoneNumber
-                    address {
-                        street
-                        number
-                        zipCode
-                        city
-                        country
-                    }
-                    email
-                    airlineName
-                }
+                    email: \\"%s\\",
+                    airlineName: \\"%s\\"
+                }) %s
             }"
         }
         """.formatted(
@@ -60,7 +44,8 @@ public class EmployeeAPIOperation extends AbstractAPIOperation {
                 apiEmployeeInput.getAddress().getCity(),
                 apiEmployeeInput.getAddress().getCountry(),
                 apiEmployeeInput.getEmail(),
-                apiEmployeeInput.getAirline()
+                apiEmployeeInput.getAirlineName(),
+                (hasResult) ? "{employeeId firstName middleNames lastName dateOfBirth phoneNumber address{ street number zipCode city country} email airlineName}" : ""
         );
 
         return query;
@@ -68,14 +53,14 @@ public class EmployeeAPIOperation extends AbstractAPIOperation {
     }
 
         public APIEmployee createEmployee(APIEmployeeInput apiEmployeeInput) {
-            return execute(transformToQuery(apiEmployeeInput, 0L, "createEmployee"), "createEmployee", APIEmployee.class);
+            return execute(transformToQuery(apiEmployeeInput, 0L, "createEmployee", true), "createEmployee", APIEmployee.class);
         }
 
         public void updateEmployee(Long employeeId, APIEmployeeInput apiEmployeeInput) {
-            execute(transformToQuery(apiEmployeeInput,  employeeId, "updateEmployee"), "updateEmployee", APIEmployee.class);
+            execute(transformToQuery(apiEmployeeInput,  employeeId, "updateEmployee", false), "updateEmployee", APIEmployee.class);
         }
 
-        public APIEmployee readEmployeeById(int employeeId) throws URISyntaxException, IOException, InterruptedException {
+        public APIEmployee readEmployeeById(long employeeId) throws URISyntaxException, IOException, InterruptedException {
             String query = """
             {
                 "query": "{

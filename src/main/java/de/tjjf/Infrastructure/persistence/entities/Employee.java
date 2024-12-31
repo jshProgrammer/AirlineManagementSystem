@@ -35,7 +35,7 @@ public class Employee implements Model {
     @Column(nullable = false)
     private String email;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "employee")
     //@JoinColumn(name = "personId", referencedColumnName = "personId")
     private List<Ticket> tickets = new ArrayList<>();
 
@@ -45,7 +45,7 @@ public class Employee implements Model {
     @Column(nullable=false)
     private String position;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "airline_name", referencedColumnName = "name")
     private Airline airline;
 
