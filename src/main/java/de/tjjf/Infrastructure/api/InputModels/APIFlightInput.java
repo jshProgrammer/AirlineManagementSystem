@@ -1,13 +1,10 @@
 package de.tjjf.Infrastructure.api.InputModels;
 
-import java.util.Date;
-
 public class APIFlightInput implements APIModelInput {
 
     public APIFlightInput() {}
 
-    public APIFlightInput(long flightNum, int airplaneSerialNum, Date departureDateTime, String departureAirportCode, Date arrivalDateTime, String arrivalAirportCode, Date boardingTime, FlightStatus status, int duration, long pilotId, long copilotId) {
-        this.flightNum = flightNum;
+    public APIFlightInput(int airplaneSerialNum, String departureDateTime, String departureAirportCode, String arrivalDateTime, String arrivalAirportCode, String boardingTime, FlightStatus status, int duration, long pilotId, long copilotId) {
         this.airplaneSerialNum = airplaneSerialNum;
         this.departureDateTime = departureDateTime;
         this.departureAirportCode = departureAirportCode;
@@ -22,19 +19,17 @@ public class APIFlightInput implements APIModelInput {
 
     public enum FlightStatus { scheduled, in_the_air, landed, delayed, canceled }
 
-    private long flightNum;
-
     private int airplaneSerialNum;
 
-    private Date departureDateTime;
+    private String departureDateTime;
 
     private String departureAirportCode;
 
-    private Date arrivalDateTime;
+    private String arrivalDateTime;
 
     private String arrivalAirportCode;
 
-    private Date boardingTime;
+    private String boardingTime;
 
     private FlightStatus status;
 
@@ -44,14 +39,6 @@ public class APIFlightInput implements APIModelInput {
 
     private long copilotId;
 
-    public long getFlightNum() {
-        return flightNum;
-    }
-
-    public void setFlightNum(long flightNum) {
-        this.flightNum = flightNum;
-    }
-
     public int getAirplaneSerialNum() {
         return airplaneSerialNum;
     }
@@ -60,43 +47,43 @@ public class APIFlightInput implements APIModelInput {
         this.airplaneSerialNum = airplaneSerialNum;
     }
 
-    public Date getDepartureDateTime() {
+    public String getDepartureDateTime() {
         return departureDateTime;
     }
 
-    public void setDepartureDateTime(Date departureDateTime) {
+    public void setDepartureDateTime(String departureDateTime) {
         this.departureDateTime = departureDateTime;
     }
 
-    public String getDepartureAirport() {
+    public String getDepartureAirportCode() {
         return departureAirportCode;
     }
 
-    public void setDepartureAirport(String departureAirport) {
+    public void setDepartureAirportCode(String departureAirport) {
         this.departureAirportCode = departureAirport;
     }
 
-    public Date getArrivalDateTime() {
+    public String getArrivalDateTime() {
         return arrivalDateTime;
     }
 
-    public void setArrivalDateTime(Date arrivalDateTime) {
+    public void setArrivalDateTime(String arrivalDateTime) {
         this.arrivalDateTime = arrivalDateTime;
     }
 
-    public String getArrivalAirport() {
+    public String getArrivalAirportCode() {
         return arrivalAirportCode;
     }
 
-    public void setArrivalAirport(String arrivalAirport) {
+    public void setArrivalAirportCode(String arrivalAirport) {
         this.arrivalAirportCode = arrivalAirport;
     }
 
-    public Date getBoardingTime() {
+    public String getBoardingTime() {
         return boardingTime;
     }
 
-    public void setBoardingTime(Date boardingTime) {
+    public void setBoardingTime(String boardingTime) {
         this.boardingTime = boardingTime;
     }
 
@@ -116,19 +103,19 @@ public class APIFlightInput implements APIModelInput {
         this.duration = duration;
     }
 
-    public long getPilot() {
+    public long getPilotId() {
         return pilotId;
     }
 
-    public void setPilot(long pilot) {
-        this.pilotId = pilot;
+    public void setPilotId(long pilotId) {
+        this.pilotId = pilotId;
     }
 
-    public long getCopilot() {
+    public long getCopilotId() {
         return copilotId;
     }
 
-    public void setCopilot(long copilot) {
-        this.copilotId = copilot;
+    public void setCopilotId(long copilotId) {
+        this.copilotId = copilotId;
     }
 }

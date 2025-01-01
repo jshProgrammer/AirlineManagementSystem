@@ -15,18 +15,19 @@ public class APIAirplaneMapper extends AbstractAPIMapper<APIAirplane, MAirplane>
         );
     }
 
+    //TODO: fragen: sollen wir die APIAirplane doch so aufblasen, dass wieder gleich oder können wir hier einfach Default werte setzen
     @Override
     public MAirplane toDomainEntity(APIAirplane model){
         return new MAirplane(
                 model.getSerialNum(),
-                null,
-                null,
-                0,
-                0,
-                0,
+                "DefaultManufacturer",
+                "DefaultModel",
+                100,
+                20,
+                10,
                 new AirlinePortImpl().readAirlineByName(model.getBelongingAirlineName()),
                 model.getIsOperable(),
-                0
+                50
         );
     }
 }

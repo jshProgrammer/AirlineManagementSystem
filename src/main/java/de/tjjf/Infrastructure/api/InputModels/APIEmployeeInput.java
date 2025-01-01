@@ -1,5 +1,7 @@
 package de.tjjf.Infrastructure.api.InputModels;
 
+import de.tjjf.Infrastructure.api.DateParser;
+
 public class APIEmployeeInput implements APIModelInput {
 
 
@@ -61,28 +63,7 @@ public class APIEmployeeInput implements APIModelInput {
     }
 
     public String getDateOfBirthInRFC3339() {
-        String[] dateArr = dateOfBirth.split(" ");
-
-        // if date format is already in RFC3339
-        if(dateArr.length == 2) return dateOfBirth;
-
-        String month = switch (dateArr[1]) {
-            case "Jan" -> "01";
-            case "Feb" -> "02";
-            case "Mar" -> "03";
-            case "Apr" -> "04";
-            case "May" -> "05";
-            case "Jun" -> "06";
-            case "Jul" -> "07";
-            case "Aug" -> "08";
-            case "Sep" -> "09";
-            case "Oct" -> "10";
-            case "Nov" -> "11";
-            case "Dec" -> "12";
-            default -> "00";
-        };
-
-        return dateArr[5] + "-" + month + "-" + dateArr[2];
+        return DateParser.getDateFromDBInRFC3339(dateOfBirth);
     }
 
     public void setDateOfBirth(String dateOfBirth) {

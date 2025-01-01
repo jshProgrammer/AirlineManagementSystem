@@ -1,8 +1,6 @@
 package de.tjjf.CRUDTests.APILevel;
 
-import de.tjjf.Domain.models.*;
 import de.tjjf.Infrastructure.api.models.*;
-import org.apiguardian.api.API;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;
@@ -156,19 +154,19 @@ public class CreateAPIModelsTest {
         APIEmployee pilot = new APIEmployee(1234567, null, null, null, null, null, null, null, null);
         APIEmployee copilot = new APIEmployee(987654321, null, null, null, null, null, null, null, null);
 
-        APIFlight apiFlight = new APIFlight(flightNum, apiAirplane.getSerialNum(), departureDateTime, departureAirport.getCode(), arrivalDateTime, arrivalAirport.getCode(), boardingTime, flyStatus, duration, pilot.getEmployeeId(), copilot.getEmployeeId());
+        APIFlight apiFlight = new APIFlight(flightNum, apiAirplane.getSerialNum(), departureDateTime.toString(), departureAirport.getCode(), arrivalDateTime.toString(), arrivalAirport.getCode(), boardingTime.toString(), flyStatus, duration, pilot.getEmployeeId(), copilot.getEmployeeId());
 
         assertEquals(flightNum, apiFlight.getFlightNum());
         assertEquals(apiAirplane.getSerialNum(), apiFlight.getAirplaneSerialNum());
         assertEquals(departureDateTime, apiFlight.getDepartureDateTime());
-        assertEquals(departureAirport.getCode(), apiFlight.getDepartureAirport());
+        assertEquals(departureAirport.getCode(), apiFlight.getDepartureAirportCode());
         assertEquals(arrivalDateTime, apiFlight.getArrivalDateTime());
-        assertEquals(arrivalAirport.getCode(), apiFlight.getArrivalAirport());
+        assertEquals(arrivalAirport.getCode(), apiFlight.getArrivalAirportCode());
         assertEquals(boardingTime, apiFlight.getBoardingTime());
         assertEquals(flyStatus, apiFlight.getStatus());
         assertEquals(duration, apiFlight.getDuration());
-        assertEquals(pilot.getEmployeeId(), apiFlight.getPilot());
-        assertEquals(copilot.getEmployeeId(), apiFlight.getCopilot());
+        assertEquals(pilot.getEmployeeId(), apiFlight.getPilotId());
+        assertEquals(copilot.getEmployeeId(), apiFlight.getCopilotId());
 
     }
 
@@ -195,7 +193,7 @@ public class CreateAPIModelsTest {
         boolean isClient = true;
         APIAirport apiAirport = new APIAirport("airportCode", null, null, null, null);
         APIAirplane apiAirplane = new APIAirplane(123456789, null, true);
-        APIFlight apiFlight = new APIFlight(0, apiAirplane.getSerialNum(), new Date(), apiAirport.getCode(), new Date(), apiAirport.getCode(), new Date(), APIFlight.FlightStatus.landed, 0, 0,  0);
+        APIFlight apiFlight = new APIFlight(0, apiAirplane.getSerialNum(), new Date().toString(), apiAirport.getCode(), new Date().toString(), apiAirport.getCode(), new Date().toString(), APIFlight.FlightStatus.landed, 0, 0,  0);
         Date dateTimeOfBooking = new Date();
         int totalPrice = 300;
         int seatNum = 15;

@@ -2,21 +2,14 @@ package de.tjjf.IntegrationTests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import de.tjjf.Infrastructure.Client.ClientOperations.APIOperations.AirlineAPIOperation;
-import de.tjjf.Infrastructure.Client.ClientOperations.APIOperations.AirplaneAPIOperation;
-import de.tjjf.Infrastructure.Client.ClientOperations.APIOperations.ClientAPIOperation;
-import de.tjjf.Infrastructure.Client.ClientOperations.APIOperations.EmployeeAPIOperation;
+import de.tjjf.Infrastructure.Client.ClientOperations.APIOperations.*;
 import de.tjjf.Infrastructure.Client.GraphQLClient;
 import de.tjjf.Infrastructure.api.InputModels.*;
 import de.tjjf.Infrastructure.api.MapperInput.EmployeeMapperInput;
-import de.tjjf.Infrastructure.api.models.APIAirline;
-import de.tjjf.Infrastructure.api.models.APIAirplane;
-import de.tjjf.Infrastructure.api.models.APIClient;
-import de.tjjf.Infrastructure.api.models.APIEmployee;
-import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Delete.AirlineDeleteImpl;
-import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Delete.AirplaneDeleteImpl;
-import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Delete.ClientDeleteImpl;
-import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Delete.EmployeeDeleteImpl;
+import de.tjjf.Infrastructure.api.models.*;
+import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Create.AirportCreateImpl;
+import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Delete.*;
+import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Read.AirportReadImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -28,6 +21,7 @@ public class APIIntegrationTests {
     private GraphQLClient graphQLClient;
     private Calendar calendar;
     private Date date;
+    private Date dateTime;
 
     @BeforeEach
     public void setUp() {
@@ -36,6 +30,10 @@ public class APIIntegrationTests {
         calendar = Calendar.getInstance();
         calendar.set(2005, Calendar.FEBRUARY, 2);
         date = calendar.getTime();
+
+        calendar = Calendar.getInstance();
+        calendar.set(2005, Calendar.FEBRUARY, 2, 12, 0, 0);
+        dateTime = calendar.getTime();
     }
 
     @Test
@@ -133,16 +131,6 @@ public class APIIntegrationTests {
         new AirlineDeleteImpl(apiAirlineInput.getName()).execute();
     }
 
-
-    //TODO: beide Employee Test methoden werfen noch folgenden Fehler:
-    /*
-    rror while committing the transaction
-	at org.hibernate.internal.ExceptionConverterImpl.convertCommitException(ExceptionConverterImpl.java:67)
-	at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:104)
-	at de.tjjf.Infrastructure.persistence.DBOperations.AbstractOperations.AbstractDatabaseOperation.execute(AbstractDatabaseOperation.java:21)
-	... 34 common frames omitted
-Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement [Eindeutiger Index oder Primärschlüssel verletzt: "PUBLIC.PRIMARY_KEY_E ON PUBLIC.AIRLINE(NAME) VALUES (  36  'Test1876630105' )
-     */
     @Test
     void createAndReadEmployeeInDBViaAPITest() throws Exception {
         APIAirlineInput apiAirlineInput = new APIAirlineInput("Test" + + System.currentTimeMillis(), date, new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"), "02341324", "test@airline.de");
@@ -204,9 +192,6 @@ Caused by: org.hibernate.exception.ConstraintViolationException: could not execu
         new AirlineDeleteImpl(apiAirlineInputUpdated.getName()).execute();
     }
 
-
-
-    //TODO: diese funktioniert bisher als einziges nicht
     @Test
     void createAndReadAirplaneInDBViaAPITest() throws Exception {
 
@@ -220,18 +205,92 @@ Caused by: org.hibernate.exception.ConstraintViolationException: could not execu
         APIAirplane airplaneReadFromDB = new AirplaneAPIOperation().readAirplaneBySerialNum(apiAirplaneInput.getSerialNum());
 
         assertEquals(apiAirplaneInput.getSerialNum(), airplaneReadFromDB.getSerialNum());
-        assertEquals(apiAirplaneInput.getBelongingAirline(), airplaneReadFromDB.getBelongingAirlineName());
+        assertEquals(apiAirplaneInput.getBelongingAirlineName(), airplaneReadFromDB.getBelongingAirlineName());
+        assertEquals(apiAirplaneInput.getIsOperable(), airplaneReadFromDB.getIsOperable());
 
-        new AirlineDeleteImpl(apiAirlineInput.getName()).execute();
         new AirplaneDeleteImpl(apiAirplaneInput.getSerialNum()).execute();
+        new AirlineDeleteImpl(apiAirlineInput.getName()).execute();
     }
 
-    //TODO: hier noch updateAirplane
+    @Test
+    void setOperableAirplaneInDBViaAPITest() throws Exception {
+        APIAirlineInput apiAirlineInput = new APIAirlineInput("Test" + System.currentTimeMillis(), date, new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"), "02341324", "test@airline.de");
+        new AirlineAPIOperation().createAirline(apiAirlineInput);
 
-    //TODO: AirportTest
+        APIAirplaneInput apiAirplaneInput = new APIAirplaneInput((int)System.currentTimeMillis(), apiAirlineInput.getName(), true);
+        new AirplaneAPIOperation().createAirplane(apiAirplaneInput);
+
+        new AirplaneAPIOperation().setOperable(apiAirplaneInput.getSerialNum(), false);
+
+        APIAirplane airplaneReadFromDB = new AirplaneAPIOperation().readAirplaneBySerialNum(apiAirplaneInput.getSerialNum());
+
+        assertEquals(apiAirplaneInput.getSerialNum(), airplaneReadFromDB.getSerialNum());
+        assertEquals(apiAirplaneInput.getBelongingAirlineName(), airplaneReadFromDB.getBelongingAirlineName());
+        assertFalse(airplaneReadFromDB.getIsOperable());
+
+        new AirplaneDeleteImpl(apiAirplaneInput.getSerialNum()).execute();
+        new AirlineDeleteImpl(apiAirlineInput.getName()).execute();
+    }
+
+    @Test
+    void createAndReadAirportInDBViaAPITest() throws Exception {
+        APIAirportInput apiAirportInput = new APIAirportInput("Test" + System.currentTimeMillis(), "TestName", "Germany", "Berlin", "German");
+        new AirportAPIOperation().createAirport(apiAirportInput);
+
+        APIAirport airportReadFromDB = new AirportAPIOperation().readAirportByCode(apiAirportInput.getCode());
+
+        assertEquals(apiAirportInput.getCode(), airportReadFromDB.getCode());
+        assertEquals(apiAirportInput.getCity(), airportReadFromDB.getCity());
+        assertEquals(apiAirportInput.getCountry(), airportReadFromDB.getCountry());
+        assertEquals(apiAirportInput.getName(), airportReadFromDB.getName());
+        assertEquals(apiAirportInput.getTimezone(), airportReadFromDB.getTimezone());
+
+        new AirportDeleteImpl(apiAirportInput.getCode()).execute();
+    }
 
 
-    //TODO: FlightTest
+    //TODO: FlightTest fuinktionert noch nicht
+    @Test
+    void createAndReadFlightInDBViaAPITest() throws Exception {
+        APIAirlineInput apiAirlineInput = new APIAirlineInput("Test" + System.currentTimeMillis(), date, new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"), "02341324", "test@airline.de");
+        new AirlineAPIOperation().createAirline(apiAirlineInput);
+        APIAirplaneInput apiAirplaneInput = new APIAirplaneInput((int)System.currentTimeMillis(), apiAirlineInput.getName(), true);
+        new AirplaneAPIOperation().createAirplane(apiAirplaneInput);
+        APIAirportInput apiAirportInput = new APIAirportInput("Test" + System.currentTimeMillis(), "TestName", "Germany", "Berlin", "German");
+        new AirportAPIOperation().createAirport(apiAirportInput);
+        APIEmployeeInput apiEmployeeInput = new APIEmployeeInput("Jan", "M", "Kowalski", date.toString() , "+4915112345678", new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"), "test@test.de", apiAirlineInput.getName());
+        APIEmployee apiEmployee = new EmployeeAPIOperation().createEmployee(apiEmployeeInput);
+
+        APIEmployeeInput apiEmployeeInput2 = new APIEmployeeInput("Max", "M", "Kowalski", date.toString() , "+4915112345678", new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"), "test@test.de", apiAirlineInput.getName());
+        APIEmployee apiEmployee2 = new EmployeeAPIOperation().createEmployee(apiEmployeeInput2);
+
+        System.out.println("TEST: " + new EmployeeAPIOperation().readEmployeeById(apiEmployee2.getEmployeeId()).getFirstName());
+
+        //TODO
+        APIFlightInput apiFlightInput = new APIFlightInput(apiAirplaneInput.getSerialNum(), dateTime.toString(), apiAirportInput.getCode(), dateTime.toString(), apiAirportInput.getCode(), dateTime.toString(), APIFlightInput.FlightStatus.scheduled, 120, apiEmployee.getEmployeeId(), apiEmployee2.getEmployeeId());
+        APIFlight apiFlight = new FlightAPIOperation().createFlight(apiFlightInput);
+
+        APIFlight flightReadFromDB = new FlightAPIOperation().readFlightByFlightNum(apiFlight.getFlightNum());
+
+        assertEquals(apiFlightInput.getAirplaneSerialNum(), flightReadFromDB.getAirplaneSerialNum());
+        assertEquals(apiFlightInput.getDepartureDateTime(), flightReadFromDB.getDepartureDateTime());
+        assertEquals(apiFlightInput.getDepartureAirportCode(), flightReadFromDB.getDepartureAirportCode());
+        assertEquals(apiFlightInput.getArrivalDateTime(), flightReadFromDB.getArrivalDateTime());
+        assertEquals(apiFlightInput.getArrivalAirportCode(), flightReadFromDB.getArrivalAirportCode());
+        assertEquals(apiFlightInput.getBoardingTime(), flightReadFromDB.getBoardingTime());
+        assertEquals(apiFlightInput.getStatus(), flightReadFromDB.getStatus());
+        assertEquals(apiFlightInput.getDuration(), flightReadFromDB.getDuration());
+        assertEquals(apiFlightInput.getPilotId(), flightReadFromDB.getPilotId());
+        assertEquals(apiFlightInput.getCopilotId(), flightReadFromDB.getCopilotId());
+
+        new AirplaneDeleteImpl(apiAirplaneInput.getSerialNum()).execute();
+        new EmployeeDeleteImpl(apiEmployee.getEmployeeId()).execute();
+        new EmployeeDeleteImpl(apiEmployee2.getEmployeeId()).execute();
+        new AirlineDeleteImpl(apiAirlineInput.getName()).execute();
+        new AirportDeleteImpl(apiAirportInput.getCode()).execute();
+    }
+
+    //TODO: FlightTest update
 
     //TODO: TicketTest
 

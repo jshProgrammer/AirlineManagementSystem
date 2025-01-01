@@ -35,7 +35,7 @@ public class Airplane implements Model {
     @Column(nullable=false)
     private int maxWeightOfLuggage;
 
-    @OneToMany(mappedBy = "airplane")
+    @OneToMany(mappedBy = "airplane", fetch = FetchType.EAGER)
     private List<Flight> flights;
 
     public Airplane() {}

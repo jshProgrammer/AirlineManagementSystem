@@ -16,8 +16,8 @@ public class AirplaneMapperInput {
     public APIAirplane toDomain(APIAirplaneInput airplane){
         return new APIAirplane(
                 airplane.getSerialNum(),
-                airplane.getBelongingAirline(),
-                airplane.isOperable()
+                airplane.getBelongingAirlineName(),
+                airplane.getIsOperable()
         );
     }
 }

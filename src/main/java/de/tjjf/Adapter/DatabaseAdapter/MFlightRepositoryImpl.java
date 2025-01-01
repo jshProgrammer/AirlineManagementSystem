@@ -11,6 +11,11 @@ import de.tjjf.Infrastructure.persistence.mapper.FlightMapper;
 public class MFlightRepositoryImpl implements DataAccess.MFlightRepository {
     @Override
     public MFlight create(MFlight flight) {
+        // auch das funktioniert noch:
+        System.out.println("TEST.z4: " + new FlightMapper().toEntity(flight).getCopilot().getFirstName());
+
+        //TODO: das problem liegt in flightcreateimpl => ???!!!
+        System.out.println("Test.z5: " + new FlightCreateImpl(new FlightMapper().toEntity(flight)).execute().model);
         return new FlightMapper().toDomain(new FlightCreateImpl(new FlightMapper().toEntity(flight)).execute().model);
     }
 

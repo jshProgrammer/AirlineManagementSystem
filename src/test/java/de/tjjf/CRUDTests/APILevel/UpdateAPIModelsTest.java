@@ -2,7 +2,6 @@ package de.tjjf.CRUDTests.APILevel;
 
 
 import de.tjjf.Infrastructure.api.models.*;
-import org.apiguardian.api.API;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -91,7 +90,7 @@ public class UpdateAPIModelsTest {
         int apiFlightDuration = 100;
         long apiFlightPilotId = 888888888;
         long apiFlightCopilotId = 77777777;
-        apiFlight = new APIFlight(apiFlightFlightNum, airplansSerialNum, departureDateTime, departureAirlineCode, arrivalDateTime, arrivalAirlineName, boardingTime, flightStatus, apiFlightDuration, apiFlightPilotId, apiFlightCopilotId);
+        apiFlight = new APIFlight(apiFlightFlightNum, airplansSerialNum, departureDateTime.toString(), departureAirlineCode, arrivalDateTime.toString(), arrivalAirlineName, boardingTime.toString(), flightStatus, apiFlightDuration, apiFlightPilotId, apiFlightCopilotId);
 
         long apiPersonPersonId = 9999999;
         String apiPersonFirstName = "TestEmployeetFirstName";
@@ -253,14 +252,14 @@ public class UpdateAPIModelsTest {
         APIEmployee updatedPilot = new APIEmployee(0,null, null,null,null,"updatedpilot@gmail.com",null,"+4915112345678", null);
         APIEmployee updatedCoPilot = new APIEmployee(0,null, null,null,null,"updatedcopilot@gmail.com",null,"+4915112345678",null);
         apiFlight.setAirplaneSerialNum(updatedAirplane.getSerialNum());
-        apiFlight.setDepartureDateTime(updatedDepartureDateTime);
-        apiFlight.setArrivalDateTime(updatedArrivalDateTime);
-        apiFlight.setBoardingTime(updatedBoardingTime);
+        apiFlight.setDepartureDateTime(updatedDepartureDateTime.toString());
+        apiFlight.setArrivalDateTime(updatedArrivalDateTime.toString());
+        apiFlight.setBoardingTime(updatedBoardingTime.toString());
         apiFlight.setStatus(updatedFlightStatus);
-        apiFlight.setPilot(updatedPilot.getEmployeeId());
-        apiFlight.setArrivalAirport(updatedArrivalAirport.getCode());
-        apiFlight.setCopilot(updatedCoPilot.getEmployeeId());
-        apiFlight.setDepartureAirport(updatedDepartureAirport.getCode());
+        apiFlight.setPilotId(updatedPilot.getEmployeeId());
+        apiFlight.setArrivalAirportCode(updatedArrivalAirport.getCode());
+        apiFlight.setCopilotId(updatedCoPilot.getEmployeeId());
+        apiFlight.setDepartureAirportCode(updatedDepartureAirport.getCode());
         apiFlight.setDuration(updatedDuration);
 
         assertEquals(updatedAirplane.getSerialNum(), apiFlight.getAirplaneSerialNum());
@@ -268,11 +267,11 @@ public class UpdateAPIModelsTest {
         assertEquals(updatedArrivalDateTime, apiFlight.getArrivalDateTime());
         assertEquals(updatedBoardingTime, apiFlight.getBoardingTime());
         assertEquals(updatedFlightStatus, apiFlight.getStatus());
-        assertEquals(updatedPilot.getEmployeeId(), apiFlight.getPilot());
-        assertEquals(updatedCoPilot.getEmployeeId(), apiFlight.getCopilot());
-        assertEquals(updatedDepartureAirport.getCode(), apiFlight.getDepartureAirport());
+        assertEquals(updatedPilot.getEmployeeId(), apiFlight.getPilotId());
+        assertEquals(updatedCoPilot.getEmployeeId(), apiFlight.getCopilotId());
+        assertEquals(updatedDepartureAirport.getCode(), apiFlight.getDepartureAirportCode());
         assertEquals(updatedDuration, apiFlight.getDuration());
-        assertEquals(updatedArrivalAirport.getCode(), apiFlight.getArrivalAirport());
+        assertEquals(updatedArrivalAirport.getCode(), apiFlight.getArrivalAirportCode());
     }
 
     @Test

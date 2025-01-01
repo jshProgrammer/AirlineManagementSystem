@@ -66,11 +66,11 @@ enum APIFlightStatus {
 type APIFlight{
     flightNum: Long!,
     airplaneSerialNum: Int!,
-    departureDateTime: Date!,
+    departureDateTime: String!,
     departureAirportCode: String!,
-    arrivalDateTime: Date!,
+    arrivalDateTime: String!,
     arrivalAirportCode: String!,
-    boardingTime: Date!,
+    boardingTime: String!,
     status: APIFlightStatus!,
     duration: Int!,
     pilotId: Long!,
@@ -154,14 +154,13 @@ enum APIFlightStatusInput {
 }
 
 input APIFlightInput{
-    flightNum: Long!,
     airplaneSerialNum: Int!,
-    departureDateTime: Date!,
+    departureDateTime: String!,
     departureAirportCode: String!,
-    arrivalDateTime: Date!,
+    arrivalDateTime: String!,
     arrivalAirportCode: String!,
-    boardingTime: Date!,
-    status: APIFlightStatus!,
+    boardingTime: String!,
+    status: APIFlightStatusInput!,
     duration: Int!,
     pilotId: Long!,
     copilotId: Long!
@@ -208,7 +207,7 @@ type Query {
 
     readAirportByCode(code: String): APIAirport
 
-    ##readFlightByFlightNum(flightNum: Int): APIFlight
+    readFlightByFlightNum(flightNum: Long): APIFlight
     readAirlineByName(name: String): APIAirline #funktioniert
 
     readAirplaneBySerialNum(serialNum: Int): APIAirplane
@@ -216,10 +215,10 @@ type Query {
 
 type Mutation {
     #TODO: überall noch wegen enums Probleme
-    #createFlight(flight: APIFlightInput): Void
-    #updateFlight(flight: APIFlightInput): Void
+    createFlight(flight: APIFlightInput): APIFlight
+    updateFlight(flightNum: Long, flight: APIFlightInput): Void
     #TODO: Parameter geändert => nur noch int -> prüfen, ob an allen Stellen geändert -> existiert noch garnicht?
-    #cancelFlight(flightNum: Int): Void
+    cancelFlight(flightNum: Long): Void
 
     #TODO: die folgenden vier Methoden funktionieren noch nicht
     createEmployee(employee: APIEmployeeInput): APIEmployee
@@ -242,6 +241,6 @@ type Mutation {
     createAirline(airline: APIAirlineInput): Void #funktioniert
     updateAirline(airline: APIAirlineInput): Void
 
-     createAirplane(airplane: APIAirplaneInput): Void
-    ##setOperable(serialNum: Int, isOperable: Boolean): Void
+    createAirplane(airplane: APIAirplaneInput): Void
+    setOperable(serialNum: Int, isOperable: Boolean): Void
 }

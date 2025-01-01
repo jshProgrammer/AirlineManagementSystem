@@ -1,43 +1,46 @@
 package de.tjjf.Infrastructure.Client.ClientOperations.APIOperations;
 
+import de.tjjf.Infrastructure.api.DateParser;
 import de.tjjf.Infrastructure.api.InputModels.APIFlightInput;
 import de.tjjf.Infrastructure.api.models.APIFlight;
 
 public class FlightAPIOperation extends AbstractAPIOperation {
 
-    private String transformToQuery(APIFlightInput apiFlightInput, String commandName) {
+    private String transformToQuery(APIFlightInput apiFlightInput, Long flightNum, String commandName, boolean hasResult) {
         //TODO: wie enums in query einfügen?!
+        System.out.println("TEST.X " + DateParser.getDateTimeFromDBInRFC3339(apiFlightInput.getDepartureDateTime()));
         String query = """
         {
             "query": "mutation {
-                %s (flight: {
-                    flightNum: %d,
+                %s (%s flight: {
                     airplaneSerialNum: %d,
                     departureDateTime: \\"%s\\",
                     departureAirportCode: \\"%s\\",
                     arrivalDateTime: \\"%s\\",
                     arrivalAirportCode: \\"%s\\",
                     boardingTime: \\"%s\\",
-                    status: \\"%s\\",
+                    status: %s,
                     duration: %d,
                     pilotId: %d,
                     copilotId: %d
-                })
+                }) %s
             }"
         }
         """.formatted(
                 commandName,
-                apiFlightInput.getFlightNum(),
+                //TODO: brauchen wir nicht getDateTime...
+                (flightNum == 0L) ? "" : "flightNum: %d,".formatted(flightNum),
                 apiFlightInput.getAirplaneSerialNum(),
-                apiFlightInput.getDepartureDateTime(),
-                apiFlightInput.getDepartureAirport(),
-                apiFlightInput.getArrivalDateTime(),
-                apiFlightInput.getArrivalAirport(),
-                apiFlightInput.getBoardingTime(),
+                DateParser.getDateTimeFromDBInRFC3339(apiFlightInput.getDepartureDateTime()),
+                apiFlightInput.getDepartureAirportCode(),
+                DateParser.getDateTimeFromDBInRFC3339(apiFlightInput.getArrivalDateTime()),
+                apiFlightInput.getArrivalAirportCode(),
+                DateParser.getDateTimeFromDBInRFC3339(apiFlightInput.getBoardingTime()),
                 apiFlightInput.getStatus(),
                 apiFlightInput.getDuration(),
-                apiFlightInput.getPilot(),
-                apiFlightInput.getCopilot()
+                apiFlightInput.getPilotId(),
+                apiFlightInput.getCopilotId(),
+                (hasResult) ? "{flightNum airplaneSerialNum departureDateTime departureAirportCode arrivalDateTime arrivalAirportCode boardingTime status duration pilotId copilotId}" : ""
         );
 
         return query;
@@ -45,15 +48,15 @@ public class FlightAPIOperation extends AbstractAPIOperation {
     }
 
     //TODO: hier vermutlich noch Probleme wegen Datetime statt Date
-    public void createFlight(APIFlightInput apiFlightInput) {
-        execute(transformToQuery(apiFlightInput, "createFlight"), "createFlight", APIFlight.class);
+    public APIFlight createFlight(APIFlightInput apiFlightInput) {
+        return execute(transformToQuery(apiFlightInput, 0L, "createFlight", true), "createFlight", APIFlight.class);
     }
 
-    public void updateFlight(APIFlightInput apiFlightInput) {
-        execute(transformToQuery(apiFlightInput, "updateFlight"), "updateFlight", APIFlight.class);
+    public void updateFlight(long flightNum, APIFlightInput apiFlightInput) {
+        execute(transformToQuery(apiFlightInput, flightNum, "updateFlight", false), "updateFlight", APIFlight.class);
     }
 
-    public void cancelFlight(int flightNum) {
+    public void cancelFlight(long flightNum) {
         String query = """
         {
             "query": "mutation {
@@ -65,7 +68,7 @@ public class FlightAPIOperation extends AbstractAPIOperation {
         execute(query, "cancelFlight", APIFlight.class);
     }
 
-   public APIFlight readFlightByFlightNum(int flightNum){
+   public APIFlight readFlightByFlightNum(long flightNum){
         String query = """
                 {
                     "query": "{

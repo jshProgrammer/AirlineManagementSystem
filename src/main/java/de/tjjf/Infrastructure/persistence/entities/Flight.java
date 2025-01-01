@@ -43,13 +43,13 @@ public class Flight implements Model {
     @Column(nullable = false)
     private int duration;
 
-    //TODO: evtl ManyToOne-Beziehung?
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pilot_id", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    //TODO: hier veränderungen vorgenommen für api
+    //@JoinColumn(name = "copilot_id", referencedColumnName = "employeeId")
     private Employee pilot;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "copilot_id", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    //@JoinColumn(name = "copilot_id", referencedColumnName = "employeeId")
     private Employee copilot;
 
 

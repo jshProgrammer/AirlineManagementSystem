@@ -16,11 +16,11 @@ public class APIAirplaneInput implements APIModelInput {
         this.isOperable=operable;
     }
 
-    public String getBelongingAirline() {
+    public String getBelongingAirlineName() {
         return belongingAirlineName;
     }
 
-    public boolean isOperable() {
+    public boolean getIsOperable() {
         return isOperable;
     }
 
@@ -28,11 +28,11 @@ public class APIAirplaneInput implements APIModelInput {
         return serialNum;
     }
 
-    public void setBelongingAirline(String belongingAirlineName) {
+    public void setBelongingAirlineName(String belongingAirlineName) {
         this.belongingAirlineName = belongingAirlineName;
     }
 
-    public void setOperable(boolean operable) {
+    public void setIsOperable(boolean operable) {
         isOperable = operable;
     }
 }

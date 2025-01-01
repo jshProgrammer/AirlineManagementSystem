@@ -2,11 +2,9 @@ package de.tjjf.Infrastructure.api.mapper;
 
 import de.tjjf.Domain.models.MClient;
 import de.tjjf.Domain.models.MPerson;
+import de.tjjf.Infrastructure.api.DateParser;
 import de.tjjf.Infrastructure.api.models.APIClient;
-import de.tjjf.Infrastructure.persistence.mapper.AddressMapper;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class APIClientMapper extends AbstractAPIMapper<APIClient, MClient>  {
@@ -27,15 +25,8 @@ public class APIClientMapper extends AbstractAPIMapper<APIClient, MClient>  {
 
     @Override
     public MClient toDomainEntity(APIClient apiClient) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = DateParser.getDateFromRFC3339(apiClient.getDateOfBirth());
 
-        Date date;
-        try {
-            date = formatter.parse(apiClient.getDateOfBirth());
-            System.out.println("Parsed date: " + date);
-        } catch (ParseException e) {
-            throw new RuntimeException("Error parsing date: " + e.getMessage());
-        }
         MPerson person = new PersonMapper().toDomain(apiClient);
         return new MClient(
             person.getPersonId(),

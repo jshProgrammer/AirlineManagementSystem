@@ -22,8 +22,8 @@ public class AirplaneAPIOperation extends AbstractAPIOperation {
             }
             """.formatted(
                 airplaneInput.getSerialNum(),
-                airplaneInput.getBelongingAirline(),
-                airplaneInput.isOperable()
+                airplaneInput.getBelongingAirlineName(),
+                airplaneInput.getIsOperable()
         );
         execute(query, "createAirplane", APIAirplane.class);
     }
