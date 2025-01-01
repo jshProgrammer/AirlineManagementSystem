@@ -18,7 +18,7 @@ public abstract class AbstractAPIOperation {
     public static <R> R execute(String query, String nameOfCommand, Class<R> classOfR) {
         try(HttpClient client = HttpClient.newHttpClient();) {
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI("http://localhost:8080/airlineManagement"))
+                    .uri(new URI("http://localhost:8081/airlineManagement"))
                     .header("Content-Type", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(query))
                     .build();
