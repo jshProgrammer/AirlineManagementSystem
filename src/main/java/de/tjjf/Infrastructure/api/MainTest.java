@@ -9,7 +9,7 @@ import java.util.List;
 
 public class MainTest {
     public static void main(String[] args) throws Exception {
-        Server server = new Server(8080);
+        Server server = new Server(8081);
 
         ServletContextHandler context = new ServletContextHandler( ServletContextHandler.SESSIONS );
         context.setContextPath( "/" );

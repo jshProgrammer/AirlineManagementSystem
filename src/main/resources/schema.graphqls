@@ -209,7 +209,7 @@ type Query {
     readAirportByCode(code: String): APIAirport
 
     ##readFlightByFlightNum(flightNum: Int): APIFlight
-    readAirlineByName(name: String): APIAirline #funktioniert
+    readAirlineByName(name: String): APIAirline
 
     readAirplaneBySerialNum(serialNum: Int): APIAirplane
 }
@@ -225,7 +225,7 @@ type Mutation {
     createEmployee(employee: APIEmployeeInput): APIEmployee
     updateEmployee(employeeId: Float, employee: APIEmployeeInput): Void
 
-    createClient(client: APIClientInput): APIClient #funktioniert
+    createClient(client: APIClientInput): APIClient
     updateClient(clientId: Long, client: APIClientInput): Void
 
     #TODO addBooking und upgradeSeatingClass funktionieren noch nicht!
@@ -239,7 +239,7 @@ type Mutation {
 
     createAirport(airport: APIAirportInput): Void
 
-    createAirline(airline: APIAirlineInput): Void #funktioniert
+    createAirline(airline: APIAirlineInput): Void
     updateAirline(airline: APIAirlineInput): Void
 
      createAirplane(airplane: APIAirplaneInput): Void
