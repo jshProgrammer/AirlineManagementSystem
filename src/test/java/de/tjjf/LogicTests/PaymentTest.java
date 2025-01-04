@@ -22,7 +22,7 @@ public class PaymentTest {
 
     @Test
     void declinedCreditCardTest(){
-        MPayment mp = new MPayment("4000000000009995", "12", "34", "1234");
+        MPayment mp = new MPayment("4000000000000341", "12", "34", "1234");
         boolean result = PaymentUseCase.paymentCall(10, mp);
         Assertions.assertFalse(result, "Die Zahlung sollte fehlschlagen");
     }
