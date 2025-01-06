@@ -10,7 +10,7 @@ public class MTicket implements MModel {
 
     public enum TicketStatus { paid, unpaid, canceled }
 
-    private final int ticketId;
+    private final long ticketId;
 
     private MPerson person;
 
@@ -29,7 +29,7 @@ public class MTicket implements MModel {
     private int weightOfLuggage;
 
     // use exceptions instead of boolean, in order to be able to differ between the two problems (NoSeatsLeft, NotEnoughLuggageWeightAvailable => IllegalArgumentException)
-    public MTicket(int ticketId, MPerson person, MFlight flight, Date dateTimeOfBooking, int totalPrice, int seatNum, SeatingClass seatingClass, TicketStatus ticketStatus, int weightOfLuggage) throws NoSeatsAvailableException, IllegalArgumentException {
+    public MTicket(long ticketId, MPerson person, MFlight flight, Date dateTimeOfBooking, int totalPrice, int seatNum, SeatingClass seatingClass, TicketStatus ticketStatus, int weightOfLuggage) throws NoSeatsAvailableException, IllegalArgumentException {
 
         this.flight = flight;
 
@@ -168,7 +168,7 @@ public class MTicket implements MModel {
         return ticketStatus;
     }
 
-    public int getTicketId() {
+    public long getTicketId() {
         return ticketId;
     }
 }

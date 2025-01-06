@@ -9,6 +9,7 @@ public class FlightAPIOperation extends AbstractAPIOperation {
     private String transformToQuery(APIFlightInput apiFlightInput, Long flightNum, String commandName, boolean hasResult) {
         //TODO: wie enums in query einfügen?!
         System.out.println("TEST.X " + DateParser.getDateTimeFromDBInRFC3339(apiFlightInput.getDepartureDateTime()));
+        System.out.println("TEST.WTF copilotId: " + apiFlightInput.getCopilotId());
         String query = """
         {
             "query": "mutation {

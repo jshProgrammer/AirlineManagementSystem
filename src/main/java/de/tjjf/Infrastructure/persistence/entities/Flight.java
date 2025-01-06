@@ -15,7 +15,7 @@ public class Flight implements Model {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long flightNum;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "airplane_id", referencedColumnName = "serialNum")
     private Airplane airplane;
 
@@ -23,14 +23,14 @@ public class Flight implements Model {
     private Date departureDateTime;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "departure_airport_id", referencedColumnName = "code")
     private Airport departureAirport;
 
     @Column
     private Date arrivalDateTime;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "arrival_airport_id", referencedColumnName = "code")
     private Airport arrivalAirport;
 
@@ -43,16 +43,14 @@ public class Flight implements Model {
     @Column(nullable = false)
     private int duration;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     //TODO: hier veränderungen vorgenommen für api
-    //@JoinColumn(name = "copilot_id", referencedColumnName = "employeeId")
+    @JoinColumn(name = "pilot_id", referencedColumnName = "personId")
     private Employee pilot;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    //@JoinColumn(name = "copilot_id", referencedColumnName = "employeeId")
+    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "copilot_id", referencedColumnName = "personId")
     private Employee copilot;
-
-
 
 
     public Flight(){}

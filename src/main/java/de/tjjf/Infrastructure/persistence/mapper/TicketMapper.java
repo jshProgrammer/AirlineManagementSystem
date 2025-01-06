@@ -27,10 +27,10 @@ public class TicketMapper extends Mapper<MTicket, Ticket> {
     }
 
     public MTicket toDomain(Ticket booking){
-        Client person = new ClientReadImpl(booking.getPersonId()).run().model;
+        Client person = new ClientReadImpl(booking.getPersonId()).execute().model;
         MPerson mPerson = new PersonMapper().toDomain(person);
 
-        Flight flight = new FlightReadImpl(booking.getFlight().getFlightNum()).run().model;
+        Flight flight = new FlightReadImpl(booking.getFlight().getFlightNum()).execute().model;
 
         return new MTicket(
                 booking.getTicketId(),

@@ -15,7 +15,7 @@ public class MTicketRepositoryImpl implements DataAccess.MTicketRepository {
     }
 
     @Override
-    public MTicket readById(Integer id) {
+    public MTicket readById(Long id) {
         return new TicketMapper().toDomain(new TicketReadImpl(id).execute().model);
     }
 
@@ -25,7 +25,7 @@ public class MTicketRepositoryImpl implements DataAccess.MTicketRepository {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(Long id) {
         new TicketDeleteImpl(id).execute();
     }
 }

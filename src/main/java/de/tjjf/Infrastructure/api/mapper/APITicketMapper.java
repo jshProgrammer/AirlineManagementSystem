@@ -1,6 +1,7 @@
 package de.tjjf.Infrastructure.api.mapper;
 
 import de.tjjf.Domain.models.MTicket;
+import de.tjjf.Infrastructure.api.DateParser;
 import de.tjjf.Infrastructure.api.models.APITicket;
 import de.tjjf.Adapter.APIAdapter.ClientPortImpl;
 import de.tjjf.Adapter.APIAdapter.EmployeePortImpl;
@@ -17,7 +18,7 @@ public class APITicketMapper extends AbstractAPIMapper<APITicket, MTicket>{
                 //TODO: test if this transformation/comparison works:
                 mTicket.getPerson().getClass().equals(Client.class),
                 mTicket.getFlight().getFlightNum(),
-                mTicket.getDateTimeOfBooking(),
+                mTicket.getDateTimeOfBooking().toString(),
                 mTicket.getTotalPrice(),
                 mTicket.getSeatNum(),
                 APITicket.SeatingClass.valueOf(mTicket.getSeatingClass().name()),
@@ -30,9 +31,9 @@ public class APITicketMapper extends AbstractAPIMapper<APITicket, MTicket>{
     public MTicket toDomainEntity(APITicket apiTicket){
         return new MTicket(
                 apiTicket.getTicketId(),
-                apiTicket.isClient() ? new ClientPortImpl().readClientById(apiTicket.getPersonId()) : new EmployeePortImpl().readEmployeeById(apiTicket.getPersonId()),
+                apiTicket.getIsClient() ? new ClientPortImpl().readClientById(apiTicket.getPersonId()) : new EmployeePortImpl().readEmployeeById(apiTicket.getPersonId()),
                 new FlightPortImpl().readFlightByNum(apiTicket.getFlightNum()),
-                apiTicket.getDateTimeOfBooking(),
+                DateParser.getDateTimeFromRFC3339(apiTicket.getDateTimeOfBooking()),
                 apiTicket.getTotalPrice(),
                 apiTicket.getSeatNum(),
                 MTicket.SeatingClass.valueOf(apiTicket.getSeatingClass().name()),

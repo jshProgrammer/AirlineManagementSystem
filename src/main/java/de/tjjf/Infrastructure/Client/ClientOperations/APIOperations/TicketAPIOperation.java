@@ -1,61 +1,69 @@
 package de.tjjf.Infrastructure.Client.ClientOperations.APIOperations;
 
+import de.tjjf.Infrastructure.api.DateParser;
 import de.tjjf.Infrastructure.api.InputModels.APIPaymentInput;
 import de.tjjf.Infrastructure.api.InputModels.APITicketInput;
 import de.tjjf.Infrastructure.api.models.APITicket;
 
 public class TicketAPIOperation extends AbstractAPIOperation {
 
-    private String transformToQuery(APITicketInput apiTicketInput, String commandName) {
+    private String transformToQuery(APITicketInput apiTicketInput, APIPaymentInput apiPaymentInput, String commandName) {
         //TODO: wie hier mit enums vorgehen?
         String query = """
         {
             "query": "mutation {
-                %s (client: {
-                    ticketID: %d,
-                    personID: %d,
-                    isClient: \\"%b\\",
+                %s (newBooking: {
+                    personId: %d,
+                    isClient: %b,
                     flightNum: %d,
                     dateTimeOfBooking: \\"%s\\",
                     totalPrice: %d,
                     seatNum: %d,
-                    seatingClass: \\"%s\\",
-                    ticketStatus: \\"%s\\",
+                    seatingClass: %s,
+                    ticketStatus: %s,
                     weightOfLuggage: %d
-                })
+                }, payment: {
+                    cardNumber: \\"%s\\",
+                    expMonth: \\"%s\\",
+                    expYear: \\"%s\\",
+                    cvc: \\"%s\\"
+                }) %s
             }"
         }
         """.formatted(
                 commandName,
-                apiTicketInput.getTicketId(),
                 apiTicketInput.getPersonId(),
-                apiTicketInput.isClient(),
+                apiTicketInput.getIsClient(),
                 apiTicketInput.getFlightNum(),
-                apiTicketInput.getDateTimeOfBooking(),
+                DateParser.getDateTimeFromDBInRFC3339(apiTicketInput.getDateTimeOfBooking()),
                 apiTicketInput.getTotalPrice(),
                 apiTicketInput.getSeatNum(),
                 apiTicketInput.getSeatingClass(),
                 apiTicketInput.getTicketStatus(),
-                apiTicketInput.getWeightOfLuggage()
-
+                apiTicketInput.getWeightOfLuggage(),
+                apiPaymentInput.getCardNumber(),
+                apiPaymentInput.getExpMonth(),
+                apiPaymentInput.getExpYear(),
+                apiPaymentInput.getCvc(),
+                "{ticketId personId isClient flightNum dateTimeOfBooking totalPrice seatNum seatingClass ticketStatus weightOfLuggage}"
         );
 
         return query;
 
     }
 
-    public void addBooking(APITicketInput newBooking, APIPaymentInput paymentInput) {
+    public APITicket addBooking(APITicketInput newBooking, APIPaymentInput paymentInput) {
         //TODO: hier muss noch iwie payment mit rein?!
-        execute(transformToQuery(newBooking, "addBooking"), "addBooking", APITicket.class);
+        return execute(transformToQuery(newBooking, paymentInput, "addBooking"), "addBooking", APITicket.class);
     }
 
-    public APITicket readTicketById(int ticketId) {
+    public APITicket readTicketById(long ticketId) {
         String query = """
         {
             "query": "{
                 readTicketById(ticketId: %d) {
-                    ticketID
-                    personID
+                    ticketId
+                    personId
                     isClient
                     flightNum
                     dateTimeOfBooking
@@ -98,7 +106,7 @@ public class TicketAPIOperation extends AbstractAPIOperation {
     }
 
     //TODO: hier müsste APISeatingClassInput eigentlich hin?!
-    public void upgradeSeatingClass(int ticketId, String newSeatingClass) {
+    public void upgradeSeatingClass(long ticketId, String newSeatingClass) {
         String query = """
         {
             "query": "mutation {
@@ -110,7 +118,7 @@ public class TicketAPIOperation extends AbstractAPIOperation {
         execute(query, "upgradeSeatingClass", APITicket.class);
     }
 
-    public void upgradeLuggageWeight(int ticketId, int newLuggageWeight) {
+    public void upgradeLuggageWeight(long ticketId, int newLuggageWeight) {
         String query = """
         {
             "query": "mutation {

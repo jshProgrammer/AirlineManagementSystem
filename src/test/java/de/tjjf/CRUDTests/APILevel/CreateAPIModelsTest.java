@@ -201,12 +201,12 @@ public class CreateAPIModelsTest {
         APITicket.TicketStatus ticketStatus = APITicket.TicketStatus.paid;
         int weightOfLuggage = 20;
 
-        APITicket apiTicket = new APITicket(ticketId, apiClient.getClientId(), isClient, apiFlight.getFlightNum(), dateTimeOfBooking, totalPrice, seatNum, seatingClass, ticketStatus, weightOfLuggage );
+        APITicket apiTicket = new APITicket(ticketId, apiClient.getClientId(), isClient, apiFlight.getFlightNum(), dateTimeOfBooking.toString(), totalPrice, seatNum, seatingClass, ticketStatus, weightOfLuggage );
 
         assertEquals(ticketId, apiTicket.getTicketId());
         assertEquals(apiClient.getClientId(), apiTicket.getPersonId());
         assertEquals(apiFlight.getFlightNum(), apiTicket.getFlightNum());
-        assertEquals(isClient, apiTicket.isClient());
+        assertEquals(isClient, apiTicket.getIsClient());
         assertEquals(apiFlight.getFlightNum(), apiTicket.getFlightNum());
         assertEquals(dateTimeOfBooking, apiTicket.getDateTimeOfBooking());
         assertEquals(totalPrice, apiTicket.getTotalPrice());

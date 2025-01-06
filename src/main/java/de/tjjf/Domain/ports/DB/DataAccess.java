@@ -11,6 +11,6 @@ public interface DataAccess {
     interface MClientRepository extends CRUDRepository<MClient, Long>{}
     interface MEmployeeRepository extends CRUDRepository<MEmployee, Long>{}
     interface MFlightRepository extends CRUDRepository<MFlight, Long>{}
-    interface MTicketRepository extends CRUDRepository<MTicket, Integer>{}
+    interface MTicketRepository extends CRUDRepository<MTicket, Long>{}
 
 }

@@ -27,12 +27,12 @@ public class TicketService extends AuthorizedUseCase {
         return null;
     }
 
-    public MTicket readTicketById(int id) {
+    public MTicket readTicketById(long id) {
         //new CancelTicketUseCase().authorize();
         return port.readById(id);
     }
 
-    public void upgradeSeatingClass(int ticketId, MTicket.SeatingClass newSeatingClass) throws NoSeatsAvailableException {
+    public void upgradeSeatingClass(long ticketId, MTicket.SeatingClass newSeatingClass) throws NoSeatsAvailableException {
         //new CancelTicketUseCase().authorize();
         MTicket ticket = readTicketById(ticketId);
         //TODO: So ungefähr
@@ -41,7 +41,7 @@ public class TicketService extends AuthorizedUseCase {
 
     }
 
-    public void upgradeLuggageWeight(int ticketId, int newWeight) throws IllegalArgumentException {
+    public void upgradeLuggageWeight(long ticketId, int newWeight) throws IllegalArgumentException {
         //new CancelTicketUseCase().authorize();
         MTicket ticket = port.readById(ticketId);
         ticket.upgradeLuggageWeight(newWeight);

@@ -86,11 +86,11 @@ enum APITicketStatus {
 }
 
 type APITicket{
-    ticketID: Int!,
-    personID: Long!,
-    isCLient: Boolean!,
+    ticketId: Long!,
+    personId: Long!,
+    isClient: Boolean!,
     flightNum: Long!,
-    dateTimeOfBooking: Date!,
+    dateTimeOfBooking: String!,
     totalPrice: Int!,
     seatNum: Int!,
     seatingClass: APISeatingClass!,
@@ -175,26 +175,24 @@ enum APITicketStatusInput {
 }
 
 input APITicketInput{
-    ticketID: Int!,
-    personID: Long!,
+    personId: Long!,
     isClient: Boolean!,
     flightNum: Long!,
-    dateTimeOfBooking: Date!,
+    dateTimeOfBooking: String!,
     totalPrice: Int!,
     seatNum: Int!,
-    seatingClass: APISeatingClass!,
-    ticketStatus: APITicketStatus!,
+    seatingClass: APISeatingClassInput!,
+    ticketStatus: APITicketStatusInput!,
     weightOfLuggage: Int!
 }
 
 input APIPaymentInput {
     cardNumber: String!,
-    expMont: String!,
+    expMonth: String!,
     expYear: String!,
-    cvv: Int!
+    cvc: String!
 }
 
-#TODO: nochmal prüfen => eig haben InputModels wohl keine id
 
 type Query {
     #verifyPassword(employee: APIEmployeeInput, password: String): Boolean
@@ -202,8 +200,7 @@ type Query {
     readEmployeeById(employeeId: Long): APIEmployee
     readClientById(clientId: Long): APIClient
 
-    #TODO: readTicketById funktioniert noch nicht => WARUM?!
-    #readTicketById(ticketId: Int): APITicket
+    readTicketById(ticketId: Long): APITicket
 
     readAirportByCode(code: String): APIAirport
 
@@ -214,25 +211,20 @@ type Query {
 }
 
 type Mutation {
-    #TODO: überall noch wegen enums Probleme
     createFlight(flight: APIFlightInput): APIFlight
     updateFlight(flightNum: Long, flight: APIFlightInput): Void
-    #TODO: Parameter geändert => nur noch int -> prüfen, ob an allen Stellen geändert -> existiert noch garnicht?
     cancelFlight(flightNum: Long): Void
 
-    #TODO: die folgenden vier Methoden funktionieren noch nicht
     createEmployee(employee: APIEmployeeInput): APIEmployee
     updateEmployee(employeeId: Float, employee: APIEmployeeInput): Void
 
     createClient(client: APIClientInput): APIClient #funktioniert
     updateClient(clientId: Long, client: APIClientInput): Void
 
-    #TODO addBooking und upgradeSeatingClass funktionieren noch nicht!
-    #addBooking(newBooking: APITicketInput, payment: APIPaymentInput): Void
-    #upgradeSeatingClass(ticketId: Int, newSeatingClass: APISeatingClassInput): Void
-    ##upgradeLuggageWeight(ticketId: Int, newLuggageWeight: Int): Void
+    addBooking(newBooking: APITicketInput, payment: APIPaymentInput): APITicket
+    #upgradeSeatingClass(ticketId: Long, newSeatingClass: APISeatingClassInput): Void
+    #upgradeLuggageWeight(ticketId: Long, newLuggageWeight: Int): Void
 
-    #TODO: hier noch klären, ob nicht wirklich nur id ausreichend ist
     ##cancelTicketEmployee(employeeId: Int, flightNum: Int): Void
     ##cancelTicketClient(clientId: Int, flightNum: Int): Void
 

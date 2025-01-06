@@ -8,16 +8,16 @@ import java.util.Date;
 public class Ticket implements Model {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int ticketId;
+    private long ticketId;
 
    @Column(nullable=false, insertable = true, updatable = true)
     private long personId;
 
-   @ManyToOne(fetch = FetchType.LAZY)
+   @ManyToOne(fetch = FetchType.EAGER)
    @JoinColumn(name = "personId", referencedColumnName = "personId", insertable = false, updatable = false)
    private Client client;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "employee_id", referencedColumnName = "personId", insertable = false, updatable = false)
     private Employee employee;
 
@@ -32,7 +32,7 @@ public class Ticket implements Model {
     //@JoinColumn(name = "employee_id")
     //private Employee employee;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "flight_id", referencedColumnName = "flightNum")
     private Flight flight;
 
@@ -67,7 +67,7 @@ public class Ticket implements Model {
         this.maxWeightOfLuggage = maxWeightOfLuggage;
     }
 
-    public int getTicketId() {
+    public long getTicketId() {
         return ticketId;
     }
 

@@ -1,13 +1,10 @@
 package de.tjjf.Infrastructure.api.InputModels;
 
-import java.util.Date;
-
 public class APITicketInput implements APIModelInput {
 
     public APITicketInput(){}
 
-    public APITicketInput(int ticketId, long personId, boolean isClient, long flightNum, Date dateTimeOfBooking, int totalPrice, int seatNum, SeatingClass seatingClass, TicketStatus ticketStatus, int weightOfLuggage) {
-        this.ticketId = ticketId;
+    public APITicketInput(long personId, boolean isClient, long flightNum, String dateTimeOfBooking, int totalPrice, int seatNum, SeatingClass seatingClass, TicketStatus ticketStatus, int weightOfLuggage) {
         this.personId = personId;
         this.isClient = isClient;
         this.flightNum = flightNum;
@@ -25,15 +22,13 @@ public class APITicketInput implements APIModelInput {
 
     public enum TicketStatus { paid, unpaid, canceled }
 
-    private int ticketId;
-
     // in order to store clientId or employeeId
     private long personId;
     private boolean isClient;
 
     private long flightNum;
 
-    private Date dateTimeOfBooking;
+    private String dateTimeOfBooking;
 
     private int totalPrice;
 
@@ -49,12 +44,6 @@ public class APITicketInput implements APIModelInput {
         this.ticketStatus = ticketStatus;
     }
 
-    public void setTicketId(int ticketId) {
-        this.ticketId = ticketId;
-    }
-
-    public int getTicketId() { return this.ticketId; }
-
     public long getPersonId() {
         return personId;
     }
@@ -63,11 +52,11 @@ public class APITicketInput implements APIModelInput {
         this.personId = personId;
     }
 
-    public boolean isClient() {
+    public boolean getIsClient() {
         return isClient;
     }
 
-    public void setClient(boolean client) {
+    public void setIsClient(boolean client) {
         isClient = client;
     }
 
@@ -79,7 +68,7 @@ public class APITicketInput implements APIModelInput {
         this.flightNum = flightNum;
     }
 
-    public void setDateTimeOfBooking(Date dateTimeOfBooking) {
+    public void setDateTimeOfBooking(String dateTimeOfBooking) {
         this.dateTimeOfBooking = dateTimeOfBooking;
     }
 
@@ -115,7 +104,7 @@ public class APITicketInput implements APIModelInput {
         return weightOfLuggage;
     }
 
-    public Date getDateTimeOfBooking() {
+    public String getDateTimeOfBooking() {
         return dateTimeOfBooking;
     }
 

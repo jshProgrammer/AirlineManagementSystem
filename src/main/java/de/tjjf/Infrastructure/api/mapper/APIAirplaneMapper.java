@@ -27,7 +27,7 @@ public class APIAirplaneMapper extends AbstractAPIMapper<APIAirplane, MAirplane>
                 10,
                 new AirlinePortImpl().readAirlineByName(model.getBelongingAirlineName()),
                 model.getIsOperable(),
-                50
+                5000
         );
     }
 }

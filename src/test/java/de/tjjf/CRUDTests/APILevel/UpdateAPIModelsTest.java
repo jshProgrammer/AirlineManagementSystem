@@ -116,7 +116,7 @@ public class UpdateAPIModelsTest {
         APITicket.SeatingClass apiTicketSeatingClass = APITicket.SeatingClass.Economy;
         APITicket.TicketStatus apiTicketTicketStatus = APITicket.TicketStatus.paid;
         int apiTicketWeightOfLuggage = 20;
-        apiTicket = new APITicket(apiTicketTicketId, apiTicketClient.getClientId(), true, apiFlight.getFlightNum(), apiTicketDateTimeOfBooking, apiTicketTotalPrice, apiTicketSeatNum, apiTicketSeatingClass, apiTicketTicketStatus, apiTicketWeightOfLuggage);
+        apiTicket = new APITicket(apiTicketTicketId, apiTicketClient.getClientId(), true, apiFlight.getFlightNum(), apiTicketDateTimeOfBooking.toString(), apiTicketTotalPrice, apiTicketSeatNum, apiTicketSeatingClass, apiTicketTicketStatus, apiTicketWeightOfLuggage);
     }
 
     @Test

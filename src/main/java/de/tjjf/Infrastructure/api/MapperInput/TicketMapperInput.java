@@ -9,9 +9,8 @@ public class TicketMapperInput {
         APITicketInput.SeatingClass seatingClass = APITicketInput.SeatingClass.valueOf(ticket.getSeatingClass().name());
         APITicketInput.TicketStatus ticketStatus = APITicketInput.TicketStatus.valueOf(ticket.getTicketStatus().name());
         return new APITicketInput(
-                ticket.getTicketId(),
                 ticket.getPersonId(),
-                ticket.isClient(),
+                ticket.getIsClient(),
                 ticket.getFlightNum(),
                 ticket.getDateTimeOfBooking(),
                 ticket.getTotalPrice(),
@@ -22,13 +21,13 @@ public class TicketMapperInput {
         );
     }
 
-    public APITicket toDomain(APITicketInput ticket) {
+    public APITicket toDomain(Long ticketId, APITicketInput ticket) {
         APITicket.SeatingClass seatingClass = APITicket.SeatingClass.valueOf(ticket.getSeatingClass().name());
         APITicket.TicketStatus ticketStatus = APITicket.TicketStatus.valueOf(ticket.getTicketStatus().name());
         return new APITicket(
-                ticket.getTicketId(),
+                ticketId,
                 ticket.getPersonId(),
-                ticket.isClient(),
+                ticket.getIsClient(),
                 ticket.getFlightNum(),
                 ticket.getDateTimeOfBooking(),
                 ticket.getTotalPrice(),
