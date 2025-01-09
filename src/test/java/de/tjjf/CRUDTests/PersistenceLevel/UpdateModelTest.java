@@ -112,14 +112,14 @@ public class UpdateModelTest {
         new FlightCreateImpl(flight).execute();
 
         ticket = new Ticket(
-                client.getPersonId(),
                 flight,
                 new Date(),
                 300,
                 15,
                 "Economy",
                 "Active",
-                20
+                20,
+                client
         );
         new TicketCreateImpl(ticket).execute();
     }

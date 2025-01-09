@@ -13,10 +13,13 @@ public class MFlightRepositoryImpl implements DataAccess.MFlightRepository {
     public MFlight create(MFlight flight) {
         // auch das funktioniert noch:
         System.out.println("TEST.z4: " + new FlightMapper().toEntity(flight).getCopilot().getFirstName());
+        //TODO: es liegt an Flightmapper().toEntity, der die ids zu 0 plattmacht
+        System.out.println("TEST.z4: " + flight.getCopilot().getEmployeeId());
+        System.out.println("TEST.z4: " + new FlightMapper().toEntity(flight).getCopilot().getPersonId());
 
-        //TODO: das problem liegt in flightcreateimpl => ???!!!
         System.out.println("Test.z5: " + new FlightCreateImpl(new FlightMapper().toEntity(flight)).execute().model);
-
+        //TODO: model funktioniert, aber copilot und pilot sind null
+        System.out.println("Test.z6: " + new FlightCreateImpl(new FlightMapper().toEntity(flight)).execute().model.getStatus());
 
         return new FlightMapper().toDomain(new FlightCreateImpl(new FlightMapper().toEntity(flight)).execute().model);
     }

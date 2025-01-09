@@ -15,7 +15,10 @@ import java.util.List;
 public class PersonMapper {
 
     public MPerson toDomain(Employee employee){
+
         List<MTicket> tickets = new ArrayList<>();
+        System.out.println("TESTXXX" + tickets.size());
+        System.out.println("TESTXXX" + employee);
         for(Ticket ticket : employee.getTickets()){
             tickets.add(new TicketMapper().toDomain(new TicketReadImpl(ticket.getTicketId()).execute().model));
         }

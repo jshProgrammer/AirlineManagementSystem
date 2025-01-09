@@ -262,17 +262,15 @@ public class APIIntegrationTests {
 
         APIEmployeeInput apiEmployeeInput = new APIEmployeeInput("Jan", "M", "Kowalski", date.toString() , "+4915112345678", new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"), "test@test.de", apiAirlineInput.getName());
         APIEmployee apiEmployee = new EmployeeAPIOperation().createEmployee(apiEmployeeInput);
-        System.out.println("createId: " + apiEmployee.getEmployeeId());
-        APIEmployee employeeReadFromDB = new EmployeeAPIOperation().readEmployeeById(apiEmployee.getEmployeeId());
-        System.out.println("readId: " + employeeReadFromDB.getEmployeeId());
+
 
         //TODO
-        APIFlightInput apiFlightInput = new APIFlightInput(apiAirplaneInput.getSerialNum(), dateTime.toString(), apiAirportInput.getCode(), dateTime.toString(), apiAirportInput.getCode(), dateTime.toString(), APIFlightInput.FlightStatus.scheduled, 120, employeeReadFromDB.getEmployeeId(), employeeReadFromDB.getEmployeeId());
+        APIFlightInput apiFlightInput = new APIFlightInput(apiAirplaneInput.getSerialNum(), dateTime.toString(), apiAirportInput.getCode(), dateTime.toString(), apiAirportInput.getCode(), dateTime.toString(), APIFlightInput.FlightStatus.scheduled, 120, apiEmployee.getEmployeeId(), apiEmployee.getEmployeeId());
         APIFlight apiFlight = new FlightAPIOperation().createFlight(apiFlightInput);
 
         System.out.println("flightNum" + apiFlight.getFlightNum());
 
-        APIFlight flightReadFromDB = new FlightAPIOperation().readFlightByFlightNum(apiFlight.getFlightNum());
+       APIFlight flightReadFromDB = new FlightAPIOperation().readFlightByFlightNum(apiFlight.getFlightNum());
 
         System.out.println("flightNum" + flightReadFromDB.getFlightNum());
 
@@ -282,11 +280,14 @@ public class APIIntegrationTests {
         //assertEquals(apiFlightInput.getArrivalDateTime(), flightReadFromDB.getArrivalDateTime());
         assertEquals(apiFlightInput.getArrivalAirportCode(), flightReadFromDB.getArrivalAirportCode());
         //assertEquals(apiFlightInput.getBoardingTime(), flightReadFromDB.getBoardingTime());
-        //assertEquals(apiFlightInput.getStatus(), flightReadFromDB.getStatus());
+        assertEquals(apiFlightInput.getStatus().toString(), flightReadFromDB.getStatus().toString());
         assertEquals(apiFlightInput.getDuration(), flightReadFromDB.getDuration());
+        assertEquals(apiFlightInput.getPilotId(), flightReadFromDB.getPilotId());
+        assertEquals(apiFlightInput.getCopilotId(), flightReadFromDB.getCopilotId());
 
-        /*new FlightDeleteImpl(flightReadFromDB.getFlightNum()).execute();
-        new AirplaneDeleteImpl(apiAirplaneInput.getSerialNum()).execute();
+        new FlightDeleteImpl(apiFlight.getFlightNum()).execute();
+        //TODO: Fragen: warum können wir das jetzt nicht löschen
+        /*new AirplaneDeleteImpl(apiAirplaneInput.getSerialNum()).execute();
         new EmployeeDeleteImpl(apiEmployee.getEmployeeId()).execute();
         new AirlineDeleteImpl(apiAirlineInput.getName()).execute();
         new AirportDeleteImpl(apiAirportInput.getCode()).execute();*/
@@ -321,7 +322,10 @@ public class APIIntegrationTests {
         APIPaymentInput mp = new APIPaymentInput("4242424242424242", "12", "34", "567");
         APITicket apiTicket = new TicketAPIOperation().addBooking(apiTicketInput, mp);
 
-        //APITicket ticketReadFromDB = new TicketAPIOperation().readTicketById(apiTicket.getTicketId());
+        //TODO: Unexpected error occured
+        /*APITicket ticketReadFromDB = new TicketAPIOperation().readTicketById(apiTicket.getTicketId());
+
+        assertEquals(ticketReadFromDB.getFlightNum(), apiFlight.getFlightNum());*/
     }
 
 

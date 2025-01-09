@@ -269,7 +269,7 @@ public class CreateModelTest {
         String ticketStatus = "Confirmed";
         int weightOfLuggage = 20;
 
-        Ticket ticket = new Ticket(client.getPersonId(), flight, bookingDate, totalPrice, seatNum, seatingClass, ticketStatus, weightOfLuggage);
+        Ticket ticket = new Ticket(flight, bookingDate, totalPrice, seatNum, seatingClass, ticketStatus, weightOfLuggage, client);
         Ticket ticketReturned = new TicketCreateImpl(ticket).execute().model;
 
         assertNotNull(ticketReturned);

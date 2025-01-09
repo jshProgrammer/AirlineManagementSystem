@@ -6,7 +6,7 @@ import de.tjjf.Infrastructure.persistence.results.NoContentResult;
 import jakarta.transaction.Transactional;
 
 @Transactional
-public class AbstractCreateOperation<T extends Model> extends AbstractDatabaseOperation<ModelResult<T>> {
+public abstract class AbstractCreateOperation<T extends Model> extends AbstractDatabaseOperation<ModelResult<T>> {
 
     private T modelToPersist;
 
@@ -17,7 +17,14 @@ public class AbstractCreateOperation<T extends Model> extends AbstractDatabaseOp
 
     @Override
     public ModelResult<T> run() {
+        prePersist();
         em.persist(this.modelToPersist);
+        postPersist();
         return new ModelResult<T>(modelToPersist);
     }
+
+    //TODO: noch einbinden
+    protected void prePersist() {}
+
+    protected void postPersist() {}
 }

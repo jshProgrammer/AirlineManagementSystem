@@ -69,6 +69,11 @@ public class Employee implements Model {
         this.hireDate = hireDate;
     }
 
+    public Employee(long personId, String firstName, String middleName, String lastName, Date dateOfBirth, String phonenumber, String address, String email, List<Ticket> tickets, int salary, String position, Airline airline, Date hireDate) {
+        this(firstName, middleName, lastName, dateOfBirth, phonenumber, address, email, tickets, salary, position, airline, hireDate);
+        this.personId = personId;
+    }
+
     public long getPersonId() {
         return personId;
     }

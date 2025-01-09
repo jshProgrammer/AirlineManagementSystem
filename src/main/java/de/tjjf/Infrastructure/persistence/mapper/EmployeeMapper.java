@@ -35,6 +35,30 @@ public class EmployeeMapper extends Mapper<MEmployee, Employee>{
         );
     }
 
+    public Employee toEntityWithId(MEmployee mEmployee){
+        List<Ticket> tickets = new ArrayList<>();
+
+        for(MTicket mTicket : mEmployee.getTickets()){
+            tickets.add(new TicketMapper().toEntity(mTicket));
+        }
+
+        return new Employee(
+                mEmployee.getPersonId(),
+                mEmployee.getFirstName(),
+                mEmployee.getMiddleNames(),
+                mEmployee.getLastName(),
+                mEmployee.getDateOfBirth(),
+                mEmployee.getPhonenumber(),
+                new AddressMapper().toEntity(mEmployee.getAddress()),
+                mEmployee.getEmail(),
+                tickets,
+                mEmployee.getSalary(),
+                mEmployee.getPosition(),
+                new AirlineMapper().toEntity(mEmployee.getAirline()),
+                mEmployee.getHireDate()
+        );
+    }
+
     public MEmployee toDomain(Employee employee){
         MPerson person = new PersonMapper().toDomain(employee);
         return new MEmployee(

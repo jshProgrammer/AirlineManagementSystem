@@ -16,8 +16,8 @@ public class FlightMapper extends Mapper<MFlight, Flight> {
                 mFlight.getBoardingTime(),
                 mFlight.getStatus().name(),
                 mFlight.getDuration(),
-                new EmployeeMapper().toEntity(mFlight.getPilot()),
-                new EmployeeMapper().toEntity(mFlight.getCopilot())
+                new EmployeeMapper().toEntityWithId(mFlight.getPilot()),
+                new EmployeeMapper().toEntityWithId(mFlight.getCopilot())
         );
     }
 

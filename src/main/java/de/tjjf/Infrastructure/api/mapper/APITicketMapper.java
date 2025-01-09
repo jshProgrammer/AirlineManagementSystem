@@ -29,6 +29,11 @@ public class APITicketMapper extends AbstractAPIMapper<APITicket, MTicket>{
 
     @Override
     public MTicket toDomainEntity(APITicket apiTicket){
+        //TODO: macht hier vlt. das auslesen vom Client wieder Probleme => nein, system out danach funktioniert
+        Long test = apiTicket.getIsClient() ? new ClientPortImpl().readClientById(apiTicket.getPersonId()).getPersonId() : new EmployeePortImpl().readEmployeeById(apiTicket.getPersonId()).getEmployeeId();
+        System.out.println("TESTZZZ reading client/employee funktioniert");
+        //TODO: ja auch die id funktioniert korrekt
+        System.out.println("funktioniert die id: " + test);
         return new MTicket(
                 apiTicket.getTicketId(),
                 apiTicket.getIsClient() ? new ClientPortImpl().readClientById(apiTicket.getPersonId()) : new EmployeePortImpl().readEmployeeById(apiTicket.getPersonId()),

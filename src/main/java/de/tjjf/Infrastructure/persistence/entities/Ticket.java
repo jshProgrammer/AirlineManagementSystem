@@ -10,14 +10,11 @@ public class Ticket implements Model {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long ticketId;
 
-   @Column(nullable=false, insertable = true, updatable = true)
-    private long personId;
-
-   @ManyToOne(fetch = FetchType.EAGER)
+   @ManyToOne(fetch = FetchType.EAGER, optional = true)
    @JoinColumn(name = "personId", referencedColumnName = "personId", insertable = false, updatable = false)
    private Client client;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, optional = true)
     @JoinColumn(name = "employee_id", referencedColumnName = "personId", insertable = false, updatable = false)
     private Employee employee;
 
@@ -56,8 +53,7 @@ public class Ticket implements Model {
 
     public Ticket(){}
 
-    public Ticket(long personId, Flight flight, Date dateTimeOfBooking, int totalPrice, int seatNum, String seatingClass, String ticketStatus, int maxWeightOfLuggage) {
-        this.personId = personId;
+    private Ticket(Flight flight, Date dateTimeOfBooking, int totalPrice, int seatNum, String seatingClass, String ticketStatus, int maxWeightOfLuggage) {
         this.flight = flight;
         this.dateTimeOfBooking = dateTimeOfBooking;
         this.totalPrice = totalPrice;
@@ -66,6 +62,17 @@ public class Ticket implements Model {
         this.ticketStatus = ticketStatus;
         this.maxWeightOfLuggage = maxWeightOfLuggage;
     }
+
+    public Ticket(Flight flight, Date dateTimeOfBooking, int totalPrice, int seatNum, String seatingClass, String ticketStatus, int maxWeightOfLuggage, Client client) {
+        this(flight, dateTimeOfBooking, totalPrice, seatNum, seatingClass, ticketStatus, maxWeightOfLuggage);
+        this.client = client;
+    }
+
+    public Ticket(Flight flight, Date dateTimeOfBooking, int totalPrice, int seatNum, String seatingClass, String ticketStatus, int maxWeightOfLuggage, Employee employee) {
+        this(flight, dateTimeOfBooking, totalPrice, seatNum, seatingClass, ticketStatus, maxWeightOfLuggage);
+        this.employee = employee;
+    }
+
 
     public long getTicketId() {
         return ticketId;
@@ -93,14 +100,6 @@ public class Ticket implements Model {
 
     public Flight getFlightNum() {
         return flight;
-    }
-
-    public long getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(long personId) {
-        this.personId = personId;
     }
 
     public Flight getFlight() {
