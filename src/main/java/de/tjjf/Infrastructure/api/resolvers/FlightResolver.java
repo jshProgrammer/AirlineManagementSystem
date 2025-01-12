@@ -20,11 +20,7 @@ public class FlightResolver implements GraphQLQueryResolver, GraphQLMutationReso
 
     public APIFlight createFlight(APIFlightInput apiFlightInput) {
         APIFlight apiFlight = new FlightMapperInput().toDomain(0L, apiFlightInput);
-        // auch das funktioniert noch
-        System.out.println("TEST.Z2+ " + new APIFlightMapper().toDomainEntity(apiFlight).getCopilot().getFirstName());
 
-        //TODO: createFlight-Methode macht probleme
-        System.out.println("Test.z3" + new FlightPortImpl().createFlight(new APIFlightMapper().toDomainEntity(apiFlight)));
         return new APIFlightMapper().toAPIEntity(new FlightPortImpl().createFlight(new APIFlightMapper().toDomainEntity(apiFlight)));
     }
 
