@@ -11,6 +11,8 @@ import de.tjjf.Infrastructure.persistence.mapper.TicketMapper;
 public class MTicketRepositoryImpl implements DataAccess.MTicketRepository {
     @Override
     public MTicket create(MTicket entity) {
+        System.out.println("TESTEST10 geht bis hierhin");
+        System.out.println("TESTEST11: " + new TicketMapper().toEntity(entity).getClient().getPersonId());
         return new TicketMapper().toDomain(new TicketCreateImpl(new TicketMapper().toEntity(entity)).execute().model);
     }
 

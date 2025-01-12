@@ -10,15 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClientMapper extends Mapper<MClient, Client>{
-    public Client toEntity(MClient mClient){
-        
-        List<Ticket> tickets = new ArrayList<>();
-        
-        for(MTicket mTicket : mClient.getTickets()){
-            tickets.add(new TicketMapper().toEntity(mTicket));
-        }
-        
-        return new Client(
+    public Client toEntity(MClient mClient) {
+        return toEntity(mClient, true);
+    }
+
+    public Client toEntity(MClient mClient, boolean mapTickets){
+        Client client = new Client(
                 //mClient.getPersonId(),
                 mClient.getFirstName(),
                 mClient.getMiddleNames(),
@@ -27,9 +24,54 @@ public class ClientMapper extends Mapper<MClient, Client>{
                 mClient.getPhonenumber(),
                 AddressMapper.toEntity(mClient.getAddress()),
                 mClient.getEmail(),
-                tickets,
+                null,
                 mClient.isBusinessClient()
         );
+
+
+        if (mapTickets) {
+            List<Ticket> tickets = new ArrayList<>();
+            for (MTicket mTicket : mClient.getTickets()) {
+                Ticket ticket = new TicketMapper().toEntity(mTicket);
+                ticket.setClient(client);
+                tickets.add(ticket);
+            }
+            client.setTickets(tickets);
+        }
+
+        return client;
+    }
+
+    public Client toEntityWithId(MClient mClient) {
+        return toEntityWithId(mClient, true);
+    }
+
+    public Client toEntityWithId(MClient mClient, boolean mapTickets) {
+        Client client = new Client(
+                mClient.getPersonId(),
+                mClient.getFirstName(),
+                mClient.getMiddleNames(),
+                mClient.getLastName(),
+                mClient.getDateOfBirth(),
+                mClient.getPhonenumber(),
+                AddressMapper.toEntity(mClient.getAddress()),
+                mClient.getEmail(),
+                null,
+                mClient.isBusinessClient()
+        );
+
+        if (mapTickets) {
+            List<Ticket> tickets = new ArrayList<>();
+            for (MTicket mTicket : mClient.getTickets()) {
+                Ticket ticket = new TicketMapper().toEntity(mTicket);
+                ticket.setClient(client);
+                tickets.add(ticket);
+            }
+            client.setTickets(tickets);
+        }
+
+        return client;
+        //return this.toEntity(mClient, true);
     }
 
     public MClient toDomain(Client client){

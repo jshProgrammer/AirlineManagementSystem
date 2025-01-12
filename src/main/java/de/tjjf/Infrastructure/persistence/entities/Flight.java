@@ -70,6 +70,11 @@ public class Flight implements Model {
         this.copilot = copilot;
     }
 
+    public Flight(Long flightNum, Airplane airplane, Date departureDateTime, Airport departureAirport, Date arrivalDateTime, Airport arrivalAirport, Date boardingTime, String status, int duration, Employee pilot, Employee copilot) {
+        this(airplane, departureDateTime, departureAirport, arrivalDateTime, arrivalAirport, boardingTime, status, duration, pilot, copilot);
+        this.flightNum = flightNum;
+    }
+
     public long getFlightNum() {
         return flightNum;
     }

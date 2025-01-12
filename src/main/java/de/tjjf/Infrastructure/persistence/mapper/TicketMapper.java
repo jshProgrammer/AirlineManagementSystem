@@ -17,28 +17,25 @@ import de.tjjf.Infrastructure.persistence.entities.Ticket;
 public class TicketMapper extends Mapper<MTicket, Ticket> {
 
     public Ticket toEntity(MTicket mTicket){
-        if(mTicket.getPerson().getClass() == MClient.class) {
-            return new Ticket(
-                    new FlightMapper().toEntity(mTicket.getFlight()),
-                    mTicket.getDateTimeOfBooking(),
-                    mTicket.getTotalPrice(),
-                    mTicket.getSeatNum(),
-                    mTicket.getSeatingClass().name(),
-                    mTicket.getTicketStatus().name(),
-                    mTicket.getWeightOfLuggage(),
-                    new ClientMapper().toEntity((MClient) mTicket.getPerson())
-            );
-        }
-        return new Ticket(
-                new FlightMapper().toEntity(mTicket.getFlight()),
+
+        Ticket ticket = new Ticket(
+                new FlightMapper().toEntityWithFlightNum(mTicket.getFlight()),
                 mTicket.getDateTimeOfBooking(),
                 mTicket.getTotalPrice(),
                 mTicket.getSeatNum(),
                 mTicket.getSeatingClass().name(),
                 mTicket.getTicketStatus().name(),
-                mTicket.getWeightOfLuggage(),
-                new EmployeeMapper().toEntity((MEmployee) mTicket.getPerson())
+                mTicket.getWeightOfLuggage()
         );
+
+
+        if (mTicket.getPerson() instanceof MClient) {
+            ticket.setClient(new ClientMapper().toEntityWithId((MClient) mTicket.getPerson(), false));
+        } else if (mTicket.getPerson() instanceof MEmployee) {
+            ticket.setEmployee(new EmployeeMapper().toEntityWithId((MEmployee) mTicket.getPerson(), false));
+        }
+
+        return ticket;
     }
 
     public MTicket toDomain(Ticket booking){
@@ -49,7 +46,7 @@ public class TicketMapper extends Mapper<MTicket, Ticket> {
         } else {
             mPerson = new PersonMapper().toDomain(new ClientReadImpl(booking.getClient().getPersonId()).execute().model);
         }
-
+        System.out.println("Hallowerda");
         Flight flight = new FlightReadImpl(booking.getFlight().getFlightNum()).execute().model;
 
         return new MTicket(

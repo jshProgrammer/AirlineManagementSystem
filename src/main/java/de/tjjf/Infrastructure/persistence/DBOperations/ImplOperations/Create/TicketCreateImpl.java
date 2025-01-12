@@ -3,6 +3,7 @@ package de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Create;
 import de.tjjf.Infrastructure.persistence.DBOperations.AbstractOperations.AbstractCreateOperation;
 import de.tjjf.Infrastructure.persistence.entities.Client;
 import de.tjjf.Infrastructure.persistence.entities.Employee;
+import de.tjjf.Infrastructure.persistence.entities.Flight;
 import de.tjjf.Infrastructure.persistence.entities.Ticket;
 
 public class TicketCreateImpl extends AbstractCreateOperation<Ticket> {
@@ -14,21 +15,12 @@ public class TicketCreateImpl extends AbstractCreateOperation<Ticket> {
     }
 
     protected void prePersist() {
-        Client client = null;
-        Employee employee = null;
-
-        if(modelToPersist.getEmployee() == null) {
-            client = em.find(Client.class, modelToPersist.getClient().getPersonId());
-        } else {
-            employee = em.find(Employee.class, modelToPersist.getEmployee().getPersonId());
+        System.out.println("TESTEST30: " + modelToPersist.getFlight().getFlightNum());
+        Flight managedFlight = em.find(Flight.class, modelToPersist.getFlight().getFlightNum());
+        if (managedFlight == null) {
+            throw new RuntimeException("Flight not found");
         }
-
-        if (client == null && employee == null) {
-            throw new RuntimeException("Pilot with ID " + modelToPersist.getClient().getPersonId() + " not found");
-        }
-
-        if(client != null) modelToPersist.setClient(client);
-        else modelToPersist.setEmployee(employee);
+        modelToPersist.setFlightNum(managedFlight);
     }
 
     protected void postPersist() {

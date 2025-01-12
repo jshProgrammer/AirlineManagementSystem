@@ -11,11 +11,11 @@ public class Ticket implements Model {
     private long ticketId;
 
    @ManyToOne(fetch = FetchType.EAGER, optional = true)
-   @JoinColumn(name = "personId", referencedColumnName = "personId", insertable = false, updatable = false)
+   @JoinColumn(name = "client_id", referencedColumnName = "personId", insertable = false, updatable = false, nullable = true)
    private Client client;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = true)
-    @JoinColumn(name = "employee_id", referencedColumnName = "personId", insertable = false, updatable = false)
+    @JoinColumn(name = "employee_id", referencedColumnName = "personId", insertable = false, updatable = false, nullable = true)
     private Employee employee;
 
     //@ManyToOne
@@ -52,8 +52,8 @@ public class Ticket implements Model {
     private int maxWeightOfLuggage;
 
     public Ticket(){}
-
-    private Ticket(Flight flight, Date dateTimeOfBooking, int totalPrice, int seatNum, String seatingClass, String ticketStatus, int maxWeightOfLuggage) {
+//TODO: hier noch ne andere lösung wegen public finden
+    public Ticket(Flight flight, Date dateTimeOfBooking, int totalPrice, int seatNum, String seatingClass, String ticketStatus, int maxWeightOfLuggage) {
         this.flight = flight;
         this.dateTimeOfBooking = dateTimeOfBooking;
         this.totalPrice = totalPrice;
