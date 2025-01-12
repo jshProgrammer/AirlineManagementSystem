@@ -81,7 +81,7 @@ public class TicketAPIOperation extends AbstractAPIOperation {
     }
 
     //TODO: hier erst noch besprechen, ob wirklich id ausreicht oder ganzes input objekt nötig
-    public void cancelEmployeeTicket(int employeeId, int flightNum) {
+    public void cancelEmployeeTicket(long employeeId, int flightNum) {
         String query = """
         {
             "query": "mutation {
@@ -93,14 +93,14 @@ public class TicketAPIOperation extends AbstractAPIOperation {
         execute(query, "cancelEmployeeTicket", APITicket.class);
     }
 
-    public void cancelClientTicket(int clientId, int flightNum) {
+    public void cancelClientTicket(long personId, int flightNum) {
         String query = """
         {
             "query": "mutation {
                 cancelClientTicket(clientId: %d, flightNum: %d)
             }"
         }
-        """.formatted(clientId, flightNum);
+        """.formatted(personId, flightNum);
 
         execute(query, "cancelClientTicket", APITicket.class);
     }
