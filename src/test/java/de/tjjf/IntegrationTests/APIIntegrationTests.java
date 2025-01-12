@@ -285,7 +285,7 @@ public class APIIntegrationTests {
         assertEquals(apiFlightInput.getPilotId(), flightReadFromDB.getPilotId());
         assertEquals(apiFlightInput.getCopilotId(), flightReadFromDB.getCopilotId());
 
-        new FlightDeleteImpl(apiFlight.getFlightNum()).execute();
+        new FlightDeleteImpl(flightReadFromDB.getFlightNum()).execute();
 
         //TODO: Fragen: warum können wir das jetzt nicht löschen
         new AirplaneDeleteImpl(apiAirplaneInput.getSerialNum()).execute();

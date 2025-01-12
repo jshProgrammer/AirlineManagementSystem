@@ -29,9 +29,8 @@ public class APIFlightMapper extends AbstractAPIMapper<APIFlight, MFlight> {
     @Override
     public MFlight toDomainEntity(APIFlight apiFlight){
         //TODO: vermtulich probleme weil DateTime und nicht Date?!
-        System.out.println("TEST.X " + new EmployeePortImpl().readEmployeeById(apiFlight.getPilotId()).getFirstName());
+
         // auch das auslesen mit readEmployeeById funktioniert noch komplett richtig
-        System.out.println("TEST.X2 " + new EmployeePortImpl().readEmployeeById(apiFlight.getCopilotId()).getFirstName());
         return new MFlight(
                 apiFlight.getFlightNum(),
                 new AirplanePortImpl().readAirplaneBySerialNum(apiFlight.getAirplaneSerialNum()),
