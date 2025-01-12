@@ -55,6 +55,7 @@ public class MTicket implements MModel {
     public void upgradeSeatingClass(SeatingClass newSeatingClass) throws NoSeatsAvailableException {
         if(isSeatingUpdateAvailable(newSeatingClass)) {
             this.seatingClass = newSeatingClass;
+
         } else {
             throw new NoSeatsAvailableException("Seat could not be upgraded");
         }

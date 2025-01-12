@@ -15,7 +15,6 @@ public class APIAirplaneMapper extends AbstractAPIMapper<APIAirplane, MAirplane>
         );
     }
 
-    //TODO: fragen: sollen wir die APIAirplane doch so aufblasen, dass wieder gleich oder können wir hier einfach Default werte setzen
     @Override
     public MAirplane toDomainEntity(APIAirplane model){
         return new MAirplane(

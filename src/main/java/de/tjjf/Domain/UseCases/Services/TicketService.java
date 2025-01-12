@@ -21,9 +21,11 @@ public class TicketService extends AuthorizedUseCase {
     //TODO: Muss hier nicht AddBooking Use Case dranhängen
     public MTicket addBooking(MTicket newBooking, MPayment mPayment) {
         //new CancelTicketUseCase().authorize();
+        System.out.println("TESTEST1");
         if(AddBookingUseCase.addBooking(newBooking, mPayment)){
             return port.create(newBooking);
         }
+        System.out.println("TESTEST2");
         return null;
     }
 

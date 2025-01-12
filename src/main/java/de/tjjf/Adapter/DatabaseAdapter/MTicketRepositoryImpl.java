@@ -11,12 +11,6 @@ import de.tjjf.Infrastructure.persistence.mapper.TicketMapper;
 public class MTicketRepositoryImpl implements DataAccess.MTicketRepository {
     @Override
     public MTicket create(MTicket entity) {
-        System.out.println("TESTXYZ");
-        //TODO: das problem liegt entweder im mapper oder in ticketCreateImpl => vermutlichn im mapper
-        //TODO: nach mapper sind client und employee null?!
-        System.out.println("TESTXYZ1.5" + new TicketMapper().toEntity(entity).getClient());
-        System.out.println("TESTXYZ1.5" + new TicketMapper().toEntity(entity).getEmployee());
-        System.out.println("TESTXYZ2" + new TicketCreateImpl(new TicketMapper().toEntity(entity)).execute());
         return new TicketMapper().toDomain(new TicketCreateImpl(new TicketMapper().toEntity(entity)).execute().model);
     }
 

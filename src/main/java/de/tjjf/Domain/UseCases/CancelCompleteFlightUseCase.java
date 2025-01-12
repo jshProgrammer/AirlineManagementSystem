@@ -14,6 +14,7 @@ public class CancelCompleteFlightUseCase extends AuthorizedUseCase {
         
         flight.setStatus(MFlight.FlightStatus.canceled);
         EmailSender.sendCancelationMail(flight);
+        //TODO: hier auch noch Datenbank update
 
     }
 }

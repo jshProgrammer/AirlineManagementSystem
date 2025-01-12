@@ -119,6 +119,7 @@
             <artifactId>graphql-java-tools</artifactId>
             <version>13.1.1</version>
         </dependency>
+        <!-- TODO: hier nochmal prüfen, ob wir die wirklich brauchen -->
         <dependency>
             <groupId>com.graphql-java-kickstart</groupId>
             <artifactId>graphql-spring-boot-starter</artifactId>

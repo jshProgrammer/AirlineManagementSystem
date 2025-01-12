@@ -12,6 +12,7 @@ public class CancelTicketUseCase extends AuthorizedUseCase {
     }
 
     public static void cancelTicket(MPerson person, int flightnum) throws UnauthorizedException {
+        //10.01.2025: Gespräch mit Prof. Dr. Braun: Authorization nicht notwendig da Error Weitergabe von Resolver zu Client in GraphQL kaum umsetzbar
         //new CancelTicketUseCase().authorize();
 
         for (MTicket ticket : person.getTickets()) {
@@ -22,5 +23,6 @@ public class CancelTicketUseCase extends AuthorizedUseCase {
                 ticket.setTicketStatus(MTicket.TicketStatus.canceled);
             }
         }
+        //TODO: hier auch noch Datenbank update
     }
 }
