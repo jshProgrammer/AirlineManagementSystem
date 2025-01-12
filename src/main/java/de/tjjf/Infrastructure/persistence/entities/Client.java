@@ -50,8 +50,13 @@ public class Client implements Model {
         this.phonenumber = phonenumber;
         this.address = address;
         this.email = email;
-        this.tickets = tickets;
+        if(tickets != null) {this.tickets = tickets;}
         this.isBusinessClient = isBusinessClient;
+    }
+
+    public Client(Long personId, String firstName, String middleName, String lastName, Date dateOfBirth, String phonenumber, String address, String email, List<Ticket> tickets, boolean isBusinessClient) {
+        this(firstName, middleName, lastName, dateOfBirth, phonenumber, address, email, tickets, isBusinessClient);
+        this.personId = personId;
     }
 
     public long getPersonId() {

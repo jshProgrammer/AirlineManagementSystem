@@ -21,6 +21,24 @@ public class FlightMapper extends Mapper<MFlight, Flight> {
         );
     }
 
+    public Flight toEntityWithFlightNum(MFlight mFlight){
+        return new Flight(
+                mFlight.getFlightNum(),
+                new AirplaneMapper().toEntity(mFlight.getAirplane()),
+                mFlight.getDepartureDateTime(),
+                new AirportMapper().toEntity(mFlight.getDepartureAirport()),
+                mFlight.getArrivalDateTime(),
+                new AirportMapper().toEntity(mFlight.getArrivalAirport()),
+                mFlight.getBoardingTime(),
+                mFlight.getStatus().name(),
+                mFlight.getDuration(),
+                new EmployeeMapper().toEntityWithId(mFlight.getPilot()),
+                new EmployeeMapper().toEntityWithId(mFlight.getCopilot())
+        );
+    }
+
+
+
     public MFlight toDomain(Flight flight){
         return new MFlight(
                 flight.getFlightNum(),

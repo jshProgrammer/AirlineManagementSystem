@@ -23,6 +23,8 @@ public class TicketService extends AuthorizedUseCase {
         //new CancelTicketUseCase().authorize();
         System.out.println("TESTEST1");
         if(AddBookingUseCase.addBooking(newBooking, mPayment)){
+            System.out.println("ASFKHALKSFHAKLHF");
+            //Port Create macht Probleme
             return port.create(newBooking);
         }
         System.out.println("TESTEST2");
