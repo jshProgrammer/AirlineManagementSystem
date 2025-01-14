@@ -1,11 +1,11 @@
 package de.tjjf.Adapter.APIAdapter;
 
-import de.tjjf.Adapter.DatabaseAdapter.MAirlineRepositoryImpl;
 import de.tjjf.Adapter.DatabaseAdapter.MFlightRepositoryImpl;
-import de.tjjf.Domain.UseCases.Services.AirlineService;
 import de.tjjf.Domain.UseCases.Services.FlightService;
 import de.tjjf.Domain.models.MFlight;
 import de.tjjf.Domain.ports.API.FlightPort;
+
+import java.util.List;
 
 public class FlightPortImpl implements FlightPort {
     @Override
@@ -25,5 +25,10 @@ public class FlightPortImpl implements FlightPort {
 
     public void cancelFlight(MFlight flight) {
         new FlightService(new MFlightRepositoryImpl()).cancelFlight(flight);
+    }
+
+    @Override
+    public List<MFlight> getAllFlights(int pageNumber, int pageSize) {
+        return new FlightService(new MFlightRepositoryImpl()).getAllFlights(pageNumber, pageSize);
     }
 }

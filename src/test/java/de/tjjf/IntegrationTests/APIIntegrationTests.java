@@ -1,21 +1,15 @@
 package de.tjjf.IntegrationTests;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import de.tjjf.Domain.models.MPayment;
 import de.tjjf.Infrastructure.Client.ClientOperations.APIOperations.*;
 import de.tjjf.Infrastructure.Client.GraphQLClient;
 import de.tjjf.Infrastructure.api.InputModels.*;
-import de.tjjf.Infrastructure.api.MapperInput.EmployeeMapperInput;
 import de.tjjf.Infrastructure.api.models.*;
-import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Create.AirportCreateImpl;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Delete.*;
-import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Read.AirportReadImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 
 public class APIIntegrationTests {
 
@@ -287,8 +281,6 @@ public class APIIntegrationTests {
         assertEquals(apiFlightInput.getCopilotId(), flightReadFromDB.getCopilotId());
 
         new FlightDeleteImpl(flightReadFromDB.getFlightNum()).execute();
-
-        //TODO: Fragen: warum können wir das jetzt nicht löschen
         new AirplaneDeleteImpl(apiAirplaneInput.getSerialNum()).execute();
         new EmployeeDeleteImpl(apiEmployee.getEmployeeId()).execute();
         new AirlineDeleteImpl(apiAirlineInput.getName()).execute();
@@ -297,7 +289,59 @@ public class APIIntegrationTests {
 
     //TODO: FlightTest update
 
-    //TODO: TicketTest
+    @Test
+    void getAllFlightsWithPagingTest() throws Exception {
+        APIAirlineInput apiAirlineInput = new APIAirlineInput("Test" + System.currentTimeMillis(), date, new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"), "02341324", "test@airline.de");
+        new AirlineAPIOperation().createAirline(apiAirlineInput);
+        APIAirplaneInput apiAirplaneInput = new APIAirplaneInput((int)System.currentTimeMillis(), apiAirlineInput.getName(), true);
+        new AirplaneAPIOperation().createAirplane(apiAirplaneInput);
+        APIAirportInput apiAirportInput = new APIAirportInput("Test" + System.currentTimeMillis(), "TestName", "Germany", "Berlin", "German");
+        new AirportAPIOperation().createAirport(apiAirportInput);
+
+        APIClientInput apiClientInput = new APIClientInput("Jan", "M", "Kowalski", date.toString() , "+4915112345678", new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"), "test@test.de", false);
+        APIClient apiClient = new ClientAPIOperation().createClient(apiClientInput);
+
+        APIEmployeeInput apiEmployeeInput = new APIEmployeeInput("Jan", "M", "Kowalski", date.toString() , "+4915112345678", new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"), "test@test.de", apiAirlineInput.getName());
+        APIEmployee apiEmployee = new EmployeeAPIOperation().createEmployee(apiEmployeeInput);
+
+        APIFlightInput apiFlightInput = new APIFlightInput(apiAirplaneInput.getSerialNum(), dateTime.toString(), apiAirportInput.getCode(), dateTime.toString(), apiAirportInput.getCode(), dateTime.toString(), APIFlightInput.FlightStatus.scheduled, 120, apiEmployee.getEmployeeId(), apiEmployee.getEmployeeId());
+        APIFlight apiFlight1 = new FlightAPIOperation().createFlight(apiFlightInput);
+
+        APIFlight apiFlight2 = new FlightAPIOperation().createFlight(apiFlightInput);
+
+        Set<Long> expectedFlightNumbers = Set.of(apiFlight1.getFlightNum(), apiFlight2.getFlightNum());
+        Set<Long> foundFlightNumbers = new HashSet<>();
+
+
+        int pageNum = 1;
+        int pageSize = 10;
+
+        while (true) {
+            List<APIFlight> apiFlightList = new FlightAPIOperation().getAllFlights(pageNum, pageSize);
+
+            for (APIFlight flight : apiFlightList) {
+                if (expectedFlightNumbers.contains(flight.getFlightNum())) {
+                    foundFlightNumbers.add(flight.getFlightNum());
+                }
+            }
+
+            if (apiFlightList.size() < pageSize) {
+                break;
+            }
+            pageNum++;
+        }
+
+        assertEquals(expectedFlightNumbers, foundFlightNumbers);
+
+        new FlightDeleteImpl(apiFlight2.getFlightNum()).execute();
+        new FlightDeleteImpl(apiFlight1.getFlightNum()).execute();
+        new AirplaneDeleteImpl(apiAirplaneInput.getSerialNum()).execute();
+        new EmployeeDeleteImpl(apiEmployee.getEmployeeId()).execute();
+        new AirlineDeleteImpl(apiAirlineInput.getName()).execute();
+        new AirportDeleteImpl(apiAirportInput.getCode()).execute();
+    }
+
+    //TODO: TicketTest with logic
 
     @Test
     void createAndReadTicketInDBViaAPITest() throws Exception {
@@ -329,6 +373,8 @@ public class APIIntegrationTests {
 
         assertEquals(ticketReadFromDB.getFlightNum(), apiFlight.getFlightNum());*/
     }
+
+
 
 
 }

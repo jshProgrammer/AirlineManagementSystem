@@ -6,7 +6,14 @@ import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Create.Fli
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Delete.FlightDeleteImpl;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Read.FlightReadImpl;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Update.FlightUpdateImpl;
+import de.tjjf.Infrastructure.persistence.EntityManagerFactorySingleton;
+import de.tjjf.Infrastructure.persistence.entities.Flight;
 import de.tjjf.Infrastructure.persistence.mapper.FlightMapper;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Query;
+
+import java.util.List;
 
 public class MFlightRepositoryImpl implements DataAccess.MFlightRepository {
     @Override
@@ -28,5 +35,10 @@ public class MFlightRepositoryImpl implements DataAccess.MFlightRepository {
     @Override
     public void delete(Long id) {
         new FlightDeleteImpl(id).execute();
+    }
+
+    @Override
+    public List<MFlight> getAllFlights(int pageNumber, int pageSize) {
+        return new FlightReadImpl().getAllFlights(pageNumber, pageSize).stream().map(flight -> new FlightMapper().toDomain(flight)).toList();
     }
 }

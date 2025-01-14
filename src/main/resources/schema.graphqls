@@ -205,6 +205,8 @@ type Query {
     readAirportByCode(code: String): APIAirport
 
     readFlightByFlightNum(flightNum: Long): APIFlight
+    getAllFlights(pageNumber: Int, pageSize: Int): [APIFlight]
+
     readAirlineByName(name: String): APIAirline #funktioniert
 
     readAirplaneBySerialNum(serialNum: Int): APIAirplane

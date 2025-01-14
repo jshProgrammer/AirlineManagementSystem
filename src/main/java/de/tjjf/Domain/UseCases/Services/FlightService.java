@@ -7,6 +7,8 @@ import de.tjjf.Domain.UseCases.CancelTicketUseCase;
 import de.tjjf.Domain.models.MFlight;
 import de.tjjf.Domain.ports.DB.DataAccess;
 
+import java.util.List;
+
 public class FlightService extends AuthorizedUseCase {
     DataAccess.MFlightRepository port;
 
@@ -35,5 +37,9 @@ public class FlightService extends AuthorizedUseCase {
         toEntity.setStatus(MFlight.FlightStatus.canceled);
         CancelCompleteFlightUseCase.cancelFlight(toEntity);
         port.update(toEntity);
+    }
+
+    public List<MFlight> getAllFlights(int pageNumber, int pageSize) {
+        return port.getAllFlights(pageNumber, pageSize);
     }
 }

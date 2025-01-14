@@ -1,8 +1,11 @@
 package de.tjjf.Infrastructure.Client.ClientOperations.APIOperations;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import de.tjjf.Infrastructure.api.DateParser;
 import de.tjjf.Infrastructure.api.InputModels.APIFlightInput;
 import de.tjjf.Infrastructure.api.models.APIFlight;
+
+import java.util.List;
 
 public class FlightAPIOperation extends AbstractAPIOperation {
 
@@ -91,5 +94,29 @@ public class FlightAPIOperation extends AbstractAPIOperation {
                 """.formatted(flightNum);
 
         return execute(query, "readFlightByFlightNum", APIFlight.class);
+   }
+
+   public List<APIFlight> getAllFlights(int pageNumber, int pageSize) {
+       String query = """
+            {
+                "query": "{
+                    getAllFlights(pageNumber: %d, pageSize: %d) {
+                        flightNum
+                        airplaneSerialNum
+                        departureDateTime
+                        departureAirportCode
+                        arrivalDateTime
+                        arrivalAirportCode
+                        boardingTime
+                        status
+                        duration
+                        pilotId
+                        copilotId
+                    }
+                }"
+            }
+            """.formatted(pageNumber, pageSize);
+
+       return execute(query, "getAllFlights", new TypeReference<List<APIFlight>>(){});
    }
 }

@@ -15,6 +15,8 @@ import graphql.kickstart.tools.GraphQLMutationResolver;
 import graphql.kickstart.tools.GraphQLQueryResolver;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class FlightResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
 
@@ -34,5 +36,9 @@ public class FlightResolver implements GraphQLQueryResolver, GraphQLMutationReso
 
     public void cancelFlight(long flightNum) {
         new FlightPortImpl().cancelFlight(new FlightPortImpl().readFlightByNum(flightNum));
+    }
+
+    public List<APIFlight> getAllFlights(int pageNumber, int pageSize) {
+        return new FlightPortImpl().getAllFlights(pageNumber, pageSize).stream().map(mFlight -> new APIFlightMapper().toAPIEntity(mFlight)).toList();
     }
 }
