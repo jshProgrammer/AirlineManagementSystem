@@ -23,7 +23,6 @@ public abstract class AbstractCreateOperation<T extends Model> extends AbstractD
         return new ModelResult<T>(modelToPersist);
     }
 
-    //TODO: noch einbinden
     protected void prePersist() {}
 
     protected void postPersist() {}

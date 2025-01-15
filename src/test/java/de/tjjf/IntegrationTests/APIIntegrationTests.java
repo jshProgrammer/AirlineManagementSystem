@@ -312,6 +312,43 @@ public class APIIntegrationTests {
     }
 
     //TODO: FlightTest update
+    @Test
+    void updateFlightInDBViaAPITest() throws Exception {
+        APIAirlineInput apiAirlineInput = new APIAirlineInput("Test" + System.currentTimeMillis(), date, new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"), "02341324", "test@airline.de");
+        new AirlineAPIOperation().createAirline(apiAirlineInput);
+        APIAirplaneInput apiAirplaneInput = new APIAirplaneInput((int)System.currentTimeMillis(), apiAirlineInput.getName(), true);
+        new AirplaneAPIOperation().createAirplane(apiAirplaneInput);
+        APIAirportInput apiAirportInput = new APIAirportInput("Test" + System.currentTimeMillis(), "TestName", "Germany", "Berlin", "German");
+        new AirportAPIOperation().createAirport(apiAirportInput);
+
+        APIEmployeeInput apiEmployeeInput = new APIEmployeeInput("Jan", "M", "Kowalski", date.toString(), "+4915112345678", new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"), "test@test.de", apiAirlineInput.getName());
+        APIEmployee apiEmployee = new EmployeeAPIOperation().createEmployee(apiEmployeeInput);
+
+        APIFlightInput apiFlightInput = new APIFlightInput(apiAirplaneInput.getSerialNum(), dateTime.toString(), apiAirportInput.getCode(), dateTime.toString(), apiAirportInput.getCode(), dateTime.toString(), APIFlightInput.FlightStatus.scheduled, 120, apiEmployee.getEmployeeId(), apiEmployee.getEmployeeId());
+        APIFlight apiFlight = new FlightAPIOperation().createFlight(apiFlightInput);
+
+        APIFlightInput updatedFlightInput = new APIFlightInput(apiAirplaneInput.getSerialNum(), dateTime.toString(), apiAirportInput.getCode(), dateTime.toString(), apiAirportInput.getCode(), dateTime.toString(), APIFlightInput.FlightStatus.delayed, 150, apiEmployee.getEmployeeId(), apiEmployee.getEmployeeId());
+        new FlightAPIOperation().updateFlight(apiFlight.getFlightNum(), updatedFlightInput);
+
+        APIFlight updatedFlightReadFromDB = new FlightAPIOperation().readFlightByFlightNum(apiFlight.getFlightNum());
+
+        assertEquals(updatedFlightInput.getAirplaneSerialNum(), updatedFlightReadFromDB.getAirplaneSerialNum());
+        //assertEquals(updatedFlightInput.getDepartureDateTime(), updatedFlightReadFromDB.getDepartureDateTime());
+        assertEquals(updatedFlightInput.getDepartureAirportCode(), updatedFlightReadFromDB.getDepartureAirportCode());
+        //assertEquals(updatedFlightInput.getArrivalDateTime(), updatedFlightReadFromDB.getArrivalDateTime());
+        assertEquals(updatedFlightInput.getArrivalAirportCode(), updatedFlightReadFromDB.getArrivalAirportCode());
+        //assertEquals(updatedFlightInput.getBoardingTime(), updatedFlightReadFromDB.getBoardingTime());
+        assertEquals(updatedFlightInput.getStatus().toString(), updatedFlightReadFromDB.getStatus().toString());
+        assertEquals(updatedFlightInput.getDuration(), updatedFlightReadFromDB.getDuration());
+        assertEquals(updatedFlightInput.getPilotId(), updatedFlightReadFromDB.getPilotId());
+        assertEquals(updatedFlightInput.getCopilotId(), updatedFlightReadFromDB.getCopilotId());
+
+        new FlightDeleteImpl(updatedFlightReadFromDB.getFlightNum()).execute();
+        new AirplaneDeleteImpl(apiAirplaneInput.getSerialNum()).execute();
+        new EmployeeDeleteImpl(apiEmployee.getEmployeeId()).execute();
+        new AirlineDeleteImpl(apiAirlineInput.getName()).execute();
+        new AirportDeleteImpl(apiAirportInput.getCode()).execute();
+    }
 
     @Test
     void getAllFlightsWithPagingTest() throws Exception {

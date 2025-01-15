@@ -19,6 +19,7 @@ public class AbstractUpdateOperation<T extends Model, IDType> extends AbstractDa
 
     @Override
     public NoContentResult run() {
+        prePersist();
         // since DB models do not include an id, we have to find the entity by id first
         T existingEntity = (T) em.find(modelToChange.getClass(), id);
 
@@ -29,6 +30,7 @@ public class AbstractUpdateOperation<T extends Model, IDType> extends AbstractDa
         copyNonNullProperties(modelToChange, existingEntity);
 
         em.merge( existingEntity );
+        postPersist();
         return new NoContentResult();
     }
 
@@ -49,4 +51,8 @@ public class AbstractUpdateOperation<T extends Model, IDType> extends AbstractDa
             }
         }
     }
+
+    protected void prePersist() {}
+
+    protected void postPersist() {}
 }
