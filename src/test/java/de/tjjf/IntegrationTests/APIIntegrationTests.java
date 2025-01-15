@@ -406,7 +406,6 @@ public class APIIntegrationTests {
 
     @Test
     void createAndReadTicketInDBViaAPITest() throws Exception {
-
         APIAirlineInput apiAirlineInput = new APIAirlineInput("Test" + System.currentTimeMillis(), date, new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"), "02341324", "test@airline.de");
         new AirlineAPIOperation().createAirline(apiAirlineInput);
         APIAirplaneInput apiAirplaneInput = new APIAirplaneInput((int)System.currentTimeMillis(), apiAirlineInput.getName(), true);
@@ -528,6 +527,52 @@ public class APIIntegrationTests {
     }
 
     //TODO: cancelTicketTest
-    //TODO: cancelFlightTest
+    @Test
+    void cancelTicketViaAPITest() throws Exception {
+        APIAirlineInput apiAirlineInput = new APIAirlineInput("Test" + System.currentTimeMillis(), date, new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"), "02341324", "test@airline.de");
+        new AirlineAPIOperation().createAirline(apiAirlineInput);
+        APIAirplaneInput apiAirplaneInput = new APIAirplaneInput((int)System.currentTimeMillis(), apiAirlineInput.getName(), true);
+        new AirplaneAPIOperation().createAirplane(apiAirplaneInput);
+        APIAirportInput apiAirportInput = new APIAirportInput("Test" + System.currentTimeMillis(), "TestName", "Germany", "Berlin", "German");
+        new AirportAPIOperation().createAirport(apiAirportInput);
 
+        APIEmployeeInput apiEmployeeInput = new APIEmployeeInput("Jan", "M", "Kowalski", date.toString(), "+4915112345678", new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"), "test@test.de", apiAirlineInput.getName());
+        APIEmployee apiEmployee = new EmployeeAPIOperation().createEmployee(apiEmployeeInput);
+
+        APIFlightInput apiFlightInput = new APIFlightInput(apiAirplaneInput.getSerialNum(), dateTime.toString(), apiAirportInput.getCode(), dateTime.toString(), apiAirportInput.getCode(), dateTime.toString(), APIFlightInput.FlightStatus.scheduled, 120, apiEmployee.getEmployeeId(), apiEmployee.getEmployeeId());
+        APIFlight apiFlight = new FlightAPIOperation().createFlight(apiFlightInput);
+
+        APIClientInput apiClientInput = new APIClientInput("Jan", "M", "Kowalski", date.toString() , "+4915112345678", new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"), "test@test.de", false);
+        APIClient apiClient = new ClientAPIOperation().createClient(apiClientInput);
+
+        APITicketInput apiTicketInput = new APITicketInput(apiClient.getClientId(), true, apiFlight.getFlightNum(), dateTime.toString(), 300, 23, APITicketInput.SeatingClass.Economy,  APITicketInput.TicketStatus.paid, 23);
+        APIPaymentInput mp = new APIPaymentInput("4242424242424242", "12", "34", "567");
+        APITicket apiTicket1 = new TicketAPIOperation().addBooking(apiTicketInput, mp);
+        APITicket apiTicket2 = new TicketAPIOperation().addBooking(apiTicketInput, mp);
+
+        new FlightAPIOperation().cancelFlight(apiFlight.getFlightNum());
+
+        APIFlight updatedFlightReadFromDB = new FlightAPIOperation().readFlightByFlightNum(apiFlight.getFlightNum());
+        APITicket ticket1ReadFromDB = new TicketAPIOperation().readTicketById(apiTicket1.getTicketId());
+        APITicket ticket2ReadFromDB = new TicketAPIOperation().readTicketById(apiTicket2.getTicketId());
+
+
+        assertEquals(APIFlight.FlightStatus.canceled, updatedFlightReadFromDB.getStatus());
+        assertEquals(APITicket.TicketStatus.canceled, ticket1ReadFromDB.getTicketStatus());
+        assertEquals(APITicket.TicketStatus.canceled, ticket2ReadFromDB.getTicketStatus());
+
+        //TODO: check whether all connected tickets have been canceled
+
+        new FlightDeleteImpl(updatedFlightReadFromDB.getFlightNum()).execute();
+        new AirplaneDeleteImpl(apiAirplaneInput.getSerialNum()).execute();
+        new EmployeeDeleteImpl(apiEmployee.getEmployeeId()).execute();
+        new AirlineDeleteImpl(apiAirlineInput.getName()).execute();
+        new AirportDeleteImpl(apiAirportInput.getCode()).execute();
+    }
+
+    //TODO: cancelFlightTest
+    @Test
+    void cancelFlightViaAPITest() throws Exception {
+
+    }
 }
