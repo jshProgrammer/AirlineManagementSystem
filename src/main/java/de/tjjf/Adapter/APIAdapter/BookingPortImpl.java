@@ -22,7 +22,6 @@ public class BookingPortImpl implements TicketPort {
         return new TicketService(new MTicketRepositoryImpl()).readTicketById(id);
     }
 
-    //TODO: müssen wir hier nicht auch noch die Ticket-Nr/ das Ticket-Objekt übergeben
     @Override
     public void upgradeSeatingClass(int ticketId, MTicket.SeatingClass newSeatingClass) throws NoSeatsAvailableException{
         new TicketService(new MTicketRepositoryImpl()).upgradeSeatingClass(ticketId, newSeatingClass);

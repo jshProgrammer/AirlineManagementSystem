@@ -11,16 +11,20 @@ import de.tjjf.Infrastructure.persistence.entities.Ticket;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class PersonMapper {
+    public MPerson toDomain(Employee employee) {
+        return this.toDomain(employee, null);
+    }
 
-    public MPerson toDomain(Employee employee){
-
+    public MPerson toDomain(Employee employee, Set<Long> processedTickets) {
         List<MTicket> tickets = new ArrayList<>();
-        System.out.println("TESTXXX" + tickets.size());
-        System.out.println("TESTXXX" + employee);
-        for(Ticket ticket : employee.getTickets()){
-            tickets.add(new TicketMapper().toDomain(new TicketReadImpl(ticket.getTicketId()).execute().model));
+        for (Ticket ticket : employee.getTickets()) {
+            if (!processedTickets.contains(ticket.getTicketId())) {
+                processedTickets.add(ticket.getTicketId());
+                tickets.add(new TicketMapper().toDomain(ticket, processedTickets));
+            }
         }
         return new MPerson(
                 employee.getPersonId(),
@@ -36,9 +40,16 @@ public class PersonMapper {
     }
 
     public MPerson toDomain(Client client) {
+        return this.toDomain(client, null);
+    }
+
+    public MPerson toDomain(Client client, Set<Long> processedTickets) {
         List<MTicket> tickets = new ArrayList<>();
-        for(Ticket ticket : client.getTickets()){
-            tickets.add(new TicketMapper().toDomain(new TicketReadImpl(ticket.getTicketId()).execute().model));
+        for (Ticket ticket : client.getTickets()) {
+            if (!processedTickets.contains(ticket.getTicketId())) {
+                processedTickets.add(ticket.getTicketId());
+                tickets.add(new TicketMapper().toDomain(ticket, processedTickets));
+            }
         }
         return new MPerson(
                 client.getPersonId(),
@@ -52,4 +63,6 @@ public class PersonMapper {
                 tickets
         );
     }
+
+
 }

@@ -1,11 +1,8 @@
 package de.tjjf.Infrastructure.api;
 
-
 import org.eclipse.jetty.ee10.servlet.ServletContextHandler;
 import org.eclipse.jetty.ee10.servlet.ServletHolder;
 import org.eclipse.jetty.server.Server;
-
-import java.util.List;
 
 public class MainTest {
     public static void main(String[] args) throws Exception {

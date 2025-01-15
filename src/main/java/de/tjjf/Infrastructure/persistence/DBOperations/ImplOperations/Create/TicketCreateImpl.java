@@ -11,16 +11,19 @@ public class TicketCreateImpl extends AbstractCreateOperation<Ticket> {
 
     public TicketCreateImpl(Ticket modelToPersist){
         super(modelToPersist);
+
         this.modelToPersist = modelToPersist;
     }
 
     protected void prePersist() {
-        System.out.println("TESTEST30: " + modelToPersist.getFlight().getFlightNum());
         Flight managedFlight = em.find(Flight.class, modelToPersist.getFlight().getFlightNum());
         if (managedFlight == null) {
             throw new RuntimeException("Flight not found");
         }
         modelToPersist.setFlightNum(managedFlight);
+
+        //Client managedClient = em.find(Client.class, modelToPersist.getClient().getPersonId());
+        //modelToPersist.setClient(managedClient);
     }
 
     protected void postPersist() {

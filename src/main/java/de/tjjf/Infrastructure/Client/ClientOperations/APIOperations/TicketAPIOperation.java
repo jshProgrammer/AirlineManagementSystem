@@ -110,7 +110,7 @@ public class TicketAPIOperation extends AbstractAPIOperation {
         String query = """
         {
             "query": "mutation {
-                upgradeSeatingClass(ticketId: %d, newSeatingClass: \\"%s\\")
+                upgradeSeatingClass(ticketId: %d, newSeatingClass: %s)
             }"
         }
         """.formatted(ticketId, newSeatingClass);

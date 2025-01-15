@@ -29,7 +29,6 @@ public class TicketResolver implements GraphQLQueryResolver, GraphQLMutationReso
         return new APITicketMapper().toAPIEntity(new BookingPortImpl().readTicketById(ticketId));
     }
 
-    //TODO: Seating class evtl anders übergeben, so funktioniert es aktuell noch nicht
     public void upgradeSeatingClass(int ticketId, APITicketInput.SeatingClass newSeatingClass) {
         MTicket.SeatingClass seatingClass = Enum.valueOf(MTicket.SeatingClass.class, newSeatingClass.name());
         new BookingPortImpl().upgradeSeatingClass(ticketId, seatingClass);
@@ -38,8 +37,7 @@ public class TicketResolver implements GraphQLQueryResolver, GraphQLMutationReso
     public void upgradeLuggageWeight(int ticketId, int newWeight) {
         new BookingPortImpl().upgradeLuggageWeight(ticketId, newWeight);
     }
-    //TODO: Nochmal drüberschauen ob das so grob passt
-    //TODO: hier vlt. ändern auf id?!
+
     public void cancelTicketClient(int clientId, int flightNum) {
         APIClient apiClient = new ClientResolver().readClientById(clientId);
         new BookingPortImpl().cancelTicket(new APIClientMapper().toDomainEntity(apiClient), flightNum);

@@ -13,6 +13,8 @@ import de.tjjf.Infrastructure.persistence.entities.Employee;
 import de.tjjf.Infrastructure.persistence.entities.Flight;
 import de.tjjf.Infrastructure.persistence.entities.Ticket;
 
+import java.util.Set;
+
 
 public class TicketMapper extends Mapper<MTicket, Ticket> {
 
@@ -38,15 +40,19 @@ public class TicketMapper extends Mapper<MTicket, Ticket> {
         return ticket;
     }
 
-    public MTicket toDomain(Ticket booking){
+    public MTicket toDomain(Ticket booking) {
+        return this.toDomain(booking, null);
+    }
+
+    public MTicket toDomain(Ticket booking, Set<Long> processedTickets) {
         MPerson mPerson;
 
         if (booking.getEmployee() != null) {
-            mPerson = new PersonMapper().toDomain(new EmployeeReadImpl(booking.getClient().getPersonId()).execute().model);
+            mPerson = new PersonMapper().toDomain(new EmployeeReadImpl(booking.getEmployee().getPersonId()).execute().model, processedTickets);
         } else {
-            mPerson = new PersonMapper().toDomain(new ClientReadImpl(booking.getClient().getPersonId()).execute().model);
+            mPerson = new PersonMapper().toDomain(new ClientReadImpl(booking.getClient().getPersonId()).execute().model, processedTickets);
         }
-        System.out.println("Hallowerda");
+
         Flight flight = new FlightReadImpl(booking.getFlight().getFlightNum()).execute().model;
 
         return new MTicket(

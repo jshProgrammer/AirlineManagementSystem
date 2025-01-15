@@ -2,26 +2,46 @@ package de.tjjf.IntegrationTests;
 
 import static org.junit.jupiter.api.Assertions.*;
 import de.tjjf.Infrastructure.Client.ClientOperations.APIOperations.*;
-import de.tjjf.Infrastructure.Client.GraphQLClient;
+import de.tjjf.Infrastructure.api.DemoServlet;
 import de.tjjf.Infrastructure.api.InputModels.*;
 import de.tjjf.Infrastructure.api.models.*;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Delete.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.ee10.servlet.ServletContextHandler;
+import org.eclipse.jetty.ee10.servlet.ServletHolder;
 
 public class APIIntegrationTests {
 
-    private GraphQLClient graphQLClient;
+    private static Server server;
+
     private Calendar calendar;
     private Date date;
     private Date dateTime;
 
+    @BeforeAll
+    public static void startServer() throws Exception {
+        server = new Server(8081);
+
+        ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
+        context.setContextPath("/");
+        server.setHandler(context);
+
+        // Change path if the GraphQL server should have another URI
+        context.addServlet(new ServletHolder(new DemoServlet()), "/airlineManagement");
+
+        server.start();
+        System.out.println("Server started on port 8081");
+    }
+
+
     @BeforeEach
     public void setUp() {
-
-        graphQLClient = new GraphQLClient();
         calendar = Calendar.getInstance();
         calendar.set(2005, Calendar.FEBRUARY, 2);
         date = calendar.getTime();
@@ -30,6 +50,15 @@ public class APIIntegrationTests {
         calendar.set(2005, Calendar.FEBRUARY, 2, 12, 0, 0);
         dateTime = calendar.getTime();
     }
+
+    @AfterAll
+    public static void stopServer() throws Exception {
+        if (server != null && server.isRunning()) {
+            server.stop();
+            System.out.println("Server stopped");
+        }
+    }
+
 
     @Test
     void createAndReadClientInDBViaAPITest() throws Exception {
@@ -243,8 +272,6 @@ public class APIIntegrationTests {
         new AirportDeleteImpl(apiAirportInput.getCode()).execute();
     }
 
-
-    //TODO: FlightTest fuinktionert noch nicht
     @Test
     void createAndReadFlightInDBViaAPITest() throws Exception {
         APIAirlineInput apiAirlineInput = new APIAirlineInput("Test" + System.currentTimeMillis(), date, new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"), "02341324", "test@airline.de");
@@ -257,9 +284,6 @@ public class APIIntegrationTests {
         APIEmployeeInput apiEmployeeInput = new APIEmployeeInput("Jan", "M", "Kowalski", date.toString() , "+4915112345678", new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"), "test@test.de", apiAirlineInput.getName());
         APIEmployee apiEmployee = new EmployeeAPIOperation().createEmployee(apiEmployeeInput);
 
-
-
-        //TODO
         APIFlightInput apiFlightInput = new APIFlightInput(apiAirplaneInput.getSerialNum(), dateTime.toString(), apiAirportInput.getCode(), dateTime.toString(), apiAirportInput.getCode(), dateTime.toString(), APIFlightInput.FlightStatus.scheduled, 120, apiEmployee.getEmployeeId(), apiEmployee.getEmployeeId());
         APIFlight apiFlight = new FlightAPIOperation().createFlight(apiFlightInput);
 
@@ -368,13 +392,105 @@ public class APIIntegrationTests {
         APIPaymentInput mp = new APIPaymentInput("4242424242424242", "12", "34", "567");
         APITicket apiTicket = new TicketAPIOperation().addBooking(apiTicketInput, mp);
 
-        //TODO: Unexpected error occured
-        /*APITicket ticketReadFromDB = new TicketAPIOperation().readTicketById(apiTicket.getTicketId());
+        //TODO: ticketReadFromDB is null
+        APITicket ticketReadFromDB = new TicketAPIOperation().readTicketById(apiTicket.getTicketId());
 
-        assertEquals(ticketReadFromDB.getFlightNum(), apiFlight.getFlightNum());*/
+        assertEquals(ticketReadFromDB.getFlightNum(), apiFlight.getFlightNum());
+        assertEquals(ticketReadFromDB.getTicketStatus(), apiTicket.getTicketStatus());
+        assertEquals(ticketReadFromDB.getPersonId(), apiTicket.getPersonId());
+        assertEquals(ticketReadFromDB.getSeatNum(), apiTicket.getSeatNum());
+        assertEquals(ticketReadFromDB.getSeatingClass(), apiTicket.getSeatingClass());
+        assertEquals(ticketReadFromDB.getIsClient(), apiTicket.getIsClient());
+        assertEquals(ticketReadFromDB.getWeightOfLuggage(), apiTicket.getWeightOfLuggage());
+        //assertEquals(ticketReadFromDB.getDateTimeOfBooking(), apiTicket.getDateTimeOfBooking());
+
+        new TicketDeleteImpl(apiTicket.getTicketId()).execute();
+        new FlightDeleteImpl(apiFlight.getFlightNum()).execute();
+        new AirplaneDeleteImpl(apiAirplaneInput.getSerialNum()).execute();
+        new EmployeeDeleteImpl(apiEmployee.getEmployeeId()).execute();
+        new AirlineDeleteImpl(apiAirlineInput.getName()).execute();
+        new AirportDeleteImpl(apiAirportInput.getCode()).execute();
     }
 
+    @Test
+    void upgradeSeatingClassViaAPITest() throws Exception {
+        APIAirlineInput apiAirlineInput = new APIAirlineInput("Test" + System.currentTimeMillis(), date, new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"), "02341324", "test@airline.de");
+        new AirlineAPIOperation().createAirline(apiAirlineInput);
+        APIAirplaneInput apiAirplaneInput = new APIAirplaneInput((int)System.currentTimeMillis(), apiAirlineInput.getName(), true);
+        new AirplaneAPIOperation().createAirplane(apiAirplaneInput);
+        APIAirportInput apiAirportInput = new APIAirportInput("Test" + System.currentTimeMillis(), "TestName", "Germany", "Berlin", "German");
+        new AirportAPIOperation().createAirport(apiAirportInput);
+
+        APIClientInput apiClientInput = new APIClientInput("Jan", "M", "Kowalski", date.toString() , "+4915112345678", new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"), "test@test.de", false);
+        APIClient apiClient = new ClientAPIOperation().createClient(apiClientInput);
+
+        APIEmployeeInput apiEmployeeInput = new APIEmployeeInput("Jan", "M", "Kowalski", date.toString() , "+4915112345678", new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"), "test@test.de", apiAirlineInput.getName());
+        APIEmployee apiEmployee = new EmployeeAPIOperation().createEmployee(apiEmployeeInput);
 
 
+        APIFlightInput apiFlightInput = new APIFlightInput(apiAirplaneInput.getSerialNum(), dateTime.toString(), apiAirportInput.getCode(), dateTime.toString(), apiAirportInput.getCode(), dateTime.toString(), APIFlightInput.FlightStatus.scheduled, 120, apiEmployee.getEmployeeId(), apiEmployee.getEmployeeId());
+        APIFlight apiFlight = new FlightAPIOperation().createFlight(apiFlightInput);
+
+
+        APITicketInput apiTicketInput = new APITicketInput(apiClient.getClientId(), true, apiFlight.getFlightNum(), dateTime.toString(), 300, 23, APITicketInput.SeatingClass.Economy,  APITicketInput.TicketStatus.paid, 23);
+        APIPaymentInput mp = new APIPaymentInput("4242424242424242", "12", "34", "567");
+        APITicket apiTicket = new TicketAPIOperation().addBooking(apiTicketInput, mp);
+
+
+        new TicketAPIOperation().upgradeSeatingClass(apiTicket.getTicketId(), APITicket.SeatingClass.Business.name());
+
+        APITicket ticketReadFromDB = new TicketAPIOperation().readTicketById(apiTicket.getTicketId());
+
+        assertEquals( APITicket.SeatingClass.Business, ticketReadFromDB.getSeatingClass());
+
+        new TicketDeleteImpl(apiTicket.getTicketId()).execute();
+        new FlightDeleteImpl(apiFlight.getFlightNum()).execute();
+        new AirplaneDeleteImpl(apiAirplaneInput.getSerialNum()).execute();
+        new EmployeeDeleteImpl(apiEmployee.getEmployeeId()).execute();
+        new AirlineDeleteImpl(apiAirlineInput.getName()).execute();
+        new AirportDeleteImpl(apiAirportInput.getCode()).execute();
+    }
+
+    @Test
+    void upgradeLuggageWeightViaAPITest() throws Exception {
+        APIAirlineInput apiAirlineInput = new APIAirlineInput("Test" + System.currentTimeMillis(), date, new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"), "02341324", "test@airline.de");
+        new AirlineAPIOperation().createAirline(apiAirlineInput);
+        APIAirplaneInput apiAirplaneInput = new APIAirplaneInput((int)System.currentTimeMillis(), apiAirlineInput.getName(), true);
+        new AirplaneAPIOperation().createAirplane(apiAirplaneInput);
+        APIAirportInput apiAirportInput = new APIAirportInput("Test" + System.currentTimeMillis(), "TestName", "Germany", "Berlin", "German");
+        new AirportAPIOperation().createAirport(apiAirportInput);
+
+        APIClientInput apiClientInput = new APIClientInput("Jan", "M", "Kowalski", date.toString() , "+4915112345678", new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"), "test@test.de", false);
+        APIClient apiClient = new ClientAPIOperation().createClient(apiClientInput);
+
+        APIEmployeeInput apiEmployeeInput = new APIEmployeeInput("Jan", "M", "Kowalski", date.toString() , "+4915112345678", new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"), "test@test.de", apiAirlineInput.getName());
+        APIEmployee apiEmployee = new EmployeeAPIOperation().createEmployee(apiEmployeeInput);
+
+
+        APIFlightInput apiFlightInput = new APIFlightInput(apiAirplaneInput.getSerialNum(), dateTime.toString(), apiAirportInput.getCode(), dateTime.toString(), apiAirportInput.getCode(), dateTime.toString(), APIFlightInput.FlightStatus.scheduled, 120, apiEmployee.getEmployeeId(), apiEmployee.getEmployeeId());
+        APIFlight apiFlight = new FlightAPIOperation().createFlight(apiFlightInput);
+
+
+        APITicketInput apiTicketInput = new APITicketInput(apiClient.getClientId(), true, apiFlight.getFlightNum(), dateTime.toString(), 300, 23, APITicketInput.SeatingClass.Economy,  APITicketInput.TicketStatus.paid, 23);
+        APIPaymentInput mp = new APIPaymentInput("4242424242424242", "12", "34", "567");
+        APITicket apiTicket = new TicketAPIOperation().addBooking(apiTicketInput, mp);
+
+
+        new TicketAPIOperation().upgradeLuggageWeight(apiTicket.getTicketId(), 40);
+
+        APITicket ticketReadFromDB = new TicketAPIOperation().readTicketById(apiTicket.getTicketId());
+
+        assertEquals( 40, ticketReadFromDB.getWeightOfLuggage());
+
+        new TicketDeleteImpl(apiTicket.getTicketId()).execute();
+        new FlightDeleteImpl(apiFlight.getFlightNum()).execute();
+        new AirplaneDeleteImpl(apiAirplaneInput.getSerialNum()).execute();
+        new EmployeeDeleteImpl(apiEmployee.getEmployeeId()).execute();
+        new AirlineDeleteImpl(apiAirlineInput.getName()).execute();
+        new AirportDeleteImpl(apiAirportInput.getCode()).execute();
+    }
+
+    //TODO: cancelTicketTest
+    //TODO: cancelFlightTest
 
 }

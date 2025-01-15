@@ -224,8 +224,8 @@ type Mutation {
     updateClient(clientId: Long, client: APIClientInput): Void
 
     addBooking(newBooking: APITicketInput, payment: APIPaymentInput): APITicket
-    #upgradeSeatingClass(ticketId: Long, newSeatingClass: APISeatingClassInput): Void
-    #upgradeLuggageWeight(ticketId: Long, newLuggageWeight: Int): Void
+    upgradeSeatingClass(ticketId: Long, newSeatingClass: APISeatingClassInput): Void
+    upgradeLuggageWeight(ticketId: Long, newLuggageWeight: Int): Void
 
     ##cancelTicketEmployee(employeeId: Int, flightNum: Int): Void
     ##cancelTicketClient(clientId: Int, flightNum: Int): Void

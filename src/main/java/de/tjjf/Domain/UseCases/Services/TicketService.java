@@ -18,16 +18,11 @@ public class TicketService extends AuthorizedUseCase {
         this.port = port;
     }
 
-    //TODO: Muss hier nicht AddBooking Use Case dranhängen
     public MTicket addBooking(MTicket newBooking, MPayment mPayment) {
         //new CancelTicketUseCase().authorize();
-        System.out.println("TESTEST1");
         if(AddBookingUseCase.addBooking(newBooking, mPayment)){
-            System.out.println("ASFKHALKSFHAKLHF");
-            //Port Create macht Probleme
             return port.create(newBooking);
         }
-        System.out.println("TESTEST2");
         return null;
     }
 
@@ -39,6 +34,7 @@ public class TicketService extends AuthorizedUseCase {
     public void upgradeSeatingClass(long ticketId, MTicket.SeatingClass newSeatingClass) throws NoSeatsAvailableException {
         //new CancelTicketUseCase().authorize();
         MTicket ticket = readTicketById(ticketId);
+
         //TODO: So ungefähr
         upgradeSeatingClass(ticketId, newSeatingClass);
         //TODO => s. usecase

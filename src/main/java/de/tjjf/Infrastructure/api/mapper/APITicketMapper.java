@@ -1,5 +1,6 @@
 package de.tjjf.Infrastructure.api.mapper;
 
+import de.tjjf.Domain.models.MClient;
 import de.tjjf.Domain.models.MTicket;
 import de.tjjf.Infrastructure.api.DateParser;
 import de.tjjf.Infrastructure.api.models.APITicket;
@@ -15,8 +16,7 @@ public class APITicketMapper extends AbstractAPIMapper<APITicket, MTicket>{
         return new APITicket(
                 mTicket.getTicketId(),
                 mTicket.getPerson().getPersonId(),
-                //TODO: test if this transformation/comparison works:
-                mTicket.getPerson().getClass().equals(Client.class),
+                mTicket.getPerson().getClass().equals(MClient.class),
                 mTicket.getFlight().getFlightNum(),
                 mTicket.getDateTimeOfBooking().toString(),
                 mTicket.getTotalPrice(),
@@ -29,12 +29,7 @@ public class APITicketMapper extends AbstractAPIMapper<APITicket, MTicket>{
 
     @Override
     public MTicket toDomainEntity(APITicket apiTicket){
-        //TODO: macht hier vlt. das auslesen vom Client wieder Probleme => nein, system out danach funktioniert
-        Long test = apiTicket.getIsClient() ? new ClientPortImpl().readClientById(apiTicket.getPersonId()).getPersonId() : new EmployeePortImpl().readEmployeeById(apiTicket.getPersonId()).getEmployeeId();
-        System.out.println("TESTZZZ reading client/employee funktioniert");
-        //TODO: ja auch die id funktioniert korrekt
-        System.out.println("funktioniert die id: " + test);
-        return new MTicket(
+         return new MTicket(
                 apiTicket.getTicketId(),
                 apiTicket.getIsClient() ? new ClientPortImpl().readClientById(apiTicket.getPersonId()) : new EmployeePortImpl().readEmployeeById(apiTicket.getPersonId()),
                 new FlightPortImpl().readFlightByNum(apiTicket.getFlightNum()),
