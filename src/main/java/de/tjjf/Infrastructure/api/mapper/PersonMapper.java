@@ -1,16 +1,11 @@
 package de.tjjf.Infrastructure.api.mapper;
 
 import de.tjjf.Domain.models.MPerson;
-import de.tjjf.Domain.models.MTicket;
 import de.tjjf.Infrastructure.api.models.APIClient;
 import de.tjjf.Infrastructure.api.models.APIEmployee;
-import de.tjjf.Infrastructure.api.models.APITicket;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class PersonMapper {
 
@@ -20,7 +15,7 @@ public class PersonMapper {
             tickets.add(new TicketMapper().toDomain(new TicketReadImpl(ticket.getTicketId()).run().model));
         }*/
 
-        //TODO: darf ich das wirklich auf null setzen?!
+        //TODO: hier vermutlich Probleme durch Setzen auf null
         return new MPerson(
                 apiEmployee.getEmployeeId(),
                 apiEmployee.getFirstName(),
@@ -53,7 +48,7 @@ public class PersonMapper {
             tickets.add(new TicketMapper().toDomain(new TicketReadImpl(ticket.getTicketId()).run().model));
         }*/
 
-        //TODO: darf ich das wirklich auf null setzen?!
+        //TODO: hier vermutlich Probleme durch Setzen auf nullapi
         return new MPerson(
                 apiClient.getClientId(),
                 apiClient.getFirstName(),

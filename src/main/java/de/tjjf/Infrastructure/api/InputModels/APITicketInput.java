@@ -17,12 +17,10 @@ public class APITicketInput implements APIModelInput {
     }
 
 
-    //TODO: sollen die enums hier wirklich drin bleiben?
     public enum SeatingClass { Economy, Business, First }
 
     public enum TicketStatus { paid, unpaid, canceled }
 
-    // in order to store clientId or employeeId
     private long personId;
     private boolean isClient;
 

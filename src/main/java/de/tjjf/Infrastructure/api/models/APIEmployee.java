@@ -1,11 +1,5 @@
 package de.tjjf.Infrastructure.api.models;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 public class APIEmployee implements APIModel {
     private long employeeId;
 

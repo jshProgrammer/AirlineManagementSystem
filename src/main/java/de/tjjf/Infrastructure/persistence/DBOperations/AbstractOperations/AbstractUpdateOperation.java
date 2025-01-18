@@ -20,7 +20,7 @@ public class AbstractUpdateOperation<T extends Model, IDType> extends AbstractDa
     @Override
     public NoContentResult run() {
         prePersist();
-        // since DB models do not include an id, we have to find the entity by id first
+
         T existingEntity = (T) em.find(modelToChange.getClass(), id);
 
         if (existingEntity == null) {
@@ -38,7 +38,6 @@ public class AbstractUpdateOperation<T extends Model, IDType> extends AbstractDa
         for (Field field : source.getClass().getDeclaredFields()) {
             field.setAccessible(true);
             try {
-                // Überspringe die ID
                 if (field.isAnnotationPresent(Id.class)) {
                     continue;
                 }

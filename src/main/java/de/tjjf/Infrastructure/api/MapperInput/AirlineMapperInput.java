@@ -19,16 +19,7 @@ public class AirlineMapperInput {
     }
 
     public APIAirline toDomain(APIAirlineInput airline) {
-        System.out.println("TEST.D" + airline.getAddress());
-        System.out.println("TEST.D2" + airline.getAddress().getCity());
-        System.out.println("TEST.D2" + airline.getAddress().getCountry());
-        System.out.println("TEST.D2" + airline.getAddress().getStreet());
-        System.out.println("TEST.D2" + airline.getAddress().getNumber());
-        System.out.println("TEST.D2" + airline.getAddress().getZipCode());
-
         APIAddress apiAddress = new AddressMapperInput().toDomain(airline.getAddress());
-        System.out.println("TEST.C");
-        System.out.println("TEST.C" + airline.getFoundationYear());
         return new APIAirline(
                 airline.getName(),
                 airline.getFoundationYear(),

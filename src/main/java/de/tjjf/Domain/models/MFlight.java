@@ -1,7 +1,5 @@
 package de.tjjf.Domain.models;
 
-import de.tjjf.Domain.EmailSender;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

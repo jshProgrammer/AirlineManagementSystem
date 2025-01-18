@@ -1,6 +1,5 @@
 package de.tjjf.Infrastructure.persistence.mapper;
 
-import de.tjjf.Domain.models.MClient;
 import de.tjjf.Domain.models.MEmployee;
 import de.tjjf.Domain.models.MPerson;
 import de.tjjf.Domain.models.MTicket;
@@ -18,9 +17,7 @@ public class EmployeeMapper extends Mapper<MEmployee, Employee>{
 
 
     public Employee toEntity(MEmployee mEmployee, boolean mapTickets){
-
         Employee employee = new Employee(
-                //mEmployee.getPersonId(),
                 mEmployee.getFirstName(),
                 mEmployee.getMiddleNames(),
                 mEmployee.getLastName(),

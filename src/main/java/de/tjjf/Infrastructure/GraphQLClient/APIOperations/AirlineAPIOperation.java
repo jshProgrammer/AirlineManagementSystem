@@ -1,4 +1,4 @@
-package de.tjjf.Infrastructure.Client.ClientOperations.APIOperations;
+package de.tjjf.Infrastructure.GraphQLClient.APIOperations;
 
 import de.tjjf.Infrastructure.api.InputModels.APIAirlineInput;
 import de.tjjf.Infrastructure.api.models.APIAirline;
@@ -8,7 +8,6 @@ import java.net.URISyntaxException;
 
 public class AirlineAPIOperation extends AbstractAPIOperation {
 
-    //TODO: extract address query for DRY-reasons
     private String transformToQuery(APIAirlineInput apiAirlineInput, String commandName) {
         String query = """
         {

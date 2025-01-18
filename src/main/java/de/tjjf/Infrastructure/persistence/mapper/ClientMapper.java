@@ -28,7 +28,6 @@ public class ClientMapper extends Mapper<MClient, Client>{
                 mClient.isBusinessClient()
         );
 
-
         if (mapTickets) {
             List<Ticket> tickets = new ArrayList<>();
             for (MTicket mTicket : mClient.getTickets()) {
@@ -71,7 +70,6 @@ public class ClientMapper extends Mapper<MClient, Client>{
         }
 
         return client;
-        //return this.toEntity(mClient, true);
     }
 
     public MClient toDomain(Client client){

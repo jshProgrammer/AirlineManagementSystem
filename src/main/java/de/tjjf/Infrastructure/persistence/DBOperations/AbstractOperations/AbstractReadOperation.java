@@ -4,7 +4,6 @@ import de.tjjf.Infrastructure.persistence.entities.Model;
 import de.tjjf.Infrastructure.persistence.results.ModelResult;
 import jakarta.transaction.Transactional;
 
-// D = String/int
 @Transactional
 public abstract class AbstractReadOperation<T extends Model, D> extends AbstractDatabaseOperation<ModelResult<T>> {
 

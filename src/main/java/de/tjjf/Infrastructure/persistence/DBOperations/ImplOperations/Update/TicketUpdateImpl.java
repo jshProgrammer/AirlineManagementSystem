@@ -18,9 +18,6 @@ public class TicketUpdateImpl extends AbstractUpdateOperation<Ticket, Long> {
             throw new RuntimeException("Flight not found");
         }
         modelToPersist.setFlightNum(managedFlight);
-
-        //Client managedClient = em.find(Client.class, modelToPersist.getClient().getPersonId());
-        //modelToPersist.setClient(managedClient);
     }
 
     protected void postPersist() {

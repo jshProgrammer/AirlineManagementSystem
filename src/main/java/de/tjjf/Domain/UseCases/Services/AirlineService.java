@@ -2,13 +2,10 @@ package de.tjjf.Domain.UseCases.Services;
 
 import de.tjjf.Domain.UseCases.AuthenticationUseCase;
 import de.tjjf.Domain.UseCases.AuthorizedUseCase;
-import de.tjjf.Domain.UseCases.CancelTicketUseCase;
 import de.tjjf.Domain.models.MAirline;
 import de.tjjf.Domain.ports.DB.DataAccess;
 
-import java.util.concurrent.atomic.AtomicReference;
 
-//TODO: Braun fragen: dürfen wir das Interface implementieren oder sollen wir es im Konstruktor übergeben
 public class AirlineService extends AuthorizedUseCase {
     DataAccess.MAirlineRepository port;
 

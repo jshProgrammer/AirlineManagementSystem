@@ -1,7 +1,8 @@
 package de.tjjf.IntegrationTests;
 
 import static org.junit.jupiter.api.Assertions.*;
-import de.tjjf.Infrastructure.Client.ClientOperations.APIOperations.*;
+
+import de.tjjf.Infrastructure.GraphQLClient.APIOperations.*;
 import de.tjjf.Infrastructure.api.DemoServlet;
 import de.tjjf.Infrastructure.api.InputModels.*;
 import de.tjjf.Infrastructure.api.models.*;

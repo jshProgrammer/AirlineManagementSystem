@@ -2,8 +2,6 @@ package de.tjjf.Infrastructure.api.mapper;
 
 import de.tjjf.Domain.models.MAirline;
 import de.tjjf.Infrastructure.api.models.APIAirline;
-import de.tjjf.Infrastructure.persistence.entities.Airline;
-import de.tjjf.Infrastructure.persistence.mapper.AddressMapper;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,7 +22,6 @@ public class APIAirlineMapper extends AbstractAPIMapper<APIAirline, MAirline> {
 
     @Override
     public MAirline toDomainEntity(APIAirline model) {
-        //TODO: headquarters wieder in api implementieren, sonst bei update gelöscht!
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
         Date date;
@@ -37,7 +34,7 @@ public class APIAirlineMapper extends AbstractAPIMapper<APIAirline, MAirline> {
         return new MAirline(
                 model.getName(),
                 date,
-                "",
+                "Default",
                 new APIAddressMapper().toDomainEntity(model.getAddress()),
                 model.getPhoneNumber(),
                 model.getEmail()

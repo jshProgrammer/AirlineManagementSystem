@@ -18,7 +18,6 @@ public class APIFlightMapper extends AbstractAPIMapper<APIFlight, MFlight> {
                 mFlight.getArrivalDateTime().toString(),
                 mFlight.getArrivalAirport().getCode(),
                 mFlight.getBoardingTime().toString(),
-                //TODO: enum Umwandlung noch durch mapper
                 APIFlight.FlightStatus.valueOf(mFlight.getStatus().name()),
                 mFlight.getDuration(),
                 mFlight.getPilot().getPersonId(),
@@ -28,9 +27,6 @@ public class APIFlightMapper extends AbstractAPIMapper<APIFlight, MFlight> {
 
     @Override
     public MFlight toDomainEntity(APIFlight apiFlight){
-        //TODO: vermtulich probleme weil DateTime und nicht Date?!
-
-        // auch das auslesen mit readEmployeeById funktioniert noch komplett richtig
         return new MFlight(
                 apiFlight.getFlightNum(),
                 new AirplanePortImpl().readAirplaneBySerialNum(apiFlight.getAirplaneSerialNum()),
@@ -39,7 +35,6 @@ public class APIFlightMapper extends AbstractAPIMapper<APIFlight, MFlight> {
                 DateParser.getDateTimeFromRFC3339(apiFlight.getArrivalDateTime()),
                 new AirportPortImpl().readAirportByCode(apiFlight.getArrivalAirportCode()),
                 DateParser.getDateTimeFromRFC3339(apiFlight.getBoardingTime()),
-                //TODO: enum Umwandlung noch durch mapper
                 MFlight.FlightStatus.valueOf(apiFlight.getStatus().name()),
                 apiFlight.getDuration(),
                 new EmployeePortImpl().readEmployeeById(apiFlight.getPilotId()),

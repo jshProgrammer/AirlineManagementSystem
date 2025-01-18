@@ -7,7 +7,6 @@ public class APITicket implements APIModel {
 
     private long ticketId;
 
-    // in order to store clientId or employeeId
     private long personId;
     private boolean isClient;
 

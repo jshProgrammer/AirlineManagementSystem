@@ -7,7 +7,6 @@ public class FlightMapper extends Mapper<MFlight, Flight> {
 
     public Flight toEntity(MFlight mFlight){
         return new Flight(
-                //mFlight.getFlightNum(),
                 new AirplaneMapper().toEntity(mFlight.getAirplane()),
                 mFlight.getDepartureDateTime(),
                 new AirportMapper().toEntity(mFlight.getDepartureAirport()),

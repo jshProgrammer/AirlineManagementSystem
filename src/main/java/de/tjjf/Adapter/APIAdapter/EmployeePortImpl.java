@@ -1,8 +1,6 @@
 package de.tjjf.Adapter.APIAdapter;
 
-import de.tjjf.Adapter.DatabaseAdapter.MAirlineRepositoryImpl;
 import de.tjjf.Adapter.DatabaseAdapter.MEmployeeRepositoryImpl;
-import de.tjjf.Domain.UseCases.Services.AirlineService;
 import de.tjjf.Domain.UseCases.Services.EmployeeService;
 import de.tjjf.Domain.models.MEmployee;
 import de.tjjf.Domain.ports.API.EmployeePort;
@@ -14,7 +12,7 @@ public class EmployeePortImpl implements EmployeePort {
                 createEmployee(employee);
     }
 
-    //TODO: implement authentication here
+    //10.01.2025: Gespräch mit Prof. Dr. Braun: Authorization nicht notwendig da Error Weitergabe von Resolver zu Client in GraphQL kaum umsetzbar
     @Override
     public boolean verifyPassword(MEmployee employee, String password) {
         return true;

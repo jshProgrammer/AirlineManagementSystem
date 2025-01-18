@@ -1,7 +1,6 @@
 package de.tjjf.Domain.models;
 
 import de.tjjf.Domain.Exceptions.NoSeatsAvailableException;
-import de.tjjf.Domain.UseCases.AddBookingUseCase;
 import java.util.Date;
 import java.util.List;
 
@@ -45,13 +44,11 @@ public class MTicket implements MModel {
         this.ticketStatus = ticketStatus;
 
         setLuggageWeight(weightOfLuggage);
-        //AddBookingUseCase.addBooking(this);
 
         flight.addTicket(this);
         person.addTickets(this);
     }
 
-    //TODO: sollte eigentlich in Use-Case, aber dann fehlt uns die Funktion setSeating-class, die wir hier ja aber nicht auf public setzen dürfen?!
     public void upgradeSeatingClass(SeatingClass newSeatingClass) throws NoSeatsAvailableException {
         if(isSeatingUpdateAvailable(newSeatingClass)) {
             this.seatingClass = newSeatingClass;
@@ -83,7 +80,6 @@ public class MTicket implements MModel {
         return reservedNumberOfSeats < totalNumberOfSeats;
     }
 
-    //TODO: gleiches Problem wie oben => dann müssten wir eine Methode setLuggageWeight bereitstellen
     public void upgradeLuggageWeight(int newWeight) throws IllegalArgumentException {
         //Use only 25% of maximum luggage weight for luggage upgrade, the rest is reserved for standard bookings
         //Simplification: Added weight cannot be removed from booking anymore

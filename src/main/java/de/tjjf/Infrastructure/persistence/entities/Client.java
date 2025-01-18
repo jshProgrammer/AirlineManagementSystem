@@ -8,7 +8,6 @@ import java.util.List;
 
 @Entity
 public class Client implements Model {
-    //TODO: hier evtl. mapped-Attribut nötig
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long personId;

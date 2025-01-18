@@ -26,7 +26,6 @@ public class APIEmployeeMapper extends AbstractAPIMapper<APIEmployee, MEmployee>
     @Override
     public MEmployee toDomainEntity(APIEmployee apiEmployee) {
         MPerson person = new PersonMapper().toDomain(apiEmployee);
-        //TODO: null für hiredate und position nicht erlaubt => in Graphql einbinden oder bei DB entfernen?!
         return new MEmployee(
                 person.getPersonId(),
                 person.getFirstName(),
@@ -36,9 +35,8 @@ public class APIEmployeeMapper extends AbstractAPIMapper<APIEmployee, MEmployee>
                 person.getPhonenumber(),
                 new APIAddressMapper().toDomainEntity(apiEmployee.getAddress()),
                 person.getEmail(),
-                //TODO: was hier tun? salary echt einfach auf 0 initalisieren?
-                0,
-                "Test",
+                4000,
+                "Default",
                 new AirlinePortImpl().readAirlineByName(apiEmployee.getAirlineName()),
                 new Date()
         );

@@ -1,4 +1,4 @@
-package de.tjjf.Infrastructure.Client.ClientOperations.results;
+package de.tjjf.Infrastructure.GraphQLClient.results;
 
 import de.tjjf.Infrastructure.api.models.APIModel;
 

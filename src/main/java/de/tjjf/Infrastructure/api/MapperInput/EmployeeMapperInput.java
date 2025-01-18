@@ -10,7 +10,6 @@ public class EmployeeMapperInput {
     public APIEmployeeInput toClient(APIEmployee employee) {
         APIAddressInput apiAddress = new AddressMapperInput().toClient(employee.getAddress());
         return new APIEmployeeInput(
-                //employee.getEmployeeId(),
                 employee.getFirstName(),
                 employee.getMiddleNames(),
                 employee.getLastName(),

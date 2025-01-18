@@ -1,10 +1,7 @@
 package de.tjjf.Infrastructure.persistence.mapper;
 
-import de.tjjf.Domain.models.MAddress;
-import de.tjjf.Domain.models.MEmployee;
 import de.tjjf.Domain.models.MPerson;
 import de.tjjf.Domain.models.MTicket;
-import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Read.TicketReadImpl;
 import de.tjjf.Infrastructure.persistence.entities.Client;
 import de.tjjf.Infrastructure.persistence.entities.Employee;
 import de.tjjf.Infrastructure.persistence.entities.Ticket;

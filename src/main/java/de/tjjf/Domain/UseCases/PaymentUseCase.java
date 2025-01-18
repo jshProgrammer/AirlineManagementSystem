@@ -1,25 +1,13 @@
 package de.tjjf.Domain.UseCases;
 
-import java.io.IOException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.*;
 import com.stripe.param.*;
-import de.tjjf.Domain.Exceptions.UnauthorizedException;
 import de.tjjf.Domain.PasswordDecryption;
-import de.tjjf.Domain.PasswordEncryption;
 import de.tjjf.Domain.models.MPayment;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 
 public class PaymentUseCase extends AuthorizedUseCase {
 
@@ -122,7 +110,6 @@ public class PaymentUseCase extends AuthorizedUseCase {
 
     }
 
-    // Methode zur Konvertierung von MPayment zu einer PaymentMethod
     public static String createPaymentMethodFromMPayment(MPayment mPayment) throws StripeException {
 
         try {
@@ -131,7 +118,6 @@ public class PaymentUseCase extends AuthorizedUseCase {
             throw new RuntimeException("Password could not be decrypted");
         }
 
-        // Test-Kartendaten konfigurieren
         Map<String, Object> cardParams = new HashMap<>();
         cardParams.put("number", mPayment.getCardNumber());
         cardParams.put("exp_month", mPayment.getExpMonth());
@@ -142,7 +128,6 @@ public class PaymentUseCase extends AuthorizedUseCase {
         paymentMethodParams.put("type", "card");
         paymentMethodParams.put("card", cardParams);
 
-        // Erstellen der PaymentMethod in Stripe
         PaymentMethod paymentMethod = PaymentMethod.create(paymentMethodParams);
         System.out.println("Generated PaymentMethod ID: " + paymentMethod.getId());
         return paymentMethod.getId();
@@ -150,7 +135,6 @@ public class PaymentUseCase extends AuthorizedUseCase {
     }
 
     public SetupIntent createSetupIntent() {
-        // Setze deinen Secret API Key
         try {
             Stripe.apiKey = PasswordDecryption.decryptPassword("src/main/java/de/tjjf/Domain/paymentApiKey.enc", "src/main/java/de/tjjf/Domain/paymentApiKey.key");  // Ersetze mit deinem Secret Key
         }
@@ -162,7 +146,6 @@ public class PaymentUseCase extends AuthorizedUseCase {
                 .build();
 
         try {
-            // Erstelle den SetupIntent
             SetupIntent setupIntent = SetupIntent.create(params);
             return setupIntent;
         } catch (Exception e) {

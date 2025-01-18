@@ -58,7 +58,6 @@ public class InvoicePDF {
             table.addHeaderCell(new Cell().add(new Paragraph("Sitzklasse").setBold()).setTextAlignment(TextAlignment.CENTER));
             table.addHeaderCell(new Cell().add(new Paragraph("Betrag (EUR)").setBold()).setTextAlignment(TextAlignment.CENTER));
 
-            // Datenzeile
             String flight = Long.toString(ticket.getFlight().getFlightNum());
             String seatingclass = ticket.getSeatingClass().toString();
             String price = Integer.toString(ticket.getTotalPrice());

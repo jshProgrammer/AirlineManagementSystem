@@ -1,4 +1,4 @@
-package de.tjjf.Infrastructure.Client.ClientOperations.APIOperations;
+package de.tjjf.Infrastructure.GraphQLClient.APIOperations;
 
 import de.tjjf.Infrastructure.api.InputModels.APIClientInput;
 import de.tjjf.Infrastructure.api.models.APIClient;
@@ -9,7 +9,6 @@ import java.net.URISyntaxException;
 public class ClientAPIOperation extends AbstractAPIOperation {
 
     private String transformToQuery(APIClientInput apiClientInput, Long clientId, String commandName, boolean hasResult) {
-        //TODO: Rückgabe brauchen wir dann vermtulich für Update nicht
         String query = """
         {
             "query": "mutation {

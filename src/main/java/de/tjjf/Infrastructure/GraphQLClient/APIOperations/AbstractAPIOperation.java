@@ -1,4 +1,4 @@
-package de.tjjf.Infrastructure.Client.ClientOperations.APIOperations;
+package de.tjjf.Infrastructure.GraphQLClient.APIOperations;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

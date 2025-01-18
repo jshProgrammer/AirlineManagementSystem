@@ -2,7 +2,6 @@ package de.tjjf.Domain.UseCases.Services;
 
 import de.tjjf.Domain.UseCases.AuthenticationUseCase;
 import de.tjjf.Domain.UseCases.AuthorizedUseCase;
-import de.tjjf.Domain.UseCases.CancelTicketUseCase;
 import de.tjjf.Domain.models.MEmployee;
 import de.tjjf.Domain.ports.DB.DataAccess;
 

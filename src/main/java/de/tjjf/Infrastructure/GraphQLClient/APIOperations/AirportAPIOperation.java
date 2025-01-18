@@ -1,4 +1,4 @@
-package de.tjjf.Infrastructure.Client.ClientOperations.APIOperations;
+package de.tjjf.Infrastructure.GraphQLClient.APIOperations;
 
 import de.tjjf.Infrastructure.api.InputModels.APIAirportInput;
 import de.tjjf.Infrastructure.api.models.APIAirport;

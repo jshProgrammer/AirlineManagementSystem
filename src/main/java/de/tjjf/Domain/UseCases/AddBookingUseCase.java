@@ -3,10 +3,8 @@ package de.tjjf.Domain.UseCases;
 import de.tjjf.Domain.EmailSender;
 import de.tjjf.Domain.models.MPayment;
 import de.tjjf.Domain.models.MTicket;
-import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Update.TicketUpdateImpl;
 
 public class AddBookingUseCase extends AuthorizedUseCase {
-
 
     public AddBookingUseCase() {
         super(AuthenticationUseCase.getInstance());

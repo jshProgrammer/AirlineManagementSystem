@@ -1,8 +1,6 @@
 package de.tjjf.Domain.UseCases;
 
-
-import de.tjjf.Domain.Exceptions.AuthException;
-
+import de.tjjf.Domain.Exceptions.UnauthorizedException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -26,10 +24,9 @@ public class AuthenticationUseCase {
 
     private static String serverURL = "https://staging.api.fiw.thws.de/auth/api/users/me";
 
-    public static String authenticate(String username, String password) throws AuthException {
+    public static String authenticate(String username, String password) throws UnauthorizedException {
         AuthenticationUseCase authenticationUseCase = getInstance();
         try (final HttpClient httpClient = HttpClient.newHttpClient()) {
-            //TODO: implement test token
 
             String auth = username + ":" + password;
             String encodedAuth = Base64.getEncoder().encodeToString(auth.getBytes(StandardCharsets.UTF_8));
@@ -48,7 +45,7 @@ public class AuthenticationUseCase {
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            throw new AuthException("Authentication failed, Username or Password are not Valid", e);
+            throw new UnauthorizedException("Authentication failed, Username or Password are not Valid", e);
         }
     }
 

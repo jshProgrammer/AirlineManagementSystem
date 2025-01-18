@@ -2,7 +2,6 @@ package de.tjjf.Infrastructure.persistence.entities;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,13 +26,8 @@ public class Airline implements Model {
     @Column(nullable=false)
     private String address;
 
-    /*@OneToMany(mappedBy = "belongingAirline", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Airplane> airplanes;*/
-
     @OneToMany(mappedBy = "airline")
     private List<Employee> employees;
-
-    //TODO: sollen wir hier mit OneToMany auch die Flugzeuge speichern => eig wird das ja selten abgerufen
 
     public Airline() {}
 

@@ -24,17 +24,6 @@ public class Ticket implements Model {
     @JoinColumn(name = "employee_id", referencedColumnName = "personId", insertable = false, updatable = false, nullable = true)
     private Employee employee;
 
-    //@ManyToOne
-    //@JoinColumn(name = "employee_id", nullable = false)
-    //private Employee employee
-    //@ManyToOne
-    //@JoinColumn(name = "client_id")
-    //private Client client;
-//
-    //@ManyToOne
-    //@JoinColumn(name = "employee_id")
-    //private Employee employee;
-
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "flight_id", referencedColumnName = "flightNum")
     private Flight flight;
@@ -58,7 +47,7 @@ public class Ticket implements Model {
     private int maxWeightOfLuggage;
 
     public Ticket(){}
-//TODO: hier noch ne andere lösung wegen public finden
+
     public Ticket(Flight flight, Date dateTimeOfBooking, int totalPrice, int seatNum, String seatingClass, String ticketStatus, int maxWeightOfLuggage) {
         this.flight = flight;
         this.dateTimeOfBooking = dateTimeOfBooking;

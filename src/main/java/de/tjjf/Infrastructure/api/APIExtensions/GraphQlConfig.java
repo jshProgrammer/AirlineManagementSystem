@@ -16,16 +16,16 @@ public class GraphQlConfig {
     }
     @Bean
     public GraphQLScalarType dateScalar() {
-        return ExtendedScalars.Date; // Nur Datum
+        return ExtendedScalars.Date;
     }
     @Bean
     public GraphQLScalarType dateTimeScalar() {
-        return ExtendedScalars.DateTime; // Datum und Zeit
+        return ExtendedScalars.DateTime;
     }
 
     @Bean
     public GraphQLScalarType timeScalar() {
-        return ExtendedScalars.Time; // Nur Zeit
+        return ExtendedScalars.Time;
     }
 
     @Bean
@@ -36,17 +36,17 @@ public class GraphQlConfig {
                 .coercing(new Coercing<Object, Object>() {
                     @Override
                     public Object serialize(Object dataFetcherResult) {
-                        return null; // Immer `null` als Ausgabe
+                        return null;
                     }
 
                     @Override
                     public Object parseValue(Object input) {
-                        return null; // Keine Eingabewerte erforderlich
+                        return null;
                     }
 
                     @Override
                     public Object parseLiteral(Object input) {
-                        return null; // Keine Literalverarbeitung erforderlich
+                        return null;
                     }
                 })
                 .build();

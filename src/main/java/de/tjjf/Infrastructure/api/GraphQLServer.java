@@ -4,7 +4,7 @@ import org.eclipse.jetty.ee10.servlet.ServletContextHandler;
 import org.eclipse.jetty.ee10.servlet.ServletHolder;
 import org.eclipse.jetty.server.Server;
 
-public class MainTest {
+public class GraphQLServer {
     public static void main(String[] args) throws Exception {
         Server server = new Server(8081);
 
@@ -12,12 +12,10 @@ public class MainTest {
         context.setContextPath( "/" );
         server.setHandler( context );
 
-        // change path if graphql server should have another URI
         context.addServlet( new ServletHolder( new DemoServlet( ) ), "/airlineManagement" );
 
         server.start( );
 
-        // The next statement keeps the server running -- don't remove it!
         server.join( );
     }
 }

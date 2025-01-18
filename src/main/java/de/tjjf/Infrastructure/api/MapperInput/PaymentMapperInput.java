@@ -1,9 +1,7 @@
 package de.tjjf.Infrastructure.api.MapperInput;
 
 import de.tjjf.Infrastructure.api.InputModels.APIPaymentInput;
-import de.tjjf.Infrastructure.api.InputModels.APITicketInput;
 import de.tjjf.Infrastructure.api.models.APIPayment;
-import de.tjjf.Infrastructure.api.models.APITicket;
 
 public class PaymentMapperInput {
 

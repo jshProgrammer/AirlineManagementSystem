@@ -2,12 +2,8 @@ package de.tjjf.Infrastructure.api.resolvers;
 
 import de.tjjf.Adapter.APIAdapter.BookingPortImpl;
 import de.tjjf.Domain.models.MTicket;
-import de.tjjf.Infrastructure.api.InputModels.APIClientInput;
-import de.tjjf.Infrastructure.api.InputModels.APIEmployeeInput;
 import de.tjjf.Infrastructure.api.InputModels.APIPaymentInput;
 import de.tjjf.Infrastructure.api.InputModels.APITicketInput;
-import de.tjjf.Infrastructure.api.MapperInput.ClientMapperInput;
-import de.tjjf.Infrastructure.api.MapperInput.EmployeeMapperInput;
 import de.tjjf.Infrastructure.api.MapperInput.PaymentMapperInput;
 import de.tjjf.Infrastructure.api.MapperInput.TicketMapperInput;
 import de.tjjf.Infrastructure.api.mapper.*;

@@ -7,7 +7,6 @@ import de.tjjf.Infrastructure.api.models.APITicket;
 import de.tjjf.Adapter.APIAdapter.ClientPortImpl;
 import de.tjjf.Adapter.APIAdapter.EmployeePortImpl;
 import de.tjjf.Adapter.APIAdapter.FlightPortImpl;
-import de.tjjf.Infrastructure.persistence.entities.Client;
 
 public class APITicketMapper extends AbstractAPIMapper<APITicket, MTicket>{
 

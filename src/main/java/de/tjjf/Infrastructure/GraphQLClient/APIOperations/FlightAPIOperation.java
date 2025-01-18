@@ -1,4 +1,4 @@
-package de.tjjf.Infrastructure.Client.ClientOperations.APIOperations;
+package de.tjjf.Infrastructure.GraphQLClient.APIOperations;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import de.tjjf.Infrastructure.api.DateParser;
@@ -10,9 +10,6 @@ import java.util.List;
 public class FlightAPIOperation extends AbstractAPIOperation {
 
     private String transformToQuery(APIFlightInput apiFlightInput, Long flightNum, String commandName, boolean hasResult) {
-        //TODO: wie enums in query einfügen?!
-        System.out.println("TEST.X " + DateParser.getDateTimeFromDBInRFC3339(apiFlightInput.getDepartureDateTime()));
-        System.out.println("TEST.WTF copilotId: " + apiFlightInput.getCopilotId());
         String query = """
         {
             "query": "mutation {
@@ -32,7 +29,6 @@ public class FlightAPIOperation extends AbstractAPIOperation {
         }
         """.formatted(
                 commandName,
-                //TODO: brauchen wir nicht getDateTime...
                 (flightNum == 0L) ? "" : "flightNum: %d,".formatted(flightNum),
                 apiFlightInput.getAirplaneSerialNum(),
                 DateParser.getDateTimeFromDBInRFC3339(apiFlightInput.getDepartureDateTime()),
@@ -51,7 +47,6 @@ public class FlightAPIOperation extends AbstractAPIOperation {
 
     }
 
-    //TODO: hier vermutlich noch Probleme wegen Datetime statt Date
     public APIFlight createFlight(APIFlightInput apiFlightInput) {
         return execute(transformToQuery(apiFlightInput, 0L, "createFlight", true), "createFlight", APIFlight.class);
     }

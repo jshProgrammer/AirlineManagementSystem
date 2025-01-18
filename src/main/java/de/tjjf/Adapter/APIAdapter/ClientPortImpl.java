@@ -1,8 +1,6 @@
 package de.tjjf.Adapter.APIAdapter;
 
-import de.tjjf.Adapter.DatabaseAdapter.MAirlineRepositoryImpl;
 import de.tjjf.Adapter.DatabaseAdapter.MClientRepositoryImpl;
-import de.tjjf.Domain.UseCases.Services.AirlineService;
 import de.tjjf.Domain.UseCases.Services.ClientService;
 import de.tjjf.Domain.models.MClient;
 import de.tjjf.Domain.ports.API.ClientPort;

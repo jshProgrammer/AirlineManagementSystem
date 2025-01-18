@@ -1,4 +1,4 @@
-package de.tjjf.Infrastructure.Client.ClientOperations.APIOperations;
+package de.tjjf.Infrastructure.GraphQLClient.APIOperations;
 
 import de.tjjf.Infrastructure.api.DateParser;
 import de.tjjf.Infrastructure.api.InputModels.APIPaymentInput;
@@ -8,7 +8,6 @@ import de.tjjf.Infrastructure.api.models.APITicket;
 public class TicketAPIOperation extends AbstractAPIOperation {
 
     private String transformToQuery(APITicketInput apiTicketInput, APIPaymentInput apiPaymentInput, String commandName) {
-        //TODO: wie hier mit enums vorgehen?
         String query = """
         {
             "query": "mutation {
@@ -53,7 +52,6 @@ public class TicketAPIOperation extends AbstractAPIOperation {
     }
 
     public APITicket addBooking(APITicketInput newBooking, APIPaymentInput paymentInput) {
-        //TODO: hier muss noch iwie payment mit rein?!
         return execute(transformToQuery(newBooking, paymentInput, "addBooking"), "addBooking", APITicket.class);
     }
 
@@ -80,7 +78,6 @@ public class TicketAPIOperation extends AbstractAPIOperation {
         return execute(query, "readTicketById", APITicket.class);
     }
 
-    //TODO: hier erst noch besprechen, ob wirklich id ausreicht oder ganzes input objekt nötig
     public void cancelEmployeeTicket(long employeeId, int flightNum) {
         String query = """
         {
@@ -105,7 +102,6 @@ public class TicketAPIOperation extends AbstractAPIOperation {
         execute(query, "cancelTicketClient", APITicket.class);
     }
 
-    //TODO: hier müsste APISeatingClassInput eigentlich hin?!
     public void upgradeSeatingClass(long ticketId, String newSeatingClass) {
         String query = """
         {

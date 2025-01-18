@@ -50,6 +50,5 @@ public class CancelTicketUseCase extends AuthorizedUseCase {
             if(changeInDB) employeePort.update(employee);
         }
 
-
     }
 }

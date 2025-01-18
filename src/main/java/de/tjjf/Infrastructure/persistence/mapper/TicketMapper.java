@@ -1,6 +1,5 @@
 package de.tjjf.Infrastructure.persistence.mapper;
 
-
 import de.tjjf.Domain.models.MClient;
 import de.tjjf.Domain.models.MEmployee;
 import de.tjjf.Domain.models.MPerson;
@@ -8,8 +7,6 @@ import de.tjjf.Domain.models.MTicket;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Read.ClientReadImpl;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Read.EmployeeReadImpl;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Read.FlightReadImpl;
-import de.tjjf.Infrastructure.persistence.entities.Client;
-import de.tjjf.Infrastructure.persistence.entities.Employee;
 import de.tjjf.Infrastructure.persistence.entities.Flight;
 import de.tjjf.Infrastructure.persistence.entities.Ticket;
 

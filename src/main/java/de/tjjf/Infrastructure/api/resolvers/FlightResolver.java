@@ -1,16 +1,11 @@
 package de.tjjf.Infrastructure.api.resolvers;
 
 
-import de.tjjf.Adapter.APIAdapter.AirlinePortImpl;
 import de.tjjf.Adapter.APIAdapter.FlightPortImpl;
 import de.tjjf.Infrastructure.api.InputModels.APIFlightInput;
-import de.tjjf.Infrastructure.api.MapperInput.EmployeeMapperInput;
 import de.tjjf.Infrastructure.api.MapperInput.FlightMapperInput;
-import de.tjjf.Infrastructure.api.mapper.APIAirlineMapper;
 import de.tjjf.Infrastructure.api.mapper.APIFlightMapper;
-import de.tjjf.Infrastructure.api.models.APIEmployee;
 import de.tjjf.Infrastructure.api.models.APIFlight;
-import de.tjjf.Infrastructure.persistence.mapper.FlightMapper;
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import graphql.kickstart.tools.GraphQLQueryResolver;
 import org.springframework.stereotype.Component;

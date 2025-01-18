@@ -4,7 +4,6 @@ import de.tjjf.Infrastructure.persistence.entities.Model;
 import de.tjjf.Infrastructure.persistence.results.NoContentResult;
 import jakarta.transaction.Transactional;
 
-// T is identifier => String or int
 @Transactional
 public class AbstractDeleteOperation<T extends Model, I> extends AbstractDatabaseOperation<NoContentResult> {
 

@@ -8,10 +8,7 @@ import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
 
-import de.tjjf.Domain.EmailSender;
 import org.apache.commons.validator.routines.EmailValidator;
-
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 //TODO: sollte die Klasse nicht noch abstract werden?
 public class MPerson implements MModel
@@ -54,14 +51,6 @@ public class MPerson implements MModel
 
         //TODO: geht hier scheinbar nicht
         //if(this.tickets != null) this.tickets = tickets;
-    }
-
-    public static void main(String[] args) {
-        // should not throw Illegal Argument Exception
-        MPerson person = new MPerson(1, "A", null, "C", new Date(1998), "091234u", new MAddress("test", 1, 34534,"Berlin", "germany"), "test@test.com", null);
-
-        // should throw IllegalArgumentException
-        //MPerson person2 = new MPerson(1, "A", null, "C", new Date(1998), "091234u", "Adresse", "a@aa", "passwd");
     }
 
 

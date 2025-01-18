@@ -1,9 +1,5 @@
 package de.tjjf.Infrastructure.api.models;
 
-import org.apache.commons.validator.routines.EmailValidator;
-
-import java.util.Date;
-
 public class APIAirline implements APIModel {
 
     public String name;

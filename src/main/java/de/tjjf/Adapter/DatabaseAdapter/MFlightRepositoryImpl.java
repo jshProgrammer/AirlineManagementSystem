@@ -6,12 +6,7 @@ import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Create.Fli
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Delete.FlightDeleteImpl;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Read.FlightReadImpl;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Update.FlightUpdateImpl;
-import de.tjjf.Infrastructure.persistence.EntityManagerFactorySingleton;
-import de.tjjf.Infrastructure.persistence.entities.Flight;
 import de.tjjf.Infrastructure.persistence.mapper.FlightMapper;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Query;
 
 import java.util.List;
 

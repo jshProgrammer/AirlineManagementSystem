@@ -1,16 +1,13 @@
 package de.tjjf.Infrastructure.persistence.entities;
 
-import de.tjjf.Domain.models.MFlight;
 import jakarta.persistence.*;
 import jakarta.persistence.Entity;
 
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "flights")
 public class Flight implements Model {
-    //TODO: evtl @JoinColumn damit Anzeigen aller Buchungen
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long flightNum;
@@ -44,7 +41,6 @@ public class Flight implements Model {
     private int duration;
 
     @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-    //TODO: hier veränderungen vorgenommen für api
     @JoinColumn(name = "pilot_id", referencedColumnName = "personId")
     private Employee pilot;
 
