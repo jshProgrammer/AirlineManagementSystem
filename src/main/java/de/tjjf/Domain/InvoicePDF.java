@@ -62,15 +62,16 @@ public class InvoicePDF {
             String flight = Long.toString(ticket.getFlight().getFlightNum());
             String seatingclass = ticket.getSeatingClass().toString();
             String price = Integer.toString(ticket.getTotalPrice());
+            String price2 = price +",00 ";
             table.addCell(new Cell().add(new Paragraph(flight)).setTextAlignment(TextAlignment.CENTER));
             table.addCell(new Cell().add(new Paragraph(seatingclass)).setTextAlignment(TextAlignment.CENTER));
-            table.addCell(new Cell().add(new Paragraph(price)).setTextAlignment(TextAlignment.CENTER));
+            table.addCell(new Cell().add(new Paragraph(price2)).setTextAlignment(TextAlignment.CENTER));
 
             document.add(table);
 
             document.add(new Paragraph("\n"));
 
-            Paragraph total = new Paragraph("Gesamtbetrag: "+price)
+            Paragraph total = new Paragraph("Gesamtbetrag: "+price+",00 €")
                     .setBold()
                     .setTextAlignment(TextAlignment.RIGHT);
             document.add(total);
