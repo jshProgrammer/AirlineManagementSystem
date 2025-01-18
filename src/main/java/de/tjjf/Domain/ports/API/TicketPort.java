@@ -7,8 +7,8 @@ import de.tjjf.Domain.models.MTicket;
 
 public interface TicketPort {
     MTicket addBooking(MTicket newBooking, MPayment payment);
-    MTicket readTicketById(int id);
-    void upgradeSeatingClass(int ticketId, MTicket.SeatingClass newSeatingClass) throws NoSeatsAvailableException;
-    void upgradeLuggageWeight(int ticketId, int newWeight) throws IllegalArgumentException;
-    void cancelTicket(MPerson person, int flightnum);
+    MTicket readTicketById(long id);
+    void upgradeSeatingClass(long ticketId, MTicket.SeatingClass newSeatingClass) throws NoSeatsAvailableException;
+    void upgradeLuggageWeight(long ticketId, int newWeight) throws IllegalArgumentException;
+    void cancelTicket(MPerson person, long flightnum);
 }

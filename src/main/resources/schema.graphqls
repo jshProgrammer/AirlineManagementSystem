@@ -227,8 +227,8 @@ type Mutation {
     upgradeSeatingClass(ticketId: Long, newSeatingClass: APISeatingClassInput): Void
     upgradeLuggageWeight(ticketId: Long, newLuggageWeight: Int): Void
 
-    cancelTicketEmployee(employeeId: Int, flightNum: Int): Void
-    cancelTicketClient(clientId: Int, flightNum: Int): Void
+    cancelTicketEmployee(employeeId: Long, flightNum: Long): Void
+    cancelTicketClient(clientId: Long, flightNum: Long): Void
 
     createAirport(airport: APIAirportInput): Void
 
@@ -236,5 +236,5 @@ type Mutation {
     updateAirline(airline: APIAirlineInput): Void
 
     createAirplane(airplane: APIAirplaneInput): Void
-    setOperable(serialNum: Int, isOperable: Boolean): Void
+    setOperable(serialNum: Long, isOperable: Boolean): Void
 }

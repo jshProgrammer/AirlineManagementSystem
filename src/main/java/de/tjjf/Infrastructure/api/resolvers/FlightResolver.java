@@ -25,7 +25,7 @@ public class FlightResolver implements GraphQLQueryResolver, GraphQLMutationReso
         return new APIFlightMapper().toAPIEntity(new FlightPortImpl().createFlight(new APIFlightMapper().toDomainEntity(apiFlight)));
     }
 
-    public APIFlight readFlightByFlightNum(int flightNum) {
+    public APIFlight readFlightByFlightNum(long flightNum) {
         return new APIFlightMapper().toAPIEntity(new FlightPortImpl().readFlightByNum(flightNum));
     }
 

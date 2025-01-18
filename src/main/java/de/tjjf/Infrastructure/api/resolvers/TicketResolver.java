@@ -25,20 +25,20 @@ public class TicketResolver implements GraphQLQueryResolver, GraphQLMutationReso
         return new APITicketMapper().toAPIEntity(new BookingPortImpl().addBooking(new APITicketMapper().toDomainEntity(apiTicket), new APIPaymentMapper().toDomainEntity(apiPayment)));
     }
 
-    public APITicket readTicketById(int ticketId) {
+    public APITicket readTicketById(long ticketId) {
         return new APITicketMapper().toAPIEntity(new BookingPortImpl().readTicketById(ticketId));
     }
 
-    public void upgradeSeatingClass(int ticketId, APITicketInput.SeatingClass newSeatingClass) {
+    public void upgradeSeatingClass(long ticketId, APITicketInput.SeatingClass newSeatingClass) {
         MTicket.SeatingClass seatingClass = Enum.valueOf(MTicket.SeatingClass.class, newSeatingClass.name());
         new BookingPortImpl().upgradeSeatingClass(ticketId, seatingClass);
     }
 
-    public void upgradeLuggageWeight(int ticketId, int newWeight) {
+    public void upgradeLuggageWeight(long ticketId, int newWeight) {
         new BookingPortImpl().upgradeLuggageWeight(ticketId, newWeight);
     }
 
-    public void cancelTicketClient(int clientId, int flightNum) {
+    public void cancelTicketClient(long clientId, long flightNum) {
         APIClient apiClient = new ClientResolver().readClientById(clientId);
         new BookingPortImpl().cancelTicket(new APIClientMapper().toDomainEntity(apiClient), flightNum);
     }

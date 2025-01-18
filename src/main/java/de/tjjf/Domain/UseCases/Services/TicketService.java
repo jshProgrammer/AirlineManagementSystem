@@ -3,9 +3,7 @@ package de.tjjf.Domain.UseCases.Services;
 import de.tjjf.Adapter.DatabaseAdapter.MTicketRepositoryImpl;
 import de.tjjf.Domain.Exceptions.NoSeatsAvailableException;
 import de.tjjf.Domain.UseCases.*;
-import de.tjjf.Domain.models.MPayment;
-import de.tjjf.Domain.models.MPerson;
-import de.tjjf.Domain.models.MTicket;
+import de.tjjf.Domain.models.*;
 import de.tjjf.Domain.ports.DB.DataAccess;
 
 public class TicketService extends AuthorizedUseCase {
@@ -28,7 +26,14 @@ public class TicketService extends AuthorizedUseCase {
     public MTicket addBooking(MTicket newBooking, MPayment mPayment) {
         //new CancelTicketUseCase().authorize();
         if(AddBookingUseCase.addBooking(newBooking, mPayment)){
-            return ticketPort.create(newBooking);
+            MTicket newTicket = ticketPort.create(newBooking);
+            newBooking.getPerson().addTickets(newBooking);
+            if ((newBooking.getPerson() instanceof MClient)) {
+                clientPort.update((MClient) newBooking.getPerson());
+            } else {
+                employeePort.update((MEmployee) newBooking.getPerson());
+            }
+            return newTicket;
         }
         return null;
     }
@@ -50,7 +55,7 @@ public class TicketService extends AuthorizedUseCase {
         new UpgradeLuggageWeightUseCase(ticketPort).upgradeLuggageWeight(ticket, newWeight);
     }
 
-    public void cancelTicket(MPerson person, int flightnum){
+    public void cancelTicket(MPerson person, long flightnum){
         //new CancelTicketUseCase().authorize();
         new CancelTicketUseCase(ticketPort, clientPort, employeePort).cancelTicket(person, flightnum);
     }

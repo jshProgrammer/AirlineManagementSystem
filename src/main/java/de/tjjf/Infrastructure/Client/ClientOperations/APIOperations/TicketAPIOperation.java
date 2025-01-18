@@ -85,24 +85,24 @@ public class TicketAPIOperation extends AbstractAPIOperation {
         String query = """
         {
             "query": "mutation {
-                cancelEmployeeTicket(employeeId: %d, flightNum: %d)
+                cancelTicketEmployee(employeeId: %d, flightNum: %d)
             }"
         }
         """.formatted(employeeId, flightNum);
 
-        execute(query, "cancelEmployeeTicket", APITicket.class);
+        execute(query, "cancelTicketEmployee", APITicket.class);
     }
 
-    public void cancelClientTicket(long personId, int flightNum) {
+    public void cancelClientTicket(long personId, long flightNum) {
         String query = """
         {
             "query": "mutation {
-                cancelClientTicket(clientId: %d, flightNum: %d)
+                cancelTicketClient(clientId: %d, flightNum: %d)
             }"
         }
         """.formatted(personId, flightNum);
 
-        execute(query, "cancelClientTicket", APITicket.class);
+        execute(query, "cancelTicketClient", APITicket.class);
     }
 
     //TODO: hier müsste APISeatingClassInput eigentlich hin?!

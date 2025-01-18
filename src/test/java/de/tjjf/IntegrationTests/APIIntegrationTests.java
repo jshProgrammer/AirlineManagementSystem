@@ -460,7 +460,6 @@ public class APIIntegrationTests {
         APIPaymentInput mp = new APIPaymentInput("4242424242424242", "12", "34", "567");
         APITicket apiTicket = new TicketAPIOperation().addBooking(apiTicketInput, mp);
 
-        //TODO: ticketReadFromDB is null
         APITicket ticketReadFromDB = new TicketAPIOperation().readTicketById(apiTicket.getTicketId());
 
         assertEquals(ticketReadFromDB.getFlightNum(), apiFlight.getFlightNum());
@@ -558,10 +557,40 @@ public class APIIntegrationTests {
         new AirportDeleteImpl(apiAirportInput.getCode()).execute();
     }
 
-    //TODO: cancelTicketTest
     @Test
     void cancelTicketViaAPITest() throws Exception {
+        APIAirlineInput apiAirlineInput = new APIAirlineInput("Test" + System.currentTimeMillis(), date, new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"), "02341324", "test@airline.de");
+        new AirlineAPIOperation().createAirline(apiAirlineInput);
+        APIAirplaneInput apiAirplaneInput = new APIAirplaneInput((int)System.currentTimeMillis(), apiAirlineInput.getName(), true);
+        new AirplaneAPIOperation().createAirplane(apiAirplaneInput);
+        APIAirportInput apiAirportInput = new APIAirportInput("Test" + System.currentTimeMillis(), "TestName", "Germany", "Berlin", "German");
+        new AirportAPIOperation().createAirport(apiAirportInput);
 
+        APIEmployeeInput apiEmployeeInput = new APIEmployeeInput("Jan", "M", "Kowalski", date.toString(), "+4915112345678", new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"), "test@test.de", apiAirlineInput.getName());
+        APIEmployee apiEmployee = new EmployeeAPIOperation().createEmployee(apiEmployeeInput);
+
+        APIFlightInput apiFlightInput = new APIFlightInput(apiAirplaneInput.getSerialNum(), dateTime.toString(), apiAirportInput.getCode(), dateTime.toString(), apiAirportInput.getCode(), dateTime.toString(), APIFlightInput.FlightStatus.scheduled, 120, apiEmployee.getEmployeeId(), apiEmployee.getEmployeeId());
+        APIFlight apiFlight = new FlightAPIOperation().createFlight(apiFlightInput);
+
+        APIClientInput apiClientInput = new APIClientInput("Jan", "M", "Kowalski", date.toString() , "+4915112345678", new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"), "test@test.de", false);
+        APIClient apiClient = new ClientAPIOperation().createClient(apiClientInput);
+
+        APITicketInput apiTicketInput = new APITicketInput(apiClient.getClientId(), true, apiFlight.getFlightNum(), dateTime.toString(), 300, 23, APITicketInput.SeatingClass.Economy,  APITicketInput.TicketStatus.paid, 23);
+        APIPaymentInput mp = new APIPaymentInput("4242424242424242", "12", "34", "567");
+        APITicket apiTicket = new TicketAPIOperation().addBooking(apiTicketInput, mp);
+
+        new TicketAPIOperation().cancelClientTicket(apiClient.getClientId(), apiTicket.getFlightNum());
+
+        APITicket updatedTicketReadFromDB = new TicketAPIOperation().readTicketById(apiTicket.getTicketId());
+
+        assertEquals(APITicket.TicketStatus.canceled, updatedTicketReadFromDB.getTicketStatus());
+
+        new TicketDeleteImpl(updatedTicketReadFromDB.getTicketId()).execute();
+        new FlightDeleteImpl(apiFlight.getFlightNum()).execute();
+        new AirplaneDeleteImpl(apiAirplaneInput.getSerialNum()).execute();
+        new EmployeeDeleteImpl(apiEmployee.getEmployeeId()).execute();
+        new AirlineDeleteImpl(apiAirlineInput.getName()).execute();
+        new AirportDeleteImpl(apiAirportInput.getCode()).execute();
     }
 
 }
