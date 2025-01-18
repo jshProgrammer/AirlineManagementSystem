@@ -14,7 +14,6 @@ public class EmployeeService extends AuthorizedUseCase {
         this.port = port;
     }
 
-    //TODO: noch richtig implementieren
     public boolean verifyPassword(MEmployee employee, String password){
         //new CancelTicketUseCase().authorize();
         return true;

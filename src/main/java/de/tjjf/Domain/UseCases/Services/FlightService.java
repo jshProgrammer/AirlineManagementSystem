@@ -34,7 +34,7 @@ public class FlightService extends AuthorizedUseCase {
 
     public void cancelFlight(MFlight toEntity){
         //new CancelTicketUseCase().authorize();
-        CancelCompleteFlightUseCase.cancelFlight(toEntity);
+        new CancelCompleteFlightUseCase(port).cancelFlight(toEntity);
     }
 
     public List<MFlight> getAllFlights(int pageNumber, int pageSize) {

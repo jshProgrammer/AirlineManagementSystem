@@ -1,5 +1,9 @@
 package de.tjjf.LogicTests;
 
+import de.tjjf.Adapter.DatabaseAdapter.MClientRepositoryImpl;
+import de.tjjf.Adapter.DatabaseAdapter.MEmployeeRepositoryImpl;
+import de.tjjf.Adapter.DatabaseAdapter.MTicketRepositoryImpl;
+import de.tjjf.Domain.EmailSender;
 import de.tjjf.Domain.UseCases.CancelCompleteFlightUseCase;
 import de.tjjf.Domain.UseCases.CancelTicketUseCase;
 import de.tjjf.Domain.models.*;
@@ -27,7 +31,7 @@ public class CancellationTest {
 
     @Test
     public void testCancellationFromCustomerSide() {
-        CancelTicketUseCase.cancelTicket(person2, 123456,false);
+        new CancelTicketUseCase(new MTicketRepositoryImpl(), new MClientRepositoryImpl(), new MEmployeeRepositoryImpl()).cancelTicket(person2, 123456,false);
         assertEquals(flight.getTickets().size(), 1);
         assertEquals(ticket.getTicketStatus(), MTicket.TicketStatus.unpaid);
         assertEquals(ticket2.getTicketStatus(), MTicket.TicketStatus.canceled);

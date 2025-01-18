@@ -3,27 +3,25 @@ package de.tjjf.Domain.UseCases;
 import de.tjjf.Domain.EmailSender;
 import de.tjjf.Domain.Exceptions.UnauthorizedException;
 import de.tjjf.Domain.models.*;
-import de.tjjf.Infrastructure.Client.ClientOperations.APIOperations.TicketAPIOperation;
-import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Update.ClientUpdateImpl;
-import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Update.EmployeeUpdateImpl;
-import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Update.FlightUpdateImpl;
-import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Update.TicketUpdateImpl;
-import de.tjjf.Infrastructure.persistence.entities.Employee;
-import de.tjjf.Infrastructure.persistence.mapper.ClientMapper;
-import de.tjjf.Infrastructure.persistence.mapper.EmployeeMapper;
-import de.tjjf.Infrastructure.persistence.mapper.FlightMapper;
-import de.tjjf.Infrastructure.persistence.mapper.TicketMapper;
+import de.tjjf.Domain.ports.DB.DataAccess;
 
 public class CancelTicketUseCase extends AuthorizedUseCase {
-    public CancelTicketUseCase() {
+    DataAccess.MTicketRepository ticketPort;
+    DataAccess.MClientRepository clientPort;
+    DataAccess.MEmployeeRepository employeePort;
+
+    public CancelTicketUseCase(DataAccess.MTicketRepository ticketPort, DataAccess.MClientRepository clientPort, DataAccess.MEmployeeRepository employeePort) {
         super(AuthenticationUseCase.getInstance());
+        this.ticketPort = ticketPort;
+        this.clientPort = clientPort;
+        this.employeePort = employeePort;
     }
 
-    public static void cancelTicket(MPerson person, int flightnum) {
+    public void cancelTicket(MPerson person, int flightnum) {
         cancelTicket(person, flightnum, true);
     }
 
-    public static void cancelTicket(MPerson person, int flightnum, boolean changeInDB) throws UnauthorizedException {
+    public void cancelTicket(MPerson person, int flightnum, boolean changeInDB) throws UnauthorizedException {
         //10.01.2025: Gespräch mit Prof. Dr. Braun: Authorization nicht notwendig da Error Weitergabe von Resolver zu Client in GraphQL kaum umsetzbar
         //new CancelTicketUseCase().authorize();
 
@@ -33,16 +31,16 @@ public class CancelTicketUseCase extends AuthorizedUseCase {
                 EmailSender.sendCancelationMailCustomer(mFlight);
                 mFlight.getTickets().remove(ticket);
                 ticket.setTicketStatus(MTicket.TicketStatus.canceled);
-                if(changeInDB) new TicketUpdateImpl(new TicketMapper().toEntity(ticket), ticket.getTicketId()).execute();
+                if(changeInDB) ticketPort.update(ticket);
             }
         }
 
         if(person instanceof MClient){
             MClient client = (MClient) person;
-            if(changeInDB) new ClientUpdateImpl(new ClientMapper().toEntity(client), person.getPersonId()).execute();
+            if(changeInDB) clientPort.update(client);
         }else{
             MEmployee employee = (MEmployee) person;
-            if(changeInDB) new EmployeeUpdateImpl(new EmployeeMapper().toEntity(employee), person.getPersonId()).execute();
+            if(changeInDB) employeePort.update(employee);
         }
 
 

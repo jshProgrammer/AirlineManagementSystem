@@ -10,6 +10,7 @@ import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
+//10.01.2025: Gespräch mit Prof. Dr. Braun: Authorization nicht notwendig da Error Weitergabe von Resolver zu Client in GraphQL kaum umsetzbar
 public class AuthenticationUseCase {
     private static AuthenticationUseCase instance;
     public String token;
@@ -76,12 +77,4 @@ public class AuthenticationUseCase {
     public String getToken() {
         return token;
     }
-
-    public static void main(String[] args) {
-        //authenticate("testest", "testtestse");
-        AuthenticationUseCase auth = new AuthenticationUseCase();
-        auth.token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrNjUzODkiLCJleHAiOjE3MzQ5NTIyOTl9.IdLVLC42usbm2finQGgNxVpSLnt4cAI59toz1rN066kylTdxQU-7E0YUBjJUqeL72slB5ZZAH85rKSUHCr2NSw";
-        System.out.println(auth.isAuthorized());
-    }
-
 }

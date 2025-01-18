@@ -2,7 +2,7 @@ package de.tjjf.Domain.UseCases;
 
 import de.tjjf.Domain.Exceptions.UnauthorizedException;
 
-//TODO: alle UseCases von dieser Klasse erben lassen und die authorize Methode aufrufen
+//10.01.2025: Gespräch mit Prof. Dr. Braun: Authorization nicht notwendig da Error Weitergabe von Resolver zu Client in GraphQL kaum umsetzbar
 public abstract class AuthorizedUseCase {
     private final AuthenticationUseCase authenticationUseCase;
 

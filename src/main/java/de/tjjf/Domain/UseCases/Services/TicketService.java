@@ -1,5 +1,6 @@
 package de.tjjf.Domain.UseCases.Services;
 
+import de.tjjf.Adapter.DatabaseAdapter.MTicketRepositoryImpl;
 import de.tjjf.Domain.Exceptions.NoSeatsAvailableException;
 import de.tjjf.Domain.UseCases.*;
 import de.tjjf.Domain.models.MPayment;
@@ -8,40 +9,49 @@ import de.tjjf.Domain.models.MTicket;
 import de.tjjf.Domain.ports.DB.DataAccess;
 
 public class TicketService extends AuthorizedUseCase {
-    DataAccess.MTicketRepository port;
+    DataAccess.MTicketRepository ticketPort;
+    DataAccess.MClientRepository clientPort;
+    DataAccess.MEmployeeRepository employeePort;
 
-    public TicketService(DataAccess.MTicketRepository port) {
+    public TicketService(DataAccess.MTicketRepository ticketPort) {
         super(AuthenticationUseCase.getInstance());
-        this.port = port;
+        this.ticketPort = ticketPort;
+    }
+
+    public TicketService(DataAccess.MTicketRepository ticketPort, DataAccess.MClientRepository clientPort, DataAccess.MEmployeeRepository employeePort) {
+        super(AuthenticationUseCase.getInstance());
+        this.ticketPort = ticketPort;
+        this.clientPort = clientPort;
+        this.employeePort = employeePort;
     }
 
     public MTicket addBooking(MTicket newBooking, MPayment mPayment) {
         //new CancelTicketUseCase().authorize();
         if(AddBookingUseCase.addBooking(newBooking, mPayment)){
-            return port.create(newBooking);
+            return ticketPort.create(newBooking);
         }
         return null;
     }
 
     public MTicket readTicketById(long id) {
         //new CancelTicketUseCase().authorize();
-        return port.readById(id);
+        return ticketPort.readById(id);
     }
 
     public void upgradeSeatingClass(long ticketId, MTicket.SeatingClass newSeatingClass) throws NoSeatsAvailableException {
         //new CancelTicketUseCase().authorize();
         MTicket ticket = readTicketById(ticketId);
-        UpgradeSeatingClassUseCase.updateSeatingClassIfAvailable(ticket, newSeatingClass);
+        new UpgradeSeatingClassUseCase(new MTicketRepositoryImpl()).updateSeatingClassIfAvailable(ticket, newSeatingClass);
     }
 
     public void upgradeLuggageWeight(long ticketId, int newWeight) throws IllegalArgumentException {
         //new CancelTicketUseCase().authorize();
-        MTicket ticket = port.readById(ticketId);
-        new UpgradeLuggageWeightUseCase().upgradeLuggageWeight(ticket, newWeight);
+        MTicket ticket = ticketPort.readById(ticketId);
+        new UpgradeLuggageWeightUseCase(ticketPort).upgradeLuggageWeight(ticket, newWeight);
     }
 
     public void cancelTicket(MPerson person, int flightnum){
         //new CancelTicketUseCase().authorize();
-        CancelTicketUseCase.cancelTicket(person, flightnum);
+        new CancelTicketUseCase(ticketPort, clientPort, employeePort).cancelTicket(person, flightnum);
     }
 }
