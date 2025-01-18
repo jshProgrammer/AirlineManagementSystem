@@ -31,11 +31,7 @@ public class TicketService extends AuthorizedUseCase {
     public void upgradeSeatingClass(long ticketId, MTicket.SeatingClass newSeatingClass) throws NoSeatsAvailableException {
         //new CancelTicketUseCase().authorize();
         MTicket ticket = readTicketById(ticketId);
-
-        //TODO: So ungefähr
-        upgradeSeatingClass(ticketId, newSeatingClass);
-        //TODO => s. usecase
-
+        UpgradeSeatingClassUseCase.updateSeatingClassIfAvailable(ticket, newSeatingClass);
     }
 
     public void upgradeLuggageWeight(long ticketId, int newWeight) throws IllegalArgumentException {
