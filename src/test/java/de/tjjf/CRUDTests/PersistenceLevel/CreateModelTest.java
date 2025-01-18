@@ -7,6 +7,7 @@ import de.tjjf.Infrastructure.persistence.entities.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -17,7 +18,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CreateModelTest {
 
-    public static final String salt = UUID.randomUUID().toString();
+    public String salt;
+
+    @BeforeEach
+    public void initialize() {
+        salt = UUID.randomUUID().toString();
+    }
 
     @Test
     public void testAirlineCreation() {
@@ -128,12 +134,12 @@ public class CreateModelTest {
         String position = "Manager";
         Date hireDate = new Date();
         Employee employee = new Employee(firstName, middleName, lastName, dateOfBirth, employeePhoneNumber, employeeAddress, employeeEmail, new ArrayList<>(), salary, position, airline, hireDate);
-        new EmployeeCreateImpl(employee).execute();
+        Employee createdEmployee = new EmployeeCreateImpl(employee).execute().model;
 
         assertNotNull(employee);
         assertEquals(position, employee.getPosition());
 
-        new EmployeeDeleteImpl(employee.getPersonId()).execute();
+        new EmployeeDeleteImpl(createdEmployee.getPersonId()).execute();
         new AirlineDeleteImpl(airlineName).execute();
     }
 
@@ -244,17 +250,32 @@ public class CreateModelTest {
         Airport arrivalAirport = new Airport(arrivalCode, arrivalName, arrivalCountry, arrivalCity, arrivalTimezone);
         new AirportCreateImpl(arrivalAirport).execute();
 
+
+        String firstName = "EmployeeFirstName";
+        String middleName = "EmployeeMiddleName";
+        String lastName = "EmployeeLastName";
+        Date dateOfBirth = new Date();
+        String employeePhoneNumber = "+491512345678";
+        String employeeAddress = "EmployeeAddress";
+        String employeeEmail = "employee@" + salt + ".com";
+        int salary = 5000;
+        String position = "Manager";
+        Date hireDate = new Date();
+
+        Employee employee = new Employee(firstName, middleName, lastName, dateOfBirth, employeePhoneNumber, employeeAddress, employeeEmail, new ArrayList<>(), salary, position, airline, hireDate);
+        Employee createdEmployee = new EmployeeCreateImpl(employee).execute().model;
+
         String status = "Scheduled";
         int duration = 180;
 
-        Flight flight = new Flight(airplane, new Date(), departureAirport, new Date(), arrivalAirport, new Date(), status, duration, null, null);
+        Flight flight = new Flight(airplane, new Date(), departureAirport, new Date(), arrivalAirport, new Date(), status, duration, createdEmployee, createdEmployee);
         new FlightCreateImpl(flight).execute();
 
 
-        String firstName = "TestFirstName";
-        String middleName = "TestMiddleNames";
-        String lastName = "TestLastName";
-        Date dateOfBirth = new Date();
+        firstName = "TestFirstName";
+        middleName = "TestMiddleNames";
+        lastName = "TestLastName";
+        dateOfBirth = new Date();
         String clientPhoneNumber = "+4915112345678";
         String clientAddress = "TestAddress";
         String clientEmail = "testemail_" + salt + "@gmail.com";

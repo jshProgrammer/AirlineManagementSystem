@@ -263,9 +263,9 @@ public class UpdateAPIModelsTest {
         apiFlight.setDuration(updatedDuration);
 
         assertEquals(updatedAirplane.getSerialNum(), apiFlight.getAirplaneSerialNum());
-        assertEquals(updatedDepartureDateTime, apiFlight.getDepartureDateTime());
-        assertEquals(updatedArrivalDateTime, apiFlight.getArrivalDateTime());
-        assertEquals(updatedBoardingTime, apiFlight.getBoardingTime());
+        assertEquals(updatedDepartureDateTime.toString(), apiFlight.getDepartureDateTime());
+        assertEquals(updatedArrivalDateTime.toString(), apiFlight.getArrivalDateTime());
+        assertEquals(updatedBoardingTime.toString(), apiFlight.getBoardingTime());
         assertEquals(updatedFlightStatus, apiFlight.getStatus());
         assertEquals(updatedPilot.getEmployeeId(), apiFlight.getPilotId());
         assertEquals(updatedCoPilot.getEmployeeId(), apiFlight.getCopilotId());

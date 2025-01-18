@@ -132,7 +132,7 @@ public class CreateAPIModelsTest {
         assertEquals(firstName, apiEmployee.getFirstName());
         assertEquals(middleName, apiEmployee.getMiddleNames());
         assertEquals(lastName, apiEmployee.getLastName());
-        assertEquals(dateofBirth, apiEmployee.getDateOfBirth());
+        assertEquals(dateofBirth.toString(), apiEmployee.getDateOfBirth());
         assertEquals(phoneNumber, apiEmployee.getPhoneNumber());
         assertEquals(address, apiEmployee.getAddress());
         assertEquals(email, apiEmployee.getEmail());
@@ -158,11 +158,11 @@ public class CreateAPIModelsTest {
 
         assertEquals(flightNum, apiFlight.getFlightNum());
         assertEquals(apiAirplane.getSerialNum(), apiFlight.getAirplaneSerialNum());
-        assertEquals(departureDateTime, apiFlight.getDepartureDateTime());
+        assertEquals(departureDateTime.toString(), apiFlight.getDepartureDateTime());
         assertEquals(departureAirport.getCode(), apiFlight.getDepartureAirportCode());
-        assertEquals(arrivalDateTime, apiFlight.getArrivalDateTime());
+        assertEquals(arrivalDateTime.toString(), apiFlight.getArrivalDateTime());
         assertEquals(arrivalAirport.getCode(), apiFlight.getArrivalAirportCode());
-        assertEquals(boardingTime, apiFlight.getBoardingTime());
+        assertEquals(boardingTime.toString(), apiFlight.getBoardingTime());
         assertEquals(flyStatus, apiFlight.getStatus());
         assertEquals(duration, apiFlight.getDuration());
         assertEquals(pilot.getEmployeeId(), apiFlight.getPilotId());
@@ -208,7 +208,7 @@ public class CreateAPIModelsTest {
         assertEquals(apiFlight.getFlightNum(), apiTicket.getFlightNum());
         assertEquals(isClient, apiTicket.getIsClient());
         assertEquals(apiFlight.getFlightNum(), apiTicket.getFlightNum());
-        assertEquals(dateTimeOfBooking, apiTicket.getDateTimeOfBooking());
+        assertEquals(dateTimeOfBooking.toString(), apiTicket.getDateTimeOfBooking());
         assertEquals(totalPrice, apiTicket.getTotalPrice());
         assertEquals(seatNum, apiTicket.getSeatNum());
         assertEquals(seatingClass, apiTicket.getSeatingClass());

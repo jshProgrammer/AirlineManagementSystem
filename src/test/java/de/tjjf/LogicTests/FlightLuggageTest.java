@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//should work 23.12.24
 public class FlightLuggageTest {
     MFlight mFlight = new MFlight(999999, null, null, null, null, null,null,null,0,null,null);
 
