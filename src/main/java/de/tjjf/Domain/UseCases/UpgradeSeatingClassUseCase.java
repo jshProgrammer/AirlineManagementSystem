@@ -7,7 +7,7 @@ import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Update.Tic
 import de.tjjf.Infrastructure.persistence.mapper.TicketMapper;
 
 public class UpgradeSeatingClassUseCase {
-    public static boolean isSeatingUpdateAvailable( MTicket ticket, MTicket.SeatingClass newDesiredSeatingClass ) throws NoSeatsAvailableException {
+    public static boolean updateSeatingClassIfAvailable( MTicket ticket, MTicket.SeatingClass newDesiredSeatingClass ) throws NoSeatsAvailableException {
 
         try{
             ticket.upgradeSeatingClass(newDesiredSeatingClass);

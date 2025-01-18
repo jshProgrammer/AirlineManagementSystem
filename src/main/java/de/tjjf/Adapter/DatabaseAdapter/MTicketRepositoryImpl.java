@@ -5,13 +5,18 @@ import de.tjjf.Domain.ports.DB.DataAccess;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Create.TicketCreateImpl;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Delete.TicketDeleteImpl;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Read.TicketReadImpl;
+import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Update.FlightUpdateImpl;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Update.TicketUpdateImpl;
+import de.tjjf.Infrastructure.persistence.mapper.FlightMapper;
 import de.tjjf.Infrastructure.persistence.mapper.TicketMapper;
 
 public class MTicketRepositoryImpl implements DataAccess.MTicketRepository {
     @Override
     public MTicket create(MTicket entity) {
-        return new TicketMapper().toDomain(new TicketCreateImpl(new TicketMapper().toEntity(entity)).execute().model);
+        MTicket newTicket = new TicketMapper().toDomain(new TicketCreateImpl(new TicketMapper().toEntity(entity)).execute().model);
+        entity.getFlight().addTicket(entity);
+        new FlightUpdateImpl(new FlightMapper().toEntity(entity.getFlight()), entity.getFlight().getFlightNum()).execute();
+        return newTicket;
     }
 
     @Override

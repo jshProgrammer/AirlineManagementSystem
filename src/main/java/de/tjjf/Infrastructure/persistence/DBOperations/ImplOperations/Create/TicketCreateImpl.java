@@ -22,8 +22,8 @@ public class TicketCreateImpl extends AbstractCreateOperation<Ticket> {
         }
         modelToPersist.setFlightNum(managedFlight);
 
-        //Client managedClient = em.find(Client.class, modelToPersist.getClient().getPersonId());
-        //modelToPersist.setClient(managedClient);
+        Client managedClient = em.find(Client.class, modelToPersist.getClient().getPersonId());
+        modelToPersist.setClient(managedClient);
     }
 
     protected void postPersist() {
