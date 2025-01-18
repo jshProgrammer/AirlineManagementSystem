@@ -1,25 +1,26 @@
 # AirlineManagementSystem
 
-Projekt für die Vorlesung Backend Systems. Implementierung eines AirlineManagemt Systems
+Project for the lecture Backend Systems. We devolped the backend for an Airline Management System.
 
-## Voraussetzungen
+## Conditions
 
-Stellen Sie sicher, dass folgende Software auf Ihrem System installiert ist:
+Make sure the following software is installed on your system:
 
-- **Java**: Version 21 oder höher
-    - [Installation von Java](https://www.oracle.com/java/technologies/javase-downloads.html)
-- **Maven**: Version 4.0 oder höher
-    - [Installation von Maven](https://maven.apache.org/install.html)
 
-Prüfen Sie die installierten Versionen:
+- **Java**: version 21 or higher
+    - [installation for Java](https://www.oracle.com/java/technologies/javase-downloads.html)
+- **Maven**: version 4.0 or higher
+    - [installation for Maven](https://maven.apache.org/install.html)
+
+Check the installed versions:
 ```bash
 java -version
 mvn -version
 ```
 
-## Projektstruktur
+## Projekt Structur
 
-Die grundlegende Struktur dieses Maven-Projekts sieht folgendermaßen aus:
+The basic structure of this Maven project is as follows:
 ```
 AirlineManagementSystem/
 |--.idea/
@@ -69,47 +70,48 @@ AirlineManagementSystem/
 |--README.md
 ```
 
-- **src/main/java/de.tjjf**: Enthält den Anwendungscode
-- **src/main/resources**: Enthält GraphQl Schema sowie Logo für Mails
-- **src/test/de.tjjf/java**: Enthält Unit- und Integrationstests
-- **pom.xml**: Maven-Projektdatei
+- **src/main/java/de.tjjf**: Contains the application code
+- **src/main/resources**: Contains GraphQl schema and logo for mails
+- **src/test/de.tjjf/java**: Contains unit and integration tests
+- **pom.xml**: Maven project file
 
 ## Installation
 
-1. Klonen Sie das Repository:
+1. Clone the repository:
    ```bash
    git clone https://github.com/jshProgrammer/AirlineManagementSystem.git
    cd AirlineManagementSystem
    ```
 
-2. Installieren Sie die Abhängigkeiten und bauen Sie das Projekt:
+2. Install the dependencies and build the project:
    ```bash
    mvn clean install
    ```
 
-3. Starten Sie die Anwendung (falls zutreffend):
+3. Start the application (if applicable):
    ```bash
    mvn exec:java -Dexec.mainClass="com.beispiel.Main"
    ```
 
-## Konfiguration
+## Configuration
+Hier noch anpassen Wegen Docker 
 
-Alle konfigurierbaren Einstellungen finden Sie in der Datei `src/main/resources/application.properties`. Passen Sie diese Datei nach Bedarf an.
+All configurable settings can be found in the file `src/main/resources/application.properties`
 
 ## Tests
 
-Führen Sie die Tests mit folgendem Befehl aus:
+Execute the tests with the following command:
 ```bash
 mvn test
 ```
 
-Die Testergebnisse finden Sie im Ordner `target/surefire-reports`.
+The test results can be found in the folder `target/surefire-reports`.
 
-## Lizenz
+## Licence
 
-Dieses Projekt steht unter der [MIT-Lizenz](LICENSE).
+This project is under the [MIT-Lizenz](LICENSE).
 
-## Entwickler
+## Contributor
 
 - Jasmin Wander
 - Finn Krappitz
