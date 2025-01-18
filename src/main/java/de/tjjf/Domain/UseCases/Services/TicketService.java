@@ -1,10 +1,7 @@
 package de.tjjf.Domain.UseCases.Services;
 
 import de.tjjf.Domain.Exceptions.NoSeatsAvailableException;
-import de.tjjf.Domain.UseCases.AddBookingUseCase;
-import de.tjjf.Domain.UseCases.AuthenticationUseCase;
-import de.tjjf.Domain.UseCases.AuthorizedUseCase;
-import de.tjjf.Domain.UseCases.CancelTicketUseCase;
+import de.tjjf.Domain.UseCases.*;
 import de.tjjf.Domain.models.MPayment;
 import de.tjjf.Domain.models.MPerson;
 import de.tjjf.Domain.models.MTicket;
@@ -44,9 +41,7 @@ public class TicketService extends AuthorizedUseCase {
     public void upgradeLuggageWeight(long ticketId, int newWeight) throws IllegalArgumentException {
         //new CancelTicketUseCase().authorize();
         MTicket ticket = port.readById(ticketId);
-        System.err.println("TESTEST: " + ticket.getTicketId());
-        ticket.upgradeLuggageWeight(newWeight);
-        port.update(ticket);
+        new UpgradeLuggageWeightUseCase().upgradeLuggageWeight(ticket, newWeight);
     }
 
     public void cancelTicket(MPerson person, int flightnum){

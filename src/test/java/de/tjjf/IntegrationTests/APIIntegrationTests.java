@@ -507,23 +507,23 @@ public class APIIntegrationTests {
         APIFlight apiFlight = new FlightAPIOperation().createFlight(apiFlightInput);
 
 
-        APITicketInput apiTicketInput = new APITicketInput(apiClient.getClientId(), true, apiFlight.getFlightNum(), dateTime.toString(), 300, 23, APITicketInput.SeatingClass.Economy,  APITicketInput.TicketStatus.paid, 23);
+        APITicketInput apiTicketInput = new APITicketInput(apiClient.getClientId(), true, apiFlight.getFlightNum(), dateTime.toString(), 300, 23, APITicketInput.SeatingClass.Economy,  APITicketInput.TicketStatus.paid, 5);
         APIPaymentInput mp = new APIPaymentInput("4242424242424242", "12", "34", "567");
         APITicket apiTicket = new TicketAPIOperation().addBooking(apiTicketInput, mp);
 
 
-        new TicketAPIOperation().upgradeLuggageWeight(apiTicket.getTicketId(), 40);
+        new TicketAPIOperation().upgradeLuggageWeight(apiTicket.getTicketId(), 6);
 
         APITicket ticketReadFromDB = new TicketAPIOperation().readTicketById(apiTicket.getTicketId());
 
-        assertEquals( 40, ticketReadFromDB.getWeightOfLuggage());
+        assertEquals( 11, ticketReadFromDB.getWeightOfLuggage());
 
-        new TicketDeleteImpl(apiTicket.getTicketId()).execute();
+        /*new TicketDeleteImpl(apiTicket.getTicketId()).execute();
         new FlightDeleteImpl(apiFlight.getFlightNum()).execute();
         new AirplaneDeleteImpl(apiAirplaneInput.getSerialNum()).execute();
         new EmployeeDeleteImpl(apiEmployee.getEmployeeId()).execute();
         new AirlineDeleteImpl(apiAirlineInput.getName()).execute();
-        new AirportDeleteImpl(apiAirportInput.getCode()).execute();
+        new AirportDeleteImpl(apiAirportInput.getCode()).execute();*/
     }
 
     //TODO: cancelTicketTest
