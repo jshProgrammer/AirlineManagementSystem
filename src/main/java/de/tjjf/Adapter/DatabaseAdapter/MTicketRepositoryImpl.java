@@ -16,10 +16,6 @@ public class MTicketRepositoryImpl implements DataAccess.MTicketRepository {
 
     @Override
     public MTicket readById(Long id) {
-        System.out.println("TESTEST400: " + new TicketReadImpl(id).execute().model);
-        //TODO: hier ist das problem, getClient() gibt null zurück?! => das problem liegt schon im erstellen => in der datenbank kommt nichts für clientid und personid an
-        System.out.println("TESTEST400: " + new TicketReadImpl(id).execute().model.getClient());
-        System.out.println("TESTEST400: " + new TicketReadImpl(id).execute().model.getClient().getPersonId());
         return new TicketMapper().toDomain(new TicketReadImpl(id).execute().model);
     }
 

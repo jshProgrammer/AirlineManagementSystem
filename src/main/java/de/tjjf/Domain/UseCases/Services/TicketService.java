@@ -44,6 +44,7 @@ public class TicketService extends AuthorizedUseCase {
     public void upgradeLuggageWeight(long ticketId, int newWeight) throws IllegalArgumentException {
         //new CancelTicketUseCase().authorize();
         MTicket ticket = port.readById(ticketId);
+        System.err.println("TESTEST: " + ticket.getTicketId());
         ticket.upgradeLuggageWeight(newWeight);
         port.update(ticket);
     }

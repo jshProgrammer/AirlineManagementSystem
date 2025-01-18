@@ -13,6 +13,7 @@ import de.tjjf.Infrastructure.persistence.entities.Employee;
 import de.tjjf.Infrastructure.persistence.entities.Flight;
 import de.tjjf.Infrastructure.persistence.entities.Ticket;
 
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -41,7 +42,7 @@ public class TicketMapper extends Mapper<MTicket, Ticket> {
     }
 
     public MTicket toDomain(Ticket booking) {
-        return this.toDomain(booking, null);
+        return this.toDomain(booking, new HashSet<>());
     }
 
     public MTicket toDomain(Ticket booking, Set<Long> processedTickets) {

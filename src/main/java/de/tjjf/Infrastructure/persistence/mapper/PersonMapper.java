@@ -10,12 +10,13 @@ import de.tjjf.Infrastructure.persistence.entities.Employee;
 import de.tjjf.Infrastructure.persistence.entities.Ticket;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class PersonMapper {
     public MPerson toDomain(Employee employee) {
-        return this.toDomain(employee, null);
+        return this.toDomain(employee, new HashSet<>());
     }
 
     public MPerson toDomain(Employee employee, Set<Long> processedTickets) {
@@ -40,7 +41,7 @@ public class PersonMapper {
     }
 
     public MPerson toDomain(Client client) {
-        return this.toDomain(client, null);
+        return this.toDomain(client, new HashSet<>());
     }
 
     public MPerson toDomain(Client client, Set<Long> processedTickets) {
