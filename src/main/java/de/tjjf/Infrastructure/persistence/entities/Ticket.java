@@ -16,14 +16,24 @@ public class Ticket implements Model {
     @Column(nullable = false)
     private Long employee_id;
 
-
    @ManyToOne(fetch = FetchType.EAGER, optional = true)
-   @JoinColumn(name = "client_id", referencedColumnName = "personId")
+   @JoinColumn(name = "client_id", referencedColumnName = "personId", insertable = false, updatable = false, nullable = true)
    private Client client;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = true)
-    @JoinColumn(name = "employee_id", referencedColumnName = "personId")
+    @JoinColumn(name = "employee_id", referencedColumnName = "personId", insertable = false, updatable = false, nullable = true)
     private Employee employee;
+
+    //@ManyToOne
+    //@JoinColumn(name = "employee_id", nullable = false)
+    //private Employee employee
+    //@ManyToOne
+    //@JoinColumn(name = "client_id")
+    //private Client client;
+//
+    //@ManyToOne
+    //@JoinColumn(name = "employee_id")
+    //private Employee employee;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "flight_id", referencedColumnName = "flightNum")
@@ -83,8 +93,8 @@ public class Ticket implements Model {
     }
 
     public void setClient(Client client) {
-        this.client_id = client.getPersonId();
         this.client = client;
+        this.client_id = client.getPersonId();
     }
 
     public Employee getEmployee() {
@@ -92,8 +102,8 @@ public class Ticket implements Model {
     }
 
     public void setEmployee(Employee employee) {
-        this.employee_id = employee.getPersonId();
         this.employee = employee;
+        this.employee_id = employee.getPersonId();
     }
 
     public Flight getFlightNum() {
