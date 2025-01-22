@@ -8,7 +8,7 @@ import jakarta.transaction.Transactional;
 import java.lang.reflect.Field;
 
 @Transactional
-public class AbstractUpdateOperation<T extends Model, IDType> extends AbstractDatabaseOperation<NoContentResult>{
+public abstract class AbstractUpdateOperation<T extends Model, IDType> extends AbstractDatabaseOperation<NoContentResult>{
     IDType id;
     T modelToChange;
 

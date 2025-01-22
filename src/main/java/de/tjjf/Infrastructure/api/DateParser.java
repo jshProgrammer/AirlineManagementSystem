@@ -81,7 +81,7 @@ public class DateParser {
                 System.err.println("Error parsing date: " + e.getMessage());
             }
         }
-        //TODO: d zu dd geändert
+
         SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
 
         Date dateAsDate;

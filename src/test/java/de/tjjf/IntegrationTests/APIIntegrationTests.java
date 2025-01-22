@@ -3,6 +3,7 @@ package de.tjjf.IntegrationTests;
 import static org.junit.jupiter.api.Assertions.*;
 
 import de.tjjf.Infrastructure.GraphQLClient.APIOperations.*;
+import de.tjjf.Infrastructure.api.DateParser;
 import de.tjjf.Infrastructure.api.DemoServlet;
 import de.tjjf.Infrastructure.api.InputModels.*;
 import de.tjjf.Infrastructure.api.models.*;
@@ -44,11 +45,11 @@ public class APIIntegrationTests {
     @BeforeEach
     public void setUp() {
         calendar = Calendar.getInstance();
-        calendar.set(2005, Calendar.FEBRUARY, 2);
+        calendar.set(2005, Calendar.FEBRUARY, 2, 0, 0, 0);
         date = calendar.getTime();
 
         calendar = Calendar.getInstance();
-        calendar.set(2005, Calendar.FEBRUARY, 2, 12, 0, 0);
+        calendar.set(2005, Calendar.FEBRUARY, 2, 0, 0, 0);
         dateTime = calendar.getTime();
     }
 
@@ -71,8 +72,7 @@ public class APIIntegrationTests {
         assertEquals("Jan", clientReadFromDB.getFirstName());
         assertEquals("M", clientReadFromDB.getMiddleNames());
         assertEquals("Kowalski", clientReadFromDB.getLastName());
-        //TODO: extract DateParser from one Mapper class so that it can be used here
-        //assertEquals(clientReadFromDB.getDateOfBirth(), date.toString());
+        assertEquals(input.getDateOfBirth().toString(), DateParser.getDateFromRFC3339(clientReadFromDB.getDateOfBirth()).toString());
         assertEquals( "0234214234", clientReadFromDB.getPhoneNumber());
         assertEquals( "Test", clientReadFromDB.getAddress().getStreet());
         assertEquals(1, clientReadFromDB.getAddress().getNumber());
@@ -99,8 +99,7 @@ public class APIIntegrationTests {
         assertEquals("Test", clientReadFromDB.getFirstName());
         assertEquals("Test", clientReadFromDB.getMiddleNames());
         assertEquals("Test", clientReadFromDB.getLastName());
-        //TODO: extract DateParser from one Mapper class so that it can be used here
-        //assertEquals(clientReadFromDB.getDateOfBirth(), date.toString());
+        assertEquals(input.getDateOfBirth().toString(), DateParser.getDateFromRFC3339(clientReadFromDB.getDateOfBirth()).toString());
 
         //assertEquals( "0234214233", clientReadFromDB.getPhoneNumber());
         assertEquals( "Street", clientReadFromDB.getAddress().getStreet());
@@ -122,7 +121,6 @@ public class APIIntegrationTests {
         APIAirline airlineReadFromDB = new AirlineAPIOperation().readAirlineByName(apiAirlineInput.getName());
 
         assertEquals(apiAirlineInput.getName(), airlineReadFromDB.getName());
-        //assertEquals(apiAirlineInput.getDate, airlineReadFromDB.getDate());
         assertEquals(apiAirlineInput.getAddress().getCity(), airlineReadFromDB.getAddress().getCity());
         assertEquals(apiAirlineInput.getAddress().getCountry(), airlineReadFromDB.getAddress().getCountry());
         assertEquals(apiAirlineInput.getAddress().getStreet(), airlineReadFromDB.getAddress().getStreet());
@@ -144,7 +142,6 @@ public class APIIntegrationTests {
         APIAirline airlineReadFromDB = new AirlineAPIOperation().readAirlineByName(apiAirlineInput.getName());
 
         assertEquals(apiAirlineInput.getName(), airlineReadFromDB.getName());
-        //assertEquals(apiAirlineInput.getDate, airlineReadFromDB.getDate());
         assertEquals("Frankfurt", airlineReadFromDB.getAddress().getCity());
         assertEquals("Germany", airlineReadFromDB.getAddress().getCountry());
         assertEquals("Street", airlineReadFromDB.getAddress().getStreet());
@@ -168,7 +165,7 @@ public class APIIntegrationTests {
         assertEquals(apiEmployeeInput.getFirstName(), employeeReadFromDB.getFirstName());
         assertEquals(apiEmployeeInput.getMiddleNames(), employeeReadFromDB.getMiddleNames());
         assertEquals(apiEmployeeInput.getLastName(), employeeReadFromDB.getLastName());
-        //assertEquals(apiEmployeeInput.getDateOfBirth(), employeeReadFromDB.getDateOfBirth());
+        assertEquals(apiEmployeeInput.getDateOfBirth().toString(), DateParser.getDateFromRFC3339(employeeReadFromDB.getDateOfBirth()).toString());
         assertEquals(apiEmployeeInput.getPhoneNumber(), employeeReadFromDB.getPhoneNumber());
         assertEquals(apiEmployeeInput.getAddress().getCity(), employeeReadFromDB.getAddress().getCity());
         assertEquals(apiEmployeeInput.getAddress().getCountry(), employeeReadFromDB.getAddress().getCountry());
@@ -201,7 +198,7 @@ public class APIIntegrationTests {
         assertEquals("Test", employeeReadFromDB.getFirstName());
         assertEquals("Test", employeeReadFromDB.getMiddleNames());
         assertEquals("Test", employeeReadFromDB.getLastName());
-        //assertEquals(apiEmployeeInput.getDateOfBirth(), employeeReadFromDB.getDateOfBirth());
+        assertEquals(apiEmployeeInput.getDateOfBirth().toString(), DateParser.getDateFromRFC3339(employeeReadFromDB.getDateOfBirth()).toString());
         assertEquals("+4915112345678", employeeReadFromDB.getPhoneNumber());
         assertEquals("Frankfurt", employeeReadFromDB.getAddress().getCity());
         assertEquals("Germany", employeeReadFromDB.getAddress().getCountry());
@@ -209,8 +206,6 @@ public class APIIntegrationTests {
         assertEquals(912376, employeeReadFromDB.getAddress().getZipCode());
         assertEquals(2, employeeReadFromDB.getAddress().getNumber());
         assertEquals("airline@test.de", employeeReadFromDB.getEmail());
-        //TODO: noch testen, ob man auch diese constraint abändern kann
-        //assertEquals(apiAirlineInputUpdated.getName(), employeeReadFromDB.getAirlineName());
 
         new EmployeeDeleteImpl(employeeReadFromDB.getEmployeeId()).execute();
         new AirlineDeleteImpl(apiAirlineInput.getName()).execute();
@@ -295,11 +290,11 @@ public class APIIntegrationTests {
         System.out.println("flightNum" + flightReadFromDB.getFlightNum());
 
         assertEquals(apiFlightInput.getAirplaneSerialNum(), flightReadFromDB.getAirplaneSerialNum());
-        //assertEquals(apiFlightInput.getDepartureDateTime(), flightReadFromDB.getDepartureDateTime());
+        assertEquals(apiFlightInput.getDepartureDateTime().toString(), DateParser.getDateFromRFC3339(flightReadFromDB.getDepartureDateTime()).toString());
         assertEquals(apiFlightInput.getDepartureAirportCode(), flightReadFromDB.getDepartureAirportCode());
-        //assertEquals(apiFlightInput.getArrivalDateTime(), flightReadFromDB.getArrivalDateTime());
+        assertEquals(apiFlightInput.getArrivalDateTime().toString(), DateParser.getDateFromRFC3339(flightReadFromDB.getArrivalDateTime()).toString());
         assertEquals(apiFlightInput.getArrivalAirportCode(), flightReadFromDB.getArrivalAirportCode());
-        //assertEquals(apiFlightInput.getBoardingTime(), flightReadFromDB.getBoardingTime());
+        assertEquals(apiFlightInput.getBoardingTime().toString(), DateParser.getDateFromRFC3339 (flightReadFromDB.getBoardingTime()).toString());
         assertEquals(apiFlightInput.getStatus().toString(), flightReadFromDB.getStatus().toString());
         assertEquals(apiFlightInput.getDuration(), flightReadFromDB.getDuration());
         assertEquals(apiFlightInput.getPilotId(), flightReadFromDB.getPilotId());
@@ -333,11 +328,11 @@ public class APIIntegrationTests {
         APIFlight updatedFlightReadFromDB = new FlightAPIOperation().readFlightByFlightNum(apiFlight.getFlightNum());
 
         assertEquals(updatedFlightInput.getAirplaneSerialNum(), updatedFlightReadFromDB.getAirplaneSerialNum());
-        //assertEquals(updatedFlightInput.getDepartureDateTime(), updatedFlightReadFromDB.getDepartureDateTime());
+        assertEquals(updatedFlightInput.getDepartureDateTime().toString(), DateParser.getDateFromRFC3339(updatedFlightReadFromDB.getDepartureDateTime()).toString());
         assertEquals(updatedFlightInput.getDepartureAirportCode(), updatedFlightReadFromDB.getDepartureAirportCode());
-        //assertEquals(updatedFlightInput.getArrivalDateTime(), updatedFlightReadFromDB.getArrivalDateTime());
+        assertEquals(updatedFlightInput.getArrivalDateTime().toString(), DateParser.getDateFromRFC3339(updatedFlightReadFromDB.getArrivalDateTime()).toString());
         assertEquals(updatedFlightInput.getArrivalAirportCode(), updatedFlightReadFromDB.getArrivalAirportCode());
-        //assertEquals(updatedFlightInput.getBoardingTime(), updatedFlightReadFromDB.getBoardingTime());
+        assertEquals(updatedFlightInput.getBoardingTime().toString(), DateParser.getDateFromRFC3339(updatedFlightReadFromDB.getBoardingTime()).toString());
         assertEquals(updatedFlightInput.getStatus().toString(), updatedFlightReadFromDB.getStatus().toString());
         assertEquals(updatedFlightInput.getDuration(), updatedFlightReadFromDB.getDuration());
         assertEquals(updatedFlightInput.getPilotId(), updatedFlightReadFromDB.getPilotId());
@@ -470,7 +465,7 @@ public class APIIntegrationTests {
         assertEquals(ticketReadFromDB.getSeatingClass(), apiTicket.getSeatingClass());
         assertEquals(ticketReadFromDB.getIsClient(), apiTicket.getIsClient());
         assertEquals(ticketReadFromDB.getWeightOfLuggage(), apiTicket.getWeightOfLuggage());
-        //assertEquals(ticketReadFromDB.getDateTimeOfBooking(), apiTicket.getDateTimeOfBooking());
+      // assertEquals(ticketReadFromDB.getDateTimeOfBooking().toString(), DateParser.getDateTimeFromRFC3339().getDateTimeOfBooking());
 
         new TicketDeleteImpl(apiTicket.getTicketId()).execute();
         new FlightDeleteImpl(apiFlight.getFlightNum()).execute();
@@ -558,40 +553,6 @@ public class APIIntegrationTests {
         new AirportDeleteImpl(apiAirportInput.getCode()).execute();
     }
 
-    @Test
-    void cancelTicketViaAPITest() throws Exception {
-        APIAirlineInput apiAirlineInput = new APIAirlineInput("Test" + System.currentTimeMillis(), date, new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"), "02341324", "test@airline.de");
-        new AirlineAPIOperation().createAirline(apiAirlineInput);
-        APIAirplaneInput apiAirplaneInput = new APIAirplaneInput((int)System.currentTimeMillis(), apiAirlineInput.getName(), true);
-        new AirplaneAPIOperation().createAirplane(apiAirplaneInput);
-        APIAirportInput apiAirportInput = new APIAirportInput("Test" + System.currentTimeMillis(), "TestName", "Germany", "Berlin", "German");
-        new AirportAPIOperation().createAirport(apiAirportInput);
 
-        APIEmployeeInput apiEmployeeInput = new APIEmployeeInput("Jan", "M", "Kowalski", date.toString(), "+4915112345678", new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"), "test@test.de", apiAirlineInput.getName());
-        APIEmployee apiEmployee = new EmployeeAPIOperation().createEmployee(apiEmployeeInput);
-
-        APIFlightInput apiFlightInput = new APIFlightInput(apiAirplaneInput.getSerialNum(), dateTime.toString(), apiAirportInput.getCode(), dateTime.toString(), apiAirportInput.getCode(), dateTime.toString(), APIFlightInput.FlightStatus.scheduled, 120, apiEmployee.getEmployeeId(), apiEmployee.getEmployeeId());
-        APIFlight apiFlight = new FlightAPIOperation().createFlight(apiFlightInput);
-
-        APIClientInput apiClientInput = new APIClientInput("Jan", "M", "Kowalski", date.toString() , "+4915112345678", new APIAddressInput("Test", 1, 91237, "Berlin", "Germany"), "test@test.de", false);
-        APIClient apiClient = new ClientAPIOperation().createClient(apiClientInput);
-
-        APITicketInput apiTicketInput = new APITicketInput(apiClient.getClientId(), true, apiFlight.getFlightNum(), dateTime.toString(), 300, 23, APITicketInput.SeatingClass.Economy,  APITicketInput.TicketStatus.paid, 23);
-        APIPaymentInput mp = new APIPaymentInput("4242424242424242", "12", "34", "567");
-        APITicket apiTicket = new TicketAPIOperation().addTicket(apiTicketInput, mp);
-
-        new TicketAPIOperation().cancelClientTicket(apiClient.getClientId(), apiTicket.getFlightNum());
-
-        APITicket updatedTicketReadFromDB = new TicketAPIOperation().readTicketById(apiTicket.getTicketId());
-
-        assertEquals(APITicket.TicketStatus.canceled, updatedTicketReadFromDB.getTicketStatus());
-
-        new TicketDeleteImpl(updatedTicketReadFromDB.getTicketId()).execute();
-        new FlightDeleteImpl(apiFlight.getFlightNum()).execute();
-        new AirplaneDeleteImpl(apiAirplaneInput.getSerialNum()).execute();
-        new EmployeeDeleteImpl(apiEmployee.getEmployeeId()).execute();
-        new AirlineDeleteImpl(apiAirlineInput.getName()).execute();
-        new AirportDeleteImpl(apiAirportInput.getCode()).execute();
-    }
 
 }

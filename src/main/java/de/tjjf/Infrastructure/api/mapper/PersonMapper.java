@@ -3,6 +3,7 @@ package de.tjjf.Infrastructure.api.mapper;
 import de.tjjf.Domain.models.DomainPerson;
 import de.tjjf.Infrastructure.api.models.APIClient;
 import de.tjjf.Infrastructure.api.models.APIEmployee;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,12 +11,6 @@ import java.util.Date;
 public class PersonMapper {
 
     public DomainPerson toDomain(APIEmployee apiEmployee){
-        /*List<MTicket> tickets = new ArrayList<>();
-        for(APITicket ticket : apiEmployee.getT()){
-            tickets.add(new TicketMapper().toDomain(new TicketReadImpl(ticket.getTicketId()).run().model));
-        }*/
-
-        //TODO: hier vermutlich Probleme durch Setzen auf null
         return new DomainPerson(
                 apiEmployee.getEmployeeId(),
                 apiEmployee.getFirstName(),
@@ -43,12 +38,6 @@ public class PersonMapper {
     }
 
     public DomainPerson toDomain(APIClient apiClient){
-        /*List<MTicket> tickets = new ArrayList<>();
-        for(APITicket ticket : apiEmployee.getT()){
-            tickets.add(new TicketMapper().toDomain(new TicketReadImpl(ticket.getTicketId()).run().model));
-        }*/
-
-        //TODO: hier vermutlich Probleme durch Setzen auf nullapi
         return new DomainPerson(
                 apiClient.getClientId(),
                 apiClient.getFirstName(),
