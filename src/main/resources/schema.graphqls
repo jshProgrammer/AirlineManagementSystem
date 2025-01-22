@@ -1,10 +1,5 @@
-scalar Date
 scalar Long
 scalar Void
-
-type MyType {
-    created: Date
-}
 
 type APIAddress {
     street: String!,

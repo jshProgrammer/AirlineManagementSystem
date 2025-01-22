@@ -32,7 +32,7 @@ public class DemoServlet extends GraphQLHttpServlet {
             return SchemaParser.newParser( )
                     .schemaString( schemaString )
                     .resolvers( new AirlineResolver(), new AirplaneResolver(), new AirportResolver(), new ClientResolver(), new EmployeeResolver(), new FlightResolver( ), new TicketResolver() )
-                    .scalars(new GraphQlConfig().voidScalar(), new GraphQlConfig().dateScalar(), new GraphQlConfig().longScalar())
+                    .scalars(new GraphQlConfig().voidScalar(), new GraphQlConfig().longScalar())
                     .build( )
                     .makeExecutableSchema( );
         }

@@ -14,19 +14,6 @@ public class GraphQlConfig {
     public GraphQLScalarType longScalar() {
            return ExtendedScalars.GraphQLLong;
     }
-    @Bean
-    public GraphQLScalarType dateScalar() {
-        return ExtendedScalars.Date;
-    }
-    @Bean
-    public GraphQLScalarType dateTimeScalar() {
-        return ExtendedScalars.DateTime;
-    }
-
-    @Bean
-    public GraphQLScalarType timeScalar() {
-        return ExtendedScalars.Time;
-    }
 
     @Bean
     public GraphQLScalarType voidScalar() {
