@@ -28,7 +28,7 @@ public class InvoicePDF {
             PdfWriter pdfWriter = new PdfWriter(filePath);
             PdfDocument pdfDocument = new PdfDocument(pdfWriter);
             Document document = new Document(pdfDocument);
-            //TODO: Evtl Adresse einfügen
+
             String companyName = ticket.getFlight().getAirplane().getBelongingAirline().getName();
             String companyDetails = informations;
             Paragraph header = new Paragraph(companyName)

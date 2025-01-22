@@ -10,7 +10,7 @@ import de.tjjf.Domain.models.DomainPerson;
 import de.tjjf.Domain.models.DomainTicket;
 import de.tjjf.Domain.ports.API.TicketPort;
 
-public class BookingPortImpl implements TicketPort {
+public class TicketPortImpl implements TicketPort {
     @Override
     public DomainTicket addBooking(DomainTicket newBooking, DomainPayment mPayment) {
         return new TicketService(new MTicketRepositoryImpl(), new MClientRepositoryImpl(), new MEmployeeRepositoryImpl()).addBooking(newBooking, mPayment);

@@ -218,7 +218,7 @@ type Mutation {
     createClient(client: APIClientInput): APIClient
     updateClient(clientId: Long, client: APIClientInput): Void
 
-    addBooking(newBooking: APITicketInput, payment: APIPaymentInput): APITicket
+    addTicket(newBooking: APITicketInput, payment: APIPaymentInput): APITicket
     upgradeSeatingClass(ticketId: Long, newSeatingClass: APISeatingClassInput): Void
     upgradeLuggageWeight(ticketId: Long, newLuggageWeight: Int): Void
 

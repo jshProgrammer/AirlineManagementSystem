@@ -1,6 +1,6 @@
 package de.tjjf.Infrastructure.api.resolvers;
 
-import de.tjjf.Infrastructure.api.adapter.BookingPortImpl;
+import de.tjjf.Infrastructure.api.adapter.TicketPortImpl;
 import de.tjjf.Domain.models.DomainTicket;
 import de.tjjf.Infrastructure.api.InputModels.APIPaymentInput;
 import de.tjjf.Infrastructure.api.InputModels.APITicketInput;
@@ -15,33 +15,33 @@ import org.springframework.stereotype.Component;
 @Component
 public class TicketResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
     //TODO: Ticket Port Impl, bzw rename von booking zu ticket außer ich bin zu blöd die Logik zu verstehen - Tom
-    public APITicket addBooking(APITicketInput newBooking, APIPaymentInput payment) {
+    public APITicket addTicket(APITicketInput newBooking, APIPaymentInput payment) {
         APITicket apiTicket = new TicketMapperInput().toDomain(0L, newBooking);
         APIPayment apiPayment = new PaymentMapperInput().toDomain(payment);
-        return new APITicketMapper().toAPIEntity(new BookingPortImpl().addBooking(new APITicketMapper().toDomainEntity(apiTicket), new APIPaymentMapper().toDomainEntity(apiPayment)));
+        return new APITicketMapper().toAPIEntity(new TicketPortImpl().addBooking(new APITicketMapper().toDomainEntity(apiTicket), new APIPaymentMapper().toDomainEntity(apiPayment)));
     }
 
     public APITicket readTicketById(long ticketId) {
-        return new APITicketMapper().toAPIEntity(new BookingPortImpl().readTicketById(ticketId));
+        return new APITicketMapper().toAPIEntity(new TicketPortImpl().readTicketById(ticketId));
     }
 
     public void upgradeSeatingClass(long ticketId, APITicketInput.SeatingClass newSeatingClass) {
         DomainTicket.SeatingClass seatingClass = Enum.valueOf(DomainTicket.SeatingClass.class, newSeatingClass.name());
-        new BookingPortImpl().upgradeSeatingClass(ticketId, seatingClass);
+        new TicketPortImpl().upgradeSeatingClass(ticketId, seatingClass);
     }
 
     public void upgradeLuggageWeight(long ticketId, int newWeight) {
-        new BookingPortImpl().upgradeLuggageWeight(ticketId, newWeight);
+        new TicketPortImpl().upgradeLuggageWeight(ticketId, newWeight);
     }
 
     public void cancelTicketClient(long clientId, long flightNum) {
         APIClient apiClient = new ClientResolver().readClientById(clientId);
-        new BookingPortImpl().cancelTicket(new APIClientMapper().toDomainEntity(apiClient), flightNum);
+        new TicketPortImpl().cancelTicket(new APIClientMapper().toDomainEntity(apiClient), flightNum);
     }
 
     public void cancelTicketEmployee(int employeeId, int flightNum) {
         APIEmployee apiEmployee = new EmployeeResolver().readEmployeeById(employeeId);
-        new BookingPortImpl().cancelTicket(new APIEmployeeMapper().toDomainEntity(apiEmployee), flightNum);
+        new TicketPortImpl().cancelTicket(new APIEmployeeMapper().toDomainEntity(apiEmployee), flightNum);
     }
 
 }

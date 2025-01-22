@@ -10,10 +10,10 @@ public class Ticket implements Model {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long ticketId;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Long client_id;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Long employee_id;
 
    @ManyToOne(fetch = FetchType.EAGER, optional = true)
@@ -61,11 +61,13 @@ public class Ticket implements Model {
     public Ticket(Flight flight, Date dateTimeOfBooking, int totalPrice, int seatNum, String seatingClass, String ticketStatus, int maxWeightOfLuggage, Client client) {
         this(flight, dateTimeOfBooking, totalPrice, seatNum, seatingClass, ticketStatus, maxWeightOfLuggage);
         this.client = client;
+        this.client_id = client.getPersonId();
     }
 
     public Ticket(Flight flight, Date dateTimeOfBooking, int totalPrice, int seatNum, String seatingClass, String ticketStatus, int maxWeightOfLuggage, Employee employee) {
         this(flight, dateTimeOfBooking, totalPrice, seatNum, seatingClass, ticketStatus, maxWeightOfLuggage);
         this.employee = employee;
+        this.employee_id = employee.getPersonId();
     }
 
 

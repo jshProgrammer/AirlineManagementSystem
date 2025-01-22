@@ -51,8 +51,6 @@ public class Flight implements Model {
 
     public Flight(){}
 
-
-    //TODO: boardingTime has to be DateTime
     public Flight(Airplane airplane, Date departureDateTime, Airport departureAirport, Date arrivalDateTime, Airport arrivalAirport, Date boardingTime, String status, int duration, Employee pilot, Employee copilot) {
         this.airplane = airplane;
         this.departureDateTime = departureDateTime;

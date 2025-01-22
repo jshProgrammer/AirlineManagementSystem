@@ -25,7 +25,7 @@ public class TicketService extends AuthorizedUseCase {
 
     public DomainTicket addBooking(DomainTicket newBooking, DomainPayment mPayment) {
         //new CancelTicketUseCase().authorize();
-        if(AddBookingUseCase.addBooking(newBooking, mPayment)){
+        if(AddTicketUseCase.addTicket(newBooking, mPayment)){
             DomainTicket newTicket = ticketPort.create(newBooking);
             newBooking.getPerson().addTickets(newBooking);
             if ((newBooking.getPerson() instanceof DomainClient)) {

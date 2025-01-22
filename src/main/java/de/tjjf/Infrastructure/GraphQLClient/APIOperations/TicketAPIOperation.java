@@ -51,8 +51,8 @@ public class TicketAPIOperation extends AbstractAPIOperation {
 
     }
 
-    public APITicket addBooking(APITicketInput newBooking, APIPaymentInput paymentInput) {
-        return execute(transformToQuery(newBooking, paymentInput, "addBooking"), "addBooking", APITicket.class);
+    public APITicket addTicket(APITicketInput newBooking, APIPaymentInput paymentInput) {
+        return execute(transformToQuery(newBooking, paymentInput, "addTicket"), "addTicket", APITicket.class);
     }
 
     public APITicket readTicketById(long ticketId) {

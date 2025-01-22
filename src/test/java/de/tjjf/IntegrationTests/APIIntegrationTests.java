@@ -459,7 +459,7 @@ public class APIIntegrationTests {
 
         APITicketInput apiTicketInput = new APITicketInput(apiClient.getClientId(), true, apiFlight.getFlightNum(), dateTime.toString(), 300, 23, APITicketInput.SeatingClass.Economy,  APITicketInput.TicketStatus.paid, 23);
         APIPaymentInput mp = new APIPaymentInput("4242424242424242", "12", "34", "567");
-        APITicket apiTicket = new TicketAPIOperation().addBooking(apiTicketInput, mp);
+        APITicket apiTicket = new TicketAPIOperation().addTicket(apiTicketInput, mp);
 
         APITicket ticketReadFromDB = new TicketAPIOperation().readTicketById(apiTicket.getTicketId());
 
@@ -502,7 +502,7 @@ public class APIIntegrationTests {
 
         APITicketInput apiTicketInput = new APITicketInput(apiClient.getClientId(), true, apiFlight.getFlightNum(), dateTime.toString(), 300, 23, APITicketInput.SeatingClass.Economy,  APITicketInput.TicketStatus.paid, 23);
         APIPaymentInput mp = new APIPaymentInput("4242424242424242", "12", "34", "567");
-        APITicket apiTicket = new TicketAPIOperation().addBooking(apiTicketInput, mp);
+        APITicket apiTicket = new TicketAPIOperation().addTicket(apiTicketInput, mp);
 
 
         new TicketAPIOperation().upgradeSeatingClass(apiTicket.getTicketId(), APITicket.SeatingClass.Business.name());
@@ -541,7 +541,7 @@ public class APIIntegrationTests {
 
         APITicketInput apiTicketInput = new APITicketInput(apiClient.getClientId(), true, apiFlight.getFlightNum(), dateTime.toString(), 300, 23, APITicketInput.SeatingClass.Economy,  APITicketInput.TicketStatus.paid, 5);
         APIPaymentInput mp = new APIPaymentInput("4242424242424242", "12", "34", "567");
-        APITicket apiTicket = new TicketAPIOperation().addBooking(apiTicketInput, mp);
+        APITicket apiTicket = new TicketAPIOperation().addTicket(apiTicketInput, mp);
 
 
         new TicketAPIOperation().upgradeLuggageWeight(apiTicket.getTicketId(), 6);
@@ -578,7 +578,7 @@ public class APIIntegrationTests {
 
         APITicketInput apiTicketInput = new APITicketInput(apiClient.getClientId(), true, apiFlight.getFlightNum(), dateTime.toString(), 300, 23, APITicketInput.SeatingClass.Economy,  APITicketInput.TicketStatus.paid, 23);
         APIPaymentInput mp = new APIPaymentInput("4242424242424242", "12", "34", "567");
-        APITicket apiTicket = new TicketAPIOperation().addBooking(apiTicketInput, mp);
+        APITicket apiTicket = new TicketAPIOperation().addTicket(apiTicketInput, mp);
 
         new TicketAPIOperation().cancelClientTicket(apiClient.getClientId(), apiTicket.getFlightNum());
 
