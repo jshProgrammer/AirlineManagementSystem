@@ -28,7 +28,6 @@ public abstract class AbstractAPIOperation {
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         String responseBody = response.body();
-        System.out.println("Response Body: " + responseBody);
 
         Map<String, Object> result = objectMapper.readValue(responseBody, new TypeReference<Map<String, Object>>() {});
         if (result.containsKey("errors")) {
@@ -54,7 +53,6 @@ public abstract class AbstractAPIOperation {
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         String responseBody = response.body();
-        System.out.println("Response Body: " + responseBody);
 
         Map<String, Object> result = objectMapper.readValue(responseBody, new TypeReference<Map<String, Object>>() {});
         if (result.containsKey("errors")) {

@@ -48,17 +48,12 @@ public class ClientAPIOperation extends AbstractAPIOperation {
                 (hasResult) ? "{clientId firstName middleNames lastName dateOfBirth phoneNumber address{ street number zipCode city country} email isBusinessClient}" : ""
         );
 
-        System.out.println("TEST" + query);
-
         return query;
 
     }
 
         public APIClient createClient(APIClientInput apiClientInput) {
-            System.out.println("Test.0");
-            APIClient returned = execute(transformToQuery(apiClientInput, null, "createClient", true), "createClient", APIClient.class);
-            System.out.println("TEST.A" + returned.getClientId());
-            return returned;
+            return execute(transformToQuery(apiClientInput, null, "createClient", true), "createClient", APIClient.class);
         }
 
         public void updateClient(Long clientId, APIClientInput apiClientInput) {

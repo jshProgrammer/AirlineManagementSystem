@@ -25,18 +25,13 @@ public class CancelTicketUseCase extends AuthorizedUseCase {
         //10.01.2025: Gespräch mit Prof. Dr. Braun: Authorization nicht notwendig da Error Weitergabe von Resolver zu Client in GraphQL kaum umsetzbar
         //new CancelTicketUseCase().authorize();
 
-        System.out.println("TESTEST300");
         for (DomainTicket ticket : person.getTickets()) {
-            //TODO: geht hier nicht rein => person.getTickets ist leer => Verbindung auf DB-Ebene funktioniert scheinbar nicht
-            System.out.println("TESTEST350");
             if (flightnum == (int) ticket.getFlight().getFlightNum()) {
                 DomainFlight mFlight = ticket.getFlight();
                 EmailSender.sendCancelationMailCustomer(mFlight);
                 mFlight.getTickets().remove(ticket);
                 ticket.setTicketStatus(DomainTicket.TicketStatus.canceled);
-                System.out.println("TESTEST400");
                 if(changeInDB) {
-                    System.out.println("TESTEST500");
                     ticketPort.update(ticket);
                 }
             }

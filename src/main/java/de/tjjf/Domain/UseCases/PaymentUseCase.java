@@ -96,14 +96,11 @@ public class PaymentUseCase extends AuthorizedUseCase {
 
             PaymentIntent intent = PaymentIntent.create(params);
             if ("succeeded".equals(intent.getStatus())) {
-                System.out.println("Payment successful");
                 return true;
             } else {
-                System.out.println("Payment failed with status: " + intent.getStatus());
                 return false;
             }
         } catch (StripeException e) {
-            System.out.println("Payment failed due to an error:");
             e.printStackTrace();
             return false;
         }
@@ -129,9 +126,7 @@ public class PaymentUseCase extends AuthorizedUseCase {
         paymentMethodParams.put("card", cardParams);
 
         PaymentMethod paymentMethod = PaymentMethod.create(paymentMethodParams);
-        System.out.println("Generated PaymentMethod ID: " + paymentMethod.getId());
         return paymentMethod.getId();
-        //return "pm_card_visa";
     }
 
     public SetupIntent createSetupIntent() {

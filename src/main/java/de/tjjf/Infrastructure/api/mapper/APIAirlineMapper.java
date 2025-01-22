@@ -27,7 +27,6 @@ public class APIAirlineMapper extends AbstractAPIMapper<APIAirline, DomainAirlin
         Date date;
         try {
             date = formatter.parse(model.getFoundationYear());
-            System.out.println("Parsed date: " + date);
         } catch (ParseException e) {
             throw new RuntimeException("Error parsing date: " + e.getMessage());
         }

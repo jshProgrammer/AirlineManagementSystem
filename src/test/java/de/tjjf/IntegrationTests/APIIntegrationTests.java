@@ -283,11 +283,7 @@ public class APIIntegrationTests {
         APIFlightInput apiFlightInput = new APIFlightInput(apiAirplaneInput.getSerialNum(), dateTime.toString(), apiAirportInput.getCode(), dateTime.toString(), apiAirportInput.getCode(), dateTime.toString(), APIFlightInput.FlightStatus.scheduled, 120, apiEmployee.getEmployeeId(), apiEmployee.getEmployeeId());
         APIFlight apiFlight = new FlightAPIOperation().createFlight(apiFlightInput);
 
-        System.out.println("flightNum" + apiFlight.getFlightNum());
-
        APIFlight flightReadFromDB = new FlightAPIOperation().readFlightByFlightNum(apiFlight.getFlightNum());
-
-        System.out.println("flightNum" + flightReadFromDB.getFlightNum());
 
         assertEquals(apiFlightInput.getAirplaneSerialNum(), flightReadFromDB.getAirplaneSerialNum());
         assertEquals(apiFlightInput.getDepartureDateTime().toString(), DateParser.getDateFromRFC3339(flightReadFromDB.getDepartureDateTime()).toString());

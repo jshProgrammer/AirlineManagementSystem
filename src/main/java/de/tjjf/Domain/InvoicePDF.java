@@ -76,7 +76,6 @@ public class InvoicePDF {
             document.add(total);
             document.close();
 
-            System.out.println("PDF wurde erstellt");
             return filePath;
         }
         catch (Exception e){

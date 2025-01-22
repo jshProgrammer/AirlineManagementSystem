@@ -30,7 +30,6 @@ public class PersonMapper {
         Date parsedDate;
         try {
             parsedDate = formatter.parse(date);
-            System.out.println("Parsed date: " + date);
         } catch (ParseException e) {
             throw new RuntimeException("Error parsing date: " + e.getMessage());
         }

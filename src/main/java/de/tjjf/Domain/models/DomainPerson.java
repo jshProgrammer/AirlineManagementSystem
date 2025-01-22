@@ -62,7 +62,7 @@ public class DomainPerson implements DomainModel
 
             return phoneNumberUtil.isValidNumber(parsedNumber);
         } catch (NumberParseException e) {
-            System.out.println("Invalid Phonenumber: " + e.getMessage());
+            System.err.println("Invalid Phonenumber: " + e.getMessage());
             return false;
         }
     }

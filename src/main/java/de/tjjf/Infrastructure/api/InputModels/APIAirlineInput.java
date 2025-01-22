@@ -70,7 +70,6 @@ public class APIAirlineInput implements APIModelInput {
     }
 
     public String getFoundationYearInRFC3339() {
-        System.out.println(foundationYear);
         String[] dateArr = foundationYear.split(" ");
 
         String month = switch (dateArr[1]) {
