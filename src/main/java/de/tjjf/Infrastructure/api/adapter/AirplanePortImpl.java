@@ -1,6 +1,6 @@
-package de.tjjf.Adapter.APIAdapter;
+package de.tjjf.Infrastructure.api.adapter;
 
-import de.tjjf.Adapter.DatabaseAdapter.MAirplaneRepositoryImpl;
+import de.tjjf.Infrastructure.persistence.adapter.MAirplaneRepositoryImpl;
 import de.tjjf.Domain.UseCases.Services.AirplaneService;
 import de.tjjf.Domain.models.DomainAirplane;
 import de.tjjf.Domain.ports.API.AirplanePort;

@@ -1,6 +1,6 @@
 package de.tjjf.Infrastructure.api.resolvers;
 
-import de.tjjf.Adapter.APIAdapter.ClientPortImpl;
+import de.tjjf.Infrastructure.api.adapter.ClientPortImpl;
 import de.tjjf.Infrastructure.api.InputModels.APIClientInput;
 import de.tjjf.Infrastructure.api.MapperInput.ClientMapperInput;
 import de.tjjf.Infrastructure.api.mapper.APIClientMapper;

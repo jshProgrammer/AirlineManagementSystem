@@ -1,7 +1,7 @@
 package de.tjjf.Infrastructure.api.resolvers;
 
 
-import de.tjjf.Adapter.APIAdapter.FlightPortImpl;
+import de.tjjf.Infrastructure.api.adapter.FlightPortImpl;
 import de.tjjf.Infrastructure.api.InputModels.APIFlightInput;
 import de.tjjf.Infrastructure.api.MapperInput.FlightMapperInput;
 import de.tjjf.Infrastructure.api.mapper.APIFlightMapper;

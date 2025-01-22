@@ -1,6 +1,6 @@
-package de.tjjf.Adapter.APIAdapter;
+package de.tjjf.Infrastructure.api.adapter;
 
-import de.tjjf.Adapter.DatabaseAdapter.MEmployeeRepositoryImpl;
+import de.tjjf.Infrastructure.persistence.adapter.MEmployeeRepositoryImpl;
 import de.tjjf.Domain.UseCases.Services.EmployeeService;
 import de.tjjf.Domain.models.DomainEmployee;
 import de.tjjf.Domain.ports.API.EmployeePort;

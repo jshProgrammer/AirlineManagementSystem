@@ -1,6 +1,6 @@
 package de.tjjf.Infrastructure.api.resolvers;
 
-import de.tjjf.Adapter.APIAdapter.BookingPortImpl;
+import de.tjjf.Infrastructure.api.adapter.BookingPortImpl;
 import de.tjjf.Domain.models.DomainTicket;
 import de.tjjf.Infrastructure.api.InputModels.APIPaymentInput;
 import de.tjjf.Infrastructure.api.InputModels.APITicketInput;

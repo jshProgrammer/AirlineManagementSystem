@@ -1,6 +1,6 @@
-package de.tjjf.Adapter.APIAdapter;
+package de.tjjf.Infrastructure.api.adapter;
 
-import de.tjjf.Adapter.DatabaseAdapter.MFlightRepositoryImpl;
+import de.tjjf.Infrastructure.persistence.adapter.MFlightRepositoryImpl;
 import de.tjjf.Domain.UseCases.Services.FlightService;
 import de.tjjf.Domain.models.DomainFlight;
 import de.tjjf.Domain.ports.API.FlightPort;

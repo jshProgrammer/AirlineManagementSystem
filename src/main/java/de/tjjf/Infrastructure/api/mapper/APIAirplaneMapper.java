@@ -2,7 +2,7 @@ package de.tjjf.Infrastructure.api.mapper;
 
 import de.tjjf.Domain.models.DomainAirplane;
 import de.tjjf.Infrastructure.api.models.APIAirplane;
-import de.tjjf.Adapter.APIAdapter.AirlinePortImpl;
+import de.tjjf.Infrastructure.api.adapter.AirlinePortImpl;
 
 public class APIAirplaneMapper extends AbstractAPIMapper<APIAirplane, DomainAirplane> {
 

@@ -4,9 +4,9 @@ import de.tjjf.Domain.models.DomainClient;
 import de.tjjf.Domain.models.DomainTicket;
 import de.tjjf.Infrastructure.api.DateParser;
 import de.tjjf.Infrastructure.api.models.APITicket;
-import de.tjjf.Adapter.APIAdapter.ClientPortImpl;
-import de.tjjf.Adapter.APIAdapter.EmployeePortImpl;
-import de.tjjf.Adapter.APIAdapter.FlightPortImpl;
+import de.tjjf.Infrastructure.api.adapter.ClientPortImpl;
+import de.tjjf.Infrastructure.api.adapter.EmployeePortImpl;
+import de.tjjf.Infrastructure.api.adapter.FlightPortImpl;
 
 public class APITicketMapper extends AbstractAPIMapper<APITicket, DomainTicket>{
 

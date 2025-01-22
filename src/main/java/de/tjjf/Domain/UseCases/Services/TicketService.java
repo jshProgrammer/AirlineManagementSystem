@@ -1,6 +1,6 @@
 package de.tjjf.Domain.UseCases.Services;
 
-import de.tjjf.Adapter.DatabaseAdapter.MTicketRepositoryImpl;
+import de.tjjf.Infrastructure.persistence.adapter.MTicketRepositoryImpl;
 import de.tjjf.Domain.Exceptions.NoSeatsAvailableException;
 import de.tjjf.Domain.UseCases.*;
 import de.tjjf.Domain.models.*;

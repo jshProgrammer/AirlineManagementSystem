@@ -1,6 +1,6 @@
 package de.tjjf.Infrastructure.api.resolvers;
 
-import de.tjjf.Adapter.APIAdapter.AirportPortImpl;
+import de.tjjf.Infrastructure.api.adapter.AirportPortImpl;
 import de.tjjf.Infrastructure.api.InputModels.APIAirportInput;
 import de.tjjf.Infrastructure.api.mapper.APIAirportMapper;
 import de.tjjf.Infrastructure.api.models.APIAirport;

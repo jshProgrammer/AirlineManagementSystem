@@ -1,8 +1,8 @@
 package de.tjjf.LogicTests;
 
-import de.tjjf.Adapter.DatabaseAdapter.MClientRepositoryImpl;
-import de.tjjf.Adapter.DatabaseAdapter.MEmployeeRepositoryImpl;
-import de.tjjf.Adapter.DatabaseAdapter.MTicketRepositoryImpl;
+import de.tjjf.Infrastructure.persistence.adapter.MClientRepositoryImpl;
+import de.tjjf.Infrastructure.persistence.adapter.MEmployeeRepositoryImpl;
+import de.tjjf.Infrastructure.persistence.adapter.MTicketRepositoryImpl;
 import de.tjjf.Domain.UseCases.CancelTicketUseCase;
 import de.tjjf.Domain.models.*;
 import org.junit.jupiter.api.Test;

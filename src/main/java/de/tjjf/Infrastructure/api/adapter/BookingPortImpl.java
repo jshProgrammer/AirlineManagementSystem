@@ -1,8 +1,8 @@
-package de.tjjf.Adapter.APIAdapter;
+package de.tjjf.Infrastructure.api.adapter;
 
-import de.tjjf.Adapter.DatabaseAdapter.MClientRepositoryImpl;
-import de.tjjf.Adapter.DatabaseAdapter.MEmployeeRepositoryImpl;
-import de.tjjf.Adapter.DatabaseAdapter.MTicketRepositoryImpl;
+import de.tjjf.Infrastructure.persistence.adapter.MClientRepositoryImpl;
+import de.tjjf.Infrastructure.persistence.adapter.MEmployeeRepositoryImpl;
+import de.tjjf.Infrastructure.persistence.adapter.MTicketRepositoryImpl;
 import de.tjjf.Domain.Exceptions.NoSeatsAvailableException;
 import de.tjjf.Domain.UseCases.Services.TicketService;
 import de.tjjf.Domain.models.DomainPayment;

@@ -1,6 +1,6 @@
-package de.tjjf.Adapter.APIAdapter;
+package de.tjjf.Infrastructure.api.adapter;
 
-import de.tjjf.Adapter.DatabaseAdapter.MAirportRepsoitoryImp;
+import de.tjjf.Infrastructure.persistence.adapter.MAirportRepsoitoryImp;
 import de.tjjf.Domain.UseCases.Services.AirportService;
 import de.tjjf.Domain.models.DomainAirport;
 import de.tjjf.Domain.ports.API.AirportPort;

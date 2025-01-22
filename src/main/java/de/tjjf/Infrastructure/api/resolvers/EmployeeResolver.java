@@ -1,6 +1,6 @@
 package de.tjjf.Infrastructure.api.resolvers;
 
-import de.tjjf.Adapter.APIAdapter.EmployeePortImpl;
+import de.tjjf.Infrastructure.api.adapter.EmployeePortImpl;
 import de.tjjf.Infrastructure.api.InputModels.APIEmployeeInput;
 import de.tjjf.Infrastructure.api.MapperInput.EmployeeMapperInput;
 import de.tjjf.Infrastructure.api.mapper.APIEmployeeMapper;

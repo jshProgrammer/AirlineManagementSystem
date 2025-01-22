@@ -3,7 +3,7 @@ package de.tjjf.Infrastructure.api.mapper;
 import de.tjjf.Domain.models.DomainEmployee;
 import de.tjjf.Domain.models.DomainPerson;
 import de.tjjf.Infrastructure.api.models.APIEmployee;
-import de.tjjf.Adapter.APIAdapter.AirlinePortImpl;
+import de.tjjf.Infrastructure.api.adapter.AirlinePortImpl;
 
 import java.util.Date;
 

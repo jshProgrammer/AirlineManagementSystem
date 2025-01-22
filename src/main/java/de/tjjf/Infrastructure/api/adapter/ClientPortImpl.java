@@ -1,6 +1,6 @@
-package de.tjjf.Adapter.APIAdapter;
+package de.tjjf.Infrastructure.api.adapter;
 
-import de.tjjf.Adapter.DatabaseAdapter.MClientRepositoryImpl;
+import de.tjjf.Infrastructure.persistence.adapter.MClientRepositoryImpl;
 import de.tjjf.Domain.UseCases.Services.ClientService;
 import de.tjjf.Domain.models.DomainClient;
 import de.tjjf.Domain.ports.API.ClientPort;

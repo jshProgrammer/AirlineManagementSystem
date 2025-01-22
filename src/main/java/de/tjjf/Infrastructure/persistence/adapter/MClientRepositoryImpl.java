@@ -1,4 +1,4 @@
-package de.tjjf.Adapter.DatabaseAdapter;
+package de.tjjf.Infrastructure.persistence.adapter;
 
 import de.tjjf.Domain.models.DomainClient;
 import de.tjjf.Domain.ports.DB.DataAccess;

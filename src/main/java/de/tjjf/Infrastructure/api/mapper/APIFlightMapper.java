@@ -3,9 +3,9 @@ package de.tjjf.Infrastructure.api.mapper;
 import de.tjjf.Domain.models.DomainFlight;
 import de.tjjf.Infrastructure.api.DateParser;
 import de.tjjf.Infrastructure.api.models.APIFlight;
-import de.tjjf.Adapter.APIAdapter.AirplanePortImpl;
-import de.tjjf.Adapter.APIAdapter.AirportPortImpl;
-import de.tjjf.Adapter.APIAdapter.EmployeePortImpl;
+import de.tjjf.Infrastructure.api.adapter.AirplanePortImpl;
+import de.tjjf.Infrastructure.api.adapter.AirportPortImpl;
+import de.tjjf.Infrastructure.api.adapter.EmployeePortImpl;
 
 public class APIFlightMapper extends AbstractAPIMapper<APIFlight, DomainFlight> {
     @Override
