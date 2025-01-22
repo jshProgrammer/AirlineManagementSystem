@@ -10,7 +10,6 @@ import com.google.i18n.phonenumbers.Phonenumber;
 
 import org.apache.commons.validator.routines.EmailValidator;
 
-//TODO: sollte die Klasse nicht noch abstract werden?
 public class DomainPerson implements DomainModel
 {
     private long personId;
@@ -39,18 +38,15 @@ public class DomainPerson implements DomainModel
         this.dateOfBirth = dateOfBirth;
         this.address = address;
 
-        //PhoneNumber-validation
         if(verifyPhonenumber(phonenumber)) this.phonenumber = phonenumber;
 
-        // E-Mail-validation
         EmailValidator validator = EmailValidator.getInstance();
         boolean isValid = validator.isValid(email);
         if(!isValid) throw new IllegalArgumentException("Email is not a valid email");
 
         this.email = email;
 
-        //TODO: geht hier scheinbar nicht
-        //if(this.tickets != null) this.tickets = tickets;
+        if(this.tickets != null && tickets != null) this.tickets = tickets;
     }
 
 

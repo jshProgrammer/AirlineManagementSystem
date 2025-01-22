@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 //should work 23.12.24
 public class PaymentTest {
-    //TODO: Wie machen wir es mit Testen? Switch Case für Card Numbers? Schwierig oder ich bin zu blöd für wegen Token
     PaymentUseCase puc = new PaymentUseCase();
 
     @Test

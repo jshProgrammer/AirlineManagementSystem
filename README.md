@@ -103,7 +103,11 @@ AirlineManagementSystem/
    ```
 
 ## Configuration
-Hier noch anpassen Wegen Docker 
+```bash
+docker build --tag "airline"
+docker run airline
+docker run --detach airline
+```
 
 All configurable settings can be found in the file `src/main/resources/application.properties`
 
@@ -111,7 +115,7 @@ All configurable settings can be found in the file `src/main/resources/applicati
 
 Execute the tests with the following command:
 ```bash
-mvn verify
+docker exec -lt airline mvn test
 ```
 
 The test results can be found in the folder `target/surefire-reports`.

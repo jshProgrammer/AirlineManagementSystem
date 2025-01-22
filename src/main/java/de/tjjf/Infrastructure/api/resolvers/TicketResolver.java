@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TicketResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
-    //TODO: Ticket Port Impl, bzw rename von booking zu ticket außer ich bin zu blöd die Logik zu verstehen - Tom
     public APITicket addTicket(APITicketInput newBooking, APIPaymentInput payment) {
         APITicket apiTicket = new TicketMapperInput().toDomain(0L, newBooking);
         APIPayment apiPayment = new PaymentMapperInput().toDomain(payment);
