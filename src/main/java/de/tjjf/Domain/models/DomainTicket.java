@@ -4,16 +4,16 @@ import de.tjjf.Domain.Exceptions.NoSeatsAvailableException;
 import java.util.Date;
 import java.util.List;
 
-public class MTicket implements MModel {
+public class DomainTicket implements DomainModel {
     public enum SeatingClass { Economy, Business, First }
 
     public enum TicketStatus { paid, unpaid, canceled }
 
     private final long ticketId;
 
-    private MPerson person;
+    private DomainPerson person;
 
-    private MFlight flight;
+    private DomainFlight flight;
 
     private final Date dateTimeOfBooking;
 
@@ -28,7 +28,7 @@ public class MTicket implements MModel {
     private int weightOfLuggage;
 
     // use exceptions instead of boolean, in order to be able to differ between the two problems (NoSeatsLeft, NotEnoughLuggageWeightAvailable => IllegalArgumentException)
-    public MTicket(long ticketId, MPerson person, MFlight flight, Date dateTimeOfBooking, int totalPrice, int seatNum, SeatingClass seatingClass, TicketStatus ticketStatus, int weightOfLuggage) throws NoSeatsAvailableException, IllegalArgumentException {
+    public DomainTicket(long ticketId, DomainPerson person, DomainFlight flight, Date dateTimeOfBooking, int totalPrice, int seatNum, SeatingClass seatingClass, TicketStatus ticketStatus, int weightOfLuggage) throws NoSeatsAvailableException, IllegalArgumentException {
 
         this.flight = flight;
 
@@ -58,20 +58,20 @@ public class MTicket implements MModel {
         }
     }
 
-    public boolean isSeatingUpdateAvailable(MTicket.SeatingClass newDesiredSeatingClass ) {
+    public boolean isSeatingUpdateAvailable(DomainTicket.SeatingClass newDesiredSeatingClass ) {
 
-        MFlight belongingFlight = this.flight;
-        List<MTicket> bookingsOfThisFlight = belongingFlight.getTickets();
+        DomainFlight belongingFlight = this.flight;
+        List<DomainTicket> bookingsOfThisFlight = belongingFlight.getTickets();
 
         int totalNumberOfSeats = switch(newDesiredSeatingClass) {
-            case MTicket.SeatingClass.Economy -> belongingFlight.getAirplane().getAmountOfEconomySeats();
-            case MTicket.SeatingClass.Business -> belongingFlight.getAirplane().getAmountOfBusinessSeats();
-            case MTicket.SeatingClass.First -> belongingFlight.getAirplane().getAmountOfFirstClassSeats();
+            case DomainTicket.SeatingClass.Economy -> belongingFlight.getAirplane().getAmountOfEconomySeats();
+            case DomainTicket.SeatingClass.Business -> belongingFlight.getAirplane().getAmountOfBusinessSeats();
+            case DomainTicket.SeatingClass.First -> belongingFlight.getAirplane().getAmountOfFirstClassSeats();
         };
 
         int reservedNumberOfSeats = 0;
 
-        for(MTicket mTicketIter : bookingsOfThisFlight) {
+        for(DomainTicket mTicketIter : bookingsOfThisFlight) {
             if(mTicketIter.getSeatingClass() == newDesiredSeatingClass) {
                 reservedNumberOfSeats++;
             }
@@ -116,11 +116,11 @@ public class MTicket implements MModel {
         this.ticketStatus = ticketStatus;
     }
 
-    public void setFlightNum(MFlight flight) {
+    public void setFlightNum(DomainFlight flight) {
         this.flight = flight;
     }
 
-    public void setPerson(MPerson person) {
+    public void setPerson(DomainPerson person) {
         this.person = person;
     }
 
@@ -145,7 +145,7 @@ public class MTicket implements MModel {
         return seatingClass;
     }
 
-    public MPerson getPerson() {
+    public DomainPerson getPerson() {
         return person;
     }
 
@@ -153,7 +153,7 @@ public class MTicket implements MModel {
         return weightOfLuggage;
     }
 
-    public MFlight getFlight() {
+    public DomainFlight getFlight() {
         return flight;
     }
 

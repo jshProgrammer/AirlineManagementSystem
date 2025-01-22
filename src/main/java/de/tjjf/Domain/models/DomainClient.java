@@ -3,16 +3,16 @@ package de.tjjf.Domain.models;
 import java.util.Date;
 import java.util.List;
 
-public class MClient extends MPerson implements MModel {
+public class DomainClient extends DomainPerson implements DomainModel {
 
     private boolean isBusinessClient;
 
-    public MClient(long personId, String firstName, String middleNames, String lastName, Date dateOfBirth, String phonenumber, MAddress address, String email, boolean isBusinessClient) {
+    public DomainClient(long personId, String firstName, String middleNames, String lastName, Date dateOfBirth, String phonenumber, DomainAddress address, String email, boolean isBusinessClient) {
         super(personId, firstName, middleNames, lastName, dateOfBirth, phonenumber, address, email, null);
         this.isBusinessClient = isBusinessClient;
     }
 
-    public MClient(long personId, String firstName, String middleNames, String lastName, Date dateOfBirth, String phonenumber, MAddress address, String email, boolean isBusinessClient, List<MTicket> tickets) {
+    public DomainClient(long personId, String firstName, String middleNames, String lastName, Date dateOfBirth, String phonenumber, DomainAddress address, String email, boolean isBusinessClient, List<DomainTicket> tickets) {
         super(personId, firstName, middleNames, lastName, dateOfBirth, phonenumber, address, email, tickets);
         this.isBusinessClient = isBusinessClient;
     }

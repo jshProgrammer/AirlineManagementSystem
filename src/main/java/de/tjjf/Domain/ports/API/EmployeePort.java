@@ -1,10 +1,10 @@
 package de.tjjf.Domain.ports.API;
 
-import de.tjjf.Domain.models.MEmployee;
+import de.tjjf.Domain.models.DomainEmployee;
 
 public interface EmployeePort {
-    MEmployee createEmployee(MEmployee employee);
-    boolean verifyPassword(MEmployee employee, String password);
-    MEmployee readEmployeeById(long id);
-    void updateEmployee(MEmployee employee);
+    DomainEmployee createEmployee(DomainEmployee employee);
+    boolean verifyPassword(DomainEmployee employee, String password);
+    DomainEmployee readEmployeeById(long id);
+    void updateEmployee(DomainEmployee employee);
 }

@@ -1,12 +1,12 @@
 package de.tjjf.LogicTests;
 
-import de.tjjf.Domain.models.MFlight;
+import de.tjjf.Domain.models.DomainFlight;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class FlightLuggageTest {
-    MFlight mFlight = new MFlight(999999, null, null, null, null, null,null,null,0,null,null);
+    DomainFlight mFlight = new DomainFlight(999999, null, null, null, null, null,null,null,0,null,null);
 
     @Test
     public void testNegativeValueInitial(){

@@ -1,13 +1,13 @@
 package de.tjjf.Infrastructure.api.mapper;
 
-import de.tjjf.Domain.models.MAirplane;
+import de.tjjf.Domain.models.DomainAirplane;
 import de.tjjf.Infrastructure.api.models.APIAirplane;
 import de.tjjf.Adapter.APIAdapter.AirlinePortImpl;
 
-public class APIAirplaneMapper extends AbstractAPIMapper<APIAirplane, MAirplane> {
+public class APIAirplaneMapper extends AbstractAPIMapper<APIAirplane, DomainAirplane> {
 
     @Override
-    public APIAirplane toAPIEntity(MAirplane mAirplane){
+    public APIAirplane toAPIEntity(DomainAirplane mAirplane){
         return new APIAirplane(
                 mAirplane.getSerialNum(),
                 mAirplane.getBelongingAirline().getName(),
@@ -16,8 +16,8 @@ public class APIAirplaneMapper extends AbstractAPIMapper<APIAirplane, MAirplane>
     }
 
     @Override
-    public MAirplane toDomainEntity(APIAirplane model){
-        return new MAirplane(
+    public DomainAirplane toDomainEntity(APIAirplane model){
+        return new DomainAirplane(
                 model.getSerialNum(),
                 "DefaultManufacturer",
                 "DefaultModel",

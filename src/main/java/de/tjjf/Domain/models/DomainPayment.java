@@ -1,13 +1,13 @@
 package de.tjjf.Domain.models;
 
-public class MPayment implements MModel
+public class DomainPayment implements DomainModel
 {
     private String cardNumber;
     private String expMonth;
     private String expYear;
     private String cvc;
 
-    public MPayment(String cardNumber, String expMonth, String expYear, String cvc) {
+    public DomainPayment(String cardNumber, String expMonth, String expYear, String cvc) {
         this.cardNumber = cardNumber;
         this.expMonth = expMonth;
         this.expYear = expYear;

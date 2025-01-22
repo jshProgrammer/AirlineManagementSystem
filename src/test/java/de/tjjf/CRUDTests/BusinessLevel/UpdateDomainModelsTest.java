@@ -7,18 +7,18 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UpdateMModelsTest {
+public class UpdateDomainModelsTest {
 
-    MAddress mAddress;
-    MAirline mAirline;
-    MAirplane mAirplane;
-    MAirport departuremAirport;
-    MAirport arrivalmAirport;
-    MClient mClient;
-    MEmployee mEmployee;
-    MFlight mFlight;
-    MPerson mPerson;
-    MTicket mTicket;
+    DomainAddress mAddress;
+    DomainAirline mAirline;
+    DomainAirplane mAirplane;
+    DomainAirport departuremAirport;
+    DomainAirport arrivalmAirport;
+    DomainClient mClient;
+    DomainEmployee mEmployee;
+    DomainFlight mFlight;
+    DomainPerson mPerson;
+    DomainTicket mTicket;
 
     @BeforeEach
     public void beforeEach() {
@@ -27,15 +27,15 @@ public class UpdateMModelsTest {
         int mAddressZipCode = 12345;
         String mAddressCity = "TestCity";
         String mAddressCountry = "TestCountry";
-        mAddress = new MAddress(mAddressStreet, mAddressNumber, mAddressZipCode, mAddressCity, mAddressCountry);
+        mAddress = new DomainAddress(mAddressStreet, mAddressNumber, mAddressZipCode, mAddressCity, mAddressCountry);
 
         String mAirlineName = "TestAirline";
         Date mAirlineDate = new Date();
         String mAirlineHeadQuarters = "TestHeadquarters";
-        MAddress mAirlineMAddress = new MAddress(null, 0, 0, null, null);
+        DomainAddress mAirlineMAddress = new DomainAddress(null, 0, 0, null, null);
         String mAirlinePhoneNumber = "+4915112345678";
         String mAirlineEmail = "testemail@gmail.com";
-        mAirline = new MAirline(mAirlineName , mAirlineDate, mAirlineHeadQuarters, mAirlineMAddress, mAirlinePhoneNumber, mAirlineEmail);
+        mAirline = new DomainAirline(mAirlineName , mAirlineDate, mAirlineHeadQuarters, mAirlineMAddress, mAirlinePhoneNumber, mAirlineEmail);
 
         int mAirplaneSerialNum = 1234;
         String mAirplaneManufacturer = "TestManufacturer";
@@ -45,21 +45,21 @@ public class UpdateMModelsTest {
         int mAirplaneAmountOfFirstClassSeats = 15;
         boolean mAirplaneIsOperable = true;
         int mAirplaneMaxWeightOfLuggage = 40000;
-        mAirplane = new MAirplane(mAirplaneSerialNum, mAirplaneManufacturer, mAirplaneModel, mAirplaneAmountOfEconomySeats, mAirplaneAmountOfBusinessSeats, mAirplaneAmountOfFirstClassSeats,  mAirline, mAirplaneIsOperable, mAirplaneMaxWeightOfLuggage);
+        mAirplane = new DomainAirplane(mAirplaneSerialNum, mAirplaneManufacturer, mAirplaneModel, mAirplaneAmountOfEconomySeats, mAirplaneAmountOfBusinessSeats, mAirplaneAmountOfFirstClassSeats,  mAirline, mAirplaneIsOperable, mAirplaneMaxWeightOfLuggage);
 
         String departureMAirportCode = "departureTestCode";
         String departureMAirportName = "departureTestName";
         String departureMAirportCountry = "departureTestCountry";
         String departureMAirportCity = "departureTestCity";
         String departureMAirportTimezone = "departureTestTimezone";
-        departuremAirport = new MAirport(departureMAirportCode, departureMAirportName,departureMAirportCountry, departureMAirportCity, departureMAirportTimezone);
+        departuremAirport = new DomainAirport(departureMAirportCode, departureMAirportName,departureMAirportCountry, departureMAirportCity, departureMAirportTimezone);
 
         String arrivalMAirportCode = "arrivalTestCode";
         String arrivalMAirportName = "arrivalTestName";
         String arrivalMAirportCountry = "arrivalTestCountry";
         String arrivalMAirportCity = "arrivalTestCity";
         String arrivalMAirportTimezone = "arrivalTestTimezone";
-        arrivalmAirport = new MAirport(arrivalMAirportCode, arrivalMAirportName,arrivalMAirportCountry, arrivalMAirportCity, arrivalMAirportTimezone);
+        arrivalmAirport = new DomainAirport(arrivalMAirportCode, arrivalMAirportName,arrivalMAirportCountry, arrivalMAirportCity, arrivalMAirportTimezone);
 
         long mClientPersonId = 9999999;
         String mClientFirstName = "TestClientFirstName";
@@ -67,10 +67,10 @@ public class UpdateMModelsTest {
         String mClientLastName = "TestClientLastName";
         Date mClientDateOfBirth = new Date();
         String mClientPhoneNumber = "+4915112345678";
-        MAddress mClientMAddress = new MAddress(null, 0, 0, null, null);
+        DomainAddress mClientMAddress = new DomainAddress(null, 0, 0, null, null);
         String mClientEmail = "testemail@gmail.com";
         boolean mClientIsBusinessClient = true;
-        mClient = new MClient(mClientPersonId, mClientFirstName, mClientMiddleNames, mClientLastName, mClientDateOfBirth,  mClientPhoneNumber, mClientMAddress, mClientEmail, mClientIsBusinessClient);
+        mClient = new DomainClient(mClientPersonId, mClientFirstName, mClientMiddleNames, mClientLastName, mClientDateOfBirth,  mClientPhoneNumber, mClientMAddress, mClientEmail, mClientIsBusinessClient);
 
         long mEmployeePersonId = 9999999;
         String mEmployeeFirstName = "TestEmployeetFirstName";
@@ -78,23 +78,23 @@ public class UpdateMModelsTest {
         String mEmployeeLastName = "TestEmployeeLastName";
         Date mEmployeeDateOfBirth = new Date();
         String mEmployeePhoneNumber = "+4915112345678";
-        MAddress mEmployeeMAddress = new MAddress(null, 0, 0, null, null);
+        DomainAddress mEmployeeMAddress = new DomainAddress(null, 0, 0, null, null);
         String mEmployeeEmail = "testemail@gmail.com";
         int mEmployeeSalary = 100;
         String mEmployeePosition = "TestPosition";
-        MAirline mEmployeeMAirline = new MAirline(null, null, null, null ,"+4915112345678","memployeeairline@gmail.com");
+        DomainAirline mEmployeeMAirline = new DomainAirline(null, null, null, null ,"+4915112345678","memployeeairline@gmail.com");
         Date mEmployeeHireDate = new Date();
-        mEmployee = new MEmployee(mEmployeePersonId, mEmployeeFirstName, mEmployeeMiddleNames, mEmployeeLastName, mEmployeeDateOfBirth,  mEmployeePhoneNumber, mEmployeeMAddress, mEmployeeEmail, mEmployeeSalary, mEmployeePosition,mEmployeeMAirline,mEmployeeHireDate);
+        mEmployee = new DomainEmployee(mEmployeePersonId, mEmployeeFirstName, mEmployeeMiddleNames, mEmployeeLastName, mEmployeeDateOfBirth,  mEmployeePhoneNumber, mEmployeeMAddress, mEmployeeEmail, mEmployeeSalary, mEmployeePosition,mEmployeeMAirline,mEmployeeHireDate);
 
         long mFLightFlightNum = 1234;
         Date mAirplaneDepartureDateTime = new Date();
         Date mAirplaneArrivalDateTime = new Date();
         Date mAirplaneBoardingTime = new Date();
-        MFlight.FlightStatus mAirplaneFlightStatus = MFlight.FlightStatus.landed;
+        DomainFlight.FlightStatus mAirplaneFlightStatus = DomainFlight.FlightStatus.landed;
         int mAirplaneDuration = 123;
-        MEmployee mAirplanePilot = new MEmployee(0, null, null, null, null, "+4915112345678",null, "mairlinepilot@gmail.com", 0, null, null, null);
-        MEmployee mAirplaneCopilot = new MEmployee(0, null, null, null, null, "+4915112345678",null, "mairlinecopilot@gmail.com",  0, null, null, null);
-        mFlight = new MFlight(mFLightFlightNum, mAirplane, mAirplaneDepartureDateTime, departuremAirport, mAirplaneArrivalDateTime, arrivalmAirport, mAirplaneBoardingTime, mAirplaneFlightStatus, mAirplaneDuration, mAirplanePilot, mAirplaneCopilot);
+        DomainEmployee mAirplanePilot = new DomainEmployee(0, null, null, null, null, "+4915112345678",null, "mairlinepilot@gmail.com", 0, null, null, null);
+        DomainEmployee mAirplaneCopilot = new DomainEmployee(0, null, null, null, null, "+4915112345678",null, "mairlinecopilot@gmail.com",  0, null, null, null);
+        mFlight = new DomainFlight(mFLightFlightNum, mAirplane, mAirplaneDepartureDateTime, departuremAirport, mAirplaneArrivalDateTime, arrivalmAirport, mAirplaneBoardingTime, mAirplaneFlightStatus, mAirplaneDuration, mAirplanePilot, mAirplaneCopilot);
 
         long mPersonPersonId = 9999999;
         String mPersonFirstName = "TestEmployeetFirstName";
@@ -102,20 +102,20 @@ public class UpdateMModelsTest {
         String mPersonLastName = "TestEmployeeLastName";
         Date mPersonDateOfBirth = new Date();
         String mPersonPhoneNumber = "+4915112345678";
-        MAddress mPersonMAddress = new MAddress(null, 0, 0, null, null);
+        DomainAddress mPersonMAddress = new DomainAddress(null, 0, 0, null, null);
         String mPersonEmail = "testemail@gmail.com";
         String mPersonPassword = "testpassword";
-        mPerson = new MPerson(mPersonPersonId, mPersonFirstName, mPersonMiddleNames, mPersonLastName,mPersonDateOfBirth,mPersonPhoneNumber,mPersonMAddress, mPersonEmail, null );
+        mPerson = new DomainPerson(mPersonPersonId, mPersonFirstName, mPersonMiddleNames, mPersonLastName,mPersonDateOfBirth,mPersonPhoneNumber,mPersonMAddress, mPersonEmail, null );
 
         int mTicketTicketId = 1234;
-        MPerson mTicketPerson = new MPerson(0,null,null,null,null,"+4915112345678",null,"mticketperson@gmail.com", null);
+        DomainPerson mTicketPerson = new DomainPerson(0,null,null,null,null,"+4915112345678",null,"mticketperson@gmail.com", null);
         Date mTicketDateTimeOfBooking = new Date();
         int mTicketTotalPrice = 300;
         int mTicketSeatNum = 15;
-        MTicket.SeatingClass mTicketSeatingClass = MTicket.SeatingClass.Economy;
-        MTicket.TicketStatus mTicketTicketStatus = MTicket.TicketStatus.paid;
+        DomainTicket.SeatingClass mTicketSeatingClass = DomainTicket.SeatingClass.Economy;
+        DomainTicket.TicketStatus mTicketTicketStatus = DomainTicket.TicketStatus.paid;
         int mTicketWeightOfLuggage = 20;
-        mTicket = new MTicket(mTicketTicketId, mTicketPerson, mFlight, mTicketDateTimeOfBooking, mTicketTotalPrice, mTicketSeatNum, mTicketSeatingClass, mTicketTicketStatus, mTicketWeightOfLuggage);
+        mTicket = new DomainTicket(mTicketTicketId, mTicketPerson, mFlight, mTicketDateTimeOfBooking, mTicketTotalPrice, mTicketSeatNum, mTicketSeatingClass, mTicketTicketStatus, mTicketWeightOfLuggage);
     }
 
     @Test
@@ -145,7 +145,7 @@ public class UpdateMModelsTest {
         String updatedHeadquarters = "UpdatedHeadquarters";
         String updatedEmail = "updatedEmail@gmail.com";
         String updatedPhoneNumber = "+4915198765432";
-        MAddress updatedMAddress = new MAddress(null, 0, 0, null, null);
+        DomainAddress updatedMAddress = new DomainAddress(null, 0, 0, null, null);
 
         // Update values
         mAirline.setName(updatedName);
@@ -165,7 +165,7 @@ public class UpdateMModelsTest {
     @Test
     public void testUpdateMAirplane() {
         boolean updatedIsOperable = false;
-        MAirline updatedAirline = new MAirline(null, null, null, null ,"+4915112345678","updatedairline@gmail.com");
+        DomainAirline updatedAirline = new DomainAirline(null, null, null, null ,"+4915112345678","updatedairline@gmail.com");
 
         mAirplane.setBelongingAirline(updatedAirline);
         mAirplane.setOperable(updatedIsOperable);
@@ -205,7 +205,7 @@ public class UpdateMModelsTest {
     public void testUpdateEmployee(){
         int updatedSalary = 200;
         String updatedPosition = "UpdatedPosition";
-        MAirline updatedAirline = new MAirline(null, null, null, null ,"+4915112345678","updatedariline@gmail.com");
+        DomainAirline updatedAirline = new DomainAirline(null, null, null, null ,"+4915112345678","updatedariline@gmail.com");
         Date updatedHireDate= new Date();
 
         mEmployee.setHireDate(updatedHireDate);
@@ -221,16 +221,16 @@ public class UpdateMModelsTest {
 
     @Test
     public void testUpdateFlight(){
-        MAirplane updatedAirplane = new MAirplane(0, null,null,0,0,0,null,true,0);
+        DomainAirplane updatedAirplane = new DomainAirplane(0, null,null,0,0,0,null,true,0);
         Date updatedDepartureDateTime = new Date();
-        MAirport updatedDepartureAirport = new MAirport(null, null,null,null,null);
+        DomainAirport updatedDepartureAirport = new DomainAirport(null, null,null,null,null);
         Date updatedArrivalDateTime = new Date();
-        MAirport updatedArrivalAirport = new MAirport(null, null,null,null,null);
+        DomainAirport updatedArrivalAirport = new DomainAirport(null, null,null,null,null);
         Date updatedBoardingTime = new Date();
-        MFlight.FlightStatus updatedFlightStatus = MFlight.FlightStatus.landed;
+        DomainFlight.FlightStatus updatedFlightStatus = DomainFlight.FlightStatus.landed;
         int updatedDuration = 123;
-        MEmployee updatedPilot = new MEmployee(0,null, null,null,null,"+4915112345678",null,"updatedpilot@gmail.com",0,null,null,null);
-        MEmployee updatedCoPilot = new MEmployee(0,null, null,null,null,"+4915112345678",null,"updatedcopilot@gmail.com",0,null,null,null);
+        DomainEmployee updatedPilot = new DomainEmployee(0,null, null,null,null,"+4915112345678",null,"updatedpilot@gmail.com",0,null,null,null);
+        DomainEmployee updatedCoPilot = new DomainEmployee(0,null, null,null,null,"+4915112345678",null,"updatedcopilot@gmail.com",0,null,null,null);
         mFlight.setAirplane(updatedAirplane);
         mFlight.setDepartureDateTime(updatedDepartureDateTime);
         mFlight.setArrivalDateTime(updatedArrivalDateTime);
@@ -262,7 +262,7 @@ public class UpdateMModelsTest {
         Date updatedDateOfBirth = new Date();
         String updatedPhoneNumber = "+49151987654321";
         String updatedEmail = "UpdatedEmail";
-        MAddress updatedAdress = new MAddress(null,0,0,null,null);
+        DomainAddress updatedAdress = new DomainAddress(null,0,0,null,null);
 
         mPerson.setFirstName(updatedFirstName);
         mPerson.setLastName(updatedLastName);
@@ -283,9 +283,9 @@ public class UpdateMModelsTest {
 
     @Test
     public void testUpdateTicket(){
-        MTicket.TicketStatus updatedTicketStatus = MTicket.TicketStatus.unpaid;
-        MFlight updatedFlight = new MFlight(0,null,null,null,null,null, null,null,0,null,null);
-        MPerson updatedPerson = new MPerson(0,null,null,null,null,"+4915112345678",null,"updatedperson@gmail.com", null);
+        DomainTicket.TicketStatus updatedTicketStatus = DomainTicket.TicketStatus.unpaid;
+        DomainFlight updatedFlight = new DomainFlight(0,null,null,null,null,null, null,null,0,null,null);
+        DomainPerson updatedPerson = new DomainPerson(0,null,null,null,null,"+4915112345678",null,"updatedperson@gmail.com", null);
         int updatedSeatNum = 100;
         int updatedPrice = 1000;
 

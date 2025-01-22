@@ -1,15 +1,15 @@
 package de.tjjf.Infrastructure.api.mapper;
 
-import de.tjjf.Domain.models.MClient;
-import de.tjjf.Domain.models.MPerson;
+import de.tjjf.Domain.models.DomainClient;
+import de.tjjf.Domain.models.DomainPerson;
 import de.tjjf.Infrastructure.api.DateParser;
 import de.tjjf.Infrastructure.api.models.APIClient;
 
 import java.util.Date;
 
-public class APIClientMapper extends AbstractAPIMapper<APIClient, MClient>  {
+public class APIClientMapper extends AbstractAPIMapper<APIClient, DomainClient>  {
     @Override
-    public APIClient toAPIEntity(MClient mClient) {
+    public APIClient toAPIEntity(DomainClient mClient) {
         return new APIClient(
             mClient.getPersonId(),
                 mClient.getFirstName(),
@@ -24,11 +24,11 @@ public class APIClientMapper extends AbstractAPIMapper<APIClient, MClient>  {
     }
 
     @Override
-    public MClient toDomainEntity(APIClient apiClient) {
+    public DomainClient toDomainEntity(APIClient apiClient) {
         Date date = DateParser.getDateFromRFC3339(apiClient.getDateOfBirth());
 
-        MPerson person = new PersonMapper().toDomain(apiClient);
-        return new MClient(
+        DomainPerson person = new PersonMapper().toDomain(apiClient);
+        return new DomainClient(
             person.getPersonId(),
             person.getFirstName(),
             person.getMiddleNames(),

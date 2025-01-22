@@ -1,6 +1,6 @@
 package de.tjjf.Domain.models;
 
-public class MAirport implements MModel {
+public class DomainAirport implements DomainModel {
 
     private final String code;
 
@@ -12,7 +12,7 @@ public class MAirport implements MModel {
 
     private String timezone;
 
-    public MAirport(String code, String name, String country, String city, String timezone) {
+    public DomainAirport(String code, String name, String country, String city, String timezone) {
         this.code = code;
         this.name = name;
         this.country = country;

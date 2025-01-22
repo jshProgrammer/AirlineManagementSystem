@@ -5,25 +5,25 @@ import de.tjjf.Adapter.DatabaseAdapter.MEmployeeRepositoryImpl;
 import de.tjjf.Adapter.DatabaseAdapter.MTicketRepositoryImpl;
 import de.tjjf.Domain.Exceptions.NoSeatsAvailableException;
 import de.tjjf.Domain.UseCases.Services.TicketService;
-import de.tjjf.Domain.models.MPayment;
-import de.tjjf.Domain.models.MPerson;
-import de.tjjf.Domain.models.MTicket;
+import de.tjjf.Domain.models.DomainPayment;
+import de.tjjf.Domain.models.DomainPerson;
+import de.tjjf.Domain.models.DomainTicket;
 import de.tjjf.Domain.ports.API.TicketPort;
 
 public class BookingPortImpl implements TicketPort {
     @Override
-    public MTicket addBooking(MTicket newBooking, MPayment mPayment) {
+    public DomainTicket addBooking(DomainTicket newBooking, DomainPayment mPayment) {
         return new TicketService(new MTicketRepositoryImpl(), new MClientRepositoryImpl(), new MEmployeeRepositoryImpl()).addBooking(newBooking, mPayment);
 
     }
 
     @Override
-    public MTicket readTicketById(long id) {
+    public DomainTicket readTicketById(long id) {
         return new TicketService(new MTicketRepositoryImpl()).readTicketById(id);
     }
 
     @Override
-    public void upgradeSeatingClass(long ticketId, MTicket.SeatingClass newSeatingClass) throws NoSeatsAvailableException{
+    public void upgradeSeatingClass(long ticketId, DomainTicket.SeatingClass newSeatingClass) throws NoSeatsAvailableException{
         new TicketService(new MTicketRepositoryImpl()).upgradeSeatingClass(ticketId, newSeatingClass);
     }
 
@@ -33,7 +33,7 @@ public class BookingPortImpl implements TicketPort {
     }
 
     @Override
-    public void cancelTicket(MPerson person, long flightnum){
+    public void cancelTicket(DomainPerson person, long flightnum){
         new TicketService(new MTicketRepositoryImpl(), new MClientRepositoryImpl(), new MEmployeeRepositoryImpl()).cancelTicket(person, flightnum);
     }
 }

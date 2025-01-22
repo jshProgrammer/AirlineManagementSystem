@@ -4,7 +4,7 @@ import org.apache.commons.validator.routines.EmailValidator;
 
 import java.util.Date;
 
-public class MAirline implements MModel {
+public class DomainAirline implements DomainModel {
 
     private String name;
 
@@ -12,13 +12,13 @@ public class MAirline implements MModel {
 
     private String headQuarters;
 
-    private MAddress address;
+    private DomainAddress address;
 
     private String phoneNumber;
 
     private String email;
 
-    public MAirline(String name, Date foundationYear, String headQuarters, MAddress address, String phoneNumber, String email) {
+    public DomainAirline(String name, Date foundationYear, String headQuarters, DomainAddress address, String phoneNumber, String email) {
         this.name = name;
         this.foundationYear = foundationYear;
         this.headQuarters = headQuarters;
@@ -52,11 +52,11 @@ public class MAirline implements MModel {
         this.headQuarters = headQuarters;
     }
 
-    public MAddress getAddress() {
+    public DomainAddress getAddress() {
         return address;
     }
 
-    public void setAddress(MAddress address) {
+    public void setAddress(DomainAddress address) {
         this.address = address;
     }
 

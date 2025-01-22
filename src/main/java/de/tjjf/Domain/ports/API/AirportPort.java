@@ -1,8 +1,8 @@
 package de.tjjf.Domain.ports.API;
 
-import de.tjjf.Domain.models.MAirport;
+import de.tjjf.Domain.models.DomainAirport;
 
 public interface AirportPort {
-    MAirport createAirport(MAirport airport);
-    MAirport readAirportByCode(String code);
+    DomainAirport createAirport(DomainAirport airport);
+    DomainAirport readAirportByCode(String code);
 }

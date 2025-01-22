@@ -1,8 +1,8 @@
 package de.tjjf.Domain;
 
-import de.tjjf.Domain.models.MFlight;
-import de.tjjf.Domain.models.MPerson;
-import de.tjjf.Domain.models.MTicket;
+import de.tjjf.Domain.models.DomainFlight;
+import de.tjjf.Domain.models.DomainPerson;
+import de.tjjf.Domain.models.DomainTicket;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -89,10 +89,10 @@ public class EmailSender {
             throw new RuntimeException(e);
         }
     }
-    public static void sendCancelationMail(MFlight mFlight) {
-        for (MTicket ticket : mFlight.getTickets()) {
-            ticket.setTicketStatus(MTicket.TicketStatus.canceled);
-            MPerson person = ticket.getPerson();
+    public static void sendCancelationMail(DomainFlight mFlight) {
+        for (DomainTicket ticket : mFlight.getTickets()) {
+            ticket.setTicketStatus(DomainTicket.TicketStatus.canceled);
+            DomainPerson person = ticket.getPerson();
             String mailPerson = person.getEmail();
             String subject = "Cancelation of flight " + mFlight.getFlightNum();
 
@@ -107,7 +107,7 @@ public class EmailSender {
         }
     }
 
-    public static void sendInvoice(MTicket ticket){
+    public static void sendInvoice(DomainTicket ticket){
         String recipient = ticket.getPerson().getEmail();
         String subject = "Rechnung zu Ticket: "+ticket.getTicketId();
         String content = "<h1>Vielen Dank für Ihren Einkauf!</h1>"
@@ -116,9 +116,9 @@ public class EmailSender {
         sendMail(recipient,subject,content,PDFPath);
     }
 
-    public static void sendCancelationMailCustomer(MFlight mFlight){
-        for (MTicket ticket : mFlight.getTickets()){
-            MPerson person = ticket.getPerson();
+    public static void sendCancelationMailCustomer(DomainFlight mFlight){
+        for (DomainTicket ticket : mFlight.getTickets()){
+            DomainPerson person = ticket.getPerson();
             String mailPerson = person.getEmail();
             String subject = "Cancelation of flight " + mFlight.getFlightNum();
 

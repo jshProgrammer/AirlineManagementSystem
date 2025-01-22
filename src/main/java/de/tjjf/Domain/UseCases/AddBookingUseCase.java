@@ -1,8 +1,8 @@
 package de.tjjf.Domain.UseCases;
 
 import de.tjjf.Domain.EmailSender;
-import de.tjjf.Domain.models.MPayment;
-import de.tjjf.Domain.models.MTicket;
+import de.tjjf.Domain.models.DomainPayment;
+import de.tjjf.Domain.models.DomainTicket;
 
 public class AddBookingUseCase extends AuthorizedUseCase {
 
@@ -12,7 +12,7 @@ public class AddBookingUseCase extends AuthorizedUseCase {
 
     //4242424242424242 erfolgreiche Zahlung
     //4000000000000069 abgelaufene Karte/erfloglose Zahlung
-    public static boolean addBooking(MTicket newBooking, MPayment mPayment) {
+    public static boolean addBooking(DomainTicket newBooking, DomainPayment mPayment) {
         //new CancelTicketUseCase().authorize();
         boolean bookable = false;
         boolean paid = PaymentUseCase.paymentCall(newBooking.getTotalPrice(), mPayment);

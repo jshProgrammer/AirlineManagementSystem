@@ -1,16 +1,16 @@
 package de.tjjf.Infrastructure.api.mapper;
 
-import de.tjjf.Domain.models.MAirline;
+import de.tjjf.Domain.models.DomainAirline;
 import de.tjjf.Infrastructure.api.models.APIAirline;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class APIAirlineMapper extends AbstractAPIMapper<APIAirline, MAirline> {
+public class APIAirlineMapper extends AbstractAPIMapper<APIAirline, DomainAirline> {
 
     @Override
-    public APIAirline toAPIEntity(MAirline mAirline) {
+    public APIAirline toAPIEntity(DomainAirline mAirline) {
         return new APIAirline(
                 mAirline.getName(),
                 mAirline.getFoundationYear().toString(),
@@ -21,7 +21,7 @@ public class APIAirlineMapper extends AbstractAPIMapper<APIAirline, MAirline> {
     }
 
     @Override
-    public MAirline toDomainEntity(APIAirline model) {
+    public DomainAirline toDomainEntity(APIAirline model) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
         Date date;
@@ -31,7 +31,7 @@ public class APIAirlineMapper extends AbstractAPIMapper<APIAirline, MAirline> {
         } catch (ParseException e) {
             throw new RuntimeException("Error parsing date: " + e.getMessage());
         }
-        return new MAirline(
+        return new DomainAirline(
                 model.getName(),
                 date,
                 "Default",

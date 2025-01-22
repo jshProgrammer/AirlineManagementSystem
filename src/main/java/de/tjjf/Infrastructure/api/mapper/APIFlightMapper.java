@@ -1,15 +1,15 @@
 package de.tjjf.Infrastructure.api.mapper;
 
-import de.tjjf.Domain.models.MFlight;
+import de.tjjf.Domain.models.DomainFlight;
 import de.tjjf.Infrastructure.api.DateParser;
 import de.tjjf.Infrastructure.api.models.APIFlight;
 import de.tjjf.Adapter.APIAdapter.AirplanePortImpl;
 import de.tjjf.Adapter.APIAdapter.AirportPortImpl;
 import de.tjjf.Adapter.APIAdapter.EmployeePortImpl;
 
-public class APIFlightMapper extends AbstractAPIMapper<APIFlight, MFlight> {
+public class APIFlightMapper extends AbstractAPIMapper<APIFlight, DomainFlight> {
     @Override
-    public APIFlight toAPIEntity(MFlight mFlight){
+    public APIFlight toAPIEntity(DomainFlight mFlight){
         return new APIFlight(
                 mFlight.getFlightNum(),
                 mFlight.getAirplane().getSerialNum(),
@@ -26,8 +26,8 @@ public class APIFlightMapper extends AbstractAPIMapper<APIFlight, MFlight> {
     }
 
     @Override
-    public MFlight toDomainEntity(APIFlight apiFlight){
-        return new MFlight(
+    public DomainFlight toDomainEntity(APIFlight apiFlight){
+        return new DomainFlight(
                 apiFlight.getFlightNum(),
                 new AirplanePortImpl().readAirplaneBySerialNum(apiFlight.getAirplaneSerialNum()),
                 DateParser.getDateTimeFromRFC3339(apiFlight.getDepartureDateTime()),
@@ -35,7 +35,7 @@ public class APIFlightMapper extends AbstractAPIMapper<APIFlight, MFlight> {
                 DateParser.getDateTimeFromRFC3339(apiFlight.getArrivalDateTime()),
                 new AirportPortImpl().readAirportByCode(apiFlight.getArrivalAirportCode()),
                 DateParser.getDateTimeFromRFC3339(apiFlight.getBoardingTime()),
-                MFlight.FlightStatus.valueOf(apiFlight.getStatus().name()),
+                DomainFlight.FlightStatus.valueOf(apiFlight.getStatus().name()),
                 apiFlight.getDuration(),
                 new EmployeePortImpl().readEmployeeById(apiFlight.getPilotId()),
                 new EmployeePortImpl().readEmployeeById(apiFlight.getCopilotId())

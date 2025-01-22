@@ -1,7 +1,7 @@
 package de.tjjf.Domain.UseCases;
 
 import de.tjjf.Domain.Exceptions.NoSeatsAvailableException;
-import de.tjjf.Domain.models.MTicket;
+import de.tjjf.Domain.models.DomainTicket;
 import de.tjjf.Domain.ports.DB.DataAccess;
 
 public class UpgradeSeatingClassUseCase {
@@ -11,7 +11,7 @@ public class UpgradeSeatingClassUseCase {
         this.ticketPort = ticketPort;
     }
 
-    public boolean updateSeatingClassIfAvailable( MTicket ticket, MTicket.SeatingClass newDesiredSeatingClass ) throws NoSeatsAvailableException {
+    public boolean updateSeatingClassIfAvailable(DomainTicket ticket, DomainTicket.SeatingClass newDesiredSeatingClass ) throws NoSeatsAvailableException {
 
         try{
             ticket.upgradeSeatingClass(newDesiredSeatingClass);

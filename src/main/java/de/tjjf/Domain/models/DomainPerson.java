@@ -11,7 +11,7 @@ import com.google.i18n.phonenumbers.Phonenumber;
 import org.apache.commons.validator.routines.EmailValidator;
 
 //TODO: sollte die Klasse nicht noch abstract werden?
-public class MPerson implements MModel
+public class DomainPerson implements DomainModel
 {
     private long personId;
 
@@ -25,13 +25,13 @@ public class MPerson implements MModel
 
     private String phonenumber;
 
-    private MAddress address;
+    private DomainAddress address;
 
     private String email;
 
-    private List<MTicket> tickets = new ArrayList<>();
+    private List<DomainTicket> tickets = new ArrayList<>();
 
-    public MPerson(long personId, String firstName, String middleNames, String lastName, Date dateOfBirth, String phonenumber, MAddress address, String email, List<MTicket> tickets) {
+    public DomainPerson(long personId, String firstName, String middleNames, String lastName, Date dateOfBirth, String phonenumber, DomainAddress address, String email, List<DomainTicket> tickets) {
         this.personId = personId;
         this.firstName = firstName;
         this.middleNames = middleNames;
@@ -104,7 +104,7 @@ public class MPerson implements MModel
         return phonenumber;
     }
 
-    public MAddress getAddress() {
+    public DomainAddress getAddress() {
         return address;
     }
 
@@ -133,15 +133,15 @@ public class MPerson implements MModel
         this.email = email;
     }
 
-    public List<MTicket> getTickets() {
+    public List<DomainTicket> getTickets() {
         return tickets;
     }
 
-    public void addTickets(MTicket ticket) {
+    public void addTickets(DomainTicket ticket) {
         tickets.add(ticket);
     }
 
-    public void setAddress(MAddress address) {
+    public void setAddress(DomainAddress address) {
         this.address = address;
     }
 }

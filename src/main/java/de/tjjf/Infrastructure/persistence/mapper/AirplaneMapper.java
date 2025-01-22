@@ -1,12 +1,12 @@
 package de.tjjf.Infrastructure.persistence.mapper;
 
-import de.tjjf.Domain.models.MAirplane;
+import de.tjjf.Domain.models.DomainAirplane;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Read.AirlineReadImpl;
 import de.tjjf.Infrastructure.persistence.entities.Airplane;
 
-public class AirplaneMapper extends Mapper<MAirplane, Airplane> {
+public class AirplaneMapper extends Mapper<DomainAirplane, Airplane> {
 
-    public Airplane toEntity(MAirplane mAirplane){
+    public Airplane toEntity(DomainAirplane mAirplane){
         return new Airplane(
                 mAirplane.getSerialNum(),
                 mAirplane.getManufacturer(),
@@ -20,8 +20,8 @@ public class AirplaneMapper extends Mapper<MAirplane, Airplane> {
         );
     }
 
-   public MAirplane toDomain(Airplane airplane){
-        return new MAirplane(
+   public DomainAirplane toDomain(Airplane airplane){
+        return new DomainAirplane(
                 airplane.getSerialNum(),
                 airplane.getManufacturer(),
                 airplane.getModel(),

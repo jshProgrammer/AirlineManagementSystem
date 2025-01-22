@@ -4,21 +4,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class MFlight implements MModel {
+public class DomainFlight implements DomainModel {
 
     public enum FlightStatus { scheduled, in_the_air, landed, delayed, canceled }
 
     private final long flightNum;
 
-    private MAirplane airplane;
+    private DomainAirplane airplane;
 
     private Date departureDateTime;
 
-    private MAirport departureAirport;
+    private DomainAirport departureAirport;
 
     private Date arrivalDateTime;
 
-    private MAirport arrivalAirport;
+    private DomainAirport arrivalAirport;
 
     private Date boardingTime;
 
@@ -26,17 +26,17 @@ public class MFlight implements MModel {
 
     private int duration;
 
-    List<MTicket> tickets = new ArrayList<>();
+    List<DomainTicket> tickets = new ArrayList<>();
 
-    private MEmployee pilot;
+    private DomainEmployee pilot;
 
-    private MEmployee copilot;
+    private DomainEmployee copilot;
 
     private int currentInitialLuggageWeight = 0;
 
     private int currentUpgradeLuggageWeight = 0;
 
-    public MFlight(long flightNum, MAirplane airplane, Date departureDateTime, MAirport departureAirport, Date arrivalDateTime, MAirport arrivalAirport, Date boardingTime, FlightStatus status, int duration, MEmployee pilot, MEmployee copilot) {
+    public DomainFlight(long flightNum, DomainAirplane airplane, Date departureDateTime, DomainAirport departureAirport, Date arrivalDateTime, DomainAirport arrivalAirport, Date boardingTime, FlightStatus status, int duration, DomainEmployee pilot, DomainEmployee copilot) {
         this.flightNum = flightNum;
         this.airplane = airplane;
         this.departureDateTime = departureDateTime;
@@ -67,15 +67,15 @@ public class MFlight implements MModel {
         }
     }
 
-    public void addTicket(MTicket ticket) {
+    public void addTicket(DomainTicket ticket) {
         tickets.add(ticket);
     }
 
-    public void setAirplane(MAirplane airplane) {
+    public void setAirplane(DomainAirplane airplane) {
         this.airplane = airplane;
     }
 
-    public void setArrivalAirport(MAirport arrivalAirport) {
+    public void setArrivalAirport(DomainAirport arrivalAirport) {
         this.arrivalAirport = arrivalAirport;
     }
 
@@ -87,11 +87,11 @@ public class MFlight implements MModel {
         this.boardingTime = boardingTime;
     }
 
-    public void setCopilot(MEmployee copilot) {
+    public void setCopilot(DomainEmployee copilot) {
         this.copilot = copilot;
     }
 
-    public void setDepartureAirport(MAirport departureAirport) {
+    public void setDepartureAirport(DomainAirport departureAirport) {
         this.departureAirport = departureAirport;
     }
 
@@ -103,7 +103,7 @@ public class MFlight implements MModel {
         this.duration = duration;
     }
 
-    public void setPilot(MEmployee pilot) {
+    public void setPilot(DomainEmployee pilot) {
         this.pilot = pilot;
     }
 
@@ -111,11 +111,11 @@ public class MFlight implements MModel {
         this.status = status;
     }
 
-    public MAirplane getAirplane() {
+    public DomainAirplane getAirplane() {
         return airplane;
     }
 
-    public MAirport getArrivalAirport() {
+    public DomainAirport getArrivalAirport() {
         return arrivalAirport;
     }
 
@@ -129,11 +129,11 @@ public class MFlight implements MModel {
         return boardingTime;
     }
 
-    public MEmployee getCopilot() {
+    public DomainEmployee getCopilot() {
         return copilot;
     }
 
-    public MAirport getDepartureAirport() {
+    public DomainAirport getDepartureAirport() {
         return departureAirport;
     }
 
@@ -149,7 +149,7 @@ public class MFlight implements MModel {
         return flightNum;
     }
 
-    public MEmployee getPilot() {
+    public DomainEmployee getPilot() {
         return pilot;
     }
 
@@ -157,7 +157,7 @@ public class MFlight implements MModel {
         return status;
     }
 
-    public List<MTicket> getTickets() {
+    public List<DomainTicket> getTickets() {
         return tickets;
     }
 

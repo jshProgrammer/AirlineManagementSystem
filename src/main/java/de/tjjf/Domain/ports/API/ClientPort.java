@@ -1,10 +1,10 @@
 package de.tjjf.Domain.ports.API;
 
-import de.tjjf.Domain.models.MClient;
+import de.tjjf.Domain.models.DomainClient;
 
 public interface ClientPort {
-    MClient createClient(MClient client);
+    DomainClient createClient(DomainClient client);
     // no verification of password due to design decision of implementing employee api and not client api
-    MClient readClientById(long id);
-    void updateClient(MClient client);
+    DomainClient readClientById(long id);
+    void updateClient(DomainClient client);
 }

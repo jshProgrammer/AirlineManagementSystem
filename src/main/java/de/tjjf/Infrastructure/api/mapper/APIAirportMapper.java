@@ -1,11 +1,11 @@
 package de.tjjf.Infrastructure.api.mapper;
 
-import de.tjjf.Domain.models.MAirport;
+import de.tjjf.Domain.models.DomainAirport;
 import de.tjjf.Infrastructure.api.models.APIAirport;
 
-public class APIAirportMapper extends AbstractAPIMapper<APIAirport, MAirport>{
+public class APIAirportMapper extends AbstractAPIMapper<APIAirport, DomainAirport>{
     @Override
-    public APIAirport toAPIEntity(MAirport mAirport) {
+    public APIAirport toAPIEntity(DomainAirport mAirport) {
         return new APIAirport(
                 mAirport.getCode(),
                 mAirport.getName(),
@@ -16,8 +16,8 @@ public class APIAirportMapper extends AbstractAPIMapper<APIAirport, MAirport>{
     }
 
     @Override
-    public MAirport toDomainEntity(APIAirport apiAirport) {
-        return new MAirport(
+    public DomainAirport toDomainEntity(APIAirport apiAirport) {
+        return new DomainAirport(
                 apiAirport.getCode(),
                 apiAirport.getName(),
                 apiAirport.getCountry(),

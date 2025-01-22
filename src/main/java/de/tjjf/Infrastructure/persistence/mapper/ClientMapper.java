@@ -1,20 +1,20 @@
 package de.tjjf.Infrastructure.persistence.mapper;
 
-import de.tjjf.Domain.models.MClient;
-import de.tjjf.Domain.models.MPerson;
-import de.tjjf.Domain.models.MTicket;
+import de.tjjf.Domain.models.DomainClient;
+import de.tjjf.Domain.models.DomainPerson;
+import de.tjjf.Domain.models.DomainTicket;
 import de.tjjf.Infrastructure.persistence.entities.Client;
 import de.tjjf.Infrastructure.persistence.entities.Ticket;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClientMapper extends Mapper<MClient, Client>{
-    public Client toEntity(MClient mClient) {
+public class ClientMapper extends Mapper<DomainClient, Client>{
+    public Client toEntity(DomainClient mClient) {
         return toEntity(mClient, true);
     }
 
-    public Client toEntity(MClient mClient, boolean mapTickets){
+    public Client toEntity(DomainClient mClient, boolean mapTickets){
         Client client = new Client(
                 //mClient.getPersonId(),
                 mClient.getFirstName(),
@@ -30,7 +30,7 @@ public class ClientMapper extends Mapper<MClient, Client>{
 
         if (mapTickets) {
             List<Ticket> tickets = new ArrayList<>();
-            for (MTicket mTicket : mClient.getTickets()) {
+            for (DomainTicket mTicket : mClient.getTickets()) {
                 Ticket ticket = new TicketMapper().toEntity(mTicket);
                 ticket.setClient(client);
                 tickets.add(ticket);
@@ -41,11 +41,11 @@ public class ClientMapper extends Mapper<MClient, Client>{
         return client;
     }
 
-    public Client toEntityWithId(MClient mClient) {
+    public Client toEntityWithId(DomainClient mClient) {
         return toEntityWithId(mClient, true);
     }
 
-    public Client toEntityWithId(MClient mClient, boolean mapTickets) {
+    public Client toEntityWithId(DomainClient mClient, boolean mapTickets) {
         Client client = new Client(
                 mClient.getPersonId(),
                 mClient.getFirstName(),
@@ -61,7 +61,7 @@ public class ClientMapper extends Mapper<MClient, Client>{
 
         if (mapTickets) {
             List<Ticket> tickets = new ArrayList<>();
-            for (MTicket mTicket : mClient.getTickets()) {
+            for (DomainTicket mTicket : mClient.getTickets()) {
                 Ticket ticket = new TicketMapper().toEntity(mTicket);
                 ticket.setClient(client);
                 tickets.add(ticket);
@@ -72,10 +72,10 @@ public class ClientMapper extends Mapper<MClient, Client>{
         return client;
     }
 
-    public MClient toDomain(Client client){
+    public DomainClient toDomain(Client client){
 
-        MPerson person = new PersonMapper().toDomain(client);
-        return new MClient(
+        DomainPerson person = new PersonMapper().toDomain(client);
+        return new DomainClient(
                 person.getPersonId(),
                 person.getFirstName(),
                 person.getMiddleNames(),

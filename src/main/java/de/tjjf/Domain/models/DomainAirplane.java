@@ -1,6 +1,6 @@
 package de.tjjf.Domain.models;
 
-public class MAirplane implements MModel {
+public class DomainAirplane implements DomainModel {
 
     private final int serialNum;
 
@@ -14,14 +14,14 @@ public class MAirplane implements MModel {
 
     private final int amountOfFirstClassSeats;
 
-    private MAirline belongingAirline;
+    private DomainAirline belongingAirline;
 
     private boolean isOperable;
 
     private final int maxWeightOfLuggage;
 
 
-    public MAirplane(int serialNum, String manufacturer, String model, int amountOfEconomySeats, int amountOfBusinessSeats, int amountOfFirstClassSeats, MAirline belongingAirline, boolean isOperable, int maxWeightOfLuggage) {
+    public DomainAirplane(int serialNum, String manufacturer, String model, int amountOfEconomySeats, int amountOfBusinessSeats, int amountOfFirstClassSeats, DomainAirline belongingAirline, boolean isOperable, int maxWeightOfLuggage) {
         this.serialNum = serialNum;
         this.manufacturer = manufacturer;
         this.model = model;
@@ -46,7 +46,7 @@ public class MAirplane implements MModel {
         return amountOfFirstClassSeats;
     }
 
-    public MAirline getBelongingAirline() {
+    public DomainAirline getBelongingAirline() {
         return belongingAirline;
     }
 
@@ -70,7 +70,7 @@ public class MAirplane implements MModel {
         return maxWeightOfLuggage;
     }
 
-    public void setBelongingAirline(MAirline belongingAirline) {
+    public void setBelongingAirline(DomainAirline belongingAirline) {
         this.belongingAirline = belongingAirline;
     }
 

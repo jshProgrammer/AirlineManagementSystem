@@ -1,6 +1,6 @@
 package de.tjjf.Domain.models;
 
-public class MAddress implements MModel {
+public class DomainAddress implements DomainModel {
     // simplification: leave out character after number (e.g. Street 12a => Street 12)
     public String street;
 
@@ -12,7 +12,7 @@ public class MAddress implements MModel {
 
     public String country;
 
-    public MAddress(String street, int number, int zipcode, String city, String country) {
+    public DomainAddress(String street, int number, int zipcode, String city, String country) {
         this.street=street;
         this.number=number;
         this.zipcode=zipcode;

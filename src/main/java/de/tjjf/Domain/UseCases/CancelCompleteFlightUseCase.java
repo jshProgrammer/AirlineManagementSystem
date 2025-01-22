@@ -1,7 +1,7 @@
 package de.tjjf.Domain.UseCases;
 
 import de.tjjf.Domain.EmailSender;
-import de.tjjf.Domain.models.MFlight;
+import de.tjjf.Domain.models.DomainFlight;
 import de.tjjf.Domain.ports.DB.DataAccess;
 
 public class CancelCompleteFlightUseCase extends AuthorizedUseCase {
@@ -13,10 +13,10 @@ public class CancelCompleteFlightUseCase extends AuthorizedUseCase {
     }
 
 
-    public void cancelFlight(MFlight flight){
+    public void cancelFlight(DomainFlight flight){
         //new CancelCompleteFlightUseCase().authorize();
         
-        flight.setStatus(MFlight.FlightStatus.canceled);
+        flight.setStatus(DomainFlight.FlightStatus.canceled);
         EmailSender.sendCancelationMail(flight);
         port.update(flight);
 

@@ -1,11 +1,11 @@
 package de.tjjf.Infrastructure.api.mapper;
 
-import de.tjjf.Domain.models.MAddress;
+import de.tjjf.Domain.models.DomainAddress;
 import de.tjjf.Infrastructure.api.models.APIAddress;
 
-public class APIAddressMapper extends AbstractAPIMapper<APIAddress, MAddress> {
+public class APIAddressMapper extends AbstractAPIMapper<APIAddress, DomainAddress> {
     @Override
-    public APIAddress toAPIEntity(MAddress mAddress) {
+    public APIAddress toAPIEntity(DomainAddress mAddress) {
         return new APIAddress(
                 mAddress.getStreet(),
                 mAddress.getNumber(),
@@ -16,8 +16,8 @@ public class APIAddressMapper extends AbstractAPIMapper<APIAddress, MAddress> {
     }
 
     @Override
-    public MAddress toDomainEntity(APIAddress apiAddress) {
-        return new MAddress(
+    public DomainAddress toDomainEntity(APIAddress apiAddress) {
+        return new DomainAddress(
                 apiAddress.getStreet(),
                 apiAddress.getNumber(),
                 apiAddress.getZipCode(),

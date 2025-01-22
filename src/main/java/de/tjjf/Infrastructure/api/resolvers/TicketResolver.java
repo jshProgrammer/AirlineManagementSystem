@@ -1,7 +1,7 @@
 package de.tjjf.Infrastructure.api.resolvers;
 
 import de.tjjf.Adapter.APIAdapter.BookingPortImpl;
-import de.tjjf.Domain.models.MTicket;
+import de.tjjf.Domain.models.DomainTicket;
 import de.tjjf.Infrastructure.api.InputModels.APIPaymentInput;
 import de.tjjf.Infrastructure.api.InputModels.APITicketInput;
 import de.tjjf.Infrastructure.api.MapperInput.PaymentMapperInput;
@@ -26,7 +26,7 @@ public class TicketResolver implements GraphQLQueryResolver, GraphQLMutationReso
     }
 
     public void upgradeSeatingClass(long ticketId, APITicketInput.SeatingClass newSeatingClass) {
-        MTicket.SeatingClass seatingClass = Enum.valueOf(MTicket.SeatingClass.class, newSeatingClass.name());
+        DomainTicket.SeatingClass seatingClass = Enum.valueOf(DomainTicket.SeatingClass.class, newSeatingClass.name());
         new BookingPortImpl().upgradeSeatingClass(ticketId, seatingClass);
     }
 

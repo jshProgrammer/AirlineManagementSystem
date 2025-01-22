@@ -1,13 +1,13 @@
 package de.tjjf.Infrastructure.api.mapper;
 
-import de.tjjf.Domain.models.MPayment;
+import de.tjjf.Domain.models.DomainPayment;
 import de.tjjf.Infrastructure.api.models.APIPayment;
 
-public class APIPaymentMapper extends AbstractAPIMapper<APIPayment, MPayment> {
+public class APIPaymentMapper extends AbstractAPIMapper<APIPayment, DomainPayment> {
 
 
     @Override
-    public APIPayment toAPIEntity(MPayment mPayment){
+    public APIPayment toAPIEntity(DomainPayment mPayment){
         return new APIPayment(
                 mPayment.getCardNumber(),
                 mPayment.getCvc(),
@@ -17,8 +17,8 @@ public class APIPaymentMapper extends AbstractAPIMapper<APIPayment, MPayment> {
     }
 
     @Override
-    public MPayment toDomainEntity(APIPayment apiPayment){
-        return new MPayment(
+    public DomainPayment toDomainEntity(APIPayment apiPayment){
+        return new DomainPayment(
                 apiPayment.getCardNumber(),
                 apiPayment.getExpMonth(),
                 apiPayment.getExpYear(),

@@ -7,7 +7,7 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CreateMModelsTest {
+public class CreateDomainModelsTest {
 
     @Test
     public void testCreatingMAdress(){
@@ -16,7 +16,7 @@ public class CreateMModelsTest {
         int zipcode = 97265;
         String city = "TestCity";
         String country = "TestCountry";
-        MAddress mAdress = new MAddress(street, number, zipcode, city, country);
+        DomainAddress mAdress = new DomainAddress(street, number, zipcode, city, country);
 
         assertEquals(mAdress.getStreet(), street);
         assertEquals(mAdress.getNumber(), number);
@@ -31,11 +31,11 @@ public class CreateMModelsTest {
         String name = "TestAirline";
         Date date = new Date();
         String headQuarters = "TestHeadquarters";
-        MAddress address = new MAddress(null,0,0, null, null);
+        DomainAddress address = new DomainAddress(null,0,0, null, null);
         String phoneNumber = "+4915112345678";
         String email = "testmail@gmail.com";
 
-        MAirline mAirline = new MAirline(name , date, headQuarters, address, phoneNumber, email);
+        DomainAirline mAirline = new DomainAirline(name , date, headQuarters, address, phoneNumber, email);
 
         assertEquals(mAirline.getName(), name);
         assertEquals(mAirline.getHeadQuarters(), headQuarters);
@@ -54,11 +54,11 @@ public class CreateMModelsTest {
         int amountOfEconomySeats = 50;
         int amountOfBusinessSeats = 25;
         int amountOfFirstClassSeats = 15;
-        MAirline mAirline = new MAirline(null, null, null, null, "+4915112345678", "airline@gmail.com");
+        DomainAirline mAirline = new DomainAirline(null, null, null, null, "+4915112345678", "airline@gmail.com");
         boolean isOperable = true;
         int maxWeightOfLuggage = 40000;
 
-        MAirplane mAirplane = new MAirplane(serialNum, manufacturer, model, amountOfEconomySeats, amountOfBusinessSeats, amountOfFirstClassSeats,  mAirline, isOperable, maxWeightOfLuggage);
+        DomainAirplane mAirplane = new DomainAirplane(serialNum, manufacturer, model, amountOfEconomySeats, amountOfBusinessSeats, amountOfFirstClassSeats,  mAirline, isOperable, maxWeightOfLuggage);
 
         assertEquals(mAirplane.getSerialNum(), serialNum);
         assertEquals(mAirplane.getManufacturer(), manufacturer);
@@ -84,7 +84,7 @@ public class CreateMModelsTest {
         String city = "TestCity";
         String timezone = "TestTimezone";
 
-        MAirport mAirport = new MAirport(code, name, country, city, timezone);
+        DomainAirport mAirport = new DomainAirport(code, name, country, city, timezone);
 
         assertEquals(mAirport.getCode(), code);
         assertEquals(mAirport.getName(), name);
@@ -102,11 +102,11 @@ public class CreateMModelsTest {
         String middleName = "TestMiddleName";
         Date dateofBirth = new Date();
         String phoneNumber = "+4915112345678";
-        MAddress address = new MAddress(null, 0, 0, null, null);
+        DomainAddress address = new DomainAddress(null, 0, 0, null, null);
         String email = "testmail@gmail.com";
         Boolean isBusinessClient = true;
 
-        MClient mClient = new MClient(personId, firstName, middleName, lastName, dateofBirth, phoneNumber, address, email, isBusinessClient);
+        DomainClient mClient = new DomainClient(personId, firstName, middleName, lastName, dateofBirth, phoneNumber, address, email, isBusinessClient);
 
         assertEquals(mClient.getPersonId(), personId);
         assertEquals(mClient.getFirstName(), firstName);
@@ -127,7 +127,7 @@ public class CreateMModelsTest {
     public void testCreatingEmployee(){
         int salary = 100;
         String position = "TestPosition";
-        MAirline mAirline = new MAirline(null, null, null, null, "+4915112345678", "airline@gmail.com");
+        DomainAirline mAirline = new DomainAirline(null, null, null, null, "+4915112345678", "airline@gmail.com");
         Date hireDate = new Date();
         long personId = 987654321;
         String firstName = "TestFirstName";
@@ -135,10 +135,10 @@ public class CreateMModelsTest {
         String middleName = "TestMiddleName";
         Date dateofBirth = new Date();
         String phoneNumber = "+4915112345678";
-        MAddress address = new MAddress(null, 0, 0, null, null);
+        DomainAddress address = new DomainAddress(null, 0, 0, null, null);
         String email = "testmail@gmail.com";
 
-        MEmployee mEmployee = new MEmployee(personId, firstName, middleName, lastName, dateofBirth, phoneNumber, address, email, salary, position, mAirline, hireDate);
+        DomainEmployee mEmployee = new DomainEmployee(personId, firstName, middleName, lastName, dateofBirth, phoneNumber, address, email, salary, position, mAirline, hireDate);
 
         assertEquals(mEmployee.getPersonId(), personId);
         assertEquals(mEmployee.getFirstName(), firstName);
@@ -158,18 +158,18 @@ public class CreateMModelsTest {
     @Test
     public void testCreatingFlight(){
         long flightNum = 1234;
-        MAirplane mAirplane = new MAirplane(0, null, null, 0, 0, 0, null, true, 0);
+        DomainAirplane mAirplane = new DomainAirplane(0, null, null, 0, 0, 0, null, true, 0);
         Date departureDateTime = new Date();
-        MAirport departureAirport = new MAirport(null, null, null, null, null);
+        DomainAirport departureAirport = new DomainAirport(null, null, null, null, null);
         Date arrivalDateTime = new Date();
-        MAirport arrivalAirport = new MAirport(null, null, null, null, null);
+        DomainAirport arrivalAirport = new DomainAirport(null, null, null, null, null);
         Date boardingTime = new Date();
-        MFlight.FlightStatus flyStatus = MFlight.FlightStatus.landed;
+        DomainFlight.FlightStatus flyStatus = DomainFlight.FlightStatus.landed;
         int duration = 123;
-        MEmployee pilot = new MEmployee(0, null, null, null, null, "+4915112345678",null, "pilot@gmail.com",  0, null, null, null);
-        MEmployee copilot = new MEmployee(0, null, null, null, null, "+4915112345678",null, "copilot@gmail.com", 0, null, null, null);
+        DomainEmployee pilot = new DomainEmployee(0, null, null, null, null, "+4915112345678",null, "pilot@gmail.com",  0, null, null, null);
+        DomainEmployee copilot = new DomainEmployee(0, null, null, null, null, "+4915112345678",null, "copilot@gmail.com", 0, null, null, null);
 
-        MFlight mFlight = new MFlight(flightNum, mAirplane, departureDateTime, departureAirport, arrivalDateTime, arrivalAirport, boardingTime, flyStatus, duration, pilot, copilot);
+        DomainFlight mFlight = new DomainFlight(flightNum, mAirplane, departureDateTime, departureAirport, arrivalDateTime, arrivalAirport, boardingTime, flyStatus, duration, pilot, copilot);
 
         assertEquals(mFlight.getFlightNum(), flightNum);
         assertEquals(mFlight.getAirplane(), mAirplane);
@@ -187,20 +187,20 @@ public class CreateMModelsTest {
     @Test
     public void testCreatingMTicket() {
         int ticketId = 1234;
-        MPerson person = new MPerson(0,  "TestFirstName",  "TestMiddleName", "TestLastName", null, "+4915112345678", null, "person@gmail.com", null);
-        MAddress mAddress = new MAddress("TestStreet",0,0, "Frankfurt", "Germany");
-        MAirline mAirline = new MAirline("TestAirlineName", null, "TestHeadquarters", mAddress, "+4915112345678", "airline@gmail.com");
-        MAirport mAirport = new MAirport("TestCode", "TestName", "TestCountry", "TestCity", "TestTimezone");
-        MAirplane mAirplane = new MAirplane(0, "TestManufacturer", "TestModel", 100, 50, 25, mAirline, true, 10000);
-        MFlight mFlight = new MFlight(0, mAirplane, new Date(), mAirport, new Date(), mAirport, new Date(), MFlight.FlightStatus.landed, 0, null,  null);
+        DomainPerson person = new DomainPerson(0,  "TestFirstName",  "TestMiddleName", "TestLastName", null, "+4915112345678", null, "person@gmail.com", null);
+        DomainAddress mAddress = new DomainAddress("TestStreet",0,0, "Frankfurt", "Germany");
+        DomainAirline mAirline = new DomainAirline("TestAirlineName", null, "TestHeadquarters", mAddress, "+4915112345678", "airline@gmail.com");
+        DomainAirport mAirport = new DomainAirport("TestCode", "TestName", "TestCountry", "TestCity", "TestTimezone");
+        DomainAirplane mAirplane = new DomainAirplane(0, "TestManufacturer", "TestModel", 100, 50, 25, mAirline, true, 10000);
+        DomainFlight mFlight = new DomainFlight(0, mAirplane, new Date(), mAirport, new Date(), mAirport, new Date(), DomainFlight.FlightStatus.landed, 0, null,  null);
         Date dateTimeOfBooking = new Date();
         int totalPrice = 300;
         int seatNum = 15;
-        MTicket.SeatingClass seatingClass = MTicket.SeatingClass.Economy;
-        MTicket.TicketStatus ticketStatus = MTicket.TicketStatus.paid;
+        DomainTicket.SeatingClass seatingClass = DomainTicket.SeatingClass.Economy;
+        DomainTicket.TicketStatus ticketStatus = DomainTicket.TicketStatus.paid;
         int weightOfLuggage = 20;
 
-        MTicket mTicket = new MTicket(ticketId, person, mFlight, dateTimeOfBooking, totalPrice, seatNum, seatingClass, ticketStatus, weightOfLuggage);
+        DomainTicket mTicket = new DomainTicket(ticketId, person, mFlight, dateTimeOfBooking, totalPrice, seatNum, seatingClass, ticketStatus, weightOfLuggage);
 
         assertEquals(mTicket.getTicketId(), ticketId);
         assertEquals(mTicket.getPerson(), person);

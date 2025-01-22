@@ -1,6 +1,6 @@
 package de.tjjf.Infrastructure.api.mapper;
 
-import de.tjjf.Domain.models.MPerson;
+import de.tjjf.Domain.models.DomainPerson;
 import de.tjjf.Infrastructure.api.models.APIClient;
 import de.tjjf.Infrastructure.api.models.APIEmployee;
 import java.text.ParseException;
@@ -9,14 +9,14 @@ import java.util.Date;
 
 public class PersonMapper {
 
-    public MPerson toDomain(APIEmployee apiEmployee){
+    public DomainPerson toDomain(APIEmployee apiEmployee){
         /*List<MTicket> tickets = new ArrayList<>();
         for(APITicket ticket : apiEmployee.getT()){
             tickets.add(new TicketMapper().toDomain(new TicketReadImpl(ticket.getTicketId()).run().model));
         }*/
 
         //TODO: hier vermutlich Probleme durch Setzen auf null
-        return new MPerson(
+        return new DomainPerson(
                 apiEmployee.getEmployeeId(),
                 apiEmployee.getFirstName(),
                 apiEmployee.getMiddleNames(),
@@ -42,14 +42,14 @@ public class PersonMapper {
         return parsedDate;
     }
 
-    public MPerson toDomain(APIClient apiClient){
+    public DomainPerson toDomain(APIClient apiClient){
         /*List<MTicket> tickets = new ArrayList<>();
         for(APITicket ticket : apiEmployee.getT()){
             tickets.add(new TicketMapper().toDomain(new TicketReadImpl(ticket.getTicketId()).run().model));
         }*/
 
         //TODO: hier vermutlich Probleme durch Setzen auf nullapi
-        return new MPerson(
+        return new DomainPerson(
                 apiClient.getClientId(),
                 apiClient.getFirstName(),
                 apiClient.getMiddleNames(),

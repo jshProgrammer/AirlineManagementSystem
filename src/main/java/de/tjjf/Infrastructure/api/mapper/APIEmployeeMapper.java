@@ -1,15 +1,15 @@
 package de.tjjf.Infrastructure.api.mapper;
 
-import de.tjjf.Domain.models.MEmployee;
-import de.tjjf.Domain.models.MPerson;
+import de.tjjf.Domain.models.DomainEmployee;
+import de.tjjf.Domain.models.DomainPerson;
 import de.tjjf.Infrastructure.api.models.APIEmployee;
 import de.tjjf.Adapter.APIAdapter.AirlinePortImpl;
 
 import java.util.Date;
 
-public class APIEmployeeMapper extends AbstractAPIMapper<APIEmployee, MEmployee>{
+public class APIEmployeeMapper extends AbstractAPIMapper<APIEmployee, DomainEmployee>{
     @Override
-    public APIEmployee toAPIEntity(MEmployee mEmployee) {
+    public APIEmployee toAPIEntity(DomainEmployee mEmployee) {
         return new APIEmployee(
                 mEmployee.getPersonId(),
                 mEmployee.getFirstName(),
@@ -24,9 +24,9 @@ public class APIEmployeeMapper extends AbstractAPIMapper<APIEmployee, MEmployee>
     }
 
     @Override
-    public MEmployee toDomainEntity(APIEmployee apiEmployee) {
-        MPerson person = new PersonMapper().toDomain(apiEmployee);
-        return new MEmployee(
+    public DomainEmployee toDomainEntity(APIEmployee apiEmployee) {
+        DomainPerson person = new PersonMapper().toDomain(apiEmployee);
+        return new DomainEmployee(
                 person.getPersonId(),
                 person.getFirstName(),
                 person.getMiddleNames(),

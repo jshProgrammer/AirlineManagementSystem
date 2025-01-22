@@ -1,9 +1,9 @@
 package de.tjjf.Domain.ports.API;
 
-import de.tjjf.Domain.models.MAirline;
+import de.tjjf.Domain.models.DomainAirline;
 
 public interface AirlinePort {
-    MAirline createAirline(MAirline airline);
-    MAirline readAirlineByName(String name);
-    void updateAirline(MAirline airline); // e.g. name or headquarter could change
+    DomainAirline createAirline(DomainAirline airline);
+    DomainAirline readAirlineByName(String name);
+    void updateAirline(DomainAirline airline); // e.g. name or headquarter could change
 }

@@ -10,16 +10,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 //should work 23.12.24
 public class TicketLuggageTest {
-    MAirplane mAirplane = new MAirplane(123123, null, null, 30, 15 , 15, null, true, 1000);
-    MFlight mFlight = new MFlight(999999, mAirplane, null, null, null, null,null,null,0,null,null);
-    MPerson mPerson = new MPerson(1, "Max", null,null  , new Date(), "01231231", new MAddress("street", 1, 92341, "Berlin", "Germany"), "airlinemanagementtestmail@gmail.com", null);
+    DomainAirplane mAirplane = new DomainAirplane(123123, null, null, 30, 15 , 15, null, true, 1000);
+    DomainFlight mFlight = new DomainFlight(999999, mAirplane, null, null, null, null,null,null,0,null,null);
+    DomainPerson mPerson = new DomainPerson(1, "Max", null,null  , new Date(), "01231231", new DomainAddress("street", 1, 92341, "Berlin", "Germany"), "airlinemanagementtestmail@gmail.com", null);
 
     @Test
     public void acceptableLuggageIncreasePriceTest(){
         int weightOfLuggage = 12;
         int totalPrice = 200;
 
-        MTicket ticket = new MTicket(1, mPerson , mFlight, new Date(), totalPrice, 1, MTicket.SeatingClass.Economy, MTicket.TicketStatus.unpaid, weightOfLuggage );
+        DomainTicket ticket = new DomainTicket(1, mPerson , mFlight, new Date(), totalPrice, 1, DomainTicket.SeatingClass.Economy, DomainTicket.TicketStatus.unpaid, weightOfLuggage );
 
         //increase price accordingly to the weight of Luggage -> see MTicket setLuggageWeight()
         totalPrice = totalPrice + (weightOfLuggage * 4);
@@ -31,7 +31,7 @@ public class TicketLuggageTest {
     @Test
     public void tooMuchInitialLuggageWeightTest(){
         assertThrows(IllegalArgumentException.class, () -> {
-            new MTicket(1, mPerson, mFlight, new Date(), 200, 1, MTicket.SeatingClass.Economy, MTicket.TicketStatus.unpaid, 50 );
+            new DomainTicket(1, mPerson, mFlight, new Date(), 200, 1, DomainTicket.SeatingClass.Economy, DomainTicket.TicketStatus.unpaid, 50 );
         });
     }
 
@@ -39,7 +39,7 @@ public class TicketLuggageTest {
     public void successfulLuggageUpgradeTest(){
         int weightOfLuggage = 12;
         int totalPrice = 200;
-        MTicket ticket = new MTicket(1, mPerson, mFlight, new Date(), totalPrice, 1, MTicket.SeatingClass.Economy, MTicket.TicketStatus.unpaid, weightOfLuggage);
+        DomainTicket ticket = new DomainTicket(1, mPerson, mFlight, new Date(), totalPrice, 1, DomainTicket.SeatingClass.Economy, DomainTicket.TicketStatus.unpaid, weightOfLuggage);
         int newWeight = 5;
 
         //Initial luggage increasing the price
@@ -58,7 +58,7 @@ public class TicketLuggageTest {
     public void unsuccessfulLuggageUpgradeTest(){
         int weightOfLuggage = 12;
         int totalPrice = 200;
-        MTicket ticket = new MTicket(1, mPerson, mFlight, new Date(), totalPrice, 1, MTicket.SeatingClass.Economy, MTicket.TicketStatus.unpaid, weightOfLuggage);
+        DomainTicket ticket = new DomainTicket(1, mPerson, mFlight, new Date(), totalPrice, 1, DomainTicket.SeatingClass.Economy, DomainTicket.TicketStatus.unpaid, weightOfLuggage);
         int newWeight = 1000;
 
         assertThrows(IllegalArgumentException.class, () -> {

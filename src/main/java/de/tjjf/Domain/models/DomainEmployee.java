@@ -2,7 +2,7 @@ package de.tjjf.Domain.models;
 
 import java.util.Date;
 
-public class MEmployee extends MPerson implements MModel {
+public class DomainEmployee extends DomainPerson implements DomainModel {
 
     private long employeeId;
 
@@ -10,11 +10,11 @@ public class MEmployee extends MPerson implements MModel {
 
     private String position;
 
-    private MAirline airline;
+    private DomainAirline airline;
 
     private Date hireDate;
 
-    public MEmployee(long personId, String firstName, String middleNames, String lastName, Date dateOfBirth, String phonenumber, MAddress address, String email, int salary, String position, MAirline airline, Date hireDate) {
+    public DomainEmployee(long personId, String firstName, String middleNames, String lastName, Date dateOfBirth, String phonenumber, DomainAddress address, String email, int salary, String position, DomainAirline airline, Date hireDate) {
         super(personId, firstName, middleNames, lastName, dateOfBirth, phonenumber, address, email, null);
         this.employeeId = personId;
         this.salary = salary;
@@ -32,7 +32,7 @@ public class MEmployee extends MPerson implements MModel {
         return position;
     }
 
-    public MAirline getAirline() {
+    public DomainAirline getAirline() {
         return airline;
     }
 
@@ -48,7 +48,7 @@ public class MEmployee extends MPerson implements MModel {
         this.position = position;
     }
 
-    public void setAirline(MAirline airline) {
+    public void setAirline(DomainAirline airline) {
         this.airline = airline;
     }
 

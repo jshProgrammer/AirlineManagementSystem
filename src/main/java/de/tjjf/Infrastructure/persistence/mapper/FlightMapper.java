@@ -1,11 +1,11 @@
 package de.tjjf.Infrastructure.persistence.mapper;
 
-import de.tjjf.Domain.models.MFlight;
+import de.tjjf.Domain.models.DomainFlight;
 import de.tjjf.Infrastructure.persistence.entities.Flight;
 
-public class FlightMapper extends Mapper<MFlight, Flight> {
+public class FlightMapper extends Mapper<DomainFlight, Flight> {
 
-    public Flight toEntity(MFlight mFlight){
+    public Flight toEntity(DomainFlight mFlight){
         return new Flight(
                 new AirplaneMapper().toEntity(mFlight.getAirplane()),
                 mFlight.getDepartureDateTime(),
@@ -20,7 +20,7 @@ public class FlightMapper extends Mapper<MFlight, Flight> {
         );
     }
 
-    public Flight toEntityWithFlightNum(MFlight mFlight){
+    public Flight toEntityWithFlightNum(DomainFlight mFlight){
         return new Flight(
                 mFlight.getFlightNum(),
                 new AirplaneMapper().toEntity(mFlight.getAirplane()),
@@ -38,8 +38,8 @@ public class FlightMapper extends Mapper<MFlight, Flight> {
 
 
 
-    public MFlight toDomain(Flight flight){
-        return new MFlight(
+    public DomainFlight toDomain(Flight flight){
+        return new DomainFlight(
                 flight.getFlightNum(),
                 new AirplaneMapper().toDomain(flight.getAirplane()),
                 flight.getDepartureDateTime(),
@@ -47,7 +47,7 @@ public class FlightMapper extends Mapper<MFlight, Flight> {
                 flight.getArrivalDateTime(),
                 new AirportMapper().toDomain(flight.getArrivalAirport()),
                 flight.getBoardingTime(),
-                MFlight.FlightStatus.valueOf(flight.getStatus()),
+                DomainFlight.FlightStatus.valueOf(flight.getStatus()),
                 flight.getDuration(),
                 new EmployeeMapper().toDomain(flight.getPilot()),
                 new EmployeeMapper().toDomain(flight.getCopilot())

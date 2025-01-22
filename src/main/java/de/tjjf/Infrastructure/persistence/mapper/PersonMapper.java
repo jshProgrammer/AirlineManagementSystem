@@ -1,7 +1,7 @@
 package de.tjjf.Infrastructure.persistence.mapper;
 
-import de.tjjf.Domain.models.MPerson;
-import de.tjjf.Domain.models.MTicket;
+import de.tjjf.Domain.models.DomainPerson;
+import de.tjjf.Domain.models.DomainTicket;
 import de.tjjf.Infrastructure.persistence.entities.Client;
 import de.tjjf.Infrastructure.persistence.entities.Employee;
 import de.tjjf.Infrastructure.persistence.entities.Ticket;
@@ -12,19 +12,19 @@ import java.util.List;
 import java.util.Set;
 
 public class PersonMapper {
-    public MPerson toDomain(Employee employee) {
+    public DomainPerson toDomain(Employee employee) {
         return this.toDomain(employee, new HashSet<>());
     }
 
-    public MPerson toDomain(Employee employee, Set<Long> processedTickets) {
-        List<MTicket> tickets = new ArrayList<>();
+    public DomainPerson toDomain(Employee employee, Set<Long> processedTickets) {
+        List<DomainTicket> tickets = new ArrayList<>();
         for (Ticket ticket : employee.getTickets()) {
             if (!processedTickets.contains(ticket.getTicketId())) {
                 processedTickets.add(ticket.getTicketId());
                 tickets.add(new TicketMapper().toDomain(ticket, processedTickets));
             }
         }
-        return new MPerson(
+        return new DomainPerson(
                 employee.getPersonId(),
                 employee.getFirstName(),
                 employee.getMiddleName(),
@@ -37,19 +37,19 @@ public class PersonMapper {
         );
     }
 
-    public MPerson toDomain(Client client) {
+    public DomainPerson toDomain(Client client) {
         return this.toDomain(client, new HashSet<>());
     }
 
-    public MPerson toDomain(Client client, Set<Long> processedTickets) {
-        List<MTicket> tickets = new ArrayList<>();
+    public DomainPerson toDomain(Client client, Set<Long> processedTickets) {
+        List<DomainTicket> tickets = new ArrayList<>();
         for (Ticket ticket : client.getTickets()) {
             if (!processedTickets.contains(ticket.getTicketId())) {
                 processedTickets.add(ticket.getTicketId());
                 tickets.add(new TicketMapper().toDomain(ticket, processedTickets));
             }
         }
-        return new MPerson(
+        return new DomainPerson(
                 client.getPersonId(),
                 client.getFirstName(),
                 client.getMiddleName(),

@@ -2,7 +2,7 @@ package de.tjjf.Domain.UseCases.Services;
 
 import de.tjjf.Domain.UseCases.AuthenticationUseCase;
 import de.tjjf.Domain.UseCases.AuthorizedUseCase;
-import de.tjjf.Domain.models.MAirline;
+import de.tjjf.Domain.models.DomainAirline;
 import de.tjjf.Domain.ports.DB.DataAccess;
 
 
@@ -14,17 +14,17 @@ public class AirlineService extends AuthorizedUseCase {
         this.port = port;
     }
 
-    public MAirline create(MAirline entity) {
+    public DomainAirline create(DomainAirline entity) {
         //new CancelTicketUseCase().authorize();
         return port.create(entity);
     }
 
-    public MAirline readById(String s) {
+    public DomainAirline readById(String s) {
         //new CancelTicketUseCase().authorize();
         return port.readById(s);
     }
 
-    public void update(MAirline entity) {
+    public void update(DomainAirline entity) {
         //new CancelTicketUseCase().authorize();
         port.update(entity);
     }

@@ -1,6 +1,6 @@
 package de.tjjf.Adapter.DatabaseAdapter;
 
-import de.tjjf.Domain.models.MAirport;
+import de.tjjf.Domain.models.DomainAirport;
 import de.tjjf.Domain.ports.DB.DataAccess;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Create.AirportCreateImpl;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Delete.AirportDeleteImpl;
@@ -11,17 +11,17 @@ import de.tjjf.Infrastructure.persistence.mapper.AirportMapper;
 public class MAirportRepsoitoryImp implements DataAccess.MAirportRepository {
 
     @Override
-    public MAirport create(MAirport entity) {
+    public DomainAirport create(DomainAirport entity) {
         return new AirportMapper().toDomain(new AirportCreateImpl(new AirportMapper().toEntity(entity)).execute().model);
     }
 
     @Override
-    public MAirport readById(String code) {
+    public DomainAirport readById(String code) {
         return new AirportMapper().toDomain(new AirportReadImpl(code).execute().model);
     }
 
     @Override
-    public void update(MAirport entity) {
+    public void update(DomainAirport entity) {
         new AirportUpdateImpl(new AirportMapper().toEntity(entity), entity.getCode()).execute();
 
     }

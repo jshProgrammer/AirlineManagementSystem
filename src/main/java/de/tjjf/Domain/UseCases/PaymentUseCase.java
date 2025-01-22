@@ -7,7 +7,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.*;
 import com.stripe.param.*;
 import de.tjjf.Domain.PasswordDecryption;
-import de.tjjf.Domain.models.MPayment;
+import de.tjjf.Domain.models.DomainPayment;
 
 public class PaymentUseCase extends AuthorizedUseCase {
 
@@ -23,7 +23,7 @@ public class PaymentUseCase extends AuthorizedUseCase {
         }
     }
 
-    public static boolean paymentCall(int amountEuros, MPayment mPayment){
+    public static boolean paymentCall(int amountEuros, DomainPayment mPayment){
         String token = simulateCardToken(mPayment);
         return paymentImpl(amountEuros, token);
     }
@@ -46,7 +46,7 @@ public class PaymentUseCase extends AuthorizedUseCase {
             throw new RuntimeException(e);
         }
     }*/
-    public static String simulateCardToken(MPayment mPayment) {
+    public static String simulateCardToken(DomainPayment mPayment) {
         if ("4242424242424242".equals(mPayment.getCardNumber())) {
             return "tok_visa";
         } else if ("4000000000000341".equals(mPayment.getCardNumber())) {
@@ -58,7 +58,7 @@ public class PaymentUseCase extends AuthorizedUseCase {
 
 
 
-    public static boolean paymentImpl(int amountEuros, MPayment method) {
+    public static boolean paymentImpl(int amountEuros, DomainPayment method) {
         boolean result = false;
         try {
             Stripe.apiKey = PasswordDecryption.decryptPassword("src/main/java/de/tjjf/Domain/paymentApiKey.enc", "src/main/java/de/tjjf/Domain/paymentApiKey.key");
@@ -110,7 +110,7 @@ public class PaymentUseCase extends AuthorizedUseCase {
 
     }
 
-    public static String createPaymentMethodFromMPayment(MPayment mPayment) throws StripeException {
+    public static String createPaymentMethodFromMPayment(DomainPayment mPayment) throws StripeException {
 
         try {
             Stripe.apiKey = PasswordDecryption.decryptPassword("src/main/java/de/tjjf/Domain/paymentApiKey.enc", "src/main/java/de/tjjf/Domain/paymentApiKey.key");

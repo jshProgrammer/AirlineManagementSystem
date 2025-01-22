@@ -23,39 +23,39 @@ public class TicketService extends AuthorizedUseCase {
         this.employeePort = employeePort;
     }
 
-    public MTicket addBooking(MTicket newBooking, MPayment mPayment) {
+    public DomainTicket addBooking(DomainTicket newBooking, DomainPayment mPayment) {
         //new CancelTicketUseCase().authorize();
         if(AddBookingUseCase.addBooking(newBooking, mPayment)){
-            MTicket newTicket = ticketPort.create(newBooking);
+            DomainTicket newTicket = ticketPort.create(newBooking);
             newBooking.getPerson().addTickets(newBooking);
-            if ((newBooking.getPerson() instanceof MClient)) {
-                clientPort.update((MClient) newBooking.getPerson());
+            if ((newBooking.getPerson() instanceof DomainClient)) {
+                clientPort.update((DomainClient) newBooking.getPerson());
             } else {
-                employeePort.update((MEmployee) newBooking.getPerson());
+                employeePort.update((DomainEmployee) newBooking.getPerson());
             }
             return newTicket;
         }
         return null;
     }
 
-    public MTicket readTicketById(long id) {
+    public DomainTicket readTicketById(long id) {
         //new CancelTicketUseCase().authorize();
         return ticketPort.readById(id);
     }
 
-    public void upgradeSeatingClass(long ticketId, MTicket.SeatingClass newSeatingClass) throws NoSeatsAvailableException {
+    public void upgradeSeatingClass(long ticketId, DomainTicket.SeatingClass newSeatingClass) throws NoSeatsAvailableException {
         //new CancelTicketUseCase().authorize();
-        MTicket ticket = readTicketById(ticketId);
+        DomainTicket ticket = readTicketById(ticketId);
         new UpgradeSeatingClassUseCase(new MTicketRepositoryImpl()).updateSeatingClassIfAvailable(ticket, newSeatingClass);
     }
 
     public void upgradeLuggageWeight(long ticketId, int newWeight) throws IllegalArgumentException {
         //new CancelTicketUseCase().authorize();
-        MTicket ticket = ticketPort.readById(ticketId);
+        DomainTicket ticket = ticketPort.readById(ticketId);
         new UpgradeLuggageWeightUseCase(ticketPort).upgradeLuggageWeight(ticket, newWeight);
     }
 
-    public void cancelTicket(MPerson person, long flightnum){
+    public void cancelTicket(DomainPerson person, long flightnum){
         //new CancelTicketUseCase().authorize();
         new CancelTicketUseCase(ticketPort, clientPort, employeePort).cancelTicket(person, flightnum);
     }

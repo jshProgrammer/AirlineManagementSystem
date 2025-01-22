@@ -1,9 +1,9 @@
 package de.tjjf.Infrastructure.persistence.mapper;
 
-import de.tjjf.Domain.models.MClient;
-import de.tjjf.Domain.models.MEmployee;
-import de.tjjf.Domain.models.MPerson;
-import de.tjjf.Domain.models.MTicket;
+import de.tjjf.Domain.models.DomainClient;
+import de.tjjf.Domain.models.DomainEmployee;
+import de.tjjf.Domain.models.DomainPerson;
+import de.tjjf.Domain.models.DomainTicket;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Read.ClientReadImpl;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Read.EmployeeReadImpl;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Read.FlightReadImpl;
@@ -14,9 +14,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-public class TicketMapper extends Mapper<MTicket, Ticket> {
+public class TicketMapper extends Mapper<DomainTicket, Ticket> {
 
-    public Ticket toEntity(MTicket mTicket){
+    public Ticket toEntity(DomainTicket mTicket){
 
         Ticket ticket = new Ticket(
                 new FlightMapper().toEntityWithFlightNum(mTicket.getFlight()),
@@ -29,21 +29,21 @@ public class TicketMapper extends Mapper<MTicket, Ticket> {
         );
 
 
-        if (mTicket.getPerson() instanceof MClient) {
-            ticket.setClient(new ClientMapper().toEntityWithId((MClient) mTicket.getPerson(), false));
-        } else if (mTicket.getPerson() instanceof MEmployee) {
-            ticket.setEmployee(new EmployeeMapper().toEntityWithId((MEmployee) mTicket.getPerson(), false));
+        if (mTicket.getPerson() instanceof DomainClient) {
+            ticket.setClient(new ClientMapper().toEntityWithId((DomainClient) mTicket.getPerson(), false));
+        } else if (mTicket.getPerson() instanceof DomainEmployee) {
+            ticket.setEmployee(new EmployeeMapper().toEntityWithId((DomainEmployee) mTicket.getPerson(), false));
         }
 
         return ticket;
     }
 
-    public MTicket toDomain(Ticket booking) {
+    public DomainTicket toDomain(Ticket booking) {
         return this.toDomain(booking, new HashSet<>());
     }
 
-    public MTicket toDomain(Ticket booking, Set<Long> processedTickets) {
-        MPerson mPerson;
+    public DomainTicket toDomain(Ticket booking, Set<Long> processedTickets) {
+        DomainPerson mPerson;
 
         if (booking.getEmployee() != null) {
             mPerson = new PersonMapper().toDomain(new EmployeeReadImpl(booking.getEmployee().getPersonId()).execute().model, processedTickets);
@@ -53,15 +53,15 @@ public class TicketMapper extends Mapper<MTicket, Ticket> {
 
         Flight flight = new FlightReadImpl(booking.getFlight().getFlightNum()).execute().model;
 
-        return new MTicket(
+        return new DomainTicket(
                 booking.getTicketId(),
                 mPerson,
                 new FlightMapper().toDomain(flight),
                 booking.getDateTimeOfBooking(),
                 booking.getTotalPrice(),
                 booking.getSeatNum(),
-                MTicket.SeatingClass.valueOf(booking.getSeatingClass()),
-                MTicket.TicketStatus.valueOf(booking.getTicketStatus()),
+                DomainTicket.SeatingClass.valueOf(booking.getSeatingClass()),
+                DomainTicket.TicketStatus.valueOf(booking.getTicketStatus()),
                 booking.getMaxWeightOfLuggage()
         );
     }

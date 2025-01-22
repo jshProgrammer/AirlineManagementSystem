@@ -1,22 +1,22 @@
 package de.tjjf.Infrastructure.persistence.mapper;
 
-import de.tjjf.Domain.models.MEmployee;
-import de.tjjf.Domain.models.MPerson;
-import de.tjjf.Domain.models.MTicket;
+import de.tjjf.Domain.models.DomainEmployee;
+import de.tjjf.Domain.models.DomainPerson;
+import de.tjjf.Domain.models.DomainTicket;
 import de.tjjf.Infrastructure.persistence.entities.Employee;
 import de.tjjf.Infrastructure.persistence.entities.Ticket;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeMapper extends Mapper<MEmployee, Employee>{
+public class EmployeeMapper extends Mapper<DomainEmployee, Employee>{
 
-    public Employee toEntity(MEmployee employee) {
+    public Employee toEntity(DomainEmployee employee) {
         return toEntity(employee, true);
     }
 
 
-    public Employee toEntity(MEmployee mEmployee, boolean mapTickets){
+    public Employee toEntity(DomainEmployee mEmployee, boolean mapTickets){
         Employee employee = new Employee(
                 mEmployee.getFirstName(),
                 mEmployee.getMiddleNames(),
@@ -33,7 +33,7 @@ public class EmployeeMapper extends Mapper<MEmployee, Employee>{
         );
         if (mapTickets) {
             List<Ticket> tickets = new ArrayList<>();
-            for (MTicket mTicket : mEmployee.getTickets()) {
+            for (DomainTicket mTicket : mEmployee.getTickets()) {
                 Ticket ticket = new TicketMapper().toEntity(mTicket);
                 ticket.setEmployee(employee);
                 tickets.add(ticket);
@@ -44,10 +44,10 @@ public class EmployeeMapper extends Mapper<MEmployee, Employee>{
         return employee;
     }
 
-    public Employee toEntityWithId(MEmployee mEmployee) {
+    public Employee toEntityWithId(DomainEmployee mEmployee) {
         List<Ticket> tickets = new ArrayList<>();
 
-        for(MTicket mTicket : mEmployee.getTickets()){
+        for(DomainTicket mTicket : mEmployee.getTickets()){
             tickets.add(new TicketMapper().toEntity(mTicket));
         }
 
@@ -68,7 +68,7 @@ public class EmployeeMapper extends Mapper<MEmployee, Employee>{
         );
     }
 
-    public Employee toEntityWithId(MEmployee mEmployee, boolean mapTickets) {
+    public Employee toEntityWithId(DomainEmployee mEmployee, boolean mapTickets) {
         Employee employee = new Employee(
                 mEmployee.getPersonId(),
                 mEmployee.getFirstName(),
@@ -86,7 +86,7 @@ public class EmployeeMapper extends Mapper<MEmployee, Employee>{
         );
         if (mapTickets) {
             List<Ticket> tickets = new ArrayList<>();
-            for (MTicket mTicket : mEmployee.getTickets()) {
+            for (DomainTicket mTicket : mEmployee.getTickets()) {
                 Ticket ticket = new TicketMapper().toEntity(mTicket);
                 ticket.setEmployee(employee);
                 tickets.add(ticket);
@@ -97,9 +97,9 @@ public class EmployeeMapper extends Mapper<MEmployee, Employee>{
         return employee;
     }
 
-    public MEmployee toDomain(Employee employee){
-        MPerson person = new PersonMapper().toDomain(employee);
-        return new MEmployee(
+    public DomainEmployee toDomain(Employee employee){
+        DomainPerson person = new PersonMapper().toDomain(employee);
+        return new DomainEmployee(
                 person.getPersonId(),
                 person.getFirstName(),
                 person.getMiddleNames(),
