@@ -1,6 +1,10 @@
 # AirlineManagementSystem
 
-Project for the lecture Backend Systems. We devolped the backend for an Airline Management System.
+We developed a comprehensive Airline Management System that efficiently handles flights, ticketing for both customers and employees, and management of airline operations. 
+The system supports multiple airlines as subsidiaries, each with its own team of employees, enabling decentralized management while maintaining overall control.
+Additionally, it provides well-defined ports for seamless communication with databases and external APIs, facilitating integration and data exchange with other systems. 
+For payment validation, the system integrates with Stripe, ensuring secure and efficient processing of transactions. 
+Authentication with THWS username and password, as well as token-based authentication, was prepared. However, due to the lack of proper error handling support in the GraphQL client, it was not utilized and commented out.
 
 ## Conditions
 
@@ -18,7 +22,7 @@ java -version
 mvn -version
 ```
 
-## Projekt Structur
+## Project Structure
 
 The basic structure of this Maven project is as follows:
 ```
@@ -28,10 +32,6 @@ AirlineManagementSystem/
 |   |--main/
 |   |   |--java/
 |   |   |   |--de.tjjf/
-|   |   |       |--Adapter/
-|   |   |       |   |--APIAdapter/
-|   |   |       |   |--DatabaseAdapter/
-|   |   |       |--APIExtensions/
 |   |   |       |--Domain/
 |   |   |       |   |--Exceptions/
 |   |   |       |   |--models/
@@ -39,14 +39,21 @@ AirlineManagementSystem/
 |   |   |       |   |   |--API/
 |   |   |       |   |   |--DB/
 |   |   |       |   |--UseCases/
+|   |   |       |   |   |--Services/
 |   |   |       |--Infrastructure/
 |   |   |           |--api/
+|   |   |           |   |--adapter/
 |   |   |           |   |--APIExtensions/
 |   |   |           |   |--InputModels/
 |   |   |           |   |--mapper/
 |   |   |           |   |--models/
 |   |   |           |   |--resolvers/
+|   |   |           |   |--services/
+|   |   |           |--GraphQL Client/
+|   |   |           |   |--APIOperations/
+|   |   |           |   |--results/
 |   |   |           |--persistence/
+|   |   |               |--adapter/
 |   |   |               |--DBOperations/
 |   |   |               |   |--AbstractOperations/
 |   |   |               |   |--ImplOperations/
@@ -63,8 +70,10 @@ AirlineManagementSystem/
 |       |--java/
 |           |--de.tjjf
 |               |--CRUDTests/
+|               |   |--APILevel
 |               |   |--BusinessLevel
 |               |   |--PersistenceLevel
+|               |--IntegrationTests/
 |               |--LogicTests/
 |--pom.xml
 |--README.md
@@ -102,7 +111,7 @@ All configurable settings can be found in the file `src/main/resources/applicati
 
 Execute the tests with the following command:
 ```bash
-mvn test
+mvn verify
 ```
 
 The test results can be found in the folder `target/surefire-reports`.
@@ -113,8 +122,8 @@ This project is under the [MIT-Lizenz](LICENSE).
 
 ## Contributor
 
-- Jasmin Wander
-- Finn Krappitz
-- Joshua Pfennig
-- Tom Knoblach
+- [Jasmin Wander] https://github.com/xjasx4
+- [Finn Krappitz] https://github.com/hendrickson187
+- [Tom Knoblach] https://github.com/Gottschalk125
+- [Joshua Pfennig] https://github.com/jshProgrammer
 
