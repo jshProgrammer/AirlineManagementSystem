@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import de.tjjf.Infrastructure.GraphQLClient.APIOperations.*;
 import de.tjjf.Infrastructure.api.DateParser;
 import de.tjjf.Infrastructure.api.DemoServlet;
+import de.tjjf.Infrastructure.api.GraphQLServer;
 import de.tjjf.Infrastructure.api.InputModels.*;
 import de.tjjf.Infrastructure.api.models.*;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Delete.*;
@@ -20,28 +21,30 @@ import org.eclipse.jetty.ee10.servlet.ServletHolder;
 
 public class APIIntegrationTests {
 
+    private static Thread serverThread;
     private static Server server;
 
     private Calendar calendar;
     private Date date;
     private Date dateTime;
 
-    // not necessary with docker
-    /*@BeforeAll
+    @BeforeAll
     public static void startServer() throws Exception {
-        server = new Server(8081);
-
-        ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        context.setContextPath("/");
-        server.setHandler(context);
-
-        // Change path if the GraphQL server should have another URI
-        context.addServlet(new ServletHolder(new DemoServlet()), "/airlineManagement");
-
-        server.start();
-        System.out.println("Server started on port 8081");
+        serverThread = new Thread(() -> {
+            try {
+                GraphQLServer.main(new String[]{});
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        serverThread.start();
     }
-*/
+
+    @AfterAll
+    public static void stopServer() throws Exception {
+        serverThread.interrupt();
+        serverThread.join();
+    }
 
     @BeforeEach
     public void setUp() {
@@ -52,14 +55,6 @@ public class APIIntegrationTests {
         calendar = Calendar.getInstance();
         calendar.set(2005, Calendar.FEBRUARY, 2, 0, 0, 0);
         dateTime = calendar.getTime();
-    }
-
-    @AfterAll
-    public static void stopServer() throws Exception {
-        if (server != null && server.isRunning()) {
-            server.stop();
-            System.out.println("Server stopped");
-        }
     }
 
 

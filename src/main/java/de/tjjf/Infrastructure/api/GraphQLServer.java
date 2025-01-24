@@ -6,7 +6,8 @@ import org.eclipse.jetty.server.Server;
 
 public class GraphQLServer {
     public static void main(String[] args) throws Exception {
-        Server server = new Server(8081);
+        int port = args[0] != null ? Integer.parseInt(args[0]) : 8081;
+        Server server = new Server(port);
 
         ServletContextHandler context = new ServletContextHandler( ServletContextHandler.SESSIONS );
         context.setContextPath( "/" );
