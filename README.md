@@ -93,18 +93,18 @@ AirlineManagementSystem/
    cd AirlineManagementSystem
    ```
 
-2. Build the docker container:
+2. Build the docker container (including running all tests and starting server for 10 seconds to see if it is starting up correctly):
    ```bash
-   sudo docker build --tag "airline:latest" .
+   sudo docker build --no-cache -t airline .
     ```
    
-3. Run the docker container:
+3. Run the docker image to start the server:
     ```bash
-    sudo docker run airline
+    sudo docker run -p 8081:8081 airline
     ```
 
 The test results can be found in the folder `target/surefire-reports`.
-Please note that tests cannot be run while the Docker container is running. If you want to rerun the test, just rebuild the Docker container.
+Please note that tests cannot be run while the Docker container is running. If you want to rerun the tests, just rebuild the docker image.
 
 ## Licence
 
