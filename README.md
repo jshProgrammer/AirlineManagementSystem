@@ -97,26 +97,15 @@ AirlineManagementSystem/
    mvn clean install
    ```
 
-3. Start the application (if applicable):
+3. Start the server:
    ```bash
-   mvn exec:java -Dexec.mainClass="com.beispiel.Main"
+   mvn spring-boot:run
    ```
-
-## Configuration
-```bash
-docker build --tag "airline"
-docker run airline
-docker run --detach airline
-```
-
-All configurable settings can be found in the file `src/main/resources/application.properties`
-
-## Tests
-
-Execute the tests with the following command:
-```bash
-docker exec -lt airline mvn test
-```
+   
+4. Execute the test cases in a separate terminal
+    ```bash
+   mvn verify
+   ```
 
 The test results can be found in the folder `target/surefire-reports`.
 

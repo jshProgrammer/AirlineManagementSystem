@@ -26,7 +26,8 @@ public class APIIntegrationTests {
     private Date date;
     private Date dateTime;
 
-    @BeforeAll
+    // not necessary with docker
+    /*@BeforeAll
     public static void startServer() throws Exception {
         server = new Server(8081);
 
@@ -40,7 +41,7 @@ public class APIIntegrationTests {
         server.start();
         System.out.println("Server started on port 8081");
     }
-
+*/
 
     @BeforeEach
     public void setUp() {
