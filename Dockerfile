@@ -1,29 +1,37 @@
-# Basis-Image mit Java 21 und Maven
+# Stage 1: Build and Test
 FROM maven:3.9.9-eclipse-temurin-21 AS build
 
-# Arbeitsverzeichnis festlegen
+# Set working directory
 WORKDIR /app
 
-# Kopiere die Maven-POM und die Quellcode-Dateien
+# Copy only the necessary files for dependency resolution
 COPY pom.xml .
+
+# Resolve dependencies to leverage Docker layer caching
+RUN mvn dependency:go-offline -B
+
+# Copy the rest of the application code
 COPY src ./src
 
-# Baue das Projekt
+# Build the application and run tests
 RUN mvn clean package
 
-# run stage
-FROM maven:3.9.9-eclipse-temurin-21
+# Run the application for a brief test
+RUN java -jar target/*.jar & \
+    sleep 10 && \
+    ps aux | grep "[j]ava" || (echo "Application did not start!" && exit 1)
 
-# set workdir again
+# Stage 2: Runtime
+FROM eclipse-temurin:21-jre
+
+# Set working directory
 WORKDIR /app
 
-# get build image
+# Copy the built JAR file from the build stage
 COPY --from=build /app/target/*.jar app.jar
 
-# Exponiere den benötigten Port
+# Expose the application port
 EXPOSE 8081
 
-# Führe den Server aus, wenn der Container gestartet wird
-CMD ["java", "-jar", "app.jar"]
-
-
+# Command to run the application
+ENTRYPOINT ["java", "-jar", "app.jar"]

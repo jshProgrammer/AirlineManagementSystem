@@ -13,8 +13,9 @@ Make sure the following software is installed on your system:
 
 - **Java**: version 21 or higher
     - [installation for Java](https://www.oracle.com/java/technologies/javase-downloads.html)
-- **Maven**: version 4.0 or higher
+- **Maven**:
     - [installation for Maven](https://maven.apache.org/install.html)
+- **Docker**
 
 Check the installed versions:
 ```bash
@@ -92,18 +93,18 @@ AirlineManagementSystem/
    cd AirlineManagementSystem
    ```
 
-2. Build the project:
+2. Build the docker container:
    ```bash
-   docker build --tag airline:latest .
+   sudo docker build --tag "airline:latest" .
     ```
    
-3. Run the project:
+3. Run the docker container:
     ```bash
-    docker run -p 8081:8081 airline
+    sudo docker run airline
     ```
 
 The test results can be found in the folder `target/surefire-reports`.
-Please note that tests cannot be run while the Docker container is running. If you want to rerun the test, just rerun the Docker container.
+Please note that tests cannot be run while the Docker container is running. If you want to rerun the test, just rebuild the Docker container.
 
 ## Licence
 
