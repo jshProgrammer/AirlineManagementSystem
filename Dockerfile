@@ -5,7 +5,7 @@ FROM maven:3.9.9-eclipse-temurin-21 AS build
 WORKDIR /app
 
 # Kopiere die Maven-POM und die Quellcode-Dateien
-COPY ../Downloads/fix/pom.xml .
+COPY pom.xml .
 COPY src ./src
 
 # Baue das Projekt

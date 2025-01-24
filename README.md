@@ -92,22 +92,18 @@ AirlineManagementSystem/
    cd AirlineManagementSystem
    ```
 
-2. Install the dependencies and build the project:
+2. Build the project:
    ```bash
-   mvn clean install
-   ```
-
-3. Start the server:
-   ```bash
-   mvn spring-boot:run
-   ```
+   docker build --tag "airline" .
+    ```
    
-4. Execute the test cases in a separate terminal
+3. Run the project:
     ```bash
-   mvn verify
-   ```
+    docker run -p 8081:8081 airline
+    ```
 
 The test results can be found in the folder `target/surefire-reports`.
+Please note that tests cannot be run while the Docker container is running. If you want to rerun the test, just rerun the Docker container.
 
 ## Licence
 
