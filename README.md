@@ -94,7 +94,7 @@ AirlineManagementSystem/
 
 2. Build the project:
    ```bash
-   docker build --tag "airline" .
+   docker build --tag airline:latest .
     ```
    
 3. Run the project:
