@@ -95,12 +95,12 @@ AirlineManagementSystem/
 
 2. Build the docker container (including running all tests and starting server for 10 seconds to see if it is starting up correctly):
    ```bash
-   sudo docker build --no-cache -t airline .
+    docker build --no-cache -t airline .
     ```
    
 3. Run the docker image to start the server:
     ```bash
-    sudo docker run -p 8081:8081 airline
+    docker run -p 8081:8081 airline
     ```
 
 The test results can be found in the folder `target/surefire-reports`.

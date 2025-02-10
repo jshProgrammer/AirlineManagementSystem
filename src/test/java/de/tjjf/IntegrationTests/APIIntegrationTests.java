@@ -14,6 +14,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.net.Socket;
 import java.util.*;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.ee10.servlet.ServletContextHandler;
@@ -28,7 +30,7 @@ public class APIIntegrationTests {
     private Date date;
     private Date dateTime;
 
-    @BeforeAll
+    /*@BeforeAll
     public static void startServer() throws Exception {
         serverThread = new Thread(() -> {
             try {
@@ -38,6 +40,32 @@ public class APIIntegrationTests {
             }
         });
         serverThread.start();
+    }*/
+    public static void waitForServer(int port) throws InterruptedException {
+        int retries = 10;
+        while (retries-- > 0) {
+            try (Socket socket = new Socket("localhost", port)) {
+                System.out.println("Server is ready!");
+                return;
+            } catch (IOException e) {
+                System.out.println("Waiting for server to start...");
+                Thread.sleep(1000);
+            }
+        }
+        throw new RuntimeException("Server did not start in time!");
+    }
+
+    @BeforeAll
+    public static void startServer() throws Exception {
+        serverThread = new Thread(() -> {
+            try {
+                GraphQLServer.main(new String[]{"8081"});
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        serverThread.start();
+        waitForServer(8081); // Wait for server to be ready
     }
 
     @AfterAll
