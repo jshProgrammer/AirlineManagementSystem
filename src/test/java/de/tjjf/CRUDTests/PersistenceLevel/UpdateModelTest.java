@@ -158,13 +158,11 @@ public class UpdateModelTest {
 
     @Test
     public void testUpdateAirline() {
-        //String updatedName = "UpdatedAirline";
         String updatedHeadquarters = "UpdatedHeadquarters";
         String updatedEmail = "updatedEmail@gmail.com";
         String updatedPhoneNumber = "+4915198765432";
         String updatedAddress = "updatedAddress";
 
-        //airline.setName(updatedName);
         airline.setHeadQuarters(updatedHeadquarters);
         airline.setMail(updatedEmail);
         airline.setPhoneNumber(updatedPhoneNumber);
@@ -174,7 +172,6 @@ public class UpdateModelTest {
 
 
         Airline updatedAirline = new AirlineReadImpl(airline.getName()).execute().model;
-        //assertEquals(updatedName, updatedAirline.getName());
         assertEquals(updatedHeadquarters, updatedAirline.getHeadQuarters());
         assertEquals(updatedEmail, updatedAirline.getMail());
         assertEquals(updatedPhoneNumber, updatedAirline.getPhoneNumber());

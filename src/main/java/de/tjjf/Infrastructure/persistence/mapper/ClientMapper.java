@@ -16,7 +16,6 @@ public class ClientMapper extends Mapper<DomainClient, Client>{
 
     public Client toEntity(DomainClient mClient, boolean mapTickets){
         Client client = new Client(
-                //mClient.getPersonId(),
                 mClient.getFirstName(),
                 mClient.getMiddleNames(),
                 mClient.getLastName(),

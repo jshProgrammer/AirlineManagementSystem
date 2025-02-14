@@ -38,7 +38,6 @@ public class CreateAPIModelsTest {
         APIAirline apiAirline = new APIAirline(name , date.toString() ,address, phoneNumber, email);
 
         assertEquals(name, apiAirline.getName());
-        //assertEquals(date, apiAirline.getFoundationYear());
         assertEquals(address, apiAirline.getAddress());
         assertEquals(phoneNumber, apiAirline.getPhoneNumber());
         assertEquals(email, apiAirline.getEmail());

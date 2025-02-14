@@ -118,5 +118,5 @@ public class Airplane implements Model {
 
     public int getMaxWeightOfLuggage() {return maxWeightOfLuggage;}
 
-    public void setMaxWeightOfLuggage(int maxWeightOfLuggage) {}
+    public void setMaxWeightOfLuggage(int maxWeightOfLuggage) {this.maxWeightOfLuggage = maxWeightOfLuggage;}
 }

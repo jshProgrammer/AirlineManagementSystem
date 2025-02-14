@@ -98,6 +98,6 @@ public class APIClientInput implements APIModelInput {
     }
 
     public void setIsBusinessClient(Boolean isBusinessClient) {
-        isBusinessClient = isBusinessClient;
+        this.isBusinessClient = isBusinessClient;
     }
 }

@@ -206,7 +206,7 @@ public class CreateDomainModelsTest {
         assertEquals(mTicket.getPerson(), person);
         assertEquals(mTicket.getFlight(), mFlight);
         assertEquals(mTicket.getDateTimeOfBooking(), dateTimeOfBooking);
-        assertEquals(mTicket.getTotalPrice(), (totalPrice + weightOfLuggage * 4)); //see MTicket.setLuggageWeight()
+        assertEquals(mTicket.getTotalPrice(), (totalPrice + weightOfLuggage * 4));
         assertEquals(mTicket.getSeatNum(), seatNum);
         assertEquals(mTicket.getSeatingClass(), seatingClass);
         assertEquals(mTicket.getTicketStatus(), ticketStatus);

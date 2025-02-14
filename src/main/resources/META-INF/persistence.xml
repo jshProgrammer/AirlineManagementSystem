@@ -50,8 +50,6 @@
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.show_sql" value="true"/>
 
-            <!-- Schema-Generierung -->
-            <!--<property name="jakarta.persistence.schema-generation.database.action" value="update"/>-->
         </properties>
     </persistence-unit>
 </persistence>

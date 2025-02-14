@@ -78,14 +78,13 @@ public class PaymentUseCase extends AuthorizedUseCase {
         try {
             Map<String, Object> paymentMethodParams = new HashMap<>();
             paymentMethodParams.put("type", "card");
-            paymentMethodParams.put("card", Map.of("token", tokenId));  // 'tok_visa' als Beispiel
+            paymentMethodParams.put("card", Map.of("token", tokenId));
             PaymentMethod paymentMethod = PaymentMethod.create(paymentMethodParams);
 
             Map<String, Object> params = new HashMap<>();
-            params.put("amount", amountEuros * 100); // Betrag in Cent
+            params.put("amount", amountEuros * 100);
             params.put("currency", "eur");
             params.put("payment_method", paymentMethod.getId());
-            //params.put("confirmation_method", "automatic");
             params.put("confirm", true);
             params.put("return_url", "https://www.deinewebsite.de/payment-success");
 

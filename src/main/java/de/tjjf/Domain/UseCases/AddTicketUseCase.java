@@ -10,8 +10,8 @@ public class AddTicketUseCase extends AuthorizedUseCase {
         super(AuthenticationUseCase.getInstance());
     }
 
-    //4242424242424242 erfolgreiche Zahlung
-    //4000000000000069 abgelaufene Karte/erfloglose Zahlung
+    //4242424242424242 succeed payment
+    //4000000000000069 declined payment
     public static boolean addTicket(DomainTicket newBooking, DomainPayment mPayment) {
         //new CancelTicketUseCase().authorize();
         boolean bookable = false;

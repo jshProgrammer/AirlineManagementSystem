@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import de.tjjf.Infrastructure.GraphQLClient.APIOperations.*;
 import de.tjjf.Infrastructure.api.DateParser;
-import de.tjjf.Infrastructure.api.DemoServlet;
 import de.tjjf.Infrastructure.api.GraphQLServer;
 import de.tjjf.Infrastructure.api.InputModels.*;
 import de.tjjf.Infrastructure.api.models.*;
@@ -18,8 +17,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.*;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.ee10.servlet.ServletContextHandler;
-import org.eclipse.jetty.ee10.servlet.ServletHolder;
+
 
 public class APIIntegrationTests {
 
@@ -30,17 +28,6 @@ public class APIIntegrationTests {
     private Date date;
     private Date dateTime;
 
-    /*@BeforeAll
-    public static void startServer() throws Exception {
-        serverThread = new Thread(() -> {
-            try {
-                GraphQLServer.main(new String[]{});
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-        serverThread.start();
-    }*/
     public static void waitForServer(int port) throws InterruptedException {
         int retries = 10;
         while (retries-- > 0) {
@@ -65,7 +52,7 @@ public class APIIntegrationTests {
             }
         });
         serverThread.start();
-        waitForServer(8081); // Wait for server to be ready
+        waitForServer(8081);
     }
 
     @AfterAll
@@ -125,7 +112,6 @@ public class APIIntegrationTests {
         assertEquals("Test", clientReadFromDB.getLastName());
         assertEquals(input.getDateOfBirth().toString(), DateParser.getDateFromRFC3339(clientReadFromDB.getDateOfBirth()).toString());
 
-        //assertEquals( "0234214233", clientReadFromDB.getPhoneNumber());
         assertEquals( "Street", clientReadFromDB.getAddress().getStreet());
         assertEquals(2, clientReadFromDB.getAddress().getNumber());
         assertEquals(91236, clientReadFromDB.getAddress().getZipCode());
@@ -485,7 +471,6 @@ public class APIIntegrationTests {
         assertEquals(ticketReadFromDB.getSeatingClass(), apiTicket.getSeatingClass());
         assertEquals(ticketReadFromDB.getIsClient(), apiTicket.getIsClient());
         assertEquals(ticketReadFromDB.getWeightOfLuggage(), apiTicket.getWeightOfLuggage());
-      // assertEquals(ticketReadFromDB.getDateTimeOfBooking().toString(), DateParser.getDateTimeFromRFC3339().getDateTimeOfBooking());
 
         new TicketDeleteImpl(apiTicket.getTicketId()).execute();
         new FlightDeleteImpl(apiFlight.getFlightNum()).execute();

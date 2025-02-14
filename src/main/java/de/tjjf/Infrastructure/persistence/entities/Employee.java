@@ -36,7 +36,6 @@ public class Employee implements Model {
     private String email;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "employee")
-    //@JoinColumn(name = "personId", referencedColumnName = "personId")
     private List<Ticket> tickets = new ArrayList<>();
 
     @Column(nullable=false)

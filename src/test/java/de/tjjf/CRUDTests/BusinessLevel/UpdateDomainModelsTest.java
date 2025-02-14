@@ -147,14 +147,14 @@ public class UpdateDomainModelsTest {
         String updatedPhoneNumber = "+4915198765432";
         DomainAddress updatedMAddress = new DomainAddress(null, 0, 0, null, null);
 
-        // Update values
+
         mAirline.setName(updatedName);
         mAirline.setHeadQuarters(updatedHeadquarters);
         mAirline.setAddress(updatedMAddress);
         mAirline.setEmail(updatedEmail);
         mAirline.setPhoneNumber(updatedPhoneNumber);
 
-        // Assertions
+
         assertEquals(mAirline.getName(), updatedName);
         assertEquals(mAirline.getHeadQuarters(), updatedHeadquarters);
         assertEquals(mAirline.getAddress(), updatedMAddress);

@@ -5,14 +5,13 @@ import de.tjjf.Domain.models.DomainPayment;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-//should work 23.12.24
+
 public class PaymentTest {
     PaymentUseCase puc = new PaymentUseCase();
 
     @Test
     void successfulPaymentTest(){
         DomainPayment mp = new DomainPayment("4242424242424242", "12", "34", "567");
-        //assertTrue(puc.paymentCall(250, mp));
         boolean result = PaymentUseCase.paymentCall(10, mp);
 
         Assertions.assertTrue(result, "Die Zahlung sollte erfolgreich sein");

@@ -147,13 +147,13 @@ public class UpdateAPIModelsTest {
         String updatedPhoneNumber = "+4915198765432";
         APIAddress updatedMAddress = new APIAddress(null, 0, 0, null, null);
 
-        // Update values
+
         apiAirline.setName(updatedName);
         apiAirline.setAddress(updatedMAddress);
         apiAirline.setEmail(updatedEmail);
         apiAirline.setPhoneNumber(updatedPhoneNumber);
 
-        // Assertions
+
         assertEquals(updatedName, apiAirline.getName());
         assertEquals(updatedMAddress, apiAirline.getAddress());
         assertEquals(updatedPhoneNumber, apiAirline.getPhoneNumber());

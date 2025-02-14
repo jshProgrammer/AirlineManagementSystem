@@ -2,11 +2,7 @@ package de.tjjf.CRUDTests.PersistenceLevel;
 
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Create.*;
 import de.tjjf.Infrastructure.persistence.DBOperations.ImplOperations.Delete.*;
-import de.tjjf.Infrastructure.persistence.EntityManagerFactorySingleton;
 import de.tjjf.Infrastructure.persistence.entities.*;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

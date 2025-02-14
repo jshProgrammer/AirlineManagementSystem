@@ -1,6 +1,5 @@
 package de.tjjf.Domain.UseCases.Services;
 
-import de.tjjf.Infrastructure.persistence.adapter.MTicketRepositoryImpl;
 import de.tjjf.Domain.Exceptions.NoSeatsAvailableException;
 import de.tjjf.Domain.UseCases.*;
 import de.tjjf.Domain.models.*;
@@ -46,7 +45,7 @@ public class TicketService extends AuthorizedUseCase {
     public void upgradeSeatingClass(long ticketId, DomainTicket.SeatingClass newSeatingClass) throws NoSeatsAvailableException {
         //new CancelTicketUseCase().authorize();
         DomainTicket ticket = readTicketById(ticketId);
-        new UpgradeSeatingClassUseCase(new MTicketRepositoryImpl()).updateSeatingClassIfAvailable(ticket, newSeatingClass);
+        new UpgradeSeatingClassUseCase(ticketPort).updateSeatingClassIfAvailable(ticket, newSeatingClass);
     }
 
     public void upgradeLuggageWeight(long ticketId, int newWeight) throws IllegalArgumentException {

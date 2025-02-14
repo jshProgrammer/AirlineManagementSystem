@@ -32,7 +32,6 @@ public class DomainTicket implements DomainModel {
 
         this.flight = flight;
 
-        // check whether there is still a seat for customer
         if(!isSeatingUpdateAvailable(seatingClass)) throw new NoSeatsAvailableException("Flight cannot be booked any more due to restricted amount");
 
         this.ticketId = ticketId;
@@ -88,7 +87,6 @@ public class DomainTicket implements DomainModel {
             this.weightOfLuggage = this.weightOfLuggage + newWeight;
             this.flight.addCurrentUpgradeLuggageWeight(this.flight.getCurrentUpgradeLuggageWeight() + newWeight);
 
-            //Increasing the total price in addition to be able to bring more luggage
             this.totalPrice = this.totalPrice + (newWeight * 5);
         }else{
             throw new IllegalArgumentException("Not enough available luggage weight. Only " + (this.flight.getAirplane().getMaxWeightOfLuggage() * 0.25 - this.flight.getCurrentUpgradeLuggageWeight()) + "kg upgradeable luggageweight available");
@@ -97,13 +95,11 @@ public class DomainTicket implements DomainModel {
     }
 
     private void setLuggageWeight(int wishedLuggageWeight) throws IllegalArgumentException{
-        //checking if wishedLuggageWeight is suitable for standard booking
         if(this.flight.getAirplane().getMaxWeightOfLuggage() * 0.75 / this.flight.getAirplane().getTotalNumberOfSeats() >= wishedLuggageWeight){
 
             this.weightOfLuggage = wishedLuggageWeight;
             this.flight.addCurrentInitialLuggageWeight(this.flight.getCurrentInitialLuggageWeight() + weightOfLuggage);
 
-            //Increasing the total price in addition to bring more luggage. Here only 4 because it's at the initial booking
             this.totalPrice = this.totalPrice + (wishedLuggageWeight * 4);
         }
         else {

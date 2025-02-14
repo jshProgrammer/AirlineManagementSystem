@@ -38,7 +38,7 @@ public class AuthenticationUseCase {
 
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
             if (response.statusCode() == 200) {
-                authenticationUseCase.token = response.headers().map().get("X-fhws-jwt-token").getFirst(); //extract the token from the response header
+                authenticationUseCase.token = response.headers().map().get("X-fhws-jwt-token").getFirst();
                 return authenticationUseCase.token;
             } else {
                 throw new RuntimeException("Authentication failed, Username or Password are not Valid");
@@ -52,7 +52,7 @@ public class AuthenticationUseCase {
     public boolean isAuthorized() {
         AuthenticationUseCase authenticationUseCase = getInstance();
         if(authenticationUseCase.token == null || authenticationUseCase.token.isEmpty()) return false;
-        // check whether token is still valid
+
         try (final HttpClient httpClient = HttpClient.newHttpClient()) {
 
             HttpRequest request = HttpRequest.newBuilder()
