@@ -103,7 +103,7 @@ AirlineManagementSystem/
     docker run -p 8081:8081 airline
     ```
 
-The test results can be found in the folder `target/surefire-reports`.
+The test results can be found in the folder `app/surefire-reports` within the running containers file system.
 Please note that tests cannot be run while the Docker container is running. If you want to rerun the tests, just rebuild the docker image.
 
 ## Licence
